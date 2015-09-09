@@ -1,0 +1,15 @@
+language: c
+
+sudo: false
+
+install:
+  - ./get-conda.sh
+  - export PATH="$HOME/conda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+
+script:
+  - conda build binutils-lm32-elf
+  - conda build gcc-lm32-elf
