@@ -1,0 +1,33 @@
+package:
+  name: gcc-lm32-elf
+  version: 4.9.3
+
+source:
+  fn: gcc-4.9.3.tar.bz2
+  url: https://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2
+  sha256: 2332b2a5a321b57508b9031354a8503af6fdfb868b8c1748d33028d100a8b67e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    # These are taken from the output of the configure scripts
+    - binutils-lm32-elf
+    - gmp >=4.3.2
+    - mpfr >=2.4.2
+    - mpc >=0.8.1
+    - isl 0.12.2
+    - cloog
+  run:
+    - binutils-lm32-elf
+    - gmp >=4.3.2
+    - mpfr >=2.4.2
+    - mpc >=0.8.1
+    - isl 0.12.2
+    - cloog
+
+about:
+  home: https://gcc.gnu.org/
+  license: GPL
+  summary: 'The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Java, Ada, and Go, as well as libraries for these languages (libstdc++, libgcj,...).'
