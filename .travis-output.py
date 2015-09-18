@@ -6,8 +6,6 @@ import string
 import sys
 import time
 
-sys.stdin = io.TextIOWrapper(sys.stdin.detach(), newline='')
-
 output_to=sys.stdout
 
 args = list(sys.argv[1:])
