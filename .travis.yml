@@ -11,12 +11,21 @@ install:
   - conda info -a
 
 script:
+  - echo "travis_fold:start:binutils-lm32-elf\r"
   # binutils-lm32-elf
-  - conda build binutils-lm32-elf
+  - ./.travis-output.py output.log.binutils conda build binutils-lm32-elf
   - conda install binutils-lm32-elf --use-local
+  - echo "travis_fold:end:binutils-lm32-elf\r"
   # gcc-lm32-elf
-  - conda build gcc-lm32-elf
+  - echo "travis_fold:start:gcc-lm32-elf\r"
+  - ./.travis-output.py output.log.gcc conda build gcc-lm32-elf
   - conda install gcc-lm32-elf --use-local
+  - echo "travis_fold:end:gcc-lm32-elf\r"
   # sdcc
-  - conda build sdcc
+  - echo "travis_fold:start:sdcc\r"
+  - ./.travis-output.py output.log.sdcc conda build sdcc
   - conda install sdcc --use-local
+  - echo "travis_fold:end:sdcc\r"
+
+after_failure:
+  - cat output.log.*
