@@ -105,4 +105,4 @@ while True:
   cont.append('\n')
   last_skip = output_line(cont, last_skip)
 
-sys.exit(child.wait())
+sys.exit(child.exitstatus)
