@@ -1,0 +1,21 @@
+package:
+  name: sdcc
+  version: 3.5.0
+
+source:
+  fn: sdcc-src-3.5.0.tar.bz2
+  url: http://sourceforge.net/projects/sdcc/files/sdcc/3.5.0/sdcc-src-3.5.0.tar.bz2/download
+  sha256: 2332b2a5a321b57508b9031354a8503af6fdfb868b8c1748d33028d100a8b67e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    # These are taken from the output of the configure scripts
+  run:
+
+about:
+  home: http://sdcc.sourceforge.net/
+  license: GPL
+  summary: 'SDCC is a retargettable, optimizing ANSI - C compiler suite that targets the Intel MCS51 based microprocessors (8031, 8032, 8051, 8052, etc.), Maxim (formerly Dallas) DS80C390 variants, Freescale (formerly Motorola) HC08 based (hc08, s08), Zilog Z80 based MCUs (z80, z180, gbz80, Rabbit 2000/3000, Rabbit 3000A, TLCS-90) and STMicroelectronics STM8. Work is in progress on supporting the Microchip PIC16 and PIC18 targets. It can be retargeted for other microprocessors.'
