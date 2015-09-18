@@ -14,7 +14,6 @@ install:
   - conda info -a
 
 script:
-  - set -e
   - echo -n "travis_fold:start:binutils-lm32-elf\r"
   # binutils-lm32-elf
   - python ./.travis-output.py output.log.binutils conda build binutils-lm32-elf
