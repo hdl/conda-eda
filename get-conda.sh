@@ -9,7 +9,7 @@ if [ ! -d ~/conda ]; then
         ./Miniconda3-latest-Linux-x86_64.sh -p ~/conda -b
 fi
 export PATH=~/conda/bin:$PATH
-conda update conda
+conda update -y conda
 conda install -y conda-build
 conda install -y anaconda-client
 conda install -y jinja2
