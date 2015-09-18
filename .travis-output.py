@@ -17,11 +17,14 @@ def output_line(line_bits, last_skip):
   sline = line.strip()
 
   skip = True
-  if line.startswith(" "):
+  if line.startswith(" ") and not sline.startswith('/'):
     skip = False
 
-  if len(sline) > 0:
-    if sline[0] in string.ascii_uppercase:
+  if "Entering directory" in sline:
+    skip = False
+
+  if len(sline) > 1:
+    if sline[0] in string.ascii_uppercase and sline[1] not in string.ascii_uppercase:
       skip = False
     if sline[0] in ('[', '=', '!', '+'):
       skip = False
