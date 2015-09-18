@@ -5,13 +5,13 @@ python:
 sudo: false
 
 install:
+  - pip install pexpect
   - ./get-conda.sh
   - export PATH="$PATH:$HOME/conda/bin"
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - pip install pexpect
 
 script:
   - set -e
