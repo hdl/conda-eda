@@ -11,7 +11,12 @@ install:
   - conda info -a
 
 script:
+  # binutils-lm32-elf
   - conda build binutils-lm32-elf
   - conda install binutils-lm32-elf --use-local
+  # gcc-lm32-elf
   - conda build gcc-lm32-elf
   - conda install gcc-lm32-elf --use-local
+  # sdcc
+  - conda build sdcc
+  - conda install sdcc --use-local

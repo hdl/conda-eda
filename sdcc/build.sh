@@ -5,7 +5,10 @@ set -e
 
 mkdir build
 cd build
-../configure --prefix=$PREFIX
+CPPFLAGS=-I$PREFIX/include \
+CXXFLAGS=-I$PREFIX/include \
+../configure \
+  --prefix=$PREFIX \
 
 make -j$CPU_COUNT
 make install

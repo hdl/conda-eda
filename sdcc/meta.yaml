@@ -5,15 +5,19 @@ package:
 source:
   fn: sdcc-src-3.5.0.tar.bz2
   url: http://sourceforge.net/projects/sdcc/files/sdcc/3.5.0/sdcc-src-3.5.0.tar.bz2/download
-  sha256: 2332b2a5a321b57508b9031354a8503af6fdfb868b8c1748d33028d100a8b67e
+  sha256: f82978d1614244b22e093402c0a4de1f688a07c807b2980126c964eb3df85fa9
 
 build:
   number: 0
 
 requirements:
   build:
-    # These are taken from the output of the configure scripts
+    - ncurses
+    - boost
+    - bison
   run:
+    - ncurses
+    - boost
 
 about:
   home: http://sdcc.sourceforge.net/
