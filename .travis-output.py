@@ -20,8 +20,14 @@ def output_line(line_bits, last_skip):
   if line.startswith(" ") and not sline.startswith('/'):
     skip = False
 
+  if "da es fi" in sline:
+    skip = True
+  if "setting rpath" in sline:
+    skip = True
+
   if "Entering directory" in sline:
     skip = False
+    sline = sline.split('make')[-1]
 
   if len(sline) > 1:
     if sline[0] in string.ascii_uppercase and sline[1] not in string.ascii_uppercase:
