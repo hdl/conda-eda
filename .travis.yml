@@ -29,6 +29,16 @@ script:
   - python ./.travis-output.py output.log.sdcc conda build sdcc
   - conda install sdcc --use-local
   - echo -n "travis_fold:end:sdcc\r"
+  # sdcc
+  - echo -n "travis_fold:start:sdcc\r"
+  - python ./.travis-output.py output.log.sdcc conda build sdcc
+  - conda install sdcc --use-local
+  - echo -n "travis_fold:end:sdcc\r"
+  # openocd
+  - echo -n "travis_fold:start:openocd\r"
+  - python ./.travis-output.py output.log.openocd conda build openocd
+  - conda install openocd --use-local
+  - echo -n "travis_fold:end:openocd\r"
 
 after_failure:
   - cat output.log.*
