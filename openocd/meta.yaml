@@ -7,15 +7,7 @@ source:
   git_url: git://git.code.sf.net/p/openocd/code
 
 build:
-  number: 1
-
-requirements:
-  build:
-    - ncurses
-    - boost
-  run:
-    - ncurses
-    - boost
+  number: 2
 
 about:
   home: http://openocd.org/
