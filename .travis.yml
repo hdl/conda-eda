@@ -3,6 +3,10 @@ python:
   - "3.5"
 
 sudo: false
+addons:
+  apt:
+    packages:
+    - libftdi-dev
 
 install:
   - pip install pexpect
