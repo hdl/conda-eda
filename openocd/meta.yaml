@@ -1,13 +1,13 @@
 package:
   name: openocd
-  version: v0.9.0_24_gd28ab08
+  version: v0.9.0_44_g3edb157
 
 source:
-  git_rev: v0.9.0-24-gd28ab08
+  git_rev: v0.9.0-44-g3edb157
   git_url: git://git.code.sf.net/p/openocd/code
 
 build:
-  number: 2
+  number: 3
 
 about:
   home: http://openocd.org/
