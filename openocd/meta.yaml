@@ -5,9 +5,15 @@ package:
 source:
   git_rev: v0.9.0-44-g3edb157
   git_url: git://git.code.sf.net/p/openocd/code
+  patches: 
+    - relative-scripts.patch
 
 build:
-  number: 3
+  number: 6
+
+test:
+  commands:
+    - openocd -v
 
 about:
   home: http://openocd.org/
