@@ -1,15 +1,15 @@
 package:
   name: openocd
-  version: v0.9.0_44_g3edb157
+  version: v0.9.0_118_g8697d82
 
 source:
-  git_rev: v0.9.0-44-g3edb157
-  git_url: git://git.code.sf.net/p/openocd/code
+  git_rev: v0.9.0-118-g8697d82
+  git_url: git://github.com/mithro/openocd.git
   patches: 
     - relative-scripts.patch
 
 build:
-  number: 6
+  number: 1
 
 test:
   commands:
