@@ -1,6 +1,6 @@
 package:
   name: openocd
-  version: v0.9.0_118_g8697d82
+  version: git
 
 source:
   git_rev: v0.9.0-118-g8697d82
@@ -8,12 +8,11 @@ source:
   patches: 
     - relative-scripts.patch
 
-build:
-  number: 1
-
 test:
   commands:
     - openocd -v
+    - openocd -v 2>&1 | head -1 | grep -q -v dirty
+    - openocd -v 2>&1 | head -1 | grep -q -- "-[0-9][0-9][0-9][0-9][0-9]-[0-9a-z]\+ "
 
 about:
   home: http://openocd.org/
