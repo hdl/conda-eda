@@ -2,6 +2,10 @@
 
 set -x
 set -e
+export GIT_AUTHOR_NAME="Conda Build"
+export GIT_AUTHOR_EMAIL="robot@timvideos.us"
+export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 git commit -a -m "Changes for conda."
 
 ./bootstrap
