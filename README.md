@@ -1,9 +1,40 @@
-# conda-misoc-lm32
+# conda-hdmi2usb-packages
 
-Conda build recipes for HDMI2USB-misoc-firmware build dependencies include;
+Conda build recipes for HDMI2USB-misoc-firmware build dependencies.
 
- - [x] binutils compiled for lm32
- - [x] gcc compiled for lm32
- - [ ] makestuff
- 
 Basically, anything which hasn't gotten a proper package at https://launchpad.net/~timvideos/+archive/ubuntu/hdmi2usb
+
+# Toolchains
+
+## MiSoC "soft-CPU" support
+
+The MiSoC system supports both a `lm32` and `or1k` "soft-CPU" implementations.
+
+### lm32-elf
+
+"Bare metal" cross compiler.
+
+ - binutils - (Current version: 2.25.1)
+ * gcc - (Current version: 4.9.3)
+
+### or1k-elf
+
+*In progress*
+
+"Bare metal" cross compiler.
+
+ - [ ] binutils - ???
+ - [ ] gcc - ???
+
+Following instructions at http://openrisc.io/newlib/building.html
+
+## Cypress FX2 support
+
+ * sdcc (Current version: 3.5.0)
+
+# Support Tools
+
+## OpenOCD
+
+Tool for JTAG programming.
+ 
