@@ -1,11 +1,11 @@
 package:
   name: gcc-lm32-elf
-  version: 4.9.3
+  version: 5.3.0
 
 source:
-  fn: gcc-4.9.3.tar.bz2
-  url: https://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2
-  sha256: 2332b2a5a321b57508b9031354a8503af6fdfb868b8c1748d33028d100a8b67e
+  fn: gcc-5.3.0.tar.bz2
+  url: ftp://ftp.gnu.org/gnu/gcc/gcc-5.3.0/gcc-5.3.0.tar.bz2
+  sha256: b84f5592e9218b73dbae612b5253035a7b34a9a1f7688d2e1bfaaf7267d5c4db
 
 build:
   detect_binary_files_with_prefix: True
@@ -31,8 +31,8 @@ requirements:
 test:
   commands:
     - lm32-elf-gcc --version
-    - lm32-elf-gcc --version 2>&1 | grep -q 4.9.3
-    - lm32-elf-gcc-4.9.3 --version
+    - lm32-elf-gcc --version 2>&1 | grep -q 5.3.0
+    - lm32-elf-gcc-5.3.0 --version
 
 about:
   home: https://gcc.gnu.org/
