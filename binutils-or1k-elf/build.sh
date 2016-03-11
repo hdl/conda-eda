@@ -6,7 +6,6 @@ cd build
 ../configure \
   --target=or1k-elf \
   --prefix=$PREFIX \
-  --enable-shared \
   --disable-itcl \
   --disable-tk \
   --disable-tcl \
@@ -19,8 +18,7 @@ cd build
   --disable-gdb \
   --with-sysroot \
   --disable-newlib \
-  --disable-libgloss \
-  --with-system-zlib
+  --disable-libgloss
 make -j4
 make install
 
