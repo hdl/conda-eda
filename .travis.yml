@@ -30,3 +30,8 @@ script:
 
 after_failure:
   - cat output.log
+
+matrix:
+  allow_failures:
+    - env: PACKAGE=sdcc
+
