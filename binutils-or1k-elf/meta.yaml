@@ -1,0 +1,20 @@
+package:
+  name: binutils-or1k-elf
+  version: git
+
+source:
+  git_url: https://github.com/openrisc/or1k-src.git
+  git_rev: a8d7a523f3bb95c01d038a347a9cd2d9e701c86a
+
+build:
+  detect_binary_files_with_prefix: True
+  number: 0
+
+requirements:
+  build:
+    - system # [not win]
+
+about:
+  home: https://www.gnu.org/software/binutils/
+  license: GPL
+  summary: 'A set of programming tools for creating and managing binary programs, object files, libraries, profile data, and assembly source code.'
