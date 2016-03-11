@@ -20,6 +20,7 @@ install:
 
 env:
   - PACKAGE=binutils-lm32-elf
+  - PACKAGE=binutils-or1k-elf
   - PACKAGE=gcc-lm32-elf
   - PACKAGE=sdcc
   - PACKAGE=openocd
