@@ -1,0 +1,3 @@
+[submodule "gcc-or1k-elf/newlib"]
+	path = gcc-or1k-elf/newlib
+	url = https://github.com/openrisc/newlib.git
