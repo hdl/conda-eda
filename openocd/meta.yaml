@@ -3,8 +3,8 @@ package:
   version: git
 
 source:
-  git_rev: v0.9.0-118-g8697d82
-  git_url: git://github.com/mithro/openocd.git
+  git_rev: v0.9.0-247-g73b676c
+  git_url: git://repo.or.cz/openocd.git
   patches: 
     - relative-scripts.patch
 
