@@ -6,6 +6,7 @@ cd build
 ../configure \
   --target=or1k-elf \
   --prefix=$PREFIX \
+  --enable-deterministic-archives \
   --disable-itcl \
   --disable-tk \
   --disable-tcl \
