@@ -1,0 +1,33 @@
+package:
+  name: gcc-or1k-elf
+  version: git
+
+source:
+  git_url: https://github.com/openrisc/or1k-gcc.git
+  git_rev: 80794b79e069d2dc28e15d2843ef55a7066ed9a1
+
+build:
+  detect_binary_files_with_prefix: True
+  number: 0
+
+requirements:
+  build:
+    # These are taken from the output of the configure scripts
+    - binutils-or1k-elf
+    - gmp >=4.3.2
+    - mpfr >=2.4.2
+    - mpc >=0.8.1
+    - isl 0.12.2
+    - cloog
+  run:
+    - binutils-or1k-elf
+    - gmp >=4.3.2
+    - mpfr >=2.4.2
+    - mpc >=0.8.1
+    - isl 0.12.2
+    - cloog
+
+about:
+  home: https://gcc.gnu.org/
+  license: GPL
+  summary: 'The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Java, Ada, and Go, as well as libraries for these languages (libstdc++, libgcj,...).'
