@@ -25,6 +25,7 @@ env:
   - PACKAGE=binutils-lm32-elf
   - PACKAGE=binutils-or1k-elf
   - PACKAGE=gcc-lm32-elf
+  - PACKAGE=gcc-or1k-elf
   - PACKAGE=sdcc
   - PACKAGE=openocd
 
