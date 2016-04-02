@@ -32,7 +32,18 @@ fi
 mkdir -p build-gcc-stage1
 (
   cd build-gcc-stage1
-  ../gcc/configure --target=or1k-elf --prefix=$PREFIX --enable-languages=c --disable-shared --disable-libssp
+  ../gcc/configure \
+    --target=or1k-elf \
+    --enable-languages=c \
+    --disable-shared \
+    --disable-libssp \
+    --prefix=$PREFIX \
+    --with-gmp=$PREFIX \
+    --with-mpfr=$PREFIX \
+    --with-mpc=$PREFIX \
+    --with-isl=$PREFIX \
+    --with-cloog=$PREFIX \
+
   make -j"${CPU_COUNT}"
   make install-strip
 )
@@ -42,7 +53,11 @@ or1k-elf-gcc --version
 mkdir -p build-newlib
 (
   cd build-newlib
-  ../newlib/configure --target=or1k-elf --prefix=$PREFIX --disable-multilib
+  ../newlib/configure \
+    --target=or1k-elf \
+    --prefix=$PREFIX \
+    --disable-multilib \
+
   make -j"${CPU_COUNT}"
   make install
 )
@@ -50,7 +65,19 @@ mkdir -p build-newlib
 mkdir -p build-gcc-stage2
 (
   cd build-gcc-stage2
-  ../gcc/configure --target=or1k-elf --prefix=$PREFIX --enable-languages=c,c++ --disable-shared --disable-libssp --with-newlib
+  ../gcc/configure \
+    --target=or1k-elf \
+    --enable-languages=c,c++ \
+    --disable-shared \
+    --disable-libssp \
+    --with-newlib \
+    --prefix=$PREFIX \
+    --with-gmp=$PREFIX \
+    --with-mpfr=$PREFIX \
+    --with-mpc=$PREFIX \
+    --with-isl=$PREFIX \
+    --with-cloog=$PREFIX \
+
   make -j"${CPU_COUNT}"
   make install-strip
 )
