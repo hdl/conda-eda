@@ -20,6 +20,7 @@ install:
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda info -a
+  - conda config --add channels timvideos
 
 env:
   - PACKAGE=binutils-lm32-elf
