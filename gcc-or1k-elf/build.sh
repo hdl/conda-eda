@@ -3,6 +3,10 @@
 set -x
 set -e
 
+export GIT_AUTHOR_NAME="Conda Build"
+export GIT_AUTHOR_EMAIL="robot@timvideos.us"
+export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 git tag -a v a1c19ad21c0fb2395a2793cb4b9db71528a51c8e -m"Initial Revision"
 GIT_REV=$(git describe --match=v | sed -e's/^v-//' | sed -e's/-/_/')
 
