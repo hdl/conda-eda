@@ -29,6 +29,7 @@ env:
 script:
   - python ./.travis-output.py output.log conda build $PACKAGE
   - conda install $PACKAGE --use-local
+  - du -h ~/conda/conda-bld/linux-64/*
 
 after_failure:
   - cat output.log
