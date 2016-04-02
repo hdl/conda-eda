@@ -21,4 +21,4 @@ cd build
 	--disable-libssp
 
 make -j$CPU_COUNT
-make install
+make install-strip
