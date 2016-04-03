@@ -1,10 +1,11 @@
 package:
   name: binutils-or1k-elf
-  version: git
+  version: 2.26.0
 
 source:
-  git_url: https://github.com/openrisc/or1k-src.git
-  git_rev: a8d7a523f3bb95c01d038a347a9cd2d9e701c86a
+  fn: binutils-2.26.tar.bz2
+  url: https://ftp.gnu.org/gnu/binutils/binutils-2.26.tar.bz2
+  sha256: c2ace41809542f5237afc7e3b8f32bb92bc7bc53c6232a84463c423b0714ecd9
 
 build:
   detect_binary_files_with_prefix: True
