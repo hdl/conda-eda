@@ -16,7 +16,6 @@ install:
   - export PATH="$PATH:$HOME/conda/bin"
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
   - conda info -a
 
 env:
@@ -33,6 +32,9 @@ script:
 
 after_failure:
   - cat output.log
+
+after_success:
+  - if [ x$TRAVIS_BRANCH = x"master" ]; then anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER ~/conda/conda-bld/linux-64/$PACKAGE*.tar.bz2; fi
 
 matrix:
   allow_failures:
