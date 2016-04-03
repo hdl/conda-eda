@@ -3,12 +3,14 @@
 set -x
 set -e
 
+CONDA_PATH=${1:-~/conda}
+
 wget -c https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 chmod a+x Miniconda3-latest-Linux-x86_64.sh
-if [ ! -d ~/conda ]; then
-        ./Miniconda3-latest-Linux-x86_64.sh -p ~/conda -b
+if [ ! -d $CONDA_PATH ]; then
+        ./Miniconda3-latest-Linux-x86_64.sh -p $CONDA_PATH -b
 fi
-export PATH=~/conda/bin:$PATH
+export PATH=$CONDA_PATH/bin:$PATH
 conda update -y conda
 conda install -y conda-build
 conda install -y anaconda-client
