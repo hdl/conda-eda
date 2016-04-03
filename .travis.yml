@@ -37,6 +37,7 @@ after_failure:
   - cat output.log
 
 after_success:
+  - tar -jtf $CONDA_PATH/conda-bld/linux-64/$PACKAGE*.tar.bz2
   - if [ x$TRAVIS_BRANCH = x"master" ]; then anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER $CONDA_PATH/conda-bld/linux-64/$PACKAGE*.tar.bz2; fi
 
 matrix:
