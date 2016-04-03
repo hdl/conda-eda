@@ -2,6 +2,7 @@
 
 import io
 import pexpect
+import re
 import string
 import sys
 import time
@@ -14,6 +15,7 @@ child = pexpect.spawn(' '.join(args))
 
 def output_line(line_bits, last_skip):
   line = "".join(line_bits)
+  line = re.sub("/really.*/conda/", "/.../conda/", line)
   sline = line.strip()
 
   skip = True
