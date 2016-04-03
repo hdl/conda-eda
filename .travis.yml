@@ -11,6 +11,8 @@ addons:
     - libusb-1.0-0-dev
 
 install:
+  - git submodule update --recursive --init
+  - git submodule foreach git submodule update --recursive --init
   - export BASE_PATH=/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path
   - export CONDA_PATH=$BASE_PATH/conda
   - mkdir -p $BASE_PATH
@@ -20,11 +22,13 @@ install:
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda info -a
+  - conda config --add channels timvideos
 
 env:
   - PACKAGE=binutils-lm32-elf
   - PACKAGE=binutils-or1k-elf
   - PACKAGE=gcc-lm32-elf
+  - PACKAGE=gcc-or1k-elf
   - PACKAGE=sdcc
   - PACKAGE=openocd
 
