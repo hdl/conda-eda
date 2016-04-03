@@ -14,7 +14,7 @@ The MiSoC system supports both a `lm32` and `or1k` "soft-CPU" implementations.
 
 "Bare metal" cross compiler.
 
- - binutils - (Current version: 2.25.1)
+ - binutils - (Current version: 2.26.0)
  * gcc - (Current version: 4.9.3)
 
 ### or1k-elf
@@ -23,8 +23,8 @@ The MiSoC system supports both a `lm32` and `or1k` "soft-CPU" implementations.
 
 "Bare metal" cross compiler.
 
- - [ ] binutils - (Based off 2.24)
- - [ ] gcc - ???
+ - [ ] binutils - (Current version: 2.26.0)
+ - [ ] gcc - (Based off version: 4.9.3)
 
 Following instructions at http://openrisc.io/newlib/building.html
 
