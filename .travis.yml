@@ -11,6 +11,8 @@ addons:
     - libusb-1.0-0-dev
 
 install:
+  - git submodule update --recursive --init
+  - git submodule foreach git submodule update --recursive --init
   - export BASE_PATH=/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path
   - export CONDA_PATH=$BASE_PATH/conda
   - mkdir -p $BASE_PATH
