@@ -22,6 +22,8 @@ cd build
   --disable-libgloss
 
 make -j$CPU_COUNT
+make install
+cd binutils
 make install-strip
 
 $PREFIX/bin/or1k-elf-ar --version 2>&1 | head -1 | sed -e's/.* //' -e"s/\$/_$GIT_REV/" > ../__conda_version__.txt
