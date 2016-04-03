@@ -11,9 +11,12 @@ addons:
     - libusb-1.0-0-dev
 
 install:
+  - export BASE_PATH=/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path
+  - export CONDA_PATH=$BASE_PATH/conda
+  - mkdir -p $BASE_PATH
   - pip install pexpect
-  - ./get-conda.sh
-  - export PATH="$PATH:$HOME/conda/bin"
+  - ./get-conda.sh $CONDA_PATH
+  - export PATH="$PATH:$CONDA_PATH/bin"
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda info -a
@@ -28,13 +31,13 @@ env:
 script:
   - python ./.travis-output.py output.log conda build $PACKAGE
   - conda install $PACKAGE --use-local
-  - du -h ~/conda/conda-bld/linux-64/*
+  - du -h $CONDA_PATH/conda-bld/linux-64/$PACKAGE*.tar.bz2
 
 after_failure:
   - cat output.log
 
 after_success:
-  - if [ x$TRAVIS_BRANCH = x"master" ]; then anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER ~/conda/conda-bld/linux-64/$PACKAGE*.tar.bz2; fi
+  - if [ x$TRAVIS_BRANCH = x"master" ]; then anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER $CONDA_PATH/conda-bld/linux-64/$PACKAGE*.tar.bz2; fi
 
 matrix:
   allow_failures:
