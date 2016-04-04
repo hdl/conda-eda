@@ -14,3 +14,6 @@ CXXFLAGS=-I$PREFIX/include \
 
 make -j$CPU_COUNT
 make install
+
+TZ=UTC date +%Y%m%d_%H%M%S > ../__conda_buildstr__.txt
+TZ=UTC date +%Y%m%d%H%M%S > ../__conda_buildnum__.txt

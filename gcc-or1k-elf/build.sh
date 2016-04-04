@@ -87,3 +87,4 @@ find $PREFIX -type f -exec file \{\} \;
 $PREFIX/bin/or1k-elf-gcc --version
 $PREFIX/bin/or1k-elf-gcc --version 2>&1 | head -1 | sed -e's/.* //' -e"s/\$/_$GIT_REV/" > ./__conda_version__.txt
 TZ=UTC date +%Y%m%d_%H%M%S > ./__conda_buildstr__.txt
+TZ=UTC date +%Y%m%d%H%M%S > ./__conda_buildnum__.txt
