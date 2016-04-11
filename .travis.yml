@@ -31,6 +31,7 @@ env:
   - PACKAGE=gcc-or1k-elf
   - PACKAGE=sdcc
   - PACKAGE=openocd
+  - PACKAGE=verilator
 
 script:
   - python ./.travis-output.py output.log conda build $PACKAGE
