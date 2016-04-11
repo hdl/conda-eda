@@ -1,0 +1,15 @@
+package:
+  name: verilator
+  version: git
+
+source:
+  git_rev: master
+  git_url: http://git.veripool.org/git/verilator 
+
+test:
+  commands:
+
+about:
+  home: http://www.veripool.org/projects/verilator/wiki/Intro
+  license: LGPL v3
+  summary: 'Verilator is the fastest free Verilog HDL simulator, and beats most commercial simulators.'
