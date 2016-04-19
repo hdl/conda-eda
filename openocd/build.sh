@@ -15,6 +15,7 @@ cd build
   --prefix=$PREFIX \
   --enable-usb-blaster-2 \
   --enable-usb_blaster_libftdi \
+  --enable-jtag_vpi \
 
 make -j$CPU_COUNT
 make install
