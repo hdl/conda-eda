@@ -1,16 +1,20 @@
 #!/bin/bash
+# Instructions from http://openrisc.io/newlib/building.html
 
 set -x
 set -e
 
-export GIT_AUTHOR_NAME="Conda Build"
-export GIT_AUTHOR_EMAIL="robot@timvideos.us"
-export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-git tag -a v a1c19ad21c0fb2395a2793cb4b9db71528a51c8e -m"Initial Revision"
-GIT_REV=$(git describe --match=v | sed -e's/^v-//' | sed -e's/-/_/')
+# Fetch upstream gcc so we can get a git-describe delta
+git remote add upstream git://gcc.gnu.org/git/gcc.git
+git fetch upstream
 
-or1k-elf-as --version
+# Find our current or1k release
+OR1K_RELEASE=$(git describe --abbrev=0 --match or1k-*-release)
+echo "    or1k release: '$OR1K_RELEASE'"
+UPSTREAM_RELEASE=$(echo $OR1K_RELEASE | sed -e's/^or1k-/gcc-/' -e's/\./_/g')
+echo "upstream release: '$UPSTREAM_RELEASE'"
+GIT_REV=$(git describe --tags --long --match ${UPSTREAM_RELEASE} | sed -e"s/^${UPSTREAM_RELEASE}-//" -e's/-/_/')
+echo "  or1k git delta: '$GIT_REV'"
 
 cd ..
 mv work gcc

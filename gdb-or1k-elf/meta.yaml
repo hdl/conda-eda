@@ -4,7 +4,7 @@ package:
 
 source:
   git_url: https://github.com/openrisc/binutils-gdb.git
-  git_rev: b853c77de9a3e23964e01fa71a96e3757827fda1
+  git_rev: gdb-7.11-or1k-release
 
 build:
   detect_binary_files_with_prefix: True

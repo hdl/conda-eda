@@ -4,7 +4,7 @@ package:
 
 source:
   git_url: https://github.com/openrisc/or1k-gcc.git
-  git_rev: 04b6643de7200b42dde0d0f044a3a24ba1d20817
+  git_rev: or1k-4.9.3-release
 
 build:
   detect_binary_files_with_prefix: True

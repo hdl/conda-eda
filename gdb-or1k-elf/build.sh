@@ -1,13 +1,22 @@
+#!/bin/bash
 # Instructions from http://openrisc.io/newlib/building.html
+
+set -x
+set -e
 
 # Fetch upstream binutils-gdb so we can get a git-describe delta
 git remote add upstream git://sourceware.org/git/binutils-gdb.git
 git fetch upstream
 
 # Find our current or1k release
-GDB_RELEASE=$(git describe --abbrev=0 --match gdb-*-or1k-release | sed -e's/^gdb-//' -e's/-or1k-release$//')
+OR1K_RELEASE=$(git describe --abbrev=0 --match gdb-*or1k-release)
+echo "    or1k release: '$OR1K_RELEASE'"
+# Find update release
+UPSTREAM_RELEASE=$(echo $OR1K_RELEASE | sed -e's/-or1k-/-/')
+echo "upstream release: '$UPSTREAM_RELEASE'"
 # Find our relationship to the upstream gdb release
-GIT_REV=$(git describe --always --long --match gdb-${GDB_RELEASE}-release | sed -e"s/^gdb-${GDB_RELEASE}-release-//" -e's/-/_/')
+GIT_REV=$(git describe --long --match ${UPSTREAM_RELEASE} | sed -e"s/^${UPSTREAM_RELEASE}-//" -e's/-/_/')
+echo "  or1k git delta: '$GIT_REV'"
 
 (
 mkdir build
