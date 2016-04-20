@@ -25,11 +25,17 @@ install:
   - conda config --add channels timvideos
 
 env:
+  # lm32 toolchain
   - PACKAGE=binutils-lm32-elf
-  - PACKAGE=binutils-or1k-elf
   - PACKAGE=gcc-lm32-elf
+  - PACKAGE=gdb-lm32-elf
+  # or1k toolchain
+  - PACKAGE=binutils-or1k-elf
   - PACKAGE=gcc-or1k-elf
+  - PACKAGE=gdb-or1k-elf
+  # fx2 toolchain
   - PACKAGE=sdcc
+  # tools
   - PACKAGE=openocd
   - PACKAGE=verilator
 
