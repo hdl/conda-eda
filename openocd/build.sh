@@ -16,6 +16,8 @@ cd build
   --enable-usb-blaster-2 \
   --enable-usb_blaster_libftdi \
   --enable-jtag_vpi \
+  --enable-remote-bitbang \
+
 
 make -j$CPU_COUNT
 make install
