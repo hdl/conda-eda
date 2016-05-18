@@ -29,7 +29,7 @@ cat << EOF | docker run -i \
                         -v ${RECIPE_ROOT}:/recipe_root \
                         -v ${FEEDSTOCK_ROOT}:/feedstock_root \
                         -a stdin -a stdout -a stderr \
-                        pelson/obvious-ci:latest_x64 \
+                        condaforge/linux-anvil \
                         bash || exit $?
 
 export BINSTAR_TOKEN=${BINSTAR_TOKEN}
@@ -40,7 +40,7 @@ echo "$config" > ~/.condarc
 conda clean --lock
 
 conda update --yes --all
-conda install --yes conda-build==1.18.2
+conda install --yes conda-build
 conda info
 
 # Embarking on 1 case(s).
