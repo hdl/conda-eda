@@ -16,5 +16,5 @@ test:
 
 about:
   home: http://openocd.org/
-  license: GPL
-  summary: 'Free and Open On-Chip Debugging, In-System Programming and Boundary-Scan Testing'
+  license: GPLv2+
+  summary: 'OpenOCD provides on-chip programming and debugging support with a layered architecture of JTAG interface and TAP support'
