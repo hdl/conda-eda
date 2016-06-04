@@ -6,6 +6,9 @@ source:
   git_rev: master
   git_url: http://git.veripool.org/git/verilator 
 
+build:
+  number: 0
+
 test:
   commands:
 

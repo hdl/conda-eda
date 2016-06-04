@@ -8,6 +8,9 @@ source:
   patches: 
     - relative-scripts.patch
 
+build:
+  number: 0
+
 test:
   commands:
     - openocd -v
