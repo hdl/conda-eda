@@ -17,8 +17,8 @@ requirements:
 
 test:
   commands:
-    - lm32-or1k-ld --version
-    - lm32-or1k-ld --version 2>&1 | grep -q 2.26
+    - or1k-elf-ld --version
+    - or1k-elf-ld --version 2>&1 | grep -q 2.26
 
 about:
   home: https://www.gnu.org/software/binutils/
