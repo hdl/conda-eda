@@ -39,5 +39,6 @@ make install
 
 $PREFIX/bin/lm32-elf-gdb --version
 $PREFIX/bin/lm32-elf-gdb --version 2>&1 | head -1 | sed -e's/.* //' > ./__conda_version__.txt
-TZ=UTC date +%Y%m%d_%H%M%S > ./__conda_buildstr__.txt
-TZ=UTC date +%Y%m%d%H%M%S > ./__conda_buildnum__.txt
+touch .buildstamp
+TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > ../__conda_buildstr__.txt
+TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > ../__conda_buildnum__.txt

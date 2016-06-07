@@ -22,5 +22,9 @@ cd build
 
 make -j$CPU_COUNT
 make install-strip
-TZ=UTC date +%Y%m%d_%H%M%S > ../__conda_buildstr__.txt
-TZ=UTC date +%Y%m%d%H%M%S > ../__conda_buildnum__.txt
+
+$PREFIX/bin/lm32-elf-ld --version
+$PREFIX/bin/lm32-elf-ld --version 2>&1 | head -1 | sed -e's/GNU ld (GNU Binutils) //' > ./__conda_version__.txt
+touch .buildstamp
+TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > ../__conda_buildstr__.txt
+TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > ../__conda_buildnum__.txt

@@ -7,5 +7,6 @@ cd build
 
 make -j$CPU_COUNT
 make install-strip
-TZ=UTC date +%Y%m%d_%H%M%S > ../__conda_buildstr__.txt
-TZ=UTC date +%Y%m%d%H%M%S > ../__conda_buildnum__.txt
+touch .buildstamp
+TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > ../__conda_buildstr__.txt
+TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > ../__conda_buildnum__.txt
