@@ -16,6 +16,11 @@ requirements:
     - binutils-or1k-elf
     - gcc-or1k-elf
 
+test:
+  commands:
+    - or1k-elf-gdb --version
+    - or1k-elf-gdb --version 2>&1 | grep -q 7.11
+
 about:
   home: https://www.gnu.org/software/gdb/
   license: GPL

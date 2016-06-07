@@ -8,6 +8,7 @@ source:
   sha256: 2332b2a5a321b57508b9031354a8503af6fdfb868b8c1748d33028d100a8b67e
 
 build:
+  detect_binary_files_with_prefix: True
   number: 1
 
 requirements:
@@ -26,6 +27,12 @@ requirements:
     - mpc >=0.8.1
     - isl 0.12.2
     - cloog
+
+test:
+  commands:
+    - lm32-elf-gcc --version
+    - lm32-elf-gcc --version 2>&1 | grep -q 4.9.3
+    - lm32-elf-gcc-4.9.3 --version
 
 about:
   home: https://gcc.gnu.org/

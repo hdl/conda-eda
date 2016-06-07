@@ -8,7 +8,7 @@ source:
 
 build:
   detect_binary_files_with_prefix: True
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -26,6 +26,12 @@ requirements:
     - mpc >=0.8.1
     - isl 0.12.2
     - cloog
+
+test:
+  commands:
+    - lm32-or1k-gcc --version
+    - lm32-or1k-gcc --version 2>&1 | grep -q 4.9.3
+    - lm32-or1k-gcc-4.9.3 --version
 
 about:
   home: https://gcc.gnu.org/

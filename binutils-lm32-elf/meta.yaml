@@ -15,6 +15,11 @@ requirements:
   build:
     - system # [not win]
 
+test:
+  commands:
+    - lm32-elf-ld --version
+    - lm32-elf-ld --version 2>&1 | grep -q 2.26
+
 about:
   home: https://www.gnu.org/software/binutils/
   license: GPL

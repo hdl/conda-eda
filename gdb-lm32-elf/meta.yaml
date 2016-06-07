@@ -17,6 +17,11 @@ requirements:
     - binutils-lm32-elf
     - gcc-lm32-elf
 
+test:
+  commands:
+    - lm32-elf-gdb --version
+    - lm32-elf-gdb --version 2>&1 | grep -q 7.11
+
 about:
   home: https://www.gnu.org/software/gdb/
   license: GPL
