@@ -31,6 +31,9 @@ def output_line(line_bits, last_skip):
     skip = False
     sline = sline.split('make')[-1]
 
+  if re.search("[0-9]+\.[0-9]+", line):
+    skip = False
+
   if len(sline) > 1:
     if sline[0] in string.ascii_uppercase and sline[1] not in string.ascii_uppercase:
       skip = False
