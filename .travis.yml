@@ -38,6 +38,7 @@ env:
   # tools
   - PACKAGE=openocd
   - PACKAGE=verilator
+  - PACKAGE=flterm
 
 script:
   - python ./.travis-output.py output.log conda build $PACKAGE
