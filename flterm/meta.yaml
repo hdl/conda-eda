@@ -1,0 +1,18 @@
+package:
+  name: flterm
+  version: git
+
+source:
+  git_url: git://git.launchpad.net/~timvideos/+git/flterm
+
+build:
+  number: 0
+
+test:
+  commands:
+    - flterm --help
+
+about:
+  home: https://git.launchpad.net/~timvideos/+git/flterm
+  license: GPLv3
+  summary: 'Serial boot program for MiSoC'
