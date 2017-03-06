@@ -1,11 +1,11 @@
 package:
   name: binutils-lm32-elf
-  version: 2.26.0
+  version: 2.28.0
 
 source:
-  fn: binutils-2.26.tar.bz2
-  url: https://ftp.gnu.org/gnu/binutils/binutils-2.26.tar.bz2
-  sha256: c2ace41809542f5237afc7e3b8f32bb92bc7bc53c6232a84463c423b0714ecd9
+  fn: binutils-2.28.tar.bz2
+  url: https://ftp.gnu.org/gnu/binutils/binutils-2.28.tar.bz2
+  sha256: 6297433ee120b11b4b0a1c8f3512d7d73501753142ab9e2daa13c5a3edd32a72
 
 build:
   detect_binary_files_with_prefix: True
@@ -18,7 +18,7 @@ requirements:
 test:
   commands:
     - lm32-elf-ld --version
-    - lm32-elf-ld --version 2>&1 | grep -q 2.26
+    - lm32-elf-ld --version 2>&1 | grep -q 2.28
 
 about:
   home: https://www.gnu.org/software/binutils/
