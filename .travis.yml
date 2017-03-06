@@ -27,6 +27,7 @@ env:
   # lm32 toolchain
   - PACKAGE=binutils-lm32-elf
   - PACKAGE=gcc-lm32-elf
+  - PACKAGE=gcc5-lm32-elf
   - PACKAGE=gdb-lm32-elf
   # or1k toolchain
   - PACKAGE=binutils-or1k-elf
