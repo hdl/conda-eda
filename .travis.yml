@@ -33,6 +33,10 @@ env:
   - PACKAGE=binutils-or1k-elf
   - PACKAGE=gcc-or1k-elf
   - PACKAGE=gdb-or1k-elf
+  # riscv32 toolchain
+  - PACKAGE=binutils-riscv32-elf
+  # sh2 toolchain
+  - PACKAGE=binutils-sh2-elf
   # fx2 toolchain
   - PACKAGE=sdcc
   # tools
