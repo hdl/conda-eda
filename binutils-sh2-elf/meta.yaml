@@ -1,0 +1,26 @@
+package:
+  name: binutils-sh2-elf
+  version: 2.28.0
+
+source:
+  fn: binutils-2.28.tar.bz2
+  url: https://ftp.gnu.org/gnu/binutils/binutils-2.28.tar.bz2
+  sha256: 6297433ee120b11b4b0a1c8f3512d7d73501753142ab9e2daa13c5a3edd32a72
+
+build:
+  detect_binary_files_with_prefix: True
+  number: 0
+
+requirements:
+  build:
+    - system # [not win]
+
+test:
+  commands:
+    - sh2-elf-ld --version
+    - sh2-elf-ld --version 2>&1 | grep -q 2.28
+
+about:
+  home: https://www.gnu.org/software/binutils/
+  license: GPL
+  summary: 'A set of programming tools for creating and managing binary programs, object files, libraries, profile data, and assembly source code.'
