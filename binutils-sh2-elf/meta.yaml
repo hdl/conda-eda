@@ -14,6 +14,7 @@ build:
 requirements:
   build:
     - system # [not win]
+    - isl >=0.15
 
 test:
   commands:
