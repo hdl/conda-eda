@@ -3,7 +3,7 @@ package:
   version: git
 
 source:
-  git_url: git://git.launchpad.net/~timvideos/+git/flterm
+  git_url: https://github.com/timvideos/flterm.git
 
 build:
   number: 0
@@ -13,6 +13,6 @@ test:
     - flterm --help
 
 about:
-  home: https://git.launchpad.net/~timvideos/+git/flterm
+  home: https://github.com/timvideos/flterm
   license: GPLv3
   summary: 'Serial boot program for MiSoC'
