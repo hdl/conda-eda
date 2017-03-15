@@ -10,14 +10,14 @@ source:
   md5: 5184f543a013165e8057be59728664b1
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
 
 requirements:
   build:
-    - gmp
+    - gmp >=5.0.1,<7
   run:
-    - gmp
+    - gmp >=5.0.1,<7
 
 test:
   commands:
