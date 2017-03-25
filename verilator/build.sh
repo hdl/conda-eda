@@ -4,9 +4,10 @@ set -x
 set -e
 
 unset VERILATOR_ROOT
+ln -s /usr/bin/perl $PREFIX/bin/
 autoconf
 ./configure \
-  --prefix=$PREFIX
+  --prefix=$PREFIX \
 
 make
 make install
