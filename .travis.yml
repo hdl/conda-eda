@@ -36,10 +36,10 @@ env:
   - PACKAGE=lm32/gcc-newlib
   - PACKAGE=lm32/gdb
   # or1k toolchain
-  - PACKAGE=lm32/binutils
-  - PACKAGE=lm32/gcc-nostdc
-  - PACKAGE=lm32/gcc-newlib
-  - PACKAGE=lm32/gdb
+  - PACKAGE=or1k/binutils
+  - PACKAGE=or1k/gcc-nostdc
+  - PACKAGE=or1k/gcc-newlib
+  - PACKAGE=or1k/gdb
   # riscv32 toolchain
   - PACKAGE=riscv32/binutils
   # sh2 toolchain
