@@ -31,9 +31,9 @@ install:
 env:
   # lm32 toolchain
   - PACKAGE=lm32/binutils
-  #- PACKAGE=lm32/gcc-nostdc
-  #- PACKAGE=lm32/gcc-newlib
-  #- PACKAGE=lm32/gdb
+  - PACKAGE=lm32/gcc-nostdc
+  - PACKAGE=lm32/gcc-newlib
+  - PACKAGE=lm32/gdb
   # or1k toolchain
   #- PACKAGE=lm32/binutils
   #- PACKAGE=lm32/gcc-nostdc
