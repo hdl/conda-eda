@@ -63,7 +63,7 @@ make install-strip
 cd ..
 
 $PREFIX/bin/$GCC --version
-$PREFIX/bin/$GCC --version 2>&1 | head -1 | sed -e"s/$GCC (GCC) //" > ./__conda_version__.txt
+$PREFIX/bin/$GCC --version 2>&1 | head -1 | sed -e"s/$GCC (GCC) //" > ../__conda_version__.txt
 touch .buildstamp
 TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > ../__conda_buildstr__.txt
 TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > ../__conda_buildnum__.txt
