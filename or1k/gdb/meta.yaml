@@ -14,7 +14,7 @@ requirements:
   build:
     - system # [not win]
     - binutils-or1k-elf
-    - gcc-or1k-elf
+    - gcc-lm32-elf-nostdc
 
 test:
   commands:
