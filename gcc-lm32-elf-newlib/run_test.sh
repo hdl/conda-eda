@@ -28,20 +28,20 @@ fi
 # Check the compiler can build a simple C app which requires the standard
 # library.
 cat > main.c <<EOF
-
 #include <stdio.h>
 
 int main() {
 	puts("Hello world!\n");
 }
 EOF
+
+$GCC main.c -o main
 SUCCESS=$?
 if [ $SUCCESS -ne 0 ]; then
 	echo "Compiler didn't exit successfully."
 	exit 1
 fi
 
-$GCC main.c -o main
 if [ ! -e main ]; then
 	echo "Compiler didn't make a binary output file!"
 	exit 1
