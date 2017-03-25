@@ -46,7 +46,7 @@ env:
   #- PACKAGE=flterm
 
 script:
-  - python ./.travis-output.py output.log conda build $PACKAGE
+  - $CONDA_PATH/bin/python ./.travis-output.py output.log conda build $PACKAGE
   - conda install $CONDA_PATH/conda-bld/linux-64/*$(basename $PACKAGE)*.tar.bz2
   - du -h $CONDA_PATH/conda-bld/linux-64/*$(basename $PACKAGE)*.tar.bz2
 
