@@ -52,16 +52,17 @@ env:
 
 script:
   - $CONDA_PATH/bin/python ./.travis-output.py output.log conda build $PACKAGE
-  - conda install $CONDA_PATH/conda-bld/linux-64/*$(basename $PACKAGE)*.tar.bz2
-  - du -h $CONDA_PATH/conda-bld/linux-64/*$(basename $PACKAGE)*.tar.bz2
+  - export CONDA_OUT=$(conda render $PACKAGE -output)
+  - conda install $CONDA_OUT
+  - du -h $CONDA_OUT
   - conda clean -s --dry-run
 
 after_failure:
   - cat output.log
 
 after_success:
-  - tar -jtf $CONDA_PATH/conda-bld/linux-64/*$(basename $PACKAGE)*.tar.bz2
-    #- if [ x$TRAVIS_BRANCH = x"master" ]; then anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER $CONDA_PATH/conda-bld/linux-64/*$(basename $PACKAGE)*.tar.bz2; fi
+  - tar -jtf $CONDA_OUT
+  - if [ x$TRAVIS_BRANCH = x"master" ]; then anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER $CONDA_OUT; fi
 
 matrix:
   allow_failures:
