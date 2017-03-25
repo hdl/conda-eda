@@ -18,7 +18,7 @@ install:
   - ./get-conda.sh $CONDA_PATH
   - export PATH="$PATH:$CONDA_PATH/bin"
   - hash -r
-  - pip install pexpect
+  - conda install pexpect
   - conda config --set always_yes yes --set changeps1 no
   - conda info -a
   - conda config --add channels timvideos
