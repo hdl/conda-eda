@@ -52,7 +52,7 @@ env:
 
 script:
   - $CONDA_PATH/bin/python ./.travis-output.py output.log conda build $PACKAGE
-  - export CONDA_OUT=$(conda render $PACKAGE -output)
+  - export CONDA_OUT=$(conda render $PACKAGE --output)
   - conda install $CONDA_OUT
   - du -h $CONDA_OUT
   - conda clean -s --dry-run
