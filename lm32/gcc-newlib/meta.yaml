@@ -28,7 +28,7 @@ requirements:
     - cloog
     # Arch specific
     - binutils-lm32-elf
-    - gcc-lm32-elf-nostd
+    - gcc-lm32-elf-nostdc
   run:
     - gmp >=4.3.2
     - mpfr >=2.4.2
@@ -37,7 +37,7 @@ requirements:
     - cloog
     # Arch specific
     - binutils-lm32-elf
-    - gcc-lm32-elf-nostd
+    - gcc-lm32-elf-nostdc
 
 about:
   home: https://gcc.gnu.org/

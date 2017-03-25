@@ -26,7 +26,7 @@ requirements:
     - cloog
     # Arch specific
     - binutils-or1k-elf
-    - gcc-or1k-elf-nostd
+    - gcc-or1k-elf-nostdc
   run:
     - gmp >=4.3.2
     - mpfr >=2.4.2
@@ -35,7 +35,7 @@ requirements:
     - cloog
     # Arch specific
     - binutils-or1k-elf
-    - gcc-or1k-elf-nostd
+    - gcc-or1k-elf-nostdc
 
 about:
   home: https://gcc.gnu.org/
