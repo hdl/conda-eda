@@ -3,7 +3,8 @@
 set -x
 set -e
 
-lm32-elf-as --version
+TARGET=lm32-elf
+$TARGET-as --version
 
 rm -rf libstdc++-v3
 mkdir build
@@ -22,7 +23,7 @@ export LDFLAGS=-static
         --with-isl=$PREFIX \
         --with-cloog=$PREFIX \
 	\
-	--target=lm32-elf \
+	--target=$TARGET \
 	--without-headers \
 	--enable-languages="c" \
 	--enable-threads=single \
@@ -43,8 +44,8 @@ export LDFLAGS=-static
 make -j$CPU_COUNT
 make install-strip
 
-$PREFIX/bin/lm32-elf-gcc --version
-$PREFIX/bin/lm32-elf-gcc --version 2>&1 | head -1 | sed -e's/lm32-elf-gcc (GCC) //' > ./__conda_version__.txt
+$PREFIX/bin/$TARGET-gcc --version
+$PREFIX/bin/$TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //" > ./__conda_version__.txt
 touch .buildstamp
 TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > ../__conda_buildstr__.txt
 TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > ../__conda_buildnum__.txt

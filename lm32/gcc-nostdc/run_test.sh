@@ -55,9 +55,9 @@ fi
 
 echo "Info about main.o"
 file main.o
-lm32-elf-objdump -f ./main.o
+$TARGET-objdump -f ./main.o
 
-if ! lm32-elf-objdump -f ./main.o | grep -q 'architecture: lm32'; then
+if ! $TARGET-objdump -f ./main.o | grep -q 'architecture: lm32'; then
 	echo "Compiled binary output not correct architecture!"
 	exit 1
 fi
@@ -74,7 +74,7 @@ SECTIONS
 }
 EOF
 
-lm32-elf-ld -T main.ld -o ./main.elf main.o -M
+$TARGET-ld -T main.ld -o ./main.elf main.o -M
 SUCCESS=$?
 if [ $SUCCESS -ne 0 ]; then
 	echo "Linker didn't exit successfully."
@@ -83,7 +83,7 @@ fi
 
 echo "Info about main.elf"
 file main.elf
-lm32-elf-objdump -f ./main.elf
+$TARGET-objdump -f ./main.elf
 
 echo "==========================================="
 
@@ -134,7 +134,7 @@ SECTIONS
   .bss : { *(.bss) }
 }
 EOF
-lm32-elf-ld -T stdio2.ld -o ./stdio2.elf stdio2.o
+$TARGET-ld -T stdio2.ld -o ./stdio2.elf stdio2.o
 SUCCESS=$?
 if [ $SUCCESS -eq 0 ]; then
 	echo "Linker was able to find puts!"

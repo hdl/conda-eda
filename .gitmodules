@@ -1,6 +1,3 @@
-[submodule "gcc-or1k-elf/newlib"]
-	path = gcc-or1k-elf/newlib
-	url = https://github.com/openrisc/newlib.git
 [submodule "conda-multisrc-example"]
 	path = conda-multisrc-example
 	url = https://github.com/mithro/conda-multisrc-example.git

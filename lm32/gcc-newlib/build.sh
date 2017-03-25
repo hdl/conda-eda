@@ -4,10 +4,9 @@ set -e
 
 TARGET=lm32-elf
 GCC=$TARGET-newlib-gcc
+
 CONDA_PYTHON=$(conda info --root)/bin/python
 ${CONDA_PYTHON} ${RECIPE_DIR}/download-extra-sources.py
-
-echo "PKG_VERSION=$PKG_VERSION"
 
 # Check binutils
 $TARGET-as --version

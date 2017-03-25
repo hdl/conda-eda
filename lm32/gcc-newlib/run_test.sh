@@ -49,9 +49,9 @@ fi
 
 file main
 
-lm32-elf-objdump -f ./main
+$TARGET-objdump -f ./main
 
-if ! lm32-elf-objdump -f ./main | grep -q 'architecture: lm32'; then
+if ! $TARGET-objdump -f ./main | grep -q 'architecture: lm32'; then
 	echo "Compiled binary output not correct architecture!"
 	exit 1
 fi
