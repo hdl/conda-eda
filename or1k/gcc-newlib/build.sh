@@ -40,7 +40,7 @@ echo "  or1k git delta: '$GIT_REV'"
 
 # Check the "nostdc" gcc is already installed
 GCC_STAGE1_VERSION=$($TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //")
-GCC_STAGE2_VERSION=$(echo $UPSTREAM_VERSION | sed -e's/^gcc-//' -e's/_/./' -e's/-.*//')
+GCC_STAGE2_VERSION=$(echo $UPSTREAM_RELEASE | sed -e's/^gcc-//' -e's/_/./' -e's/-.*//')
 if [ "$GCC_STAGE1_VERSION" != "$GCC_STAGE2_VERSION" ]; then
 	echo "Stage 1 compiler (nostdc) not the same version as us!"
 	echo "nostdc version: $GCC_STAGE1_VERSION"
