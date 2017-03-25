@@ -22,6 +22,7 @@ install:
   - conda install pexpect
   - conda info -a
   - conda config --add channels timvideos
+  - conda clean -s --dry-run
 
 env:
   # lm32 toolchain
@@ -49,6 +50,7 @@ script:
   - $CONDA_PATH/bin/python ./.travis-output.py output.log conda build $PACKAGE
   - conda install $CONDA_PATH/conda-bld/linux-64/*$(basename $PACKAGE)*.tar.bz2
   - du -h $CONDA_PATH/conda-bld/linux-64/*$(basename $PACKAGE)*.tar.bz2
+  - conda clean -s --dry-run
 
 after_failure:
   - cat output.log
