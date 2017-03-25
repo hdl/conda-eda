@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set +x
+set +e
+
 TARGET=lm32-elf
 GCC=$TARGET-gcc
 OBJDUMP=$TARGET-objdump

@@ -1,8 +1,12 @@
 #!/bin/bash
 
+set +x
+set +e
+
 TARGET=or1k-elf
 GCC=$TARGET-gcc
 OBJDUMP=$TARGET-objdump
+
 
 # Check the compiler version matches
 GCC_PKG_VERSION=$(echo $PKG_VERSION | sed -e's/_.*//')

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set +x
+set +e
+
 TARGET=lm32-elf
 GCC=$TARGET-newlib-gcc
 OBJDUMP=$TARGET-objdump
@@ -27,6 +30,11 @@ fi
 
 # Check the compiler can build a simple C app which requires the standard
 # library.
+
+echo "==========================================="
+
+echo "Compile and link a 'bare metal' binary with stdlib"
+
 cat > main.c <<EOF
 #include <stdio.h>
 
