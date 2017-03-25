@@ -1,0 +1,46 @@
+package:
+  name: gcc-lm32-elf-newlib
+  version: 6.3.0
+
+source:
+  fn: gcc-6.3.0.tar.bz2
+  url: ftp://ftp.gnu.org/gnu/gcc/gcc-6.3.0/gcc-6.3.0.tar.bz2
+  sha256: f06ae7f3f790fbf0f018f6d40e844451e6bc3b7bc96e128e63b09825c1f8b29f
+  sha512: 234dd9b1bdc9a9c6e352216a7ef4ccadc6c07f156006a59759c5e0e6a69f0abcdc14630eff11e3826dd6ba5933a8faa43043f3d1d62df6bd5ab1e82862f9bf78
+
+extra:
+  sources:
+    newlib:
+      fn: newlib-2.5.0.20170228.tar.gz
+      url: ftp://sourceware.org/pub/newlib/newlib-2.5.0.20170228.tar.gz
+      sha256: 29923e9696b091dc2f880018e747c8cf282a557d2cdb60f760d9ec6a1f97337d
+
+build:
+  detect_binary_files_with_prefix: False
+  number: 1
+
+requirements:
+  build:
+    # These are taken from the output of the configure scripts
+    - gmp >=4.3.2
+    - mpfr >=2.4.2
+    - mpc >=0.8.1
+    - isl
+    - cloog
+    # Arch specific
+    - binutils-lm32-elf
+    - gcc-lm32-elf-nostd
+  run:
+    - gmp >=4.3.2
+    - mpfr >=2.4.2
+    - mpc >=0.8.1
+    - isl
+    - cloog
+    # Arch specific
+    - binutils-lm32-elf
+    - gcc-lm32-elf-nostd
+
+about:
+  home: https://gcc.gnu.org/
+  license: GPL
+  summary: 'The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Java, Ada, and Go, as well as libraries for these languages (libstdc++, libgcj,...).'
