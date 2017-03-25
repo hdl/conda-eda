@@ -1,11 +1,11 @@
 package:
   name: sdcc
-  version: 3.5.0
+  version: 3.6.0
 
 source:
-  fn: sdcc-src-3.5.0.tar.bz2
-  url: http://sourceforge.net/projects/sdcc/files/sdcc/3.5.0/sdcc-src-3.5.0.tar.bz2/download
-  sha256: f82978d1614244b22e093402c0a4de1f688a07c807b2980126c964eb3df85fa9
+  fn: sdcc-src-3.6.0.tar.bz2
+  url: http://sourceforge.net/projects/sdcc/files/sdcc/3.6.0/sdcc-src-3.6.0.tar.bz2/download
+  sha256: e85dceb11e01ffefb545ec389da91265130c91953589392dddd2e5ec0b7ca374
 
 build:
   number: 0
