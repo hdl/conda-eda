@@ -1,6 +1,5 @@
-language: python
-python:
-  - "3.5"
+language: c
+cache: ccache
 
 sudo: false
 addons:
@@ -16,10 +15,10 @@ install:
   - export BASE_PATH=/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path
   - export CONDA_PATH=$BASE_PATH/conda
   - mkdir -p $BASE_PATH
-  - pip install pexpect
   - ./get-conda.sh $CONDA_PATH
   - export PATH="$PATH:$CONDA_PATH/bin"
   - hash -r
+  - pip install pexpect
   - conda config --set always_yes yes --set changeps1 no
   - conda info -a
   - conda config --add channels timvideos
