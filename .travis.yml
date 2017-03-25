@@ -18,32 +18,32 @@ install:
   - ./get-conda.sh $CONDA_PATH
   - export PATH="$PATH:$CONDA_PATH/bin"
   - hash -r
-  - conda install pexpect
   - conda config --set always_yes yes --set changeps1 no
+  - conda install pexpect
   - conda info -a
   - conda config --add channels timvideos
 
 env:
   # lm32 toolchain
   - PACKAGE=lm32/binutils
-  - PACKAGE=lm32/gcc-nostdc
-  - PACKAGE=lm32/gcc-newlib
-  - PACKAGE=lm32/gdb
+  #- PACKAGE=lm32/gcc-nostdc
+  #- PACKAGE=lm32/gcc-newlib
+  #- PACKAGE=lm32/gdb
   # or1k toolchain
-  - PACKAGE=lm32/binutils
-  - PACKAGE=lm32/gcc-nostdc
-  - PACKAGE=lm32/gcc-newlib
-  - PACKAGE=lm32/gdb
+  #- PACKAGE=lm32/binutils
+  #- PACKAGE=lm32/gcc-nostdc
+  #- PACKAGE=lm32/gcc-newlib
+  #- PACKAGE=lm32/gdb
   # riscv32 toolchain
-  - PACKAGE=riscv32/binutils
+  #- PACKAGE=riscv32/binutils
   # sh2 toolchain
-  - PACKAGE=sh2/binutils
+  #- PACKAGE=sh2/binutils
   # fx2 toolchain
-  - PACKAGE=sdcc
+  #- PACKAGE=sdcc
   # tools
-  - PACKAGE=openocd
-  - PACKAGE=verilator
-  - PACKAGE=flterm
+  #- PACKAGE=openocd
+  #- PACKAGE=verilator
+  #- PACKAGE=flterm
 
 script:
   - python ./.travis-output.py output.log conda build $PACKAGE
