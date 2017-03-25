@@ -1,30 +1,30 @@
 # conda-hdmi2usb-packages
 
-Conda build recipes for HDMI2USB-misoc-firmware build dependencies.
+Conda build recipes for HDMI2USB-litex-firmware build dependencies.
 
 Basically, anything which hasn't gotten a proper package at https://launchpad.net/~timvideos/+archive/ubuntu/hdmi2usb
 
 # Toolchains
 
-## MiSoC "soft-CPU" support
+## LiteX "soft-CPU" support
 
-The MiSoC system supports both a `lm32` and `or1k` "soft-CPU" implementations.
+The LiteX system supports both a `lm32` and `or1k` "soft-CPU" implementations.
+
+Current versions are;
+
+ * binutils - 2.28.0
+ * gcc - 5.4.0
+ * gcc+newlib - 5.4.0 + 2.4.0
+ * gdb - 7.11
 
 ### lm32-elf
 
-"Bare metal" cross compiler.
-
- - binutils - Upstream 2.26.0
- - gcc - Upstream 4.9.3
- - gdb - Upstream 7.11
+ * All come from upstream.
 
 ### or1k-elf
 
-"Bare metal" cross compiler.
-
- - binutils - Upstream 2.26.0
- - gcc - or1k fork, based on upstream 4.9.3
- - gdb - or1k fork, based on upstream 7.11
+ * binutils - upstream
+ * gcc, newlib & gdb - or1k forks based on upstream version.
 
 ## Cypress FX2 support
 
