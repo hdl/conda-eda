@@ -15,19 +15,21 @@ build:
 requirements:
   build:
     # These are taken from the output of the configure scripts
-    - binutils-lm32-elf
     - gmp >=4.3.2
     - mpfr >=2.4.2
     - mpc >=0.8.1
     - isl
     - cloog
+    # Arch specific
+    - binutils-lm32-elf
   run:
-    - binutils-lm32-elf
     - gmp >=4.3.2
     - mpfr >=2.4.2
     - mpc >=0.8.1
     - isl
     - cloog
+    # Arch specific
+    - binutils-lm32-elf
 
 about:
   home: https://gcc.gnu.org/
