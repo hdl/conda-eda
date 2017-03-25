@@ -27,6 +27,7 @@ install:
   - conda info -a
   - conda config --add channels timvideos
   - conda clean -s --dry-run
+  - export CONDA_OUT=$(conda render $PACKAGE --output | sed -e's/-[0-9]\+\.tar/*.tar/')
 
 env:
   # lm32 toolchain
@@ -52,7 +53,6 @@ env:
 
 script:
   - $CONDA_PATH/bin/python ./.travis-output.py output.log conda build $PACKAGE
-  - export CONDA_OUT=$(conda render $PACKAGE --output)
   - conda install $CONDA_OUT
   - du -h $CONDA_OUT
   - conda clean -s --dry-run
