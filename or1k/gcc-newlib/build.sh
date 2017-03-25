@@ -8,19 +8,11 @@ GCC=$TARGET-newlib-gcc
 CONDA_PYTHON=$(conda info --root)/bin/python
 ${CONDA_PYTHON} ${RECIPE_DIR}/download-extra-sources.py
 
+set -x
+
 # Check binutils
 $TARGET-as --version
-# Check the "nostdc" gcc is already installed
-GCC_STAGE1_VERSION=$($TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //")
-GCC_STAGE2_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//')
-if [ "$GCC_STAGE1_VERSION" != "$GCC_STAGE2_VERSION" ]; then
-	echo "Stage 1 compiler (nostdc) not the same version as us!"
-	echo "nostdc version: $GCC_STAGE1_VERSION"
-	echo "  this version: $GCC_STAGE2_VERSION"
- 	exit 1
-fi
 
-set -x
 
 # Fetch upstream gcc so we can get a git-describe delta
 echo $SRC_DIR
@@ -36,6 +28,8 @@ echo $PWD
 
 git fetch
 
+set +x
+
 # Find our current or1k release
 OR1K_RELEASE=$(git describe --abbrev=0 --match or1k-*-*)
 echo "    or1k release: '$OR1K_RELEASE'"
@@ -43,6 +37,18 @@ UPSTREAM_RELEASE=$(echo $OR1K_RELEASE | sed -e's/^or1k-/gcc-/' -e's/\./_/g' -e's
 echo "upstream release: '$UPSTREAM_RELEASE'"
 GIT_REV=$(git describe --tags --long --match ${UPSTREAM_RELEASE} | sed -e"s/^${UPSTREAM_RELEASE}-//" -e's/-/_/')
 echo "  or1k git delta: '$GIT_REV'"
+
+# Check the "nostdc" gcc is already installed
+GCC_STAGE1_VERSION=$($TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //")
+GCC_STAGE2_VERSION=$(echo $UPSTREAM_VERSION | sed -e's/^gcc-//' -e's/_/./' -e's/-.*//')
+if [ "$GCC_STAGE1_VERSION" != "$GCC_STAGE2_VERSION" ]; then
+	echo "Stage 1 compiler (nostdc) not the same version as us!"
+	echo "nostdc version: $GCC_STAGE1_VERSION"
+	echo "  this version: $GCC_STAGE2_VERSION"
+ 	exit 1
+fi
+
+set -x
 
 rm -rf libstdc++-v3
 
