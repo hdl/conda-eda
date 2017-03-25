@@ -17,7 +17,7 @@ echo $PWD
 (
 	export GIT_DIR=$(${CONDA_PYTHON} ${RECIPE_DIR}/find-git-cache.py)
 	git remote -v
-	if ! git remote get-url upstream > /dev/null 2>&1; then
+	if !  git remote -v | grep -q upstream; then
 		git remote add upstream git://gcc.gnu.org/git/gcc.git
 		git fetch upstream
 	fi
