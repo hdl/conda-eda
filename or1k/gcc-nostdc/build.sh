@@ -25,9 +25,9 @@ echo $PWD
 git fetch
 
 # Find our current or1k release
-OR1K_RELEASE=$(git describe --abbrev=0 --match or1k-*-release)
+OR1K_RELEASE=$(git describe --abbrev=0 --match or1k-*-*)
 echo "    or1k release: '$OR1K_RELEASE'"
-UPSTREAM_RELEASE=$(echo $OR1K_RELEASE | sed -e's/^or1k-/gcc-/' -e's/\./_/g')
+UPSTREAM_RELEASE=$(echo $OR1K_RELEASE | sed -e's/^or1k-/gcc-/' -e's/\./_/g' -e's/-[0-9]\+$/-release/')
 echo "upstream release: '$UPSTREAM_RELEASE'"
 GIT_REV=$(git describe --tags --long --match ${UPSTREAM_RELEASE} | sed -e"s/^${UPSTREAM_RELEASE}-//" -e's/-/_/')
 echo "  or1k git delta: '$GIT_REV'"
