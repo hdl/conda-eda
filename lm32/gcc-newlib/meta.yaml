@@ -6,6 +6,8 @@ source:
   fn: gcc-5.4.0.tar.bz2
   url: ftp://ftp.gnu.org/gnu/gcc/gcc-5.4.0/gcc-5.4.0.tar.bz2
   sha256: 608df76dec2d34de6558249d8af4cbee21eceddbcb580d666f7a5a583ca3303a
+  patches:
+   - stdint.patch
 
 extra:
   sources:
