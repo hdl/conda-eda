@@ -50,23 +50,24 @@ fi
 
 set -x
 
-rm -rf libstdc++-v3
-
-cd ..
 ls -l
 
-mkdir build-newlib
+cd gcc-*
+rm -rf libstdc++-v3
+cd ..
+
+mkdir -p build-newlib
 cd build-newlib
 ../newlib-*/configure \
         --prefix=$PREFIX \
 	--target=$TARGET \
-
+	--disable-newlib-supplied-syscalls \
 
 make -j$CPU_COUNT
 make install
 cd ..
 
-mkdir build-gcc
+mkdir -p build-gcc
 cd build-gcc
 export LDFLAGS=-static
 ../gcc-*/configure \
