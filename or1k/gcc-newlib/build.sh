@@ -50,11 +50,15 @@ fi
 
 set -x
 
-ls -l
-
-cd gcc-*
+# If --dirty we end up in the work directory, if not, we end up in the gcc
+# directory, WTF conda?
+echo $PWD
+if [ "$(basename $PWD)" = "work" ]; then
+	cd gcc-*
+fi
 rm -rf libstdc++-v3
 cd ..
+ls -l
 
 mkdir -p build-newlib
 cd build-newlib
