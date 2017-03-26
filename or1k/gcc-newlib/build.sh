@@ -13,14 +13,14 @@ set -x
 # Check binutils
 $TARGET-as --version
 
-
 # Fetch upstream gcc so we can get a git-describe delta
 echo $SRC_DIR
 echo $PWD
 
 (
 	export GIT_DIR=$(${CONDA_PYTHON} ${RECIPE_DIR}/find-git-cache.py)
-	if ! git remote get-url upstream > /dev/null 2>&1; then
+	git remote -v
+	if !  git remote -v | grep -q upstream; then
 		git remote add upstream git://gcc.gnu.org/git/gcc.git
 		git fetch upstream
 	fi

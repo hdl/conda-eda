@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -x
 set -e
 
 TARGET=or1k-elf
@@ -25,6 +24,8 @@ echo $PWD
 
 git fetch
 
+set +x
+
 # Find our current or1k release
 OR1K_RELEASE=$(git describe --abbrev=0 --match or1k-*-*)
 echo "    or1k release: '$OR1K_RELEASE'"
@@ -33,6 +34,7 @@ echo "upstream release: '$UPSTREAM_RELEASE'"
 GIT_REV=$(git describe --tags --long --match ${UPSTREAM_RELEASE} | sed -e"s/^${UPSTREAM_RELEASE}-//" -e's/-/_/')
 echo "  or1k git delta: '$GIT_REV'"
 
+set -x
 rm -rf libstdc++-v3
 mkdir build
 cd build
