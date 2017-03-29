@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# lm32 gcc newlib run test
+
 set +x
 set +e
 
@@ -13,18 +15,24 @@ GCC_PKG_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//')
 GCC_RUN_VERSION=$($GCC --version 2>&1 | head -1 | sed -e"s/$GCC (GCC) //")
 
 if [ "$GCC_PKG_VERSION" != "$GCC_RUN_VERSION" ]; then
-	echo "Compiler doesn't have correct version!"
+	echo
 	echo "  package version: $GCC_PKG_VERSION"
 	echo "installed version: $GCC_RUN_VERSION"
+	echo
+	echo "Compiler doesn't have correct version!"
+	echo
  	exit 1
 fi
 
 # Check the compiler was build for the right machine
 GCC_TARGET=$($GCC -dumpmachine)
 if [ "$GCC_TARGET" != "$TARGET" ]; then
-	echo "Compiler doesn't have correct target!"
+	echo
 	echo "  package target: $TARGET"
 	echo "installed target: $GCC_TARGET"
+	echo
+	echo "Compiler doesn't have correct target!"
+	echo
  	exit 1
 fi
 

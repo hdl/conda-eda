@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# lm32 gcc newlib build
+
 set -e
 
 TARGET=lm32-elf
@@ -15,9 +17,12 @@ $TARGET-as --version
 GCC_STAGE1_VERSION=$($TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //")
 GCC_STAGE2_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//')
 if [ "$GCC_STAGE1_VERSION" != "$GCC_STAGE2_VERSION" ]; then
-	echo "Stage 1 compiler (nostdc) not the same version as us!"
+	echo
 	echo "nostdc version: $GCC_STAGE1_VERSION"
 	echo "  this version: $GCC_STAGE2_VERSION"
+	echo
+	echo "Stage 1 compiler (nostdc) not the same version as us!"
+	echo
  	exit 1
 fi
 
