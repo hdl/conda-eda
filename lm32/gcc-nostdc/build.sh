@@ -4,15 +4,20 @@ set -x
 set -e
 
 TARGET=lm32-elf
+# Check binutils
 $TARGET-as --version
 
+echo $PWD
 rm -rf libstdc++-v3
-mkdir build
-cd build
+cd ..
+ls -l
+
+mkdir -p build-gcc
+cd build-gcc
 
 # --without-headers - Tells GCC not to rely on any C library (standard or runtime) being present for the target.
 export LDFLAGS=-static
-../configure \
+$SRC_DIR/configure \
         --prefix=$PREFIX \
         --with-gmp=$PREFIX \
         --with-mpfr=$PREFIX \
@@ -40,9 +45,11 @@ export LDFLAGS=-static
 
 make -j$CPU_COUNT
 make install-strip
+cd ..
 
 $PREFIX/bin/$TARGET-gcc --version
-$PREFIX/bin/$TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //" > ../__conda_version__.txt
+$PREFIX/bin/$TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //" > $SRC_DIR/__conda_version__.txt
 touch .buildstamp
-TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > ../__conda_buildstr__.txt
-TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > ../__conda_buildnum__.txt
+TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > $SRC_DIR/__conda_buildstr__.txt
+TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > $SRC_DIR/__conda_buildnum__.txt
+cat $SRC_DIR/__conda_*__.txt

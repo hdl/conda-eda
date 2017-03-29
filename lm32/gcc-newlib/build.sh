@@ -10,6 +10,7 @@ ${CONDA_PYTHON} ${RECIPE_DIR}/download-extra-sources.py
 
 # Check binutils
 $TARGET-as --version
+
 # Check the "nostdc" gcc is already installed
 GCC_STAGE1_VERSION=$($TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //")
 GCC_STAGE2_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//')
@@ -22,20 +23,14 @@ fi
 
 set -x
 
-# If --dirty we end up in the work directory, if not, we end up in the gcc
-# directory, WTF conda?
 echo $PWD
-ls -l $PWD
-if [ "$(basename $PWD)" = "work" ]; then
-	cd gcc-*
-fi
 rm -rf libstdc++-v3
 cd ..
 ls -l
 
 mkdir -p build-newlib
 cd build-newlib
-../newlib-*/configure \
+../newlib*/configure \
         --prefix=$PREFIX \
 	--target=$TARGET \
 	--disable-newlib-supplied-syscalls \
@@ -47,7 +42,7 @@ cd ..
 mkdir -p build-gcc
 cd build-gcc
 export LDFLAGS=-static
-../gcc-*/configure \
+$SRC_DIR/configure \
 	\
 	--program-prefix=$TARGET-newlib- \
 	\
@@ -69,7 +64,8 @@ make install-strip
 cd ..
 
 $PREFIX/bin/$GCC --version
-$PREFIX/bin/$GCC --version 2>&1 | head -1 | sed -e"s/$GCC (GCC) //" > ../__conda_version__.txt
+$PREFIX/bin/$GCC --version 2>&1 | head -1 | sed -e"s/$GCC (GCC) //" > $SRC_DIR/__conda_version__.txt
 touch .buildstamp
-TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > ../__conda_buildstr__.txt
-TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > ../__conda_buildnum__.txt
+TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > $SRC_DIR/__conda_buildstr__.txt
+TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > $SRC_DIR/__conda_buildnum__.txt
+cat $SRC_DIR/__conda_*__.txt

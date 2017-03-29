@@ -18,11 +18,13 @@ echo $PWD
 	git remote -v
 	if !  git remote -v | grep -q upstream; then
 		git remote add upstream git://gcc.gnu.org/git/gcc.git
-		git fetch upstream
 	fi
+	git fetch upstream
+	git fetch upstream --tags
 )
 
 git fetch
+git fetch --tags
 
 set +x
 
@@ -35,13 +37,18 @@ GIT_REV=$(git describe --tags --long --match ${UPSTREAM_RELEASE} | sed -e"s/^${U
 echo "  or1k git delta: '$GIT_REV'"
 
 set -x
+
+echo $PWD
 rm -rf libstdc++-v3
-mkdir build
-cd build
+cd ..
+ls -l
+
+mkdir -p build-gcc
+cd build-gcc
 
 # --without-headers - Tells GCC not to rely on any C library (standard or runtime) being present for the target.
 export LDFLAGS=-static
-../configure \
+$SRC_DIR/configure \
         --prefix=$PREFIX \
         --with-gmp=$PREFIX \
         --with-mpfr=$PREFIX \
@@ -69,10 +76,11 @@ export LDFLAGS=-static
 
 make -j$CPU_COUNT
 make install-strip
+cd ..
 
 $PREFIX/bin/$TARGET-gcc --version
-$PREFIX/bin/$TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //" -e"s/\$/_$GIT_REV/" > ../__conda_version__.txt
+$PREFIX/bin/$TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //" -e"s/\$/_$GIT_REV/" > $SRC_DIR/__conda_version__.txt
 touch .buildstamp
-TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > ../__conda_buildstr__.txt
-TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > ../__conda_buildnum__.txt
-cat ../__conda_*__.txt
+TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > $SRC_DIR/__conda_buildstr__.txt
+TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > $SRC_DIR/__conda_buildnum__.txt
+cat $SRC_DIR/__conda_*__.txt
