@@ -66,7 +66,8 @@ file main
 echo
 echo "output.map"
 echo "-------------------------------------------"
-cat output.map | sed -e's-[^/]*/work/--' -e's-[^/]*/bin--'
+cat output.map \
+	| sed -e's-[^ ]\+/bin/-[BIN]/-g' -e's-[^ ]\+/work/-[WORK]/-g'
 echo "-------------------------------------------"
 echo
 
@@ -76,8 +77,12 @@ if ! $TARGET-objdump -f ./main | grep -q 'architecture: lm32'; then
 	exit 1
 fi
 
-$TARGET-objdump -g ./main | grep DW_AT_name | grep newlib
-if ! $TARGET-objdump -g ./main | grep DW_AT_name | grep newlib; then
+$TARGET-objdump -g ./main 2>&1 \
+	| grep DW_AT_name \
+	| grep newlib \
+	| sed -e's-[^ ]\+/bin/-[BIN]/-g' -e's-[^ ]\+/work/-[WORK]/-g'
+SUCCESS=$?
+if [ $SUCCESS -ne 0 ]; then
 	echo "Compiled binary not linked against newlib!"
 	exit 1
 fi

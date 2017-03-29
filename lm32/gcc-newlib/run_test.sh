@@ -16,7 +16,7 @@ GCC_RUN_VERSION=$($GCC --version 2>&1 | head -1 | sed -e"s/$GCC (GCC) //")
 
 if [ "$GCC_PKG_VERSION" != "$GCC_RUN_VERSION" ]; then
 	echo
-	echo "  package version: $GCC_PKG_VERSION ($($PKG_VERSION))"
+	echo "  package version: $GCC_PKG_VERSION ($PKG_VERSION)"
 	echo "installed version: $GCC_RUN_VERSION ($($GCC --version 2>&1 | head -1))"
 	echo
 	echo "Compiler doesn't have correct version!"
@@ -66,7 +66,8 @@ file main
 echo
 echo "output.map"
 echo "-------------------------------------------"
-cat output.map | sed -e's-[^/]*/work/--' -e's-[^/]*/bin--'
+cat output.map \
+	| sed -e's-[^ ]\+/bin/-[BIN]/-g' -e's-[^ ]\+/work/-[WORK]/-g'
 echo "-------------------------------------------"
 echo
 
@@ -76,8 +77,12 @@ if ! $TARGET-objdump -f ./main | grep -q 'architecture: lm32'; then
 	exit 1
 fi
 
-$TARGET-objdump -g ./main | grep DW_AT_name | grep newlib
-if ! $TARGET-objdump -g ./main | grep DW_AT_name | grep newlib; then
+$TARGET-objdump -g ./main 2>&1 \
+	| grep DW_AT_name \
+	| grep newlib \
+	| sed -e's-[^ ]\+/bin/-[BIN]/-g' -e's-[^ ]\+/work/-[WORK]/-g'
+SUCCESS=$?
+if [ $SUCCESS -ne 0 ]; then
 	echo "Compiled binary not linked against newlib!"
 	exit 1
 fi
