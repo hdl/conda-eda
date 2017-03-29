@@ -11,7 +11,7 @@ OBJDUMP=$TARGET-objdump
 
 
 # Check the compiler version matches
-GCC_PKG_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//')
+GCC_PKG_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//' -e"s/_.*$//")
 GCC_RUN_VERSION=$($GCC --version 2>&1 | head -1 | sed -e"s/$GCC (GCC) //")
 
 if [ "$GCC_PKG_VERSION" != "$GCC_RUN_VERSION" ]; then
