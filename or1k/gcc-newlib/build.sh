@@ -97,9 +97,11 @@ make -j$CPU_COUNT
 make install-strip
 cd ..
 
+VERSION_DIR="$(echo $SRC_DIR | sed -e's-/work/.*-/work/-')"
+
 $PREFIX/bin/$GCC --version
-$PREFIX/bin/$GCC --version 2>&1 | head -1 | sed -e's/.* //' -e"s/\$/_$GIT_REV/" > $SRC_DIR/__conda_version__.txt
+$PREFIX/bin/$GCC --version 2>&1 | head -1 | sed -e's/.* //' -e"s/\$/_$GIT_REV/" > $VERSION_DIR/__conda_version__.txt
 touch .buildstamp
-TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > $SRC_DIR/__conda_buildstr__.txt
-TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > $SRC_DIR/__conda_buildnum__.txt
-cat $SRC_DIR/__conda_*__.txt
+TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > $VERSION_DIR/__conda_buildstr__.txt
+TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > $VERSION_DIR/__conda_buildnum__.txt
+cat $VERSION_DIR/__conda_*__.txt
