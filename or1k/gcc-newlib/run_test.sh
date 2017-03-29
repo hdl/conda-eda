@@ -5,7 +5,7 @@
 set +x
 set +e
 
-TARGET=lm32-elf
+TARGET=or1k-elf
 GCC=$TARGET-newlib-gcc
 OBJDUMP=$TARGET-objdump
 
