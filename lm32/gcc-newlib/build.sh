@@ -25,6 +25,7 @@ set -x
 # If --dirty we end up in the work directory, if not, we end up in the gcc
 # directory, WTF conda?
 echo $PWD
+ls -l $PWD
 if [ "$(basename $PWD)" = "work" ]; then
 	cd gcc-*
 fi
