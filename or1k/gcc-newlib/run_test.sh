@@ -43,7 +43,7 @@ int main() {
 }
 EOF
 
-$GCC -g main.c -o main
+$GCC -g main.c -o main -Wl,-Map=output.map
 SUCCESS=$?
 if [ $SUCCESS -ne 0 ]; then
 	echo "Compiler didn't exit successfully."
@@ -56,9 +56,9 @@ if [ ! -e main ]; then
 fi
 
 file main
+cat output.map
 
 $TARGET-objdump -f ./main
-
 if ! $TARGET-objdump -f ./main | grep -q 'architecture: lm32'; then
 	echo "Compiled binary output not correct architecture!"
 	exit 1
