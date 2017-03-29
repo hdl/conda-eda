@@ -71,10 +71,9 @@ if ! $TARGET-objdump -f ./main | grep -q 'architecture: lm32'; then
 	echo "Compiled binary output not correct architecture!"
 	exit 1
 fi
-$TARGET-objdump -g ./main
 
-strings ./main
-if ! strings ./main | grep -q 'newlib'; then
+$TARGET-objdump -g ./main | grep DW_AT_name | grep newlib
+if ! $TARGET-objdump -g ./main | grep DW_AT_name | grep newlib; then
 	echo "Compiled binary not linked against newlib!"
 	exit 1
 fi
