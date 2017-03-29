@@ -50,7 +50,6 @@ int main() {
 	puts("Hello world!\n");
 }
 EOF
-
 $GCC -g main.c -o main -Wl,-Map=output.map
 SUCCESS=$?
 if [ $SUCCESS -ne 0 ]; then
@@ -64,7 +63,12 @@ if [ ! -e main ]; then
 fi
 
 file main
-cat output.map
+echo
+echo "output.map"
+echo "-------------------------------------------"
+cat output.map | sed -e's-[^/]*/work/--' -e's-[^/]*/bin--'
+echo "-------------------------------------------"
+echo
 
 $TARGET-objdump -f ./main
 if ! $TARGET-objdump -f ./main | grep -q 'architecture: lm32'; then
