@@ -16,8 +16,8 @@ GCC_RUN_VERSION=$($GCC --version 2>&1 | head -1 | sed -e"s/$GCC (GCC) //")
 
 if [ "$GCC_PKG_VERSION" != "$GCC_RUN_VERSION" ]; then
 	echo
-	echo "  package version: $GCC_PKG_VERSION"
-	echo "installed version: $GCC_RUN_VERSION"
+	echo "  package version: $GCC_PKG_VERSION ($($PKG_VERSION))"
+	echo "installed version: $GCC_RUN_VERSION ($($GCC --version 2>&1 | head -1))"
 	echo
 	echo "Compiler doesn't have correct version!"
 	echo
