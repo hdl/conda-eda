@@ -64,7 +64,7 @@ script:
   - conda clean -s --dry-run
 
 after_failure:
-  - cat output.log
+  - cat output.log | grep -v 'gcc' | grep -v 'g++'
 
 after_success:
   - tar -jtf $CONDA_OUT
