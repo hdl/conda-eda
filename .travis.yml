@@ -52,7 +52,9 @@ env:
   - PACKAGE=flterm
 
 script:
-  - $CONDA_PATH/bin/python ./.travis-output.py output.log conda build $PACKAGE
+  - conda check $PACKAGE
+  - $CONDA_PATH/bin/python ./.travis-output.py output.log conda build --no-test $PACKAGE
+  - conda build --test $PACKAGE
   - conda install $CONDA_OUT
   - du -h $CONDA_OUT
   - conda clean -s --dry-run
