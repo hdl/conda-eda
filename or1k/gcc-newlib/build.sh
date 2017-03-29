@@ -95,6 +95,17 @@ $SRC_DIR/configure \
 
 make -j$CPU_COUNT
 make install-strip
+
+# Install aliases for the binutil tools
+for BINUTIL in $(ls $PREFIX/bin/$TARGET-* | grep /$TARGET-); do
+	NEWLIB_BINUTIL="$(echo $BINUTIL | sed -e"s_/$TARGET-_/$TARGET-newlib-_" -e's/newlib-newlib/newlib/')"
+
+	if [ ! -e "$NEWLIB_BINUTIL" ]; then
+		ln -sv "$BINUTIL" "$NEWLIB_BINUTIL"
+	fi
+done
+ls -l $PREFIX/bin/$TARGET-newlib-*
+
 cd ..
 
 VERSION_DIR="$(echo $SRC_DIR | sed -e's-/work/.*-/work/-')"
