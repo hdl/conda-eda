@@ -72,7 +72,7 @@ echo "-------------------------------------------"
 echo
 
 $TARGET-objdump -f ./main
-if ! $TARGET-objdump -f ./main | grep -q 'architecture: lm32'; then
+if ! $TARGET-objdump -f ./main | grep -q 'architecture: or1k'; then
 	echo "Compiled binary output not correct architecture!"
 	exit 1
 fi
