@@ -64,12 +64,12 @@ script:
   - conda clean -s --dry-run
 
 after_failure:
-  - cat output.log | grep -v 'gcc' | grep -v 'g++'
+  - cat output.log | grep -v 'gcc ' | grep -v 'g++ '
 
 after_success:
   - tar -jtf $CONDA_OUT
   - if [ x$TRAVIS_BRANCH = x"master" ]; then anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER $CONDA_OUT; fi
-  - cat output.log | grep -v 'gcc' | grep -v 'g++'
+  - cat output.log | grep -v 'gcc ' | grep -v 'g++ '
 
 matrix:
   allow_failures:
