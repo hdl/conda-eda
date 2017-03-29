@@ -16,6 +16,7 @@ child = pexpect.spawn(' '.join(args))
 def output_line(line_bits, last_skip):
   line = "".join(line_bits)
   line = re.sub("/really.*/conda/", "/.../conda/", line)
+  line = re.sub("/_b_env_[^/]*/", "/_b_env_.../", line)
   sline = line.strip()
 
   skip = True
