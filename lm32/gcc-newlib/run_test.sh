@@ -43,7 +43,7 @@ int main() {
 }
 EOF
 
-$GCC main.c -o main
+$GCC -g main.c -o main
 SUCCESS=$?
 if [ $SUCCESS -ne 0 ]; then
 	echo "Compiler didn't exit successfully."
@@ -64,7 +64,7 @@ if ! $TARGET-objdump -f ./main | grep -q 'architecture: lm32'; then
 	exit 1
 fi
 
-strings ./main | grep -q 'newlib'
+strings ./main | grep 'newlib'
 if ! strings ./main | grep -q 'newlib'; then
 	echo "Compiled binary not linked against newlib!"
 	exit 1

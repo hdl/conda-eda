@@ -43,7 +43,7 @@ int main() {
 }
 EOF
 
-$GCC main.c -o main
+$GCC -g main.c -o main
 SUCCESS=$?
 if [ $SUCCESS -ne 0 ]; then
 	echo "Compiler didn't exit successfully."
