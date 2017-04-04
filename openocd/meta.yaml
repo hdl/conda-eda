@@ -3,10 +3,11 @@ package:
   version: git
 
 source:
-  git_rev: v0.9.0-247-g73b676c
+  git_rev: master
   git_url: git://repo.or.cz/openocd.git
-  patches: 
-    - relative-scripts.patch
+  patches:
+    - digilent-arty.patch
+    - fpga-program.patch
 
 build:
   number: 0

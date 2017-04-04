@@ -1,0 +1,36 @@
+From b303dd3f586d6f6126bab67ce5339f8e67828aa1 Mon Sep 17 00:00:00 2001
+From: Tim 'mithro' Ansell <mithro@mithis.com>
+Date: Mon, 3 Apr 2017 14:31:21 +1000
+Subject: tcl: Adding support for Digilent Arty board.
+
+Change-Id: I907d8fcb9e31cb3ce3b706d2d87d4714530de5ea
+Signed-off-by: Tim 'mithro' Ansell <mithro@mithis.com>
+
+diff --git a/tcl/board/digilent_arty.cfg b/tcl/board/digilent_arty.cfg
+new file mode 100644
+index 00000000..317e7d26
+--- /dev/null
++++ b/tcl/board/digilent_arty.cfg
+@@ -0,0 +1,22 @@
++#
++# Digilent Arty with Xilinx Artix-7 FPGA
++#
++# http://store.digilentinc.com/arty-artix-7-fpga-development-board-for-makers-and-hobbyists/
++#
++
++# iManufacturer           1 Digilent
++# iProduct                2 Digilent USB Device
++# iSerial                 3 210319A28C7F
++
++interface ftdi
++ftdi_device_desc "Digilent USB Device"
++ftdi_vid_pid 0x0403 0x6010
++# channel 1 does not have any functionality
++ftdi_channel 0
++# just TCK TDI TDO TMS, no reset
++ftdi_layout_init 0x0088 0x008b
++reset_config none
++adapter_khz 10000
++
++source [find cpld/xilinx-xc7.cfg]
++source [find cpld/jtagspi.cfg]

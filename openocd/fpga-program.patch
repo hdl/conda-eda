@@ -1,0 +1,35 @@
+From bf5e15988a7d49b88529410d6e52ec7872ab2e05 Mon Sep 17 00:00:00 2001
+From: Tim 'mithro' Ansell <mithro@mithis.com>
+Date: Tue, 4 Apr 2017 11:13:32 +1000
+Subject: tcl: Adding back fpga_program function.
+
+Change-Id: I8962139495d45901d1c8faf19adccdb7343b8a4b
+Signed-off-by: Tim 'mithro' Ansell <mithro@mithis.com>
+
+diff --git a/tcl/cpld/xilinx-xc6s.cfg b/tcl/cpld/xilinx-xc6s.cfg
+index 9ce7ad49..cba7cb0f 100644
+--- a/tcl/cpld/xilinx-xc6s.cfg
++++ b/tcl/cpld/xilinx-xc6s.cfg
+@@ -88,3 +88,9 @@ proc xc6s_print_dna {tap} {
+ 
+ 	puts [format "DNA = %57b (0x%x)\n" $hex_dna $hex_dna]
+ }
++
++proc fpga_program {} {
++	global _CHIPNAME
++	xc6s_print_dna $_CHIPNAME.tap
++	xc6s_program $_CHIPNAME.tap
++}
+diff --git a/tcl/cpld/xilinx-xc7.cfg b/tcl/cpld/xilinx-xc7.cfg
+index d5824f8a..2be7920c 100644
+--- a/tcl/cpld/xilinx-xc7.cfg
++++ b/tcl/cpld/xilinx-xc7.cfg
+@@ -55,3 +55,8 @@ proc xc7_program {tap} {
+ 	irscan $tap $XC7_BYPASS
+ 	runtest 2000
+ }
++
++proc fpga_program {} {
++	global _CHIPNAME
++	xc7_program $_CHIPNAME.tap
++}
