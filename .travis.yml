@@ -36,6 +36,9 @@ install:
   - conda build purge
   - conda clean -s --dry-run
   - export CONDA_OUT=$(conda render $PACKAGE --output | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')
+  - autoconf --version
+  - automake --version
+  - libtool --version
 
 env:
   # lm32 toolchain
