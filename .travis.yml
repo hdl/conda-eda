@@ -12,9 +12,12 @@ sudo: false
 addons:
   apt:
     packages:
-    - texinfo
+    - autoconf
+    - automake
+    - build-essential
     - libftdi-dev
     - libusb-1.0-0-dev
+    - texinfo
 
 install:
   - git submodule update --recursive --init
