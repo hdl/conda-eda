@@ -13,7 +13,7 @@ git status
 ./bootstrap
 mkdir build
 cd build
-../configure \
+LDFLAGS="-l:libftdi.a -l:libusb.a -l:libusb-1.0.a -lpthread -ludev" ../configure \
   --prefix=$PREFIX \
   --enable-usb-blaster-2 \
   --enable-usb_blaster_libftdi \
