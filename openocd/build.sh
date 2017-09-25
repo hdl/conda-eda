@@ -25,6 +25,7 @@ make -j$CPU_COUNT
 make install
 
 ./src/openocd --version
+ldd ./src/openocd
 
 ./src/openocd --version 2>&1 | head -1 | sed -e's/+dev-[0]\+/_/' -e's/-/_/g' -e's/.* 0\./0./' -e's/ .*//' -e's/_dirty//' > ../__conda_version__.txt
 ./src/openocd --version 2>&1 | head -1 | sed -e's/[^(]*(//' -e's/)//' -e's/://g' -e's/-//g' -es'/[0-9][0-9][0-9][0-9]$/_\0/' > ../__conda_buildstr__.txt
