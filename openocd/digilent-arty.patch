@@ -2,7 +2,7 @@ diff --git a/tcl/board/digilent_arty.cfg b/tcl/board/digilent_arty.cfg
 new file mode 100644
 index 00000000..317e7d26
 --- /dev/null
-+++ b/tcl/board/digilent_arty.cfg
++++ tcl/board/digilent_arty.cfg
 @@ -0,0 +1,22 @@
 +#
 +# Digilent Arty with Xilinx Artix-7 FPGA
