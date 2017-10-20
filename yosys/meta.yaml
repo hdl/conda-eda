@@ -1,0 +1,28 @@
+package:
+  name: yosys
+  version: git
+
+source:
+  git_url: https://github.com/cliffordwolf/yosys.git
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - readline
+    - bison
+    - tk
+    - libffi
+    - flex
+  run:
+    - readline
+    - bison
+    - tk
+    - libffi
+    - flex
+
+about:
+  home: http://www.clifford.at/yosys/
+  license: ISC
+  summary: 'Yosys is a framework for Verilog RTL synthesis. It currently has extensive Verilog-2005 support and provides a basic set of synthesis algorithms for various application domains.'
