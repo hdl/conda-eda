@@ -63,8 +63,10 @@ env:
   - PACKAGE=sdcc
   # tools
   - PACKAGE=openocd
-  - PACKAGE=verilator
   - PACKAGE=flterm
+  # verilog tools
+  - PACKAGE=verilator
+  - PACKAGE=yosys
 
 script:
   - conda build --check $PACKAGE
