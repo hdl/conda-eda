@@ -12,6 +12,7 @@ if [ ! -d $CONDA_PATH -o ! -z "$CI"  ]; then
 fi
 export PATH=$CONDA_PATH/bin:$PATH
 conda update -y conda
-conda install -y conda-build
+conda install -y conda-build==2.1.17
+echo "conda-build==2.1.17" > $CONDA_PATH/conda-meta/pinned
 conda install -y anaconda-client
 conda install -y jinja2
