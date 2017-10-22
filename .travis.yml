@@ -16,8 +16,10 @@ addons:
     - autoconf
     - automake
     - build-essential
+    - libftdi1
     - libftdi-dev
     - libusb-1.0-0-dev
+    - libusb-dev
     - texinfo
 
 install:
