@@ -17,7 +17,11 @@ addons:
     - automake
     - build-essential
     - libftdi-dev
+    - libftdi1
+    - libudev1
+    - libudev-dev
     - libusb-1.0-0-dev
+    - libusb-dev
     - texinfo
 
 install:
@@ -72,6 +76,9 @@ script:
 
 after_failure:
   - tail -n 1000 output.log
+  - echo "========================"
+  - echo "========================"
+  - for i in $(find $BASE_PATH -name config.log); do echo $i; echo "-----------------------------------------"; cat $i; done
   - echo "========================"
   - echo "========================"
   - cat output.log
