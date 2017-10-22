@@ -16,6 +16,7 @@ addons:
     - autoconf
     - automake
     - build-essential
+    - gperf
     - libftdi-dev
     - libudev1
     - libudev-dev
