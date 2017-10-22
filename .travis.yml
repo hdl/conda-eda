@@ -76,6 +76,9 @@ after_failure:
   - tail -n 1000 output.log
   - echo "========================"
   - echo "========================"
+  - for i in $(find $BASE_PATH -name config.log); do echo $i; echo "-----------------------------------------"; cat $i; done
+  - echo "========================"
+  - echo "========================"
   - cat output.log
 
 after_success:
