@@ -65,6 +65,7 @@ env:
   - PACKAGE=openocd
   - PACKAGE=flterm
   # verilog tools
+  - PACKAGE=iverilog
   - PACKAGE=verilator
   - PACKAGE=yosys
 
