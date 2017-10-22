@@ -15,6 +15,7 @@ requirements:
     - tk
     - libffi
     - flex
+    - iverilog
   run:
     - readline
     - bison
