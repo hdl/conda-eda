@@ -15,6 +15,8 @@ build:
 test:
   commands:
     - openocd -v
+    - if ldd $(which openocd) | grep ftdi; then echo "libftdi found :-("; exit 1; fi
+    - if ldd $(which openocd) | grep usb; then echo "libusb found :-("; exit 1; fi
 
 about:
   home: http://openocd.org/
