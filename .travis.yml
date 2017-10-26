@@ -17,7 +17,6 @@ addons:
     - automake
     - build-essential
     - libftdi-dev
-    - libftdi1
     - libudev1
     - libudev-dev
     - libusb-1.0-0-dev

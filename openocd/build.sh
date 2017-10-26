@@ -30,7 +30,7 @@ ldd ./src/openocd
 ls -l ./src/openocd
 du -h ./src/openocd
 echo "---------------------------"
-gcc -Wall -Wstrict-prototypes -Wformat-security -Wshadow -Wextra -Wno-unused-parameter -Wbad-function-cast -Wcast-align -Wredundant-decls -Werror -g -O2 -o src/openocd src/main.o -Wl,-Bstatic src/.libs/libopenocd.a ./jimtcl/libjim.a -lusb-1.0 -lusb -lftdi1 -lftdi -Wl,-Bdynamic -Wl,--no-whole-archive -ludev -lpthread -ldl -lm
+gcc -Wall -Wstrict-prototypes -Wformat-security -Wshadow -Wextra -Wno-unused-parameter -Wbad-function-cast -Wcast-align -Wredundant-decls -Werror -g -O2 -o src/openocd src/main.o -Wl,-Bstatic src/.libs/libopenocd.a ./jimtcl/libjim.a -lusb-1.0 -lusb -lftdi -Wl,-Bdynamic -Wl,--no-whole-archive -ludev -lpthread -ldl -lm
 ldd ./src/openocd
 ls -l ./src/openocd
 du -h ./src/openocd
