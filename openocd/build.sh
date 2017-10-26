@@ -35,6 +35,9 @@ ldd ./src/openocd
 ls -l ./src/openocd
 du -h ./src/openocd
 echo "---------------------------"
+strip ./src/openocd
+ls -l ./src/openocd
+du -h ./src/openocd
 
 make install
 
