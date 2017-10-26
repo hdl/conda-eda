@@ -2,10 +2,17 @@
 
 set -e
 
-make config-gcc
+unset CFLAGS
+unset CXXFLAGS
+unset CPPFLAGS
+unset DEBUG_CXXFLAGS
+unset DEBUG_CPPFLAGS
+unset LDFLAGS
+
+make config-conda-linux
 echo "PREFIX := $PREFIX" >> Makefile.conf
 
-make -j$CPU_COUNT
+make V=1 -j$CPU_COUNT
 make test
 make install
 
