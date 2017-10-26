@@ -72,7 +72,8 @@ env:
 
 script:
   - conda build --check $PACKAGE
-  - $CONDA_PATH/bin/python ./.travis-output.py output.log conda build $PACKAGE
+  # $CONDA_PATH/bin/python ./.travis-output.py output.log conda build $PACKAGE
+  - conda build $PACKAGE
   - conda install $CONDA_OUT
   - du -h $CONDA_OUT
   - conda clean -s --dry-run
@@ -87,5 +88,5 @@ after_failure:
   - cat output.log
 
 after_success:
-  - tar -jtf $CONDA_OUT
+  - tar -jtf $CONDA_OUT | sort
   - if [ x$TRAVIS_BRANCH = x"master" ]; then anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER $CONDA_OUT; fi
