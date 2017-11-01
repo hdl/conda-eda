@@ -3,6 +3,8 @@
 set -e
 set -x
 
+export CXXFLAGS=-Wno-deprecated-declarations
+
 sh ./autoconf.sh
 ./configure --prefix=$PREFIX
 

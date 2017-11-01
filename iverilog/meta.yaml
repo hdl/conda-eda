@@ -11,11 +11,23 @@ build:
 requirements:
   build:
     - readline
-    - gcc
+    - gcc_linux-64
+    - gxx_linux-64
+    - gperf
   run:
     - readline
 
+test:
+  files:
+    - test/fsm.v
+
 about:
   home: http://iverilog.icarus.com/
-  license: ISC
+  license: GPLv2
+  license_file: COPYING
   summary: 'Icarus Verilog (iverilog) is a Verilog simulation and synthesis tool. It operates as a compiler, compiling source code written in Verilog (IEEE-1364) into some target format. For batch simulation, the compiler can generate an intermediate form called vvp assembly. This intermediate form is executed by the ``vvp'' command. For synthesis, the compiler generates netlists in the desired format.'
+
+extra:
+  maintainers:
+    - Tim 'mithro' Ansell <mithro@mithis.com>
+    - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>
