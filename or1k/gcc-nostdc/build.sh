@@ -1,9 +1,17 @@
 #!/bin/bash
 
+# or1k gcc bare metal build
+
 set -e
 
 if [ x"$TRAVIS" = xtrue ]; then
 	CPU_COUNT=2
+	unset CFLAGS
+	unset CXXFLAGS
+	unset CPPFLAGS
+	unset DEBUG_CXXFLAGS
+	unset DEBUG_CPPFLAGS
+	unset LDFLAGS
 fi
 
 TARGET=or1k-elf
