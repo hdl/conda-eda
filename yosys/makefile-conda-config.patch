@@ -39,3 +39,31 @@ index eb8f0f59..b1460a7a 100644
  config-gcc-4.8: clean
  	echo 'CONFIG := gcc-4.8' > Makefile.conf
  
+diff --git a/tests/realmath/run-test.sh b/tests/realmath/run-test.sh
+index e1a36c69..fb22bcfd 100755
+--- a/tests/realmath/run-test.sh
++++ b/tests/realmath/run-test.sh
+@@ -25,7 +25,7 @@ for ((i = 0; i < $count; i++)); do
+ 	idx=$( printf "%05d" $i )
+ 	../../../yosys -qq uut_${idx}.ys
+ 	iverilog -o uut_${idx}_tb uut_${idx}_tb.v uut_${idx}.v uut_${idx}_syn.v
+-	./uut_${idx}_tb | tee uut_${idx}.err
++	vvp ./uut_${idx}_tb | tee uut_${idx}.err
+ 	if test -s uut_${idx}.err; then
+ 		echo "Note: Make sure that 'iverilog' is an up-to-date git checkout of Icarus Verilog."
+ 		exit 1
+diff --git a/tests/techmap/mem_simple_4x1_runtest.sh b/tests/techmap/mem_simple_4x1_runtest.sh
+index e2c6303d..b987ac6d 100644
+--- a/tests/techmap/mem_simple_4x1_runtest.sh
++++ b/tests/techmap/mem_simple_4x1_runtest.sh
+@@ -7,8 +7,8 @@ set -ev
+ iverilog -o mem_simple_4x1_gold_tb mem_simple_4x1_tb.v mem_simple_4x1_uut.v
+ iverilog -o mem_simple_4x1_gate_tb mem_simple_4x1_tb.v mem_simple_4x1_synth.v mem_simple_4x1_cells.v
+ 
+-./mem_simple_4x1_gold_tb > mem_simple_4x1_gold_tb.out
+-./mem_simple_4x1_gate_tb > mem_simple_4x1_gate_tb.out
++vvp ./mem_simple_4x1_gold_tb > mem_simple_4x1_gold_tb.out
++vvp ./mem_simple_4x1_gate_tb > mem_simple_4x1_gate_tb.out
+ 
+ diff -u mem_simple_4x1_gold_tb.out mem_simple_4x1_gate_tb.out
+ rm -f mem_simple_4x1_synth.v mem_simple_4x1_tb.vcd

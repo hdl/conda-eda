@@ -9,6 +9,8 @@ unset DEBUG_CXXFLAGS
 unset DEBUG_CPPFLAGS
 unset LDFLAGS
 
+which pkg-config
+
 make config-conda-linux
 echo "PREFIX := $PREFIX" >> Makefile.conf
 
