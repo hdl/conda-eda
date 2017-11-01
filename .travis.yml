@@ -72,8 +72,8 @@ env:
 
 script:
   - conda build --check $PACKAGE
-  # $CONDA_PATH/bin/python ./.travis-output.py output.log conda build $PACKAGE
-  - conda build $PACKAGE
+  - $CONDA_PATH/bin/python ./.travis-output.py output.log conda build $PACKAGE
+  # - conda build $PACKAGE
   - conda install $CONDA_OUT
   - du -h $CONDA_OUT
   - conda clean -s --dry-run
