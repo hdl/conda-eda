@@ -1,0 +1,38 @@
+package:
+  name: yosys
+  version: git
+
+source:
+  git_url: https://github.com/cliffordwolf/yosys.git
+  patches:
+    - makefile-conda-config.patch
+
+build:
+  number: 1
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+    - pkg-config
+    - gcc_linux-64
+    - gxx_linux-64
+    - libgcc-ng
+    - readline
+    - bison
+    - tk
+    - libffi
+    - flex
+    - iverilog
+  run:
+    - readline
+    - bison
+    - tk
+    - libffi
+    - flex
+
+about:
+  home: http://www.clifford.at/yosys/
+  license: ISC
+  summary: 'Yosys is a framework for Verilog RTL synthesis. It currently has extensive Verilog-2005 support and provides a basic set of synthesis algorithms for various application domains.'

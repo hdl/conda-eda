@@ -1,0 +1,42 @@
+package:
+  name: iverilog
+  version: git
+
+source:
+  git_url: https://github.com/steveicarus/iverilog.git
+  patches:
+    - fix-vvp-path.patch
+
+build:
+  number: 1
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+    - readline
+    - gcc_linux-64
+    - gxx_linux-64
+    - gperf
+  run:
+    - readline
+
+test:
+  files:
+    - test/fsm.v
+    - test/counter.v
+    - test/counter_tb.v
+    - test/counter_list.txt
+    - test/hello_world.v
+
+about:
+  home: http://iverilog.icarus.com/
+  license: GPLv2
+  license_file: COPYING
+  summary: 'Icarus Verilog (iverilog) is a Verilog simulation and synthesis tool. It operates as a compiler, compiling source code written in Verilog (IEEE-1364) into some target format. For batch simulation, the compiler can generate an intermediate form called vvp assembly. This intermediate form is executed by the ``vvp'' command. For synthesis, the compiler generates netlists in the desired format.'
+
+extra:
+  maintainers:
+    - Tim 'mithro' Ansell <mithro@mithis.com>
+    - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>

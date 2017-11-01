@@ -1,7 +1,12 @@
-#!/bin/bash
+#! /bin/bash
 
-set -x
 set -e
+set -x
+
+if [ x"$TRAVIS" = xtrue ]; then
+	CPU_COUNT=2
+fi
+
 #export GIT_AUTHOR_NAME="Conda Build"
 #export GIT_AUTHOR_EMAIL="robot@timvideos.us"
 #export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"

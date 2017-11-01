@@ -9,10 +9,14 @@ source:
 build:
   detect_binary_files_with_prefix: False
   number: 1
+  script_env:
+    - CI
+    - TRAVIS
 
 requirements:
   build:
     - gcc_linux-64
+    - gxx_linux-64
     - libgcc-ng
     # These are taken from the output of the configure scripts
     - gmp >=4.3.2
