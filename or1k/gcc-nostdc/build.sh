@@ -2,6 +2,10 @@
 
 set -e
 
+if [ x"$TRAVIS" = xtrue ]; then
+	CPU_COUNT=2
+fi
+
 TARGET=or1k-elf
 
 CONDA_PYTHON=$(conda info --root)/bin/python

@@ -15,6 +15,9 @@ extra:
 build:
   detect_binary_files_with_prefix: False
   number: 1
+  script_env:
+    - CI
+    - TRAVIS
 
 requirements:
   build:

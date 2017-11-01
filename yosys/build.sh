@@ -3,6 +3,10 @@
 set -e
 set -x
 
+if [ x"$TRAVIS" = xtrue ]; then
+	CPU_COUNT=2
+fi
+
 unset CFLAGS
 unset CXXFLAGS
 unset CPPFLAGS
@@ -15,8 +19,7 @@ which pkg-config
 make config-conda-linux
 echo "PREFIX := $PREFIX" >> Makefile.conf
 
-#make V=1 -j$CPU_COUNT
-make V=1
+make V=1 -j$CPU_COUNT
 make test
 make install
 

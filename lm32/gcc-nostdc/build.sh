@@ -3,6 +3,10 @@
 set -x
 set -e
 
+if [ x"$TRAVIS" = xtrue ]; then
+	CPU_COUNT=2
+fi
+
 TARGET=lm32-elf
 # Check binutils
 $TARGET-as --version

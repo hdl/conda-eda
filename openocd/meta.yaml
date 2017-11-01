@@ -11,6 +11,9 @@ source:
 
 build:
   number: 0
+  script_env:
+    - CI
+    - TRAVIS
 
 test:
   commands:

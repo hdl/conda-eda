@@ -4,6 +4,10 @@
 set -x
 set -e
 
+if [ x"$TRAVIS" = xtrue ]; then
+	CPU_COUNT=2
+fi
+
 # Fetch upstream binutils-gdb so we can get a git-describe delta
 git remote add upstream git://sourceware.org/git/binutils-gdb.git
 git fetch upstream

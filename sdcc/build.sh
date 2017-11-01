@@ -3,6 +3,10 @@
 set -x
 set -e
 
+if [ x"$TRAVIS" = xtrue ]; then
+	CPU_COUNT=2
+fi
+
 mkdir build
 cd build
 CPPFLAGS=-I$PREFIX/include \

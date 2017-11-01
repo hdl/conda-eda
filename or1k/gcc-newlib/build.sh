@@ -4,6 +4,10 @@
 
 set -e
 
+if [ x"$TRAVIS" = xtrue ]; then
+	CPU_COUNT=2
+fi
+
 TARGET=or1k-elf
 GCC=$TARGET-newlib-gcc
 
