@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x
 
 unset CFLAGS
 unset CXXFLAGS
