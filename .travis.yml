@@ -37,6 +37,7 @@ install:
   - conda install pexpect
   - conda info -a
   - conda config --add channels timvideos
+  - conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')
   - conda clean -s --dry-run
   - conda build purge
   - conda clean -s --dry-run
@@ -44,6 +45,7 @@ install:
   - autoconf --version
   - automake --version
   - libtool --version
+  - export DATESTR=$(date -u +%Y%m%d%H%M%S)
 
 env:
   # lm32 toolchain
