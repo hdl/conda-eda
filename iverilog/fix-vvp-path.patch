@@ -1,0 +1,155 @@
+diff --git a/tgt-vvp/vvp.c b/tgt-vvp/vvp.c
+index 004adadd..95d19225 100644
+--- a/tgt-vvp/vvp.c
++++ b/tgt-vvp/vvp.c
+@@ -62,7 +62,8 @@ __inline__ static void draw_execute_header(ivl_design_t des)
+ 	    const char *extra_args = ivl_design_flag(des, "VVP_EXTRA_ARGS");
+ 	    if (!extra_args)
+ 		  extra_args = "";
+-	    fprintf(vvp_out, "#! %s%s\n", cp, extra_args);
++	    fprintf(vvp_out, "#! /usr/bin/env bash\n");
++	    fprintf(vvp_out, "exec %s -f \"$0\"%s \"$@\" <<'# EOF'\n", cp, extra_args);
+ #if !defined(__MINGW32__)
+ 	    fchmod(fileno(vvp_out), 0755);
+ #endif
+@@ -235,6 +236,7 @@ int target_design(ivl_design_t des)
+       for (idx = 0; idx < size; idx++) {
+ 	    fprintf(vvp_out, "    \"%s\";\n", ivl_file_table_item(idx));
+       }
++      fprintf(vvp_out, "# EOF\n");
+ 
+       fclose(vvp_out);
+       EOC_cleanup_drivers();
+diff --git a/vvp/lexor.lex b/vvp/lexor.lex
+index b048ee61..4fdcdbfa 100644
+--- a/vvp/lexor.lex
++++ b/vvp/lexor.lex
+@@ -312,6 +312,7 @@ static char* strdupnew(char const *str)
+      special, though, in that it is also a statement terminator. */
+ ";".* { return ';'; }
+ "#".* { ; }
++"exec ".* { ; }
+ 
+ [ \t\b\r] { ; }
+ 
+diff --git a/vvp/main.cc b/vvp/main.cc
+index e095a0d5..a403efa8 100644
+--- a/vvp/main.cc
++++ b/vvp/main.cc
+@@ -257,7 +257,9 @@ int main(int argc, char*argv[])
+       const char*design_path = 0;
+       struct rusage cycles[3];
+       const char *logfile_name = 0x0;
++      const char *stdin_name = 0x0;
+       FILE *logfile = 0x0;
++      FILE *designfile = 0x0;
+       extern void vpi_set_vlog_info(int, char**);
+       extern bool stop_is_finish;
+       extern int  stop_is_finish_exit_code;
+@@ -315,7 +317,7 @@ int main(int argc, char*argv[])
+         /* For non-interactive runs we do not want to run the interactive
+          * debugger, so make $stop just execute a $finish. */
+       stop_is_finish = false;
+-      while ((opt = getopt(argc, argv, "+hil:M:m:nNsvV")) != EOF) switch (opt) {
++      while ((opt = getopt(argc, argv, "+hil:M:m:nNsf:vV")) != EOF) switch (opt) {
+          case 'h':
+            fprintf(stderr,
+                    "Usage: vvp [options] input-file [+plusargs...]\n"
+@@ -330,6 +332,7 @@ int main(int argc, char*argv[])
+                    " -N             Same as -n, but exit code is 1 instead of 0\n"
+ 		   " -s             $stop right away.\n"
+                    " -v             Verbose progress messages.\n"
++                   " -f filename    Name of file on stdin (for better error messages).\n"
+                    " -V             Print the version information.\n" );
+            exit(0);
+ 	  case 'i':
+@@ -365,6 +368,9 @@ int main(int argc, char*argv[])
+ 	  case 'V':
+ 	    version_flag = true;
+ 	    break;
++	  case 'f':
++	    stdin_name = optarg;
++	    break;
+ 	  default:
+ 	    flag_errors += 1;
+       }
+@@ -394,9 +400,22 @@ int main(int argc, char*argv[])
+ 	    return 0;
+       }
+ 
+-      if (optind == argc) {
+-	    fprintf(stderr, "%s: no input file.\n", argv[0]);
+-	    return -1;
++      if (optind != argc) {
++	    design_path = argv[optind];
++      }
++      if (design_path != 0 && *design_path != '-') {
++           designfile = fopen(design_path, "r");
++	   if (designfile == 0) {
++	        fprintf(stderr, "%s: Unable to open input file.\n", design_path);
++                return -1;
++	   }
++      } else {
++	    if (stdin_name == 0) {
++	          design_path = "<stdin>";
++	    } else {
++		  design_path = stdin_name;
++	    }
++	    designfile = stdin;
+       }
+ 
+ 	/* If the VVP_DEBUG variable is set, then it contains the path
+@@ -406,8 +425,6 @@ int main(int argc, char*argv[])
+ 	    debug_file.open(path, ios::out);
+       }
+ 
+-      design_path = argv[optind];
+-
+ 	/* This is needed to get the MCD I/O routines ready for
+ 	   anything. It is done early because it is plausible that the
+ 	   compile might affect it, and it is cheap to do. */
+@@ -442,7 +459,7 @@ int main(int argc, char*argv[])
+       for (unsigned idx = 0 ;  idx < module_cnt ;  idx += 1)
+ 	    vpip_load_module(module_tab[idx]);
+ 
+-      int ret_cd = compile_design(design_path);
++      int ret_cd = compile_design(designfile, design_path);
+       destroy_lexor();
+       print_vpi_call_errors();
+       if (ret_cd) return ret_cd;
+diff --git a/vvp/parse.y b/vvp/parse.y
+index cbfc2633..dae74a82 100644
+--- a/vvp/parse.y
++++ b/vvp/parse.y
+@@ -1214,16 +1214,11 @@ delay
+ 
+ %%
+ 
+-int compile_design(const char*path)
++int compile_design(FILE*file, const char*path)
+ {
+       yypath = path;
+       yyline = 1;
+-      yyin = fopen(path, "r");
+-      if (yyin == 0) {
+-	    fprintf(stderr, "%s: Unable to open input file.\n", path);
+-	    return -1;
+-      }
+-
++      yyin = file;
+       int rc = yyparse();
+       fclose(yyin);
+       return rc;
+diff --git a/vvp/parse_misc.h b/vvp/parse_misc.h
+index a63cfd11..08d21590 100644
+--- a/vvp/parse_misc.h
++++ b/vvp/parse_misc.h
+@@ -25,7 +25,7 @@
+  * This method is called to compile the design file. The input is read
+  * and a list of statements is created.
+  */
+-extern int compile_design(const char*path);
++extern int compile_design(FILE* file, const char*path);
+ 
+ /*
+  * This routine is called to check that the input file has a compatible

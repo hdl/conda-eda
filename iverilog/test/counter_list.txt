@@ -1,0 +1,2 @@
+counter.v
+counter_tb.v

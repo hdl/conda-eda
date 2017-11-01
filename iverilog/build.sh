@@ -13,13 +13,3 @@ make install
 
 $PREFIX/bin/iverilog -V
 $PREFIX/bin/iverilog -h || true
-
-cat > hello_world.v <<'EOF'
-module hello_world;
-initial begin
-	$display("Hello World!");
-	#10 $finish;
-end
-endmodule
-EOF
-$PREFIX/bin/iverilog -v hello_world.v
