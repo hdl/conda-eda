@@ -23,4 +23,5 @@ make V=1 -j$CPU_COUNT
 make test
 make install
 
-$PREFIX/bin/yosys --version
+$PREFIX/bin/yosys -V
+$PREFIX/bin/yosys-abc -v 2>&1 | grep compiled
