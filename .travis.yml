@@ -1,4 +1,4 @@
-language: cpp
+language: c
 
 cache:
   ccache: true
@@ -25,6 +25,7 @@ addons:
     - texinfo
 
 install:
+  - export DATESTR=$(date -u +%Y%m%d%H%M%S)
   - git submodule update --recursive --init
   - git submodule foreach git submodule update --recursive --init
   - export BASE_PATH=/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path
@@ -37,10 +38,11 @@ install:
   - conda install pexpect
   - conda info -a
   - conda config --add channels timvideos
+  - conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')
   - conda clean -s --dry-run
   - conda build purge
   - conda clean -s --dry-run
-  - export CONDA_OUT=$(conda render $PACKAGE --output | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')
+  - export CONDA_OUT=$(conda render $PACKAGE --output 2> /dev/null | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')
   - autoconf --version
   - automake --version
   - libtool --version
