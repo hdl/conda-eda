@@ -1,6 +1,6 @@
 package:
   name: yosys
-  version: {{ GIT_DESCRIBE_TAG }}
+  version: {{ GIT_DESCRIBE_TAG|replace('yosys-','') }}
 
 source:
   git_url: https://github.com/cliffordwolf/yosys.git
@@ -9,7 +9,7 @@ source:
     - makefile-conda-config.patch
 
 build:
-  number: {{ GIT_DESCRIBE_NUMBER }}{{ os.environ.get('DATESTR') }}
+  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATESTR')) }}
   string: {{ GIT_DESCRIBE_NUMBER }}.{{ os.environ.get('DATESTR') }}.{{ GIT_DESCRIBE_HASH }}
   script_env:
     - CI
