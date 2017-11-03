@@ -9,8 +9,8 @@ source:
     - fix-vvp-path.patch
 
 build:
-  number: {{ GIT_DESCRIBE_NUMBER }}{{ os.environ.get('DATESTR') }}
-  string: {{ GIT_DESCRIBE_NUMBER }}.{{ os.environ.get('DATESTR') }}.{{ GIT_DESCRIBE_HASH }}
+  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATESTR')) }}
+  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATESTR') }}.{{ GIT_DESCRIBE_HASH }}
   script_env:
     - CI
     - TRAVIS
