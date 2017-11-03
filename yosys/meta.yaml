@@ -1,14 +1,16 @@
 package:
   name: yosys
-  version: git
+  version: {{ GIT_DESCRIBE_TAG|replace('yosys-','') }}
 
 source:
   git_url: https://github.com/cliffordwolf/yosys.git
+  git_rev: master
   patches:
     - makefile-conda-config.patch
 
 build:
-  number: 1
+  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATESTR')) }}
+  string: {{ GIT_DESCRIBE_NUMBER }}.{{ os.environ.get('DATESTR') }}.{{ GIT_DESCRIBE_HASH }}
   script_env:
     - CI
     - TRAVIS
@@ -35,4 +37,10 @@ requirements:
 about:
   home: http://www.clifford.at/yosys/
   license: ISC
+  license_file: COPYING
   summary: 'Yosys is a framework for Verilog RTL synthesis. It currently has extensive Verilog-2005 support and provides a basic set of synthesis algorithms for various application domains.'
+
+extra:
+  maintainers:
+    - Tim 'mithro' Ansell <mithro@mithis.com>
+    - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>
