@@ -10,22 +10,34 @@ source:
   md5: 11436d6b205e516635b666090b94ab32
 
 build:
-  number: 1
-  skip: True  # [win]
+  number: 2
+  features:
+    - vc9             # [win and py27]
+    - vc14            # [win and py>=35]
+  skip:
+    - True            # [win and not py36]
 
 requirements:
   build:
-    - gmp >=5.0.1,<7
+    - gmp >=5.0.1,<7  # [unix]
+    - cmake           # [win]
+    - python          # [win]
+    - msinttypes      # [win and py27]
+    - vc 9            # [win and py27]
+    - vc 14           # [win and py>=35]
   run:
-    - gmp >=5.0.1,<7
+    - gmp >=5.0.1,<7  # [unix]
+    - vc 9            # [win and py27]
+    - vc 14           # [win and py>=35]
 
 test:
   commands:
-    - test -f "$PREFIX/lib/libisl.a"
-    - test -f "$PREFIX/lib/libisl.la"
-    - test -f "$PREFIX/lib/libisl.so"  # [linux]
-    - test -f "$PREFIX/lib/libisl.dylib"  # [osx]
-    - test -d "$PREFIX/include/isl"
+    - if not exist %LIBRARY_LIB%\\isl.lib exit 1            # [win]
+    - if not exist %LIBRARY_INC%\\isl\\options.h exit 1     # [win]
+    - test -f "$PREFIX/lib/libisl.a"            # [unix]
+    - test -f "$PREFIX/lib/libisl.la"           # [unix]
+    - test -f "$PREFIX/lib/libisl${SHLIB_EXT}"  # [unix]
+    - test -d "$PREFIX/include/isl"             # [unix]
 
 about:
   home: http://isl.gforge.inria.fr/
@@ -35,3 +47,4 @@ about:
 extra:
   recipe-maintainers:
     - frol
+    - isuruf
