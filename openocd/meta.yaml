@@ -7,6 +7,7 @@ source:
   git_url: git://repo.or.cz/openocd.git
   patches:
     - digilent-arty.patch
+    - digilent-nexys_video.patch
     - fpga-program.patch
 
 build:
