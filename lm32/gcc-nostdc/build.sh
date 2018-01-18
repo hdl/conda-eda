@@ -33,6 +33,7 @@ mkdir -p build-gcc
 cd build-gcc
 
 # --without-headers - Tells GCC not to rely on any C library (standard or runtime) being present for the target.
+CFLAGS=-Wno-literal-suffix
 #export LDFLAGS=-static
 $SRC_DIR/configure \
         --prefix=$PREFIX \
