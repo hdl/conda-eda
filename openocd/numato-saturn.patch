@@ -2,7 +2,7 @@ diff --git a/tcl/board/numato_saturn.cfg b/tcl/board/numato_saturn.cfg
 new file mode 100644
 index 0000000..6597f2a
 --- /dev/null
-+++ b/tcl/board/numato_saturn.cfg
++++ tcl/board/numato_saturn.cfg
 @@ -0,0 +1,30 @@
 +#
 +# Numato Saturn - Spartan 6 FPGA Development Board With DDR SDRAM

@@ -2,7 +2,7 @@ diff --git a/tcl/board/gadgetfactory_papilio_duo.cfg b/tcl/board/gadgetfactory_p
 new file mode 100644
 index 0000000..0307779
 --- /dev/null
-+++ b/tcl/board/gadgetfactory_papilio_duo.cfg
++++ tcl/board/gadgetfactory_papilio_duo.cfg
 @@ -0,0 +1,20 @@
 +#
 +# Papilio DUO

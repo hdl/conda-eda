@@ -2,7 +2,7 @@ diff --git a/tcl/board/numato_waxwing.cfg b/tcl/board/numato_waxwing.cfg
 new file mode 100644
 index 0000000..328e1e5
 --- /dev/null
-+++ b/tcl/board/numato_waxwing.cfg
++++ tcl/board/numato_waxwing.cfg
 @@ -0,0 +1,30 @@
 +#
 +# Numato Waxwing Spartan 6 FPGA Development Board

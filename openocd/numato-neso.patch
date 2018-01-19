@@ -2,7 +2,7 @@ diff --git a/tcl/board/numato_neso.cfg b/tcl/board/numato_neso.cfg
 new file mode 100644
 index 0000000..37b18a0
 --- /dev/null
-+++ b/tcl/board/numato_neso.cfg
++++ tcl/board/numato_neso.cfg
 @@ -0,0 +1,30 @@
 +#
 +# Numato Neso - Artix 7 FPGA Board
