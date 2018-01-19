@@ -1,0 +1,36 @@
+diff --git a/tcl/board/numato_saturn.cfg b/tcl/board/numato_saturn.cfg
+new file mode 100644
+index 0000000..6597f2a
+--- /dev/null
++++ b/tcl/board/numato_saturn.cfg
+@@ -0,0 +1,30 @@
++#
++# Numato Saturn - Spartan 6 FPGA Development Board With DDR SDRAM
++#
++# https://numato.com/saturn-spartan-6-fpga-development-board-with-ddr-sdram
++#
++# IMPORTANT:
++#   To use openocd with Saturn using its onboard FTDI chip,
++#   put the jumpers P10 and P11 in following configuration:
++#
++#   P10: Jumpers one each between 2-4 and 3-5
++#   P11: Jumpers one each between 2-4 and 3-5
++#
++# NOTE:
++#   To put the jumpers configuration back to factory configuration (SPI flash connnections):
++#
++#   P10: Jumpers one each between 1-2 and 5-6
++#   P11: Jumpers one each between 1-2 and 5-6
++
++interface ftdi
++ftdi_device_desc "Saturn Spartan 6 FPGA Module"
++ftdi_vid_pid 0x0403 0x6010
++# channel 1 is for custom purpose by users (like uart, fifo etc)
++ftdi_channel 0
++# just TCK TDI TDO TMS, no reset
++ftdi_layout_init 0x0008 0x000b
++reset_config none
++adapter_khz 10000
++
++source [find cpld/xilinx-xc6s.cfg]
++source [find cpld/jtagspi.cfg]
