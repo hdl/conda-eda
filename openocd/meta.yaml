@@ -8,6 +8,10 @@ source:
   patches:
     - digilent-arty.patch
     - digilent-nexys_video.patch
+    - gadgetfactory-papilio_duo.patch
+    - numato-neso.patch
+    - numato-saturn.patch
+    - numato-waxwing.patch
     - fpga-program.patch
 
 build:

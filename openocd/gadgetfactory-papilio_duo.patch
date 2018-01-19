@@ -1,0 +1,26 @@
+diff --git a/tcl/board/gadgetfactory_papilio_duo.cfg b/tcl/board/gadgetfactory_papilio_duo.cfg
+new file mode 100644
+index 0000000..0307779
+--- /dev/null
++++ b/tcl/board/gadgetfactory_papilio_duo.cfg
+@@ -0,0 +1,20 @@
++#
++# Papilio DUO
++#
++# http://papilio.cc/index.php?n=Papilio.PapilioDUOHardwareGuide
++#
++
++# iManufacturer           1 Gadget Factory
++# iProduct                2 Papilio DUO
++
++interface ftdi
++ftdi_device_desc "Papilio DUO"
++ftdi_vid_pid 0x0403 0x7bc0
++ftdi_channel 0
++# just TCK TDI TDO TMS, no reset
++ftdi_layout_init 0x0008 0x000b
++reset_config none
++adapter_khz 10000
++
++source [find cpld/xilinx-xc6s.cfg]
++source [find cpld/jtagspi.cfg]
