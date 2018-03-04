@@ -6,7 +6,7 @@ cache:
    - /tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path/conda/conda-bld/git_cache
    - /tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path/conda/conda-bld/src_cache
 before_cache:
-  - conda build purge
+  - ./.travis/before_cache.sh
 
 #dist: trusty
 sudo: false
@@ -24,28 +24,11 @@ addons:
     - libusb-dev
     - texinfo
 
+before_install:
+ - source .travis/common.sh
+
 install:
-  - export DATESTR=$(date -u +%Y%m%d%H%M%S)
-  - git submodule update --recursive --init
-  - git submodule foreach git submodule update --recursive --init
-  - export BASE_PATH=/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path
-  - export CONDA_PATH=$BASE_PATH/conda
-  - mkdir -p $BASE_PATH
-  - ./get-conda.sh $CONDA_PATH
-  - export PATH="$PATH:$CONDA_PATH/bin"
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda install pexpect
-  - conda info -a
-  - conda config --add channels timvideos
-  - conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')
-  - conda clean -s --dry-run
-  - conda build purge
-  - conda clean -s --dry-run
-  - export CONDA_OUT=$(conda render $PACKAGE --output 2> /dev/null | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')
-  - autoconf --version
-  - automake --version
-  - libtool --version
+ - ./.travis/install.sh
 
 env:
   # lm32 toolchain
@@ -73,22 +56,10 @@ env:
   - PACKAGE=yosys
 
 script:
-  - conda build --check $PACKAGE
-  - $CONDA_PATH/bin/python ./.travis-output.py output.log conda build $PACKAGE
-  # - conda build $PACKAGE
-  - conda install $CONDA_OUT
-  - du -h $CONDA_OUT
-  - conda clean -s --dry-run
+  - ./.travis/script.sh
 
 after_failure:
-  - tail -n 1000 output.log
-  - echo "========================"
-  - echo "========================"
-  - for i in $(find $BASE_PATH -name config.log); do echo $i; echo "-----------------------------------------"; cat $i; done
-  - echo "========================"
-  - echo "========================"
-  - cat output.log
+  - ./.travis/after_failure.sh
 
 after_success:
-  - tar -jtf $CONDA_OUT | sort
-  - if [ x$TRAVIS_BRANCH = x"master" ]; then anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER $CONDA_OUT; fi
+  - ./.travis/after_success.sh
