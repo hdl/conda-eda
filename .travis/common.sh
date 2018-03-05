@@ -14,10 +14,12 @@ export -f travis_fold
 export -f travis_time_start
 export -f travis_time_finish
 if [ -z "$DATESTR" ]; then
-	if [ -z"$DATESHORT" ]; then
+	if [ -z "$DATESHORT" ]; then
 		export DATESTR=$(date -u +%Y%m%d%H%M%S)
+		echo "Setting long date string of $(DATESTR)"
 	else
 		export DATESTR=$(date -u +%y%m%d%H%M)
+		echo "Setting short date string of $(DATESTR)"
 	fi
 fi
 
