@@ -53,7 +53,7 @@ env:
   # verilog tools
   - PACKAGE=iverilog            DATESHORT=1
   - PACKAGE=verilator
-  - PACKAGE=vtr                 DATESHORT=1
+  - PACKAGE=vtr                 DATESHORT=1  CONDA_CHANNELS=conda-forge
   - PACKAGE=yosys               DATESHORT=1
 
 script:
