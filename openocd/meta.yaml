@@ -14,6 +14,7 @@ source:
     - numato-saturn.patch
     - numato-waxwing.patch
     - fpga-program.patch
+    - spartan7-idcodes.patch
 
 build:
   number: 0
