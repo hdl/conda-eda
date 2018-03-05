@@ -53,7 +53,7 @@ env:
   # verilog tools
   - PACKAGE=iverilog
   - PACKAGE=verilator
-  - PACKAGE=yosys
+  - PACKAGE=yosys               DATESHORT=1
 
 script:
   - ./.travis/script.sh
