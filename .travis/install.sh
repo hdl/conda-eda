@@ -37,6 +37,10 @@ start_section "info.conda.env" "Info on ${YELLOW}conda environment${NC}"
 conda info
 end_section "info.conda.env"
 
+start_section "info.conda.config" "Info on ${YELLOW}conda config${NC}"
+conda config --show
+end_section "info.conda.config"
+
 start_section "info.conda.package" "Info on ${YELLOW}conda package${NC}"
 conda render $PACKAGE
 end_section "info.conda.package"
