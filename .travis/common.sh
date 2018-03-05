@@ -14,7 +14,11 @@ export -f travis_fold
 export -f travis_time_start
 export -f travis_time_finish
 if [ -z "$DATESTR" ]; then
-	export DATESTR=$(date -u +%Y%m%d%H%M%S)
+	if [ -z"$DATESHORT" ]; then
+		export DATESTR=$(date -u +%Y%m%d%H%M%S)
+	else
+		export DATESTR=$(date -u +%y%m%d%H%M)
+	fi
 fi
 
 function start_section() {
