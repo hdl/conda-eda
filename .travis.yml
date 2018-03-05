@@ -53,6 +53,7 @@ env:
   # verilog tools
   - PACKAGE=iverilog            DATESHORT=1
   - PACKAGE=verilator
+  - PACKAGE=vtr                 DATESHORT=1
   - PACKAGE=yosys               DATESHORT=1
 
 script:
