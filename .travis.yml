@@ -51,7 +51,7 @@ env:
   - PACKAGE=openocd
   - PACKAGE=flterm
   # verilog tools
-  - PACKAGE=iverilog
+  - PACKAGE=iverilog            DATESHORT=1
   - PACKAGE=verilator
   - PACKAGE=yosys               DATESHORT=1
 
