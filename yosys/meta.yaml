@@ -3,7 +3,7 @@ package:
   version: {{ GIT_DESCRIBE_TAG|replace('yosys-','') }}
 
 source:
-  git_url: https://github.com/cliffordwolf/yosys.git
+  git_url: https://github.com/YosysHQ/yosys.git
   git_rev: master
   patches:
     - makefile-conda-config.patch
