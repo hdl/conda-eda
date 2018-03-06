@@ -36,6 +36,13 @@ function end_section() {
 	travis_fold end "$1"
 }
 
+# Disable this warning;
+# xxxx/conda_build/environ.py:377: UserWarning: The environment variable
+#     'TRAVIS' is being passed through with value 0.  If you are splitting
+#     build and test phases with --no-test, please ensure that this value is
+#     also set similarly at test time.
+export  PYTHONWARNINGS=ignore::UserWarning:conda_build.environ
+
 export BASE_PATH=/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path
 export CONDA_PATH=$BASE_PATH/conda
 mkdir -p $BASE_PATH
