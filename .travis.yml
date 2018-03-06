@@ -18,10 +18,11 @@ addons:
     - build-essential
     - gperf
     - libftdi-dev
-    - libudev1
     - libudev-dev
+    - libudev1
     - libusb-1.0-0-dev
     - libusb-dev
+    - realpath
     - texinfo
 
 before_install:
