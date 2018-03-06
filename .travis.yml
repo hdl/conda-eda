@@ -32,27 +32,27 @@ install:
 
 env:
   # lm32 toolchain
-  - PACKAGE=lm32/binutils
-  - PACKAGE=lm32/gcc-nostdc
-  - PACKAGE=lm32/gcc-newlib
-  - PACKAGE=lm32/gdb
+  - PACKAGE=lm32/binutils       CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=lm32/gcc-nostdc     CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=lm32/gcc-newlib     CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=lm32/gdb            CONDA_BUILD_VERSION=2.1.17
   # or1k toolchain
-  - PACKAGE=or1k/binutils
-  - PACKAGE=or1k/gcc-nostdc
-  - PACKAGE=or1k/gcc-newlib
-  - PACKAGE=or1k/gdb
+  - PACKAGE=or1k/binutils       CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=or1k/gcc-nostdc     CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=or1k/gcc-newlib     CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=or1k/gdb            CONDA_BUILD_VERSION=2.1.17
   # riscv32 toolchain
-  - PACKAGE=riscv32/binutils
+  - PACKAGE=riscv32/binutils    CONDA_BUILD_VERSION=2.1.17
   # sh2 toolchain
-  - PACKAGE=sh2/binutils
+  - PACKAGE=sh2/binutils        CONDA_BUILD_VERSION=2.1.17
   # fx2 toolchain
-  - PACKAGE=sdcc
+  - PACKAGE=sdcc                CONDA_BUILD_VERSION=2.1.17
   # tools
-  - PACKAGE=openocd
-  - PACKAGE=flterm
+  - PACKAGE=openocd             CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=flterm              CONDA_BUILD_VERSION=2.1.17
   # verilog tools
   - PACKAGE=iverilog            DATESHORT=1
-  - PACKAGE=verilator
+  - PACKAGE=verilator           CONDA_BUILD_VERSION=2.1.17
   - PACKAGE=vtr                 DATESHORT=1  CONDA_CHANNELS=conda-forge
   - PACKAGE=yosys               DATESHORT=1
 
