@@ -1,11 +1,6 @@
 #!/bin/bash
 TOP=$(pwd)
-for meta in $(find -name meta.yaml); do
-	(
-		cd $(dirname $meta);
-		ln -sf $(realpath $TOP/recipe_append.yaml --relative-to=.) recipe_append.yaml
-	)
-done
+
 cat > recipe_append.yaml <<EOF
 extra:
   maintainers:
@@ -22,3 +17,10 @@ extra:
     describe: $GITREV
     date:     $DATESTR
 EOF
+
+for meta in $(find -name meta.yaml); do
+	(
+		cd $(dirname $meta);
+		ln -sf $(python3 -c "import os.path; print(os.path.relpath('$TOP/recipe_append.yaml'))") recipe_append.yaml
+	)
+done
