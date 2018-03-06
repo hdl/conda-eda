@@ -22,7 +22,6 @@ addons:
     - libudev1
     - libusb-1.0-0-dev
     - libusb-dev
-    - realpath
     - texinfo
 
 before_install:
