@@ -16,10 +16,10 @@ export -f travis_time_finish
 if [ -z "$DATESTR" ]; then
 	if [ -z "$DATESHORT" ]; then
 		export DATESTR=$(date -u +%Y%m%d%H%M%S)
-		echo "Setting long date string of $(DATESTR)"
+		echo "Setting long date string of $DATESTR"
 	else
 		export DATESTR=$(date -u +%y%m%d%H%M)
-		echo "Setting short date string of $(DATESTR)"
+		echo "Setting short date string of $DATESTR"
 	fi
 fi
 
@@ -36,9 +36,18 @@ function end_section() {
 	travis_fold end "$1"
 }
 
+# Disable this warning;
+# xxxx/conda_build/environ.py:377: UserWarning: The environment variable
+#     'TRAVIS' is being passed through with value 0.  If you are splitting
+#     build and test phases with --no-test, please ensure that this value is
+#     also set similarly at test time.
+export  PYTHONWARNINGS=ignore::UserWarning:conda_build.environ
+
 export BASE_PATH=/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path
 export CONDA_PATH=$BASE_PATH/conda
 mkdir -p $BASE_PATH
 export PATH="$PATH:$CONDA_PATH/bin"
+
+export GITREV=$(git describe --long)
 
 export CONDA_OUT=$(conda render $PACKAGE --output 2> /dev/null | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')

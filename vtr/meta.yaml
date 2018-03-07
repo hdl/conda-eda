@@ -54,8 +54,3 @@ about:
   license: MIT
   license_file: LICENSE.md
   summary: 'The Verilog-to-Routing (VTR) project is a world-wide collaborative effort to provide a open-source framework for conducting FPGA architecture and CAD research and development. The VTR design flow takes as input a Verilog description of a digital circuit, and a description of the target FPGA architecture.'
-
-extra:
-  maintainers:
-    - Tim 'mithro' Ansell <mithro@mithis.com>
-    - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>

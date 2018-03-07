@@ -9,7 +9,13 @@ source:
     - makefile-conda-config.patch
 
 build:
+  # y==GIT_DESCRIBE_NUMBER, z==DATESTR, x==GIT_DESCRIBE_HASH
+  #
+  # number: 10693001803050325
+  #         1yyyy00zzzzzzzzzz
   number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATESTR')) }}
+  # string: 0693.1803050325.g588ce0e3
+  #         yyyy.zzzzzzzzzz.gxxxxxxxx
   string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATESTR') }}.{{ GIT_DESCRIBE_HASH }}
   script_env:
     - CI
@@ -39,8 +45,3 @@ about:
   license: ISC
   license_file: COPYING
   summary: 'Yosys is a framework for Verilog RTL synthesis. It currently has extensive Verilog-2005 support and provides a basic set of synthesis algorithms for various application domains.'
-
-extra:
-  maintainers:
-    - Tim 'mithro' Ansell <mithro@mithis.com>
-    - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>
