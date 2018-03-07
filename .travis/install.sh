@@ -6,9 +6,19 @@ set -e
 # Git repo fixup
 start_section "environment.git" "Setting up ${YELLOW}git checkout${NC}"
 set -x
+git fetch --unshallow || true
 git fetch --tags
 git submodule update --recursive --init
 git submodule foreach git submodule update --recursive --init
+$SPACER
+git remote -v
+git branch -v
+git branch -D master
+CURRENT_GITREV="$(git rev-parse HEAD)"
+git checkout -b master $CURRENT_GITREV
+git tag -l
+git status -v
+git describe --long
 set +x
 end_section "environment.git"
 
@@ -18,7 +28,7 @@ $SPACER
 start_section "environment.conda" "Setting up basic ${YELLOW}conda environment${NC}"
 
 mkdir -p $BASE_PATH
-./get-conda.sh $CONDA_PATH
+./conda-get.sh $CONDA_PATH
 hash -r
 conda config --set always_yes yes --set changeps1 no
 conda install pexpect
@@ -30,6 +40,8 @@ conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')
 conda clean -s --dry-run
 conda build purge
 conda clean -s --dry-run
+
+./conda-meta-extra.sh
 
 end_section "environment.conda"
 
