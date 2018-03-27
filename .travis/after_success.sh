@@ -11,7 +11,7 @@ tar -jtf $CONDA_OUT | sort
 end_section "package.contents"
 
 
-if [ x$TRAVIS_BRANCH = x"master" -a x$TRAVIS_EVENT_TYPE != x"cron" -a x$TRAVIS_PULL_REQUEST != xfalse ]; then
+if [ x$TRAVIS_BRANCH = x"master" -a x$TRAVIS_EVENT_TYPE != x"cron" -a x$TRAVIS_PULL_REQUEST == xfalse ]; then
 	$SPACER
 
 	start_section "package.upload" "${GREEN}Package uploading...${NC}"
