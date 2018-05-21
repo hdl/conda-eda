@@ -12,6 +12,7 @@ before_cache:
 sudo: false
 addons:
   apt:
+    update: true
     packages:
     - autoconf
     - automake
