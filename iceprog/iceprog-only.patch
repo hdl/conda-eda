@@ -1,0 +1,10 @@
+diff --git a/Makefile b/Makefile
+index 518e08c..93f9f56 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,4 +1,4 @@
+-SUBDIRS = icebox icepack iceprog icemulti icepll icetime icebram
++SUBDIRS = iceprog
+ 
+ include config.mk
+ 
