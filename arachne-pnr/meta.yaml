@@ -28,6 +28,7 @@ requirements:
     - tk
     - yosys
   run:
+    - icestorm
     - readline
     - bison
     - tk
