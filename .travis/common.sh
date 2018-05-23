@@ -48,6 +48,5 @@ export CONDA_PATH=$BASE_PATH/conda
 mkdir -p $BASE_PATH
 export PATH="$PATH:$CONDA_PATH/bin"
 
-export GITREV=$(git describe --long)
-
+export GITREV=$(git describe --long 2>/dev/null || echo "unknown")
 export CONDA_OUT=$(conda render $PACKAGE --output 2> /dev/null | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')
