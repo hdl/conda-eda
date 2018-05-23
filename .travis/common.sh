@@ -15,10 +15,10 @@ export -f travis_time_start
 export -f travis_time_finish
 if [ -z "$DATESTR" ]; then
 	if [ x"$CONDA_BUILD_VERSION" = x"2.1.17" ]; then
-		export DATESTR=$(date -u +%Y%m%d%H%M%S)
+		export DATESTR="$(date -u +%Y%m%d%H%M%S)"
 		echo "Setting long date string of $DATESTR"
 	else
-		export DATESTR=$(date -u +%y%m%d%H%M)
+		export DATESTR="$(date -u +%y%m%d%H%M)"
 		echo "Setting short date string of $DATESTR"
 	fi
 fi
@@ -43,10 +43,10 @@ function end_section() {
 #     also set similarly at test time.
 export PYTHONWARNINGS=ignore::UserWarning:conda_build.environ
 
-export BASE_PATH=/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path
-export CONDA_PATH=$BASE_PATH/conda
-mkdir -p $BASE_PATH
+export BASE_PATH="/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path"
+export CONDA_PATH="$BASE_PATH/conda"
+mkdir -p "$BASE_PATH"
 export PATH="$PATH:$CONDA_PATH/bin"
 
-export GITREV=$(git describe --long 2>/dev/null || echo "unknown")
-export CONDA_OUT=$(conda render $PACKAGE --output 2> /dev/null | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')
+export GITREV="$(git describe --long 2>/dev/null || echo "unknown")"
+export CONDA_OUT="$(conda render $PACKAGE --output 2> /dev/null | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')"
