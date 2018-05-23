@@ -58,10 +58,10 @@ env:
   - PACKAGE=yosys               DATESHORT=1
 
 script:
-  - ./.travis/script.sh
+  - bash $TRAVIS_BUILD_DIR/.travis/script.sh
 
 after_failure:
-  - ./.travis/after_failure.sh
+  - bash $TRAVIS_BUILD_DIR/.travis/after_failure.sh
 
 after_success:
-  - ./.travis/after_success.sh
+  - bash $TRAVIS_BUILD_DIR/.travis/after_success.sh
