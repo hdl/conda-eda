@@ -5,6 +5,14 @@ set -e
 
 $SPACER
 
+start_section "conda.copy" "${GREEN}Copying package...${NC}"
+mkdir -p /tmp/conda
+cp -avR $PACKAGE /tmp/conda/
+cd /tmp/conda/
+end_section "conda.copy"
+
+$SPACER
+
 start_section "conda.check" "${GREEN}Checking...${NC}"
 conda build --check $PACKAGE
 end_section "conda.check"
