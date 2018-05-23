@@ -27,9 +27,9 @@ addons:
     - texinfo
 
 before_install:
- - source .travis/common.sh
+ - source $TRAVIS_BUILD_DIR/.travis/common.sh
  - bash $TRAVIS_BUILD_DIR/.travis/fixup-git.sh
- - source .travis/common.sh
+ - source $TRAVIS_BUILD_DIR/.travis/common.sh
 
 install:
  - ./.travis/install.sh
