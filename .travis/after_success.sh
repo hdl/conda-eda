@@ -15,6 +15,6 @@ if [ x$TRAVIS_BRANCH = x"master" -a x$TRAVIS_EVENT_TYPE != x"cron" -a x$TRAVIS_P
 	$SPACER
 
 	start_section "package.upload" "${GREEN}Package uploading...${NC}"
-	anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER $CONDA_OUT
+	anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER --label main $CONDA_OUT
 	end_section "package.upload"
 fi
