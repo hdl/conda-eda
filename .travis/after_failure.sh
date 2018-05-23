@@ -7,7 +7,7 @@ travis_time_finish
 travis_fold end after_failure.1
 
 start_section "failure.tail" "${RED}Failure output...${NC}"
-tail -n 1000 output.log
+tail -n 1000 /tmp/output.log
 end_section "failure.tail"
 
 $SPACER
