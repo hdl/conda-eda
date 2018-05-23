@@ -1,7 +1,6 @@
 #!/bin/bash
 
 source .travis/common.sh
-set -e
 
 # Close the after_success.1 fold travis has created already.
 travis_time_finish
