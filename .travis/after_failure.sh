@@ -2,9 +2,7 @@
 
 source $TRAVIS_BUILD_DIR/.travis/common.sh
 
-# Close the after_success.1 fold travis has created already.
-travis_time_finish
-travis_fold end after_failure.1
+$SPACER
 
 start_section "failure.tail" "${RED}Failure output...${NC}"
 tail -n 1000 /tmp/output.log
