@@ -28,6 +28,8 @@ addons:
 
 before_install:
  - source .travis/common.sh
+ - bash $TRAVIS_BUILD_DIR/.travis/fixup-git.sh
+ - source .travis/common.sh
 
 install:
  - ./.travis/install.sh
