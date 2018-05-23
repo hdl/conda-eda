@@ -14,7 +14,12 @@ unset DEBUG_CXXFLAGS
 unset DEBUG_CPPFLAGS
 
 export ICEBOX=$(realpath $(dirname $(which $CC))/../share/icebox)
-echo $ICEBOX
+echo
+echo "IceStorm config"
+echo "--------------------------------------"
+echo "icebox is at '$ICEBOX'"
+ls -l $ICEBOX
+echo "--------------------------------------"
 
 make V=1 -j$CPU_COUNT
 make test
