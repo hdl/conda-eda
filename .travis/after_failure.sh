@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source .travis/common.sh
+source $TRAVIS_BUILD_DIR/.travis/common.sh
 
 # Close the after_success.1 fold travis has created already.
 travis_time_finish
