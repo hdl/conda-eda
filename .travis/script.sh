@@ -6,8 +6,8 @@ set -e
 $SPACER
 
 start_section "conda.copy" "${GREEN}Copying package...${NC}"
-mkdir -p /tmp/conda
-cp -avR $PACKAGE /tmp/conda/
+mkdir -p /tmp/conda/$PACKAGE
+cp -vRL $PACKAGE/* /tmp/conda/$PACKAGE/
 cd /tmp/conda/
 end_section "conda.copy"
 
