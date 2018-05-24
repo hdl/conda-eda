@@ -55,10 +55,9 @@ env:
   - PACKAGE=openocd             CONDA_BUILD_VERSION=2.1.17
   - PACKAGE=flterm              CONDA_BUILD_VERSION=2.1.17
   # verilog tools
-  - PACKAGE=iverilog            DATESHORT=1
+  - PACKAGE=iverilog
   - PACKAGE=verilator           CONDA_BUILD_VERSION=2.1.17
-  - PACKAGE=vtr                 DATESHORT=1  CONDA_CHANNELS=conda-forge
-  - PACKAGE=yosys               DATESHORT=1
+  - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge
 
 script:
   - bash $TRAVIS_BUILD_DIR/.travis/script.sh

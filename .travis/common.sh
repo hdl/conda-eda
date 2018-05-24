@@ -14,7 +14,7 @@ export -f travis_fold
 export -f travis_time_start
 export -f travis_time_finish
 if [ -z "$DATESTR" ]; then
-	if [ -z "$DATESHORT" ]; then
+	if [ x"$CONDA_BUILD_VERSION" = x"2.1.17" ]; then
 		export DATESTR=$(date -u +%Y%m%d%H%M%S)
 		echo "Setting long date string of $DATESTR"
 	else
