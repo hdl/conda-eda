@@ -55,6 +55,7 @@ env:
   - PACKAGE=openocd             CONDA_BUILD_VERSION=2.1.17
   - PACKAGE=flterm              CONDA_BUILD_VERSION=2.1.17
   # verilog tools
+  - PACKAGE=icestorm
   - PACKAGE=iverilog
   - PACKAGE=verilator           CONDA_BUILD_VERSION=2.1.17
   - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge

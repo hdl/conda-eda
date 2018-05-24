@@ -1,0 +1,38 @@
+package:
+  name: icestorm
+  version: {{ GIT_DESCRIBE_TAG }}
+
+source:
+  git_url: https://github.com/mithro/icestorm.git
+  git_rev: master
+  patches:
+   - noiceprog.patch
+
+build:
+  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATESTR')) }}
+  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATESTR') }}.{{ GIT_DESCRIBE_HASH }}
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+    - pkg-config
+    - gcc_linux-64
+    - gxx_linux-64
+  run:
+    - readline
+    - bison
+    - tk
+    - libffi
+    - flex
+
+about:
+  home: http://www.clifford.at/icestorm/
+  license_file: COPYING
+  summary: 'Project IceStorm aims at documenting the bitstream format of Lattice iCE40 FPGAs and providing simple tools for analyzing and creating bitstream files.'
+
+extra:
+  maintainers:
+    - Tim 'mithro' Ansell <mithro@mithis.com>
+    - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>
