@@ -1,14 +1,17 @@
 #!/bin/bash
 
-source .travis/common.sh
-set -e
+source $TRAVIS_BUILD_DIR/.travis/common.sh
 
-# Close the after_success.1 fold travis has created already.
-travis_time_finish
-travis_fold end after_failure.1
+# Close the after_failure fold travis has created already.
+travis_fold end after_failure
+
+$SPACER
 
 start_section "failure.tail" "${RED}Failure output...${NC}"
-tail -n 1000 output.log
+echo "Log is $(wc -l /tmp/output.log) lines long."
+echo "Displaying last 1000 lines"
+echo
+tail -n 1000 /tmp/output.log
 end_section "failure.tail"
 
 $SPACER
@@ -24,5 +27,5 @@ done
 $SPACER
 
 start_section "failure.log.full" "${RED}Failure output.log...${NC}"
-cat output.log
+cat /tmp/output.log
 end_section "failure.log.full"
