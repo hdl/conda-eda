@@ -14,6 +14,7 @@ addons:
   apt:
     update: true
     packages:
+    - realpath
     - autoconf
     - automake
     - build-essential
@@ -26,7 +27,9 @@ addons:
     - texinfo
 
 before_install:
- - source .travis/common.sh
+ - source $TRAVIS_BUILD_DIR/.travis/common.sh
+ - bash $TRAVIS_BUILD_DIR/.travis/fixup-git.sh
+ - source $TRAVIS_BUILD_DIR/.travis/common.sh
 
 install:
  - ./.travis/install.sh
@@ -52,16 +55,15 @@ env:
   - PACKAGE=openocd             CONDA_BUILD_VERSION=2.1.17
   - PACKAGE=flterm              CONDA_BUILD_VERSION=2.1.17
   # verilog tools
-  - PACKAGE=iverilog            DATESHORT=1
+  - PACKAGE=iverilog
   - PACKAGE=verilator           CONDA_BUILD_VERSION=2.1.17
-  - PACKAGE=vtr                 DATESHORT=1  CONDA_CHANNELS=conda-forge
-  - PACKAGE=yosys               DATESHORT=1
+  - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge
 
 script:
-  - ./.travis/script.sh
+  - bash $TRAVIS_BUILD_DIR/.travis/script.sh
 
 after_failure:
-  - ./.travis/after_failure.sh
+  - bash $TRAVIS_BUILD_DIR/.travis/after_failure.sh
 
 after_success:
-  - ./.travis/after_success.sh
+  - bash $TRAVIS_BUILD_DIR/.travis/after_success.sh
