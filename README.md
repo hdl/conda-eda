@@ -14,14 +14,16 @@ Summary: a thread-safe C library for manipulating sets and relations of integer 
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/isl-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/isl-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/isl-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/isl-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/isl-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/isl-feedstock/branch/master)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/isl-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/isl-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/isl-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/isl-feedstock)
+![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/isl/badges/version.svg)](https://anaconda.org/conda-forge/isl)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/isl/badges/downloads.svg)](https://anaconda.org/conda-forge/isl)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-isl-green.svg)](https://anaconda.org/conda-forge/isl) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/isl.svg)](https://anaconda.org/conda-forge/isl) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/isl.svg)](https://anaconda.org/conda-forge/isl) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/isl.svg)](https://anaconda.org/conda-forge/isl) |
 
 Installing isl
 ==============
