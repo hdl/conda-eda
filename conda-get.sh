@@ -17,6 +17,7 @@ if [ ! -z "$CONDA_BUILD_VERSION" ]; then
 	echo "conda-build==$CONDA_BUILD_VERSION" > $CONDA_PATH/conda-meta/pinned
 else
 	conda install -y conda-build
+	conda install -y conda-verify
 fi
 conda install -y anaconda-client
 conda install -y jinja2
