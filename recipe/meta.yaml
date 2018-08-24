@@ -10,25 +10,17 @@ source:
   md5: cb396f31b24aeeac49840b519741b0e1
 
 build:
-  number: 0
-  features:
-    - vc9             # [win and py27]
-    - vc14            # [win and py>=35]
-  skip:
-    - True            # [win and not py36]
+  number: 1
 
 requirements:
   build:
-    - gmp >=5.0.1,<7  # [unix]
+    - {{ compiler('c') }}
     - cmake           # [win]
-    - python          # [win]
-    - msinttypes      # [win and py27]
-    - vc 9            # [win and py27]
-    - vc 14           # [win and py>=35]
+  host:
+    - gmp             # [unix]
+    - msinttypes      # [vc<14]
   run:
-    - gmp >=5.0.1,<7  # [unix]
-    - vc 9            # [win and py27]
-    - vc 14           # [win and py>=35]
+    - gmp             # [unix]
 
 test:
   commands:
