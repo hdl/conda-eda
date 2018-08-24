@@ -1,9 +1,14 @@
-copy %RECIPE_DIR%\CMakeLists.txt .
-copy %RECIPE_DIR%\isl_config.h.cmake .
-copy %RECIPE_DIR%\isl_srcdir.c.cmake .
-mkdir build
-cd build
-cmake -G"NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ..
-cmake --build .
-cmake --build . --target install
-ctest -V
+set AR=llvm-ar
+set LD=lld-link
+set CXX=clang++
+set CC=clang
+set ac_cv_have_decl__BitScanForward=yes
+
+FOR /F "delims=" %%i IN ('cygpath.exe -u "%PREFIX%"') DO set "PREFIX=%%i"
+bash -lc "cd $SRC_DIR &&  ./configure --with-int=imath CFLAGS='-O3 -Dstrdup=_strdup' --prefix=$PREFIX/Library"
+bash -lc "cd $SRC_DIR && make -j$CPU_COUNT"
+bash -lc "cd $SRC_DIR && make check"
+bash -lc "cd $SRC_DIR && make install-strip"
+
+rm "%LIBRARY_LIB%/libisl.la"
+mv "%LIBRARY_LIB%/libisl.a" "%LIBRARY_LIB%/isl.lib"
