@@ -11,14 +11,16 @@ source:
 
 build:
   number: 1
+  skip: True   # [win and vc<14]
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - cmake           # [win]
+    - clangdev        # [win]
+    - lld             # [win]
+    - posix           # [win]
   host:
     - gmp             # [unix]
-    - msinttypes      # [vc<14]
   run:
     - gmp             # [unix]
 
