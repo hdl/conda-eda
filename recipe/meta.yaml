@@ -12,6 +12,8 @@ source:
 build:
   number: 1
   skip: True   # [win and vc<14]
+  run_exports:
+    - {{ pin_subpackage("isl", max_pin="x.x") }}
 
 requirements:
   build:
