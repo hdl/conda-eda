@@ -182,6 +182,7 @@ include_directories(BEFORE
 set (ISL_FILES
   basis_reduction_tab.c
   isl_aff.c
+  isl_aff_map.c
   isl_affine_hull.c
   isl_arg.c
   isl_ast_build.c
@@ -189,10 +190,10 @@ set (ISL_FILES
   isl_ast.c
   isl_ast_codegen.c
   isl_ast_graft.c
-  isl_band.c
   isl_bernstein.c
   isl_blk.c
   isl_bound.c
+  isl_box.c
   isl_coalesce.c
   isl_constraint.c
   isl_convex_hull.c
@@ -245,6 +246,7 @@ set (ISL_FILES
   isl_set_list.c
   isl_sort.c
   isl_space.c
+  isl_stride.c
   isl_stream.c
   isl_tab.c
   isl_tab_pip.c
@@ -257,6 +259,10 @@ set (ISL_FILES
   isl_version.c
   isl_vertices.c
   print.c
+  set_to_map.c
+  set_from_map.c
+  uset_to_umap.c
+  uset_from_umap.c
   imath/gmp_compat.c
   imath/imath.c
   imath/imrat.c
