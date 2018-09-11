@@ -93,8 +93,4 @@ cd ..
 VERSION_DIR="$(echo $SRC_DIR | sed -e's-/work/.*-/work/-')"
 
 $PREFIX/bin/$TARGET-gcc --version
-$PREFIX/bin/$TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //" -e"s/\$/_$GIT_REV/" > $VERSION_DIR/__conda_version__.txt
-touch .buildstamp
-TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > $VERSION_DIR/__conda_buildstr__.txt
-TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > $VERSION_DIR/__conda_buildnum__.txt
-cat $VERSION_DIR/__conda_*__.txt
+echo $($PREFIX/bin/$TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //" -e"s/\$/_$GIT_REV/")
