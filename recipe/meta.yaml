@@ -31,7 +31,6 @@ test:
     - if not exist %LIBRARY_LIB%\\isl.lib exit 1            # [win]
     - if not exist %LIBRARY_INC%\\isl\\options.h exit 1     # [win]
     - test -f "$PREFIX/lib/libisl.a"            # [unix]
-    - test -f "$PREFIX/lib/libisl.la"           # [unix]
     - test -f "$PREFIX/lib/libisl${SHLIB_EXT}"  # [unix]
     - test -d "$PREFIX/include/isl"             # [unix]
 
