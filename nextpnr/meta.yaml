@@ -23,6 +23,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - python {{ python }}
   host:
     - bison
     - boost
@@ -32,7 +33,7 @@ requirements:
     - icestorm
     - ncurses
     - pkg-config
-    - python
+    - python {{ python }}
     - readline
   run:
     - icestorm
