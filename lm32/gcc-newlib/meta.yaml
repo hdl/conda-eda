@@ -8,6 +8,7 @@ source:
   sha256: 608df76dec2d34de6558249d8af4cbee21eceddbcb580d666f7a5a583ca3303a
   patches:
    - stdint.patch
+   - reload1.patch
 
 extra:
   sources:
