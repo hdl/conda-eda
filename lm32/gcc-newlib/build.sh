@@ -56,7 +56,7 @@ cd ..
 
 mkdir -p build-gcc
 cd build-gcc
-export LDFLAGS=-static
+#export LDFLAGS=-static
 $SRC_DIR/configure \
 	\
 	--program-prefix=$TARGET-newlib- \
