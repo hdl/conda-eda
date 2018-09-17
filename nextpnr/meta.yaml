@@ -1,0 +1,53 @@
+package:
+  name: nextpnr
+  version: {{ GIT_DESCRIBE_TAG }}
+
+source:
+  git_url: https://github.com/timvideos/nextpnr.git
+  git_rev: master
+
+build:
+  # y==GIT_DESCRIBE_NUMBER, z==DATESTR, x==GIT_DESCRIBE_HASH
+  #
+  # number: 10693001803050325
+  #         1yyyy00zzzzzzzzzz
+  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATESTR')) }}
+  # string: 0693.1803050325.g588ce0e3
+  #         yyyy.zzzzzzzzzz.gxxxxxxxx
+  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATESTR') }}.{{ GIT_DESCRIBE_HASH }}
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - bison
+    - boost
+    - cmake
+    - flex
+    - fontconfig
+    - icestorm
+    - ncurses
+    - pkg-config
+    - python
+    - readline
+  run:
+    - icestorm
+    - libboost
+    - py-boost
+    - python
+    - readline
+
+#test:
+#  commands:
+#    - ./run_reg_test.pl vtr_reg_basic
+#    - ./run_reg_test.pl vtr_reg_strong -j2
+
+about:
+  home: https://github.com/YosysHQ/nextpnr
+  license: ISC
+  license_file: COPYING
+  summary: 'nextpnr aims to be a vendor neutral, timing driven, FOSS FPGA place and route tool.'
