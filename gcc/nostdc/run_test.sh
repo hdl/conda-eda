@@ -1,30 +1,38 @@
 #!/bin/bash
 
+# no C library gcc run test
+
 set +x
 set +e
 
-TARGET=or1k-elf
+TARGET=${TOOLCHAIN_ARCH}-elf
 GCC=$TARGET-gcc
 OBJDUMP=$TARGET-objdump
 
 
 # Check the compiler version matches
-GCC_PKG_VERSION=$(echo $PKG_VERSION | sed -e's/_.*//')
+GCC_PKG_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//')
 GCC_RUN_VERSION=$($GCC --version 2>&1 | head -1 | sed -e"s/$GCC (GCC) //")
 
 if [ "$GCC_PKG_VERSION" != "$GCC_RUN_VERSION" ]; then
+	echo
+	echo "  package version: $GCC_PKG_VERSION ($PKG_VERSION)"
+	echo "installed version: $GCC_RUN_VERSION ($($GCC --version 2>&1 | head -1))"
+	echo
 	echo "Compiler doesn't have correct version!"
-	echo "  package version: $GCC_PKG_VERSION"
-	echo "installed version: $GCC_RUN_VERSION"
+	echo
  	exit 1
 fi
 
 # Check the compiler was build for the right machine
 GCC_TARGET=$($GCC -dumpmachine)
 if [ "$GCC_TARGET" != "$TARGET" ]; then
-	echo "Compiler doesn't have correct target!"
+	echo
 	echo "  package target: $TARGET"
 	echo "installed target: $GCC_TARGET"
+	echo
+	echo "Compiler doesn't have correct target!"
+	echo
  	exit 1
 fi
 
@@ -60,7 +68,8 @@ echo "Info about main.o"
 file main.o
 $TARGET-objdump -f ./main.o
 
-if ! $TARGET-objdump -f ./main.o | grep -q 'architecture: or1k'; then
+$TARGET-objdump -f ./main.o
+if ! $TARGET-objdump -f ./main.o | grep -q "architecture: ${TOOLCHAIN_ARCH}"; then
 	echo "Compiled binary output not correct architecture!"
 	exit 1
 fi

@@ -1,17 +1,17 @@
 #!/bin/bash
 
-# or1k gcc newlib run test
+# gcc newlib run test
 
 set +x
 set +e
 
-TARGET=or1k-elf
+TARGET=${TOOLCHAIN_ARCH}-elf
 GCC=$TARGET-newlib-gcc
 OBJDUMP=$TARGET-objdump
 
 
 # Check the compiler version matches
-GCC_PKG_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//' -e"s/_.*$//")
+GCC_PKG_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//')
 GCC_RUN_VERSION=$($GCC --version 2>&1 | head -1 | sed -e"s/$GCC (GCC) //")
 
 if [ "$GCC_PKG_VERSION" != "$GCC_RUN_VERSION" ]; then
@@ -50,6 +50,8 @@ int main() {
 	puts("Hello world!\n");
 }
 EOF
+
+echo "Compiling main"
 $GCC -g main.c -o main -Wl,-Map=output.map
 SUCCESS=$?
 if [ $SUCCESS -ne 0 ]; then
@@ -72,7 +74,7 @@ echo "-------------------------------------------"
 echo
 
 $TARGET-objdump -f ./main
-if ! $TARGET-objdump -f ./main | grep -q 'architecture: or1k'; then
+if ! $TARGET-objdump -f ./main | grep -q "architecture: ${TOOLCHAIN_ARCH}"; then
 	echo "Compiled binary output not correct architecture!"
 	exit 1
 fi
