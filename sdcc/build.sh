@@ -18,8 +18,3 @@ CXXFLAGS=-I$PREFIX/include \
 
 make -j$CPU_COUNT
 make install
-
-sdcc --version | head -1 | sed -e's/SDCC : [^ ]\+ \([0-9.]\+\) #\([0-9]\+\) .*/\1.\2/' > ../__conda_version__.txt
-touch .buildstamp
-TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > ../__conda_buildstr__.txt
-TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > ../__conda_buildnum__.txt

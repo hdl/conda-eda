@@ -8,7 +8,14 @@ source:
   sha256: e85dceb11e01ffefb545ec389da91265130c91953589392dddd2e5ec0b7ca374
 
 build:
-  number: 0
+  # z==DATESTR
+  #
+  # number: 1803050325
+  #         zzzzzzzzzz
+  number: {{ environ.get('DATESTR') }}
+  # string: 0693.1803050325.g588ce0e3
+  #         yyyy.zzzzzzzzzz.gxxxxxxxx
+  string: {{ environ.get('DATESTR') }}
   script_env:
     - CI
     - TRAVIS

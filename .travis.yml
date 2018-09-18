@@ -50,7 +50,7 @@ env:
   # sh2 toolchain
   - PACKAGE=binutils            TOOLCHAIN_ARCH=sh2
   # fx2 toolchain
-  - PACKAGE=sdcc                CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=sdcc
   # tools
   - PACKAGE=openocd             CONDA_BUILD_VERSION=2.1.17
   - PACKAGE=flterm              CONDA_BUILD_VERSION=2.1.17
