@@ -17,6 +17,11 @@ extra:
     describe: $GITREV
     date:     $DATESTR
 EOF
+if [ ! -z "${TOOLCHAIN_ARCH}" ]; then
+	cat >> recipe_append.yaml <<EOF
+  toolchain_arch: ${TOOLCHAIN_ARCH}
+EOF
+fi
 
 for meta in $(find -name meta.yaml); do
 	(
