@@ -36,19 +36,19 @@ install:
 
 env:
   # lm32 toolchain
-  - PACKAGE=lm32/binutils       CONDA_BUILD_VERSION=2.1.17
-  - PACKAGE=lm32/gcc-nostdc     CONDA_BUILD_VERSION=2.1.17
-  - PACKAGE=lm32/gcc-newlib     CONDA_BUILD_VERSION=2.1.17
-  - PACKAGE=lm32/gdb            CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=binutils            TOOLCHAIN_ARCH=lm32
+  - PACKAGE=gcc/nostdc          TOOLCHAIN_ARCH=lm32
+  - PACKAGE=gcc/newlib          TOOLCHAIN_ARCH=lm32
+  - PACKAGE=gdb                 TOOLCHAIN_ARCH=lm32
   # or1k toolchain
-  - PACKAGE=or1k/binutils       CONDA_BUILD_VERSION=2.1.17
-  - PACKAGE=or1k/gcc-nostdc     CONDA_BUILD_VERSION=2.1.17
-  - PACKAGE=or1k/gcc-newlib     CONDA_BUILD_VERSION=2.1.17
-  - PACKAGE=or1k/gdb            CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=binutils            TOOLCHAIN_ARCH=or1k
+  - PACKAGE=gcc/nostdc          TOOLCHAIN_ARCH=or1k
+  - PACKAGE=gcc/newlib          TOOLCHAIN_ARCH=or1k
+  - PACKAGE=gdb                 TOOLCHAIN_ARCH=or1k
   # riscv32 toolchain
-  - PACKAGE=riscv32/binutils    CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=binutils            TOOLCHAIN_ARCH=riscv32
   # sh2 toolchain
-  - PACKAGE=sh2/binutils        CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=binutils            TOOLCHAIN_ARCH=sh2
   # fx2 toolchain
   - PACKAGE=sdcc                CONDA_BUILD_VERSION=2.1.17
   # tools
