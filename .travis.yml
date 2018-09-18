@@ -59,7 +59,7 @@ env:
   - PACKAGE=icestorm
   - PACKAGE=iverilog
   - PACKAGE=nextpnr
-  - PACKAGE=verilator           CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=verilator
   - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge
   - PACKAGE=yosys
 
