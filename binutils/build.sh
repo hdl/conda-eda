@@ -3,6 +3,12 @@
 set -e
 set -x
 
+if [ -z "${TOOLCHAIN_ARCH}" ]; then
+	export
+	echo "Missing \${TOOLCHAIN_ARCH} env value"
+	exit 1
+fi
+
 if [ x"$TRAVIS" = xtrue ]; then
 	CPU_COUNT=2
 fi
@@ -10,12 +16,9 @@ fi
 mkdir build
 cd build
 ../configure \
-  --target=riscv32-elf \
+  --target=${TOOLCHAIN_ARCH}-elf \
   --prefix=$PREFIX \
   --enable-deterministic-archives \
 
 make -j$CPU_COUNT
 make install-strip
-touch .buildstamp
-TZ=UTC date +%Y%m%d_%H%M%S -r .buildstamp > ../__conda_buildstr__.txt
-TZ=UTC date +%Y%m%d%H%M%S  -r .buildstamp > ../__conda_buildnum__.txt
