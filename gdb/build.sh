@@ -12,7 +12,7 @@ fi
 mkdir build
 cd build
 ../configure \
-  --target=lm32-elf \
+  --target=${TOOLCHAIN_ARCH}-elf \
   --prefix=$PREFIX \
  \
   --disable-itcl \
@@ -24,7 +24,7 @@ cd build
   --disable-rda \
   --disable-sid \
   --disable-sim \
-  --disable-lm32sim \
+  --disable-${TOOLCHAIN_ARCH}sim \
   --with-sysroot \
   --disable-newlib \
   --disable-libgloss \
@@ -32,14 +32,15 @@ cd build
   --disable-ld \
   --disable-binutils \
   --disable-gprof \
-  --with-system-zlib \
  \
   --disable-shared \
   --enable-static \
+
+#  --with-system-zlib \
 
 make -j$CPU_COUNT
 make install
 )
 
-$PREFIX/bin/lm32-elf-gdb --version
-echo $($PREFIX/bin/lm32-elf-gdb --version 2>&1 | head -1 | sed -e's/.* //')
+$PREFIX/bin/${TOOLCHAIN_ARCH}-elf-gdb --version
+echo $($PREFIX/bin/${TOOLCHAIN_ARCH}-elf-gdb --version 2>&1 | head -1 | sed -e's/.* //')
