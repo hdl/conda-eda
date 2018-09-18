@@ -53,7 +53,7 @@ env:
   - PACKAGE=sdcc
   # tools
   - PACKAGE=openocd
-  - PACKAGE=flterm              CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=flterm
   # verilog tools
   - PACKAGE=arachne-pnr
   - PACKAGE=icestorm
