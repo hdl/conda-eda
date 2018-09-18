@@ -52,7 +52,7 @@ env:
   # fx2 toolchain
   - PACKAGE=sdcc
   # tools
-  - PACKAGE=openocd             CONDA_BUILD_VERSION=2.1.17
+  - PACKAGE=openocd
   - PACKAGE=flterm              CONDA_BUILD_VERSION=2.1.17
   # verilog tools
   - PACKAGE=arachne-pnr
