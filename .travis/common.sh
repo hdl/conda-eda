@@ -1,10 +1,10 @@
 # Some colors, use it like following;
 # echo -e "Hello ${YELLOW}yellow${NC}"
-GRAY='\033[0;30m'
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-PURPLE='\033[0;35m'
+GRAY=' \033[0;30m'
+RED=' \033[0;31m'
+GREEN=' \033[0;32m'
+YELLOW=' \033[0;33m'
+PURPLE=' \033[0;35m'
 NC='\033[0m' # No Color
 
 SPACER="echo -e ${GRAY} - ${NC}"
@@ -49,4 +49,8 @@ mkdir -p "$BASE_PATH"
 export PATH="$PATH:$CONDA_PATH/bin"
 
 export GITREV="$(git describe --long 2>/dev/null || echo "unknown")"
-export CONDA_OUT="$(conda render $PACKAGE --output 2> /dev/null | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')"
+export CONDA_BUILD_ARGS=$PACKAGE
+if [ -f "$PACKAGE/conda_build_config.$TOOLCHAIN_ARCH.yaml" ]; then
+	export CONDA_BUILD_ARGS="$CONDA_BUILD_ARGS -m $PACKAGE/conda_build_config.$TOOLCHAIN_ARCH.yaml"
+fi
+export CONDA_OUT="$(conda render $CONDA_BUILD_ARGS --output 2> /dev/null | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')"
