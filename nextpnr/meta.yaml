@@ -34,7 +34,7 @@ requirements:
     - ncurses
     - pkg-config
     - python {{ python }}
-    - readline 6.2
+    - readline
   run:
     - icestorm
     - libboost
