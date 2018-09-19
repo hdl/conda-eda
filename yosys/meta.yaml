@@ -28,7 +28,8 @@ requirements:
   host:
     - pkg-config
     - bison
-    - tk
+    - python {{ python }}
+    - tk 8.5.18
     - libffi
     - flex
     - iverilog
