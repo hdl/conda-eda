@@ -41,11 +41,11 @@ requirements:
     - py-boost
     - python
     - readline
+    - yosys
 
-#test:
-#  commands:
-#    - ./run_reg_test.pl vtr_reg_basic
-#    - ./run_reg_test.pl vtr_reg_strong -j2
+test:
+  commands:
+    - nextpnr-ice40 -V
 
 about:
   home: https://github.com/YosysHQ/nextpnr
