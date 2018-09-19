@@ -51,4 +51,9 @@ echo "gcc_git_rev: $GCC_GIT_REV" >> $EXTRA_YAML_FILE
 
 more $EXTRA_YAML_FILE
 
+echo "-------------------"
+du -h .
+echo "-------------------"
+
+
 popd >/dev/null
