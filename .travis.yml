@@ -1,13 +1,5 @@
 language: c
 
-cache:
-  ccache: true
-  directories:
-   - /tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path/conda/conda-bld/git_cache
-   - /tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path/conda/conda-bld/src_cache
-before_cache:
-  - ./.travis/before_cache.sh
-
 #dist: trusty
 sudo: false
 addons:
