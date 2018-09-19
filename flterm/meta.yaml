@@ -18,6 +18,18 @@ build:
     - CI
     - TRAVIS
 
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  run:
+  {% for package in resolved_packages('host') %}
+    - {{ package }}
+  {% endfor %}
+  {% for package in resolved_packages('build') %}
+    - {{ package }}
+  {% endfor %}
+
 test:
   commands:
     - flterm --help
