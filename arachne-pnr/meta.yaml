@@ -15,10 +15,10 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - bison
     - flex
-    - gcc_linux-64
-    - gxx_linux-64
     - icestorm
     - iverilog
     - libffi
@@ -29,11 +29,12 @@ requirements:
     - yosys
   run:
     - icestorm
-    - readline
-    - bison
-    - tk
-    - libffi
-    - flex
+  {% for package in resolved_packages('host') %}
+    - {{ package }}
+  {% endfor %}
+  {% for package in resolved_packages('build') %}
+    - {{ package }}
+  {% endfor %}
 
 about:
   home: http://www.clifford.at/arachne-pnr/
