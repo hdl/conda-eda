@@ -91,7 +91,7 @@ cd ..
 mkdir -p build-newlib
 cd build-newlib
 $SRC_DIR/newlib/configure \
-        --prefix=$PREFIX \
+        --prefix=$PREFIX/$TARGET/sysroot \
 	--target=$TARGET \
 	--disable-newlib-supplied-syscalls \
 
@@ -108,6 +108,7 @@ $SRC_DIR/gcc/configure \
 	--program-prefix=$TARGET-newlib- \
 	\
         --prefix=$PREFIX \
+	--with-sysroot=$PREFIX/$TARGET/sysroot \
 	\
         --with-gmp=$CONDA_PREFIX \
         --with-mpfr=$CONDA_PREFIX \

@@ -17,7 +17,12 @@ mkdir build
 cd build
 ../configure \
   --target=${TOOLCHAIN_ARCH}-elf \
+  \
   --prefix=$PREFIX \
+  \
+  --with-sysroot \
+  --disable-nls \
+  --disable-werror \
   --enable-deterministic-archives \
 
 make -j$CPU_COUNT
