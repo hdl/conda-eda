@@ -31,16 +31,13 @@ requirements:
     - flex
     - fontconfig
     - icestorm
-    - ncurses
     - pkg-config
     - python {{ python }}
-    - readline
   run:
     - icestorm
     - libboost
     - py-boost
     - python
-    - readline
     - yosys
 
 test:
