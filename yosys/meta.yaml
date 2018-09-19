@@ -27,7 +27,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - pkg-config
-    - readline
+    - readline 6.2
     - bison
     - tk
     - libffi
