@@ -39,6 +39,7 @@ fi
 # Check the compiler can build a simple C app which requires the standard
 # library.
 echo "==========================================="
+set -x
 $GCC --version
 $GCC --target-help
 $GCC -dumpspecs

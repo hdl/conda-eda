@@ -68,8 +68,12 @@ cd build-gcc
 # --without-headers - Tells GCC not to rely on any C library (standard or runtime) being present for the target.
 #CFLAGS="$CFLAGS -Wno-literal-suffix"
 #export LDFLAGS=-static
+mkdir -p $PREFIX/$TARGET/sysroot/usr/include
+
 $SRC_DIR/gcc/configure \
-        --prefix=$PREFIX \
+	\
+        --prefix=/ \
+	--with-sysroot=$PREFIX/$TARGET/sysroot \
 	\
         --with-gmp=$CONDA_PREFIX \
         --with-mpfr=$CONDA_PREFIX \
@@ -79,9 +83,11 @@ $SRC_DIR/gcc/configure \
 	\
 	--target=$TARGET \
 	--with-pkgversion=$PKG_VERSION \
-	--without-headers \
 	--enable-languages="c" \
 	--enable-threads=single \
+	--enable-multilib \
+	\
+	--without-headers \
 	\
 	--disable-nls \
 	--disable-libatomic \
@@ -90,7 +96,6 @@ $SRC_DIR/gcc/configure \
 	--disable-libmudflap \
 	--disable-libquadmath \
 	--disable-libssp \
-	--disable-multilib \
 	--disable-nls \
 	--disable-shared \
 	--disable-tls \
@@ -98,7 +103,7 @@ $SRC_DIR/gcc/configure \
 
 
 make -j$CPU_COUNT
-make install-strip
+make DESTDIR=$PREFIX install-strip
 cd ..
 
 VERSION_DIR="$(echo $SRC_DIR | sed -e's-/work/.*-/work/-')"

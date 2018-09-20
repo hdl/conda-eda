@@ -18,12 +18,11 @@ cd build
 ../configure \
   --target=${TOOLCHAIN_ARCH}-elf \
   \
-  --prefix=$PREFIX \
+  --prefix=/ \
   \
-  --with-sysroot \
   --disable-nls \
   --disable-werror \
   --enable-deterministic-archives \
 
 make -j$CPU_COUNT
-make install-strip
+make DESTDIR=${PREFIX} install-strip

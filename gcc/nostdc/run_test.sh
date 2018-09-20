@@ -38,6 +38,22 @@ fi
 
 # Check the compiler can build a simple C app which requires the standard
 # library.
+echo "==========================================="
+set -x
+$GCC --version
+$GCC --target-help
+$GCC -dumpspecs
+$GCC -dumpversion
+$GCC -dumpmachine
+$GCC -print-search-dirs
+$GCC -print-libgcc-file-name
+$GCC -print-multiarch
+$GCC -print-multi-directory
+$GCC -print-multi-lib
+$GCC -print-multi-os-directory
+$GCC -print-sysroot
+$GCC -print-sysroot-headers-suffix
+echo "==========================================="
 
 echo "==========================================="
 
