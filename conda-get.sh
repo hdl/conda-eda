@@ -13,7 +13,9 @@ fi
 export PATH=$CONDA_PATH/bin:$PATH
 
 echo "python==3.6" > $CONDA_PATH/conda-meta/pinned
+echo "conda-build==3.14.0" >> $CONDA_PATH/conda-meta/pinned
 
+conda install -y python
 conda update -y conda
 
 conda install -y conda-build
