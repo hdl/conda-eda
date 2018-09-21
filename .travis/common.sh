@@ -14,7 +14,7 @@ export -f travis_fold
 export -f travis_time_start
 export -f travis_time_finish
 if [ -z "$DATE_STR" ]; then
-	export DATE_NUM="$(date -u +%y%m%d%H%M)"
+	export DATE_NUM="$(date -u +%Y%m%d%H%M%S)"
 	export DATE_STR="$(date -u +%Y%m%d_%H%M%S)"
 	echo "Setting date number to $DATE_NUM"
 	echo "Setting date string to $DATE_STR"
