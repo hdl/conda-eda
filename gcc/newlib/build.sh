@@ -78,7 +78,7 @@ echo "---"
 $TARGET-gcc --version 2>&1
 echo "---"
 
-GCC_STAGE1_VERSION=$($TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //")
+GCC_STAGE1_VERSION=$($TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (//" -e"s/).*//")
 GCC_STAGE2_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//')
 if [ "$GCC_STAGE1_VERSION" != "$GCC_STAGE2_VERSION" ]; then
 	echo
