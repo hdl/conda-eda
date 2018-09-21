@@ -43,7 +43,7 @@ export PYTHONWARNINGS=ignore::UserWarning:conda_build.environ
 export BASE_PATH="/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path"
 export CONDA_PATH="$BASE_PATH/conda"
 mkdir -p "$BASE_PATH"
-export PATH="$PATH:$CONDA_PATH/bin"
+export PATH="$CONDA_PATH/bin:$PATH"
 
 export GITREV="$(git describe --long 2>/dev/null || echo "unknown")"
 export CONDA_BUILD_ARGS=$PACKAGE
@@ -51,3 +51,8 @@ if [ -f "$PACKAGE/conda_build_config.$TOOLCHAIN_ARCH.yaml" ]; then
 	export CONDA_BUILD_ARGS="$CONDA_BUILD_ARGS -m $PACKAGE/conda_build_config.$TOOLCHAIN_ARCH.yaml"
 fi
 export CONDA_OUT="$(conda render $CONDA_BUILD_ARGS --output 2> /dev/null | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')"
+
+echo "          GITREV: $GITREV"
+echo "      CONDA_PATH: $CONDA_PATH"
+echo "CONDA_BUILD_ARGS: $CONDA_BUILD_ARGS"
+echo "       CONDA_OUT: $CONDA_OUT"
