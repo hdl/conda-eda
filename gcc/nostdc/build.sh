@@ -3,6 +3,19 @@
 # gcc bare metal build
 
 set -e
+if [ x"$TOOLCHAIN_ARCH" = x ]; then
+	export | grep toolchain
+	exit 1
+else
+	echo "TOOLCHAIN_ARCH: '$TOOLCHAIN_ARCH'"
+fi
+if [ x"$PKG_VERSION" = x ]; then
+	export | grep version
+	export | grep VERSION
+	exit 1
+else
+	echo "PKG_VERSION: '$PKG_VERSION'"
+fi
 
 if [ x"$TRAVIS" = xtrue ]; then
 	CPU_COUNT=2
@@ -56,7 +69,7 @@ GCC=$TARGET-gcc
 # Check binutils
 $TARGET-as --version
 
-set -x
+#set -x
 
 rm -rf libstdc++-v3
 cd ..

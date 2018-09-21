@@ -9,6 +9,13 @@ if [ x"$TOOLCHAIN_ARCH" = x ]; then
 else
 	echo "TOOLCHAIN_ARCH: '$TOOLCHAIN_ARCH'"
 fi
+if [ x"$PKG_VERSION" = x ]; then
+	export | grep version
+	export | grep VERSION
+	exit 1
+else
+	echo "PKG_VERSION: '$PKG_VERSION'"
+fi
 
 if [ x"$TRAVIS" = xtrue ]; then
 	CPU_COUNT=2
@@ -83,7 +90,7 @@ if [ "$GCC_STAGE1_VERSION" != "$GCC_STAGE2_VERSION" ]; then
  	exit 1
 fi
 
-set -x
+#set -x
 
 rm -rf libstdc++-v3
 cd ..
