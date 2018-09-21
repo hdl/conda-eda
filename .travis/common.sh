@@ -13,14 +13,11 @@ export -f travis_nanoseconds
 export -f travis_fold
 export -f travis_time_start
 export -f travis_time_finish
-if [ -z "$DATESTR" ]; then
-	if [ x"$CONDA_BUILD_VERSION" = x"2.1.17" ]; then
-		export DATESTR="$(date -u +%Y%m%d%H%M%S)"
-		echo "Setting long date string of $DATESTR"
-	else
-		export DATESTR="$(date -u +%y%m%d%H%M)"
-		echo "Setting short date string of $DATESTR"
-	fi
+if [ -z "$DATE_STR" ]; then
+	export DATE_NUM="$(date -u +%y%m%d%H%M)"
+	export DATE_STR="$(date -u +%Y%m%d_%H%M%S)"
+	echo "Setting date number to $DATE_NUM"
+	echo "Setting date string to $DATE_STR"
 fi
 
 function start_section() {

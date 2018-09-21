@@ -11,11 +11,9 @@ build:
   # z==DATESTR
   #
   # number: 1803050325
-  #         zzzzzzzzzz
-  number: {{ environ.get('DATESTR') }}
-  # string: 0693.1803050325.g588ce0e3
-  #         yyyy.zzzzzzzzzz.gxxxxxxxx
-  string: {{ environ.get('DATESTR') }}
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
     - TRAVIS

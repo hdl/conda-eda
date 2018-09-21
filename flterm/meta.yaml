@@ -6,14 +6,14 @@ source:
   git_url: https://github.com/timvideos/flterm.git
 
 build:
-  # y==GIT_DESCRIBE_NUMBER, z==DATESTR, x==GIT_DESCRIBE_HASH
+  # y==GIT_DESCRIBE_NUMBER, z==DATE_NUM, x==GIT_DESCRIBE_HASH
   #
   # number: 10693001803050325
   #         1yyyy00zzzzzzzzzz
-  number: {{ '1%04i00%s'|format(environ.get('GIT_DESCRIBE_NUMBER')|int, environ.get('DATESTR')) }}
-  # string: 0693.1803050325.g588ce0e3
-  #         yyyy.zzzzzzzzzz.gxxxxxxxx
-  string: {{ '%04i'|format(environ.get('GIT_DESCRIBE_NUMBER')|int) }}.{{ environ.get('DATESTR') }}.{{ environ.get('GIT_DESCRIBE_HASH', 'unknown') }}
+  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATE_NUM')) }}
+  # string: 0693.20180305_0325.g588ce0e3
+  #         yyyy.zzzzzzzz_zzzz.gxxxxxxxx
+  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATE_STR') }}.{{ GIT_DESCRIBE_HASH }}
   script_env:
     - CI
     - TRAVIS
