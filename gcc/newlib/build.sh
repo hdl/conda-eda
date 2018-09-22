@@ -98,27 +98,28 @@ cd ..
 mkdir -p build-newlib
 cd build-newlib
 $SRC_DIR/newlib/configure \
-        --prefix=/usr \
-	\
 	--target=$TARGET \
+	\
+        --prefix=/ \
+	\
 	--disable-newlib-supplied-syscalls \
 	\
 	--enable-multilib \
 	\
 
 make -j$CPU_COUNT
-make DESTDIR=$PREFIX/$TARGET/sysroot install
+make DESTDIR=$PREFIX install
 cd ..
 
 mkdir -p build-gcc
 cd build-gcc
 
 #export LDFLAGS=-static
+#        --prefix=$PREFIX \
 $SRC_DIR/gcc/configure \
 	\
+        --prefix=/ \
 	--program-prefix=$TARGET-newlib- \
-	\
-        --prefix=$PREFIX \
 	\
         --with-gmp=$CONDA_PREFIX \
         --with-mpfr=$CONDA_PREFIX \

@@ -52,9 +52,8 @@ $GCC -print-multi-directory
 $GCC -print-multi-lib
 $GCC -print-multi-os-directory
 $GCC -print-sysroot
-$GCC -print-sysroot-headers-suffix
-echo "==========================================="
-
+find $($GCC -print-sysroot)
+#$TARGET-cpp -Wp,-v
 echo "==========================================="
 
 echo "Compile and link a 'bare metal' binary"
@@ -68,7 +67,7 @@ int main() {
 EOF
 
 echo "Compiling main"
-$GCC -c main.c -o main.o
+$GCC -v -c main.c -o main.o
 SUCCESS=$?
 if [ $SUCCESS -ne 0 ]; then
 	echo "Compiler didn't exit successfully."

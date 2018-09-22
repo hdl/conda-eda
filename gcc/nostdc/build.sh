@@ -86,7 +86,6 @@ mkdir -p $PREFIX/$TARGET/sysroot/usr/include
 $SRC_DIR/gcc/configure \
 	\
         --prefix=/ \
-	--with-sysroot=$PREFIX/$TARGET/sysroot \
 	\
         --with-gmp=$CONDA_PREFIX \
         --with-mpfr=$CONDA_PREFIX \
