@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if ! which conda; then
+	export PATH=~/conda/bin:$PATH
+fi
+
 # Disable this warning;
 # xxxx/conda_build/environ.py:377: UserWarning: The environment variable
 #     'TRAVIS' is being passed through with value 0.  If you are splitting
@@ -7,14 +11,11 @@
 #     also set similarly at test time.
 export  PYTHONWARNINGS=ignore::UserWarning:conda_build.environ
 
-if [ -z "$DATESTR" ]; then
-        if [ -z "$DATESHORT" ]; then
-                export DATESTR=$(date -u +%Y%m%d%H%M%S)
-                echo "Setting long date string of $DATESTR"
-        else
-                export DATESTR=$(date -u +%y%m%d%H%M)
-                echo "Setting short date string of $DATESTR"
-        fi
+if [ -z "$DATE_STR" ]; then
+	export DATE_NUM="$(date -u +%Y%m%d%H%M%S)"
+	export DATE_STR="$(date -u +%Y%m%d_%H%M%S)"
+	echo "Setting date number to $DATE_NUM"
+	echo "Setting date string to $DATE_STR"
 fi
 if [ -z "$GITREV" ]; then
 	export GITREV="$(git describe --long)"
@@ -37,4 +38,5 @@ export TRAVIS_REPO_SLUG="$(git rev-parse --abbrev-ref --symbolic-full-name @{u})
 echo "TRAVIS_REPO_SLUG='${TRAVIS_REPO_SLUG}'"
 
 ./conda-meta-extra.sh
+echo conda $@
 conda $@

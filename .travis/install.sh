@@ -36,11 +36,28 @@ conda config --show
 end_section "info.conda.config"
 
 start_section "info.conda.package" "Info on ${YELLOW}conda package${NC}"
-conda render $PACKAGE
+conda render --no-source $CONDA_BUILD_ARGS || true
 end_section "info.conda.package"
 
-start_section "info.autotools" "Info on ${YELLOW}autotools${NC}"
-autoconf --version
-automake --version
-libtool --version
-end_section "info.autotools"
+$SPACER
+
+start_section "conda.copy" "${GREEN}Copying package...${NC}"
+mkdir -p /tmp/conda/$PACKAGE
+cp -vRL $PACKAGE/* /tmp/conda/$PACKAGE/
+cd /tmp/conda/
+end_section "conda.copy"
+
+$SPACER
+
+start_section "conda.download" "${GREEN}Downloading..${NC}"
+conda build --source $CONDA_BUILD_ARGS || true
+end_section "conda.download"
+
+if [ -e $PACKAGE/prescript.$TOOLCHAIN_ARCH.sh ]; then
+	start_section "conda.prescript" "${GREEN}Prescript..${NC}"
+	(
+		cd $TRAVIS_BUILD_DIR
+		$PACKAGE/prescript.$TOOLCHAIN_ARCH.sh
+	)
+	end_section "conda.prescript"
+fi
