@@ -3,7 +3,7 @@ package:
 {% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
   version: 5.4.0_{{ gcc_git_rev }}
 {% else %}
-  version: 5.4.0
+  version: 8.2.0
 {% endif %}
 
 source:
@@ -12,12 +12,10 @@ source:
     git_rev: or1k-5.4.0
     folder: gcc
 {% elif environ.get('TOOLCHAIN_ARCH') %}
-  - url: ftp://ftp.gnu.org/gnu/gcc/gcc-5.4.0/gcc-5.4.0.tar.bz2
-    fn: gcc-5.4.0.tar.bz2
-    sha256: 608df76dec2d34de6558249d8af4cbee21eceddbcb580d666f7a5a583ca3303a
+  - url: http://ftp.gnu.org/gnu/gcc/gcc-8.2.0/gcc-8.2.0.tar.gz
+    fn: gcc-8.2.0.tar.gz
+    sha256: 1b0f36be1045ff58cbb9c83743835367b860810f17f0195a4e093458b372020f
     folder: gcc
-    patches:
-     - stdint.patch
 {% else %}
   - url: empty.tar.bz2
     folder: other
