@@ -1,6 +1,6 @@
 package:
   name: openocd
-  version: git
+  version: {{ GIT_DESCRIBE_TAG }}
 
 source:
   git_rev: master
@@ -18,7 +18,14 @@ source:
     - spartan7-idcodes.patch
 
 build:
-  number: 0
+  # y==GIT_DESCRIBE_NUMBER, z==DATE_NUM, x==GIT_DESCRIBE_HASH
+  #
+  # number: 10693001803050325
+  #         1yyyy00zzzzzzzzzz
+  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATE_NUM')) }}
+  # string: 0693.20180305_0325.g588ce0e3
+  #         yyyy.zzzzzzzz_zzzz.gxxxxxxxx
+  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATE_STR') }}.{{ GIT_DESCRIBE_HASH }}
   script_env:
     - CI
     - TRAVIS

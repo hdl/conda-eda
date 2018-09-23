@@ -1,0 +1,74 @@
+package:
+  name: gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-nostdc
+{% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
+  version: 5.4.0_{{ gcc_git_rev }}
+{% else %}
+  version: 5.4.0
+{% endif %}
+
+source:
+{% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
+  - git_url: https://github.com/openrisc/or1k-gcc.git
+    git_rev: or1k-5.4.0
+    folder: gcc
+{% elif environ.get('TOOLCHAIN_ARCH') %}
+  - url: ftp://ftp.gnu.org/gnu/gcc/gcc-5.4.0/gcc-5.4.0.tar.bz2
+    fn: gcc-5.4.0.tar.bz2
+    sha256: 608df76dec2d34de6558249d8af4cbee21eceddbcb580d666f7a5a583ca3303a
+    folder: gcc
+    patches:
+     - stdint.patch
+{% else %}
+  - url: empty.tar.bz2
+    folder: other
+{% endif %}
+
+build:
+{% if environ.get('GIT_DESCRIBE_NUMBER', "0") != "0" %}
+  # y==GIT_DESCRIBE_NUMBER, z==DATE_NUM, x==GIT_DESCRIBE_HASH
+  #
+  # number: 10693001803050325
+  #         1yyyy00zzzzzzzzzz
+  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATE_NUM')) }}
+  # string: 0693.20180305_0325.g588ce0e3
+  #         yyyy.zzzzzzzz_zzzz.gxxxxxxxx
+  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATE_STR') }}.{{ GIT_DESCRIBE_HASH }}
+{% else %}
+  # z==DATESTR
+  #
+  # number: 1803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+{% endif %}
+  script_env:
+    - CI
+    - TRAVIS
+    - TOOLCHAIN_ARCH
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    # These are taken from the output of the configure scripts
+    - gmp >=4.3.2
+    - mpfr >=2.4.2
+    - mpc >=0.8.1
+    - isl
+    - cloog
+    # Arch specific
+    - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
+  run:
+    - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
+  {% for package in resolved_packages('host') %}
+    - {{ package }}
+  {% endfor %}
+  {% for package in resolved_packages('build') %}
+    - {{ package }}
+  {% endfor %}
+
+about:
+  home: https://gcc.gnu.org/
+  license: GPL
+  summary: 'The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Java, Ada, and Go, as well as libraries for these languages (libstdc++, libgcj,...).'

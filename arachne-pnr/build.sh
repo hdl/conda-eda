@@ -22,5 +22,5 @@ ls -l $ICEBOX
 echo "--------------------------------------"
 
 make V=1 -j$CPU_COUNT
-make test
+make simpletest
 make install

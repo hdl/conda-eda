@@ -9,8 +9,14 @@ source:
     - fix-vvp-path.patch
 
 build:
-  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATESTR')) }}
-  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATESTR') }}.{{ GIT_DESCRIBE_HASH }}
+  # y==GIT_DESCRIBE_NUMBER, z==DATE_NUM, x==GIT_DESCRIBE_HASH
+  #
+  # number: 10693001803050325
+  #         1yyyy00zzzzzzzzzz
+  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATE_NUM')) }}
+  # string: 0693.20180305_0325.g588ce0e3
+  #         yyyy.zzzzzzzz_zzzz.gxxxxxxxx
+  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATE_STR') }}.{{ GIT_DESCRIBE_HASH }}
   script_env:
     - CI
     - TRAVIS
@@ -18,11 +24,16 @@ build:
 requirements:
   build:
     - readline
-    - gcc_linux-64
-    - gxx_linux-64
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - gperf
   run:
-    - readline
+  {% for package in resolved_packages('host') %}
+    - {{ package }}
+  {% endfor %}
+  {% for package in resolved_packages('build') %}
+    - {{ package }}
+  {% endfor %}
 
 test:
   files:
@@ -37,8 +48,3 @@ about:
   license: GPLv2
   license_file: COPYING
   summary: 'Icarus Verilog (iverilog) is a Verilog simulation and synthesis tool. It operates as a compiler, compiling source code written in Verilog (IEEE-1364) into some target format. For batch simulation, the compiler can generate an intermediate form called vvp assembly. This intermediate form is executed by the ``vvp'' command. For synthesis, the compiler generates netlists in the desired format.'
-
-extra:
-  maintainers:
-    - Tim 'mithro' Ansell <mithro@mithis.com>
-    - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>

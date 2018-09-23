@@ -1,17 +1,39 @@
 package:
   name: verilator
-  version: git
+  version: {{ GIT_DESCRIBE_TAG }}
 
 source:
   git_rev: master
-  git_url: http://git.veripool.org/git/verilator 
+  git_url: http://git.veripool.org/git/verilator
 
 build:
   detect_binary_files_with_prefix: True
-  number: 1
+  # y==GIT_DESCRIBE_NUMBER, z==DATE_NUM, x==GIT_DESCRIBE_HASH
+  #
+  # number: 10693001803050325
+  #         1yyyy00zzzzzzzzzz
+  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATE_NUM')) }}
+  # string: 0693.20180305_0325.g588ce0e3
+  #         yyyy.zzzzzzzz_zzzz.gxxxxxxxx
+  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATE_STR') }}.{{ GIT_DESCRIBE_HASH }}
   script_env:
     - CI
     - TRAVIS
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - bison
+    - flex
+  run:
+  {% for package in resolved_packages('host') %}
+    - {{ package }}
+  {% endfor %}
+  {% for package in resolved_packages('build') %}
+    - {{ package }}
+  {% endfor %}
 
 test:
   commands:

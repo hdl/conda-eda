@@ -5,22 +5,20 @@ set -e
 
 $SPACER
 
-start_section "conda.copy" "${GREEN}Copying package...${NC}"
-mkdir -p /tmp/conda/$PACKAGE
-cp -vRL $PACKAGE/* /tmp/conda/$PACKAGE/
-cd /tmp/conda/
-end_section "conda.copy"
+start_section "info.conda.package" "Info on ${YELLOW}conda package${NC}"
+conda render $CONDA_BUILD_ARGS
+end_section "info.conda.package"
 
 $SPACER
 
 start_section "conda.check" "${GREEN}Checking...${NC}"
-conda build --check $PACKAGE
+conda build --check $CONDA_BUILD_ARGS || true
 end_section "conda.check"
 
 $SPACER
 
 start_section "conda.build" "${GREEN}Building..${NC}"
-$CONDA_PATH/bin/python $TRAVIS_BUILD_DIR/.travis-output.py /tmp/output.log conda build $PACKAGE
+$CONDA_PATH/bin/python $TRAVIS_BUILD_DIR/.travis-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
 end_section "conda.build"
 
 $SPACER

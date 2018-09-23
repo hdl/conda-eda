@@ -1,3 +1,0 @@
-[submodule "conda-multisrc-example"]
-	path = conda-multisrc-example
-	url = https://github.com/mithro/conda-multisrc-example.git

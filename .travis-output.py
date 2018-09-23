@@ -27,6 +27,12 @@ def output_line(line_bits, last_skip):
     skip = True
   if "setting rpath" in sline:
     skip = True
+  if "fprintf" in sline:
+    skip = True
+  if " from " in sline:
+    skip = True
+  if "if (" in sline:
+    skip = True
 
   if "Entering directory" in sline:
     skip = False

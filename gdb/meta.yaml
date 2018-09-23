@@ -1,0 +1,45 @@
+package:
+  name: gdb-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
+  version: 7.11
+
+{% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
+source:
+  git_url: https://github.com/openrisc/binutils-gdb.git
+  git_rev: gdb-7.11-or1k-release
+{% else %}
+source:
+  fn: gdb-7.11.tar.gz
+  url: http://ftp.gnu.org/gnu/gdb/gdb-7.11.tar.gz
+  sha256: 9382f5534aa0754169e1e09b5f1a3b77d1fa8c59c1e57617e06af37cb29c669a
+{% endif %}
+
+build:
+  detect_binary_files_with_prefix: True
+  number: 0
+  script_env:
+    - CI
+    - TRAVIS
+    - TOOLCHAIN_ARCH
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
+    - gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-nostdc
+    - zlib
+  run:
+    - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
+  {% for package in resolved_packages('host') %}
+    - {{ package }}
+  {% endfor %}
+
+test:
+  commands:
+    - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-gdb --version
+    - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-gdb --version 2>&1 | grep -q 7.11
+
+about:
+  home: https://www.gnu.org/software/gdb/
+  license: GPL
+  summary: 'GDB, the GNU Project debugger, allows you to see what is going on "inside" another program while it executes -- or what another program was doing at the moment it crashed.'

@@ -1,0 +1,34 @@
+package:
+  name: binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
+  version: 2.31.1
+
+source:
+  fn: binutils-2.31.1.tar.bz2
+  url: https://ftp.gnu.org/gnu/binutils/binutils-2.31.1.tar.bz2
+  sha256: ffcc382695bf947da6135e7436b8ed52d991cf270db897190f19d6f9838564d0
+
+build:
+  detect_binary_files_with_prefix: True
+  number: 0
+  script_env:
+    - CI
+    - TRAVIS
+    - TOOLCHAIN_ARCH
+
+requirements:
+  build:
+   - {{ compiler('c') }}
+  run:
+  {% for package in resolved_packages('host') %}
+    - {{ package }}
+  {% endfor %}
+
+test:
+  commands:
+    - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-ld --version
+    - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-ld --version 2>&1 | grep -q 2.31.1
+
+about:
+  home: https://www.gnu.org/software/binutils/
+  license: GPL
+  summary: 'A set of programming tools for creating and managing binary programs, object files, libraries, profile data, and assembly source code.'
