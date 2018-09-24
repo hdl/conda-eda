@@ -9,6 +9,11 @@ TARGET=${TOOLCHAIN_ARCH}-elf
 GCC=$TARGET-gcc
 OBJDUMP=$TARGET-objdump
 
+if [ "${TOOLCHAIN_ARCH}" = "riscv32" ]; then
+	ELF_ARCH="riscv:rv32"
+else
+	ELF_ARCH="${TOOLCHAIN_ARCH}"
+fi
 
 # Check the compiler version matches
 GCC_PKG_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//')
@@ -53,6 +58,7 @@ $GCC -print-multi-lib
 $GCC -print-multi-os-directory
 $GCC -print-sysroot
 find $($GCC -print-sysroot)
+$GCC -print-sysroot-headers-suffix
 #$TARGET-cpp -Wp,-v
 echo "==========================================="
 
@@ -84,7 +90,7 @@ file main.o
 $TARGET-objdump -f ./main.o
 
 $TARGET-objdump -f ./main.o
-if ! $TARGET-objdump -f ./main.o | grep -q "architecture: ${TOOLCHAIN_ARCH}"; then
+if ! $TARGET-objdump -f ./main.o | grep -q "architecture: ${ELF_ARCH}"; then
 	echo "Compiled binary output not correct architecture!"
 	exit 1
 fi
