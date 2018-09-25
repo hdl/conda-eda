@@ -1,1 +1,0 @@
-../nostdc/prescript.or1k.sh

@@ -1,8 +1,5 @@
 {% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
- {% if not gcc_git_rev %}
-  {% set gcc_git_rev = 'INVALID' %}
- {% endif %}
- {% set version = '5.4.0_%s'|format(gcc_git_rev) %}
+ {% set version = '8.2.0_%04i_%s'|format(GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 {% else %}
  {% set version = '8.2.0' %}
 {% endif %}
@@ -13,8 +10,8 @@ package:
 
 source:
 {% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
-  - git_url: https://github.com/openrisc/or1k-gcc.git
-    git_rev: or1k-5.4.0
+  - git_url: https://github.com/mithro/gcc.git
+    git_rev: or1k-port
     folder: gcc
 {% elif environ.get('TOOLCHAIN_ARCH') %}
   - url: http://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
@@ -31,23 +28,12 @@ source:
     folder: newlib
 
 build:
-{% if environ.get('GIT_DESCRIBE_NUMBER', "0") != "0" %}
-  # y==GIT_DESCRIBE_NUMBER, z==DATE_NUM, x==GIT_DESCRIBE_HASH
-  #
-  # number: 10693001803050325
-  #         1yyyy00zzzzzzzzzz
-  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATE_NUM')) }}
-  # string: 0693.20180305_0325.g588ce0e3
-  #         yyyy.zzzzzzzz_zzzz.gxxxxxxxx
-  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATE_STR') }}.{{ GIT_DESCRIBE_HASH }}
-{% else %}
   # z==DATESTR
   #
   # number: 1803050325
   number: {{ environ.get('DATE_NUM') }}
   # string: 20180305_0325
   string: {{ environ.get('DATE_STR') }}
-{% endif %}
   script_env:
     - CI
     - TRAVIS
@@ -66,10 +52,10 @@ requirements:
     - cloog
     # Arch specific
     - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
-    - gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-nostdc ={{ version }}
+    - gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-nostdc {{ version }}.*
   run:
     - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
-    - gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-nostdc ={{ version }}
+    - gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-nostdc {{ version }}.*
   {% for package in resolved_packages('host') %}
     - {{ package }}
   {% endfor %}
