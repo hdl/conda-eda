@@ -8,8 +8,12 @@ source:
   sha256: ffcc382695bf947da6135e7436b8ed52d991cf270db897190f19d6f9838564d0
 
 build:
-  detect_binary_files_with_prefix: True
-  number: 0
+  # z==DATESTR
+  #
+  # number: 1803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
     - TRAVIS
