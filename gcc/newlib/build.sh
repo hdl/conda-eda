@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # gcc newlib build
-
 set -e
-if [ x"$TOOLCHAIN_ARCH" = x ]; then
-	export | grep toolchain
+
+if [ -z "${TOOLCHAIN_ARCH}" ]; then
+	export | grep -i toolchain
+	echo "Missing \${TOOLCHAIN_ARCH} env value"
 	exit 1
 else
 	echo "TOOLCHAIN_ARCH: '$TOOLCHAIN_ARCH'"
@@ -149,7 +150,7 @@ $SRC_DIR/gcc/configure \
 
 
 make -j$CPU_COUNT
-make DESTDIR=$PREFIX install-strip
+make DESTDIR=${PREFIX} install-strip
 
 # Install aliases for the binutil tools
 for BINUTIL in $(ls $PREFIX/bin/$TARGET-* | grep /$TARGET-); do
@@ -163,7 +164,8 @@ ls -l $PREFIX/bin/$TARGET-newlib-*
 
 cd ..
 
-VERSION_DIR="$(echo $SRC_DIR | sed -e's-/work/.*-/work/-')"
-
+$PREFIX/bin/$TARGET-gcc --version
+$PREFIX/bin/${TOOLCHAIN_ARCH}-unknown-elf-gcc --version
 $PREFIX/bin/$TARGET-newlib-gcc --version
+
 echo $($PREFIX/bin/$TARGET-newlib-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //")

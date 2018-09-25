@@ -26,6 +26,7 @@ requirements:
 test:
   commands:
     - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-ld --version
+    - {{ environ.get('TOOLCHAIN_ARCH') }}-unknown-elf-ld --version
     - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-ld --version 2>&1 | grep -q 2.31.1
 
 about:
