@@ -34,7 +34,7 @@ requirements:
     - flex
     - iverilog
   run:
-    - tk
+    - tk 8.5.18
     - libffi
     - flex
 
