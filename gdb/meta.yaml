@@ -1,15 +1,17 @@
+{% set version = '7.11' %}
+
 package:
   name: gdb-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
-  version: 7.11
+  version: {{ version }}
 
 {% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
 source:
   git_url: https://github.com/openrisc/binutils-gdb.git
-  git_rev: gdb-7.11-or1k-release
+  git_rev: gdb-{{ version }}-or1k-release
 {% else %}
 source:
-  fn: gdb-7.11.tar.gz
-  url: http://ftp.gnu.org/gnu/gdb/gdb-7.11.tar.gz
+  fn: gdb-{{ version }}.tar.gz
+  url: http://ftp.gnu.org/gnu/gdb/gdb-{{ version }}.tar.gz
   sha256: 9382f5534aa0754169e1e09b5f1a3b77d1fa8c59c1e57617e06af37cb29c669a
 {% endif %}
 
@@ -37,7 +39,7 @@ requirements:
 test:
   commands:
     - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-gdb --version
-    - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-gdb --version 2>&1 | grep -q 7.11
+    - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-gdb --version 2>&1 | grep -q {{ version }}
 
 about:
   home: https://www.gnu.org/software/gdb/
