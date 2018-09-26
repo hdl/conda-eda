@@ -57,6 +57,11 @@ env:
   - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge
   - PACKAGE=yosys
 
+matrix:
+  allow_failures:
+  - env: PACKAGE=vtr CONDA_CHANNELS=conda-forge
+  fast_finish: true
+
 script:
   - bash $TRAVIS_BUILD_DIR/.travis/script.sh
 
