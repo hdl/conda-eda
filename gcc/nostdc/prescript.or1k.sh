@@ -6,7 +6,7 @@ if [ $TOOLCHAIN_ARCH != "or1k" ]; then
 fi
 
 if [ -z "$PACKAGE" ]; then
-	echo "Must provide $PACKAGE environment variable."
+	echo "Must provide \$PACKAGE environment variable."
 	exit 1
 fi
 
