@@ -1,10 +1,15 @@
+{% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
+ {% if not gcc_git_rev %}
+  {% set gcc_git_rev = 'INVALID' %}
+ {% endif %}
+ {% set version = '5.4.0_%s'|format(gcc_git_rev) %}
+{% else %}
+ {% set version = '8.2.0' %}
+{% endif %}
+
 package:
   name: gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-nostdc
-{% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
-  version: 5.4.0_{{ gcc_git_rev }}
-{% else %}
-  version: 8.2.0
-{% endif %}
+  version: {{ version }}
 
 source:
 {% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
@@ -12,8 +17,8 @@ source:
     git_rev: or1k-5.4.0
     folder: gcc
 {% elif environ.get('TOOLCHAIN_ARCH') %}
-  - url: http://ftp.gnu.org/gnu/gcc/gcc-8.2.0/gcc-8.2.0.tar.gz
-    fn: gcc-8.2.0.tar.gz
+  - url: http://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
+    fn: gcc-{{ version }}.tar.gz
     sha256: 1b0f36be1045ff58cbb9c83743835367b860810f17f0195a4e093458b372020f
     folder: gcc
 {% else %}

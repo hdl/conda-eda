@@ -1,15 +1,21 @@
+{% set version = '2.31.1' %}
+
 package:
   name: binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
-  version: 2.31.1
+  version: {{ version }}
 
 source:
-  fn: binutils-2.31.1.tar.bz2
-  url: https://ftp.gnu.org/gnu/binutils/binutils-2.31.1.tar.bz2
+  fn: binutils-{{ version }}.tar.bz2
+  url: https://ftp.gnu.org/gnu/binutils/binutils-{{ version }}.tar.bz2
   sha256: ffcc382695bf947da6135e7436b8ed52d991cf270db897190f19d6f9838564d0
 
 build:
-  detect_binary_files_with_prefix: True
-  number: 0
+  # z==DATESTR
+  #
+  # number: 1803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
     - TRAVIS
@@ -27,7 +33,7 @@ test:
   commands:
     - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-ld --version
     - {{ environ.get('TOOLCHAIN_ARCH') }}-unknown-elf-ld --version
-    - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-ld --version 2>&1 | grep -q 2.31.1
+    - {{ environ.get('TOOLCHAIN_ARCH') }}-elf-ld --version 2>&1 | grep -q {{ version }}
 
 about:
   home: https://www.gnu.org/software/binutils/
