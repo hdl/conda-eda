@@ -1,7 +1,6 @@
+{% set version = '8.2.0' %}
 {% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
- {% set version = '8.2.0_%04i_%s'|format(GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
-{% else %}
- {% set version = '8.2.0' %}
+ {% set version = '%s_%04i_%s'|format(version, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 {% endif %}
 
 package:
@@ -28,9 +27,7 @@ source:
     folder: newlib
 
 build:
-  # z==DATESTR
-  #
-  # number: 1803050325
+  # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
   # string: 20180305_0325
   string: {{ environ.get('DATE_STR') }}

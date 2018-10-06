@@ -1,6 +1,8 @@
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG or 'v0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
 package:
   name: iceprog
-  version: {{ GIT_DESCRIBE_TAG }}
+  version: {{ version }}
 
 source:
   git_url: https://github.com/mithro/icestorm.git
@@ -9,14 +11,10 @@ source:
    - iceprog-only.patch
 
 build:
-  # y==GIT_DESCRIBE_NUMBER, z==DATE_NUM, x==GIT_DESCRIBE_HASH
-  #
-  # number: 10693001803050325
-  #         1yyyy00zzzzzzzzzz
-  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATE_NUM')) }}
-  # string: 0693.20180305_0325.g588ce0e3
-  #         yyyy.zzzzzzzz_zzzz.gxxxxxxxx
-  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATE_STR') }}.{{ GIT_DESCRIBE_HASH }}
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
     - TRAVIS

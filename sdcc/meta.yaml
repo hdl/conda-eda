@@ -8,9 +8,7 @@ source:
   sha256: e85dceb11e01ffefb545ec389da91265130c91953589392dddd2e5ec0b7ca374
 
 build:
-  # z==DATESTR
-  #
-  # number: 1803050325
+  # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
   # string: 20180305_0325
   string: {{ environ.get('DATE_STR') }}

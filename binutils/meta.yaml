@@ -14,9 +14,7 @@ source:
 {% endif %}
 
 build:
-  # z==DATESTR
-  #
-  # number: 1803050325
+  # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
   # string: 20180305_0325
   string: {{ environ.get('DATE_STR') }}

@@ -1,4 +1,7 @@
 {% set version = '7.11' %}
+{% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
+ {% set version = '%s_%04i_%s'|format(version, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+{% endif %}
 
 package:
   name: gdb-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
@@ -7,7 +10,7 @@ package:
 {% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
 source:
   git_url: https://github.com/openrisc/binutils-gdb.git
-  git_rev: gdb-{{ version }}-or1k-release
+  git_rev: gdb-7.11-or1k-release
 {% else %}
 source:
   fn: gdb-{{ version }}.tar.gz
@@ -17,7 +20,10 @@ source:
 
 build:
   detect_binary_files_with_prefix: True
-  number: 0
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
     - TRAVIS
