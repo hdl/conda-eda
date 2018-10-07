@@ -1,22 +1,13 @@
-{% set version = '7.11' %}
-{% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
- {% set version = '%s_%04i_%s'|format(version, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
-{% endif %}
+{% set version = '8.2' %}
 
 package:
   name: gdb-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
   version: {{ version }}
 
-{% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
 source:
-  git_url: https://github.com/openrisc/binutils-gdb.git
-  git_rev: gdb-7.11-or1k-release
-{% else %}
-source:
-  fn: gdb-{{ version }}.tar.gz
-  url: http://ftp.gnu.org/gnu/gdb/gdb-{{ version }}.tar.gz
-  sha256: 9382f5534aa0754169e1e09b5f1a3b77d1fa8c59c1e57617e06af37cb29c669a
-{% endif %}
+  fn: gdb-{{ version }}.tar.xz
+  url: http://ftp.gnu.org/gnu/gdb/gdb-{{ version }}.tar.xz
+  sha256: c3a441a29c7c89720b734e5a9c6289c0a06be7e0c76ef538f7bbcef389347c39
 
 build:
   detect_binary_files_with_prefix: True
