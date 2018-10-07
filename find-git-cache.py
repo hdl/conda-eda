@@ -10,8 +10,15 @@ from conda_build.metadata import MetaData
 from conda_build.variants import get_package_variants, set_language_env_vars
 
 
-def mirror_dir(metadata, data_type=None):
-    meta = [x for x in metadata.get_section('source') if x['folder'] == 'gcc'][0]
+def mirror_dir(package, metadata, data_type=None):
+    name, _ = (package+'/').split('/', 1)
+
+    sources = metadata.get_section('source')
+    if isinstance(sources, list):
+        meta = [x for x in sources if x['folder'] == name][0]
+    else:
+        meta = sources
+
     if not data_type:
         return meta
 
@@ -44,11 +51,13 @@ def main(recipe_dir=None, data_type=None, variant=None):
     assert len(variants) == 1
     metadata = MetaData(recipe_dir, config=config, variant=variants[0])
     try:
-        print(mirror_dir(metadata, data_type))
+        print(mirror_dir(recipe_dir, metadata, data_type))
     except KeyError:
         pass
 
 
 if __name__ == "__main__":
     import sys
-    main(*sys.argv[1:])
+    f = io.StringIO()
+    with contextlib.redirect_stderr(f):
+        main(*sys.argv[1:])
