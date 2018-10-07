@@ -41,6 +41,7 @@ env:
   - PACKAGE=binutils            TOOLCHAIN_ARCH=riscv32
   - PACKAGE=gcc/nostdc          TOOLCHAIN_ARCH=riscv32
   - PACKAGE=gcc/newlib          TOOLCHAIN_ARCH=riscv32
+  - PACKAGE=gdb                 TOOLCHAIN_ARCH=riscv32
   # sh2 toolchain
   - PACKAGE=binutils            TOOLCHAIN_ARCH=sh2
   # fx2 toolchain
