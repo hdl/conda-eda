@@ -1,6 +1,6 @@
 {% set version = '8.2.0' %}
 {% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
- {% set version = '%s_%04i_%s'|format(version, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+ {% set version = '%s_2%03i_%s'|format(version, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 {% endif %}
 
 package:
@@ -10,7 +10,7 @@ package:
 source:
 {% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
   - git_url: https://github.com/mithro/gcc.git
-    git_rev: or1k-port
+    git_rev: or1k-port-2
     folder: gcc
 {% elif environ.get('TOOLCHAIN_ARCH') %}
   - url: http://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
