@@ -9,6 +9,7 @@ source:
   git_url: http://git.veripool.org/git/verilator
 
 build:
+  detect_binary_files_with_prefix: True
   # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
   # string: 20180305_0325
@@ -22,9 +23,12 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - bison
     - flex
   run:
+    - {{ compiler('cxx') }}
   {% for package in resolved_packages('host') %}
     - {{ package }}
   {% endfor %}
@@ -33,7 +37,10 @@ requirements:
   {% endfor %}
 
 test:
-  commands:
+  files:
+    - test/counter.v
+    - test/counter_tb.v
+    - test/hello_world.v
 
 about:
   home: http://www.veripool.org/projects/verilator/wiki/Intro
