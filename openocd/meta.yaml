@@ -16,6 +16,7 @@ source:
     - numato-neso.patch
     - numato-saturn.patch
     - numato-waxwing.patch
+    - numato-mimas_a7.patch
     - fpga-program.patch
     - spartan7-idcodes.patch
 
