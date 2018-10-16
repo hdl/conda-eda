@@ -2,7 +2,7 @@ diff --git a/tcl/board/numato_mimas_a7.cfg b/tcl/board/numato_mimas_a7.cfg
 new file mode 100644
 index 00000000..1261feac
 --- /dev/null
-+++ b/tcl/board/numato_mimas_a7.cfg
++++ tcl/board/numato_mimas_a7.cfg
 @@ -0,0 +1,36 @@
 +#
 +# Numato Mimas A7 - Artix 7 FPGA Board
