@@ -12,10 +12,10 @@ The LiteX system supports both a `lm32` and `or1k` "soft-CPU" implementations.
 
 Current versions are;
 
- * binutils - 2.28.0
- * gcc - 5.4.0
- * gcc+newlib - 5.4.0 + 2.4.0
- * gdb - 7.11
+ * binutils - 2.31.0
+ * gcc - 8.2.0
+ * gcc+newlib - 8.2.0 + 3.0.0
+ * gdb - 8.2
 
 ### lm32-elf
 
@@ -23,8 +23,12 @@ Current versions are;
 
 ### or1k-elf
 
- * binutils - upstream
- * gcc, newlib & gdb - or1k forks based on upstream version.
+ * binutils, gdb & newlib - upstream
+ * gcc - Rebase of Stafford Horn's gcc 9.0 patches
+
+## riscv32-elf
+
+ * All come from upstream.
 
 ## Cypress FX2 support
 
