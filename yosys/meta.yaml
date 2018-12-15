@@ -5,7 +5,7 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/YosysHQ/yosys.git
+  git_url: https://github.com/timvideos/yosys.git
   git_rev: master
   patches:
     - makefile-conda-config.patch
