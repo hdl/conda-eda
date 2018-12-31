@@ -38,8 +38,8 @@ DOCKER_IMAGE=$(cat "${FEEDSTOCK_ROOT}/.ci_support/${CONFIG}.yaml" | shyaml get-v
 mkdir -p "$ARTIFACTS"
 DONE_CANARY="$ARTIFACTS/conda-forge-build-done-${CONFIG}"
 rm -f "$DONE_CANARY"
-# Enable running in interactive mode attached to a tty
-DOCKER_RUN_ARGS=" -it "
+# Not all providers run with a real tty.  Disable using one
+DOCKER_RUN_ARGS=" "
 
 
 docker run ${DOCKER_RUN_ARGS} \
