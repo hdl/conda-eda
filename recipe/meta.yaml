@@ -38,6 +38,7 @@ about:
   home: http://isl.gforge.inria.fr/
   license: MIT
   license_family: MIT
+  license_file: LICENSE
   summary: a thread-safe C library for manipulating sets and relations of integer points bounded by affine constraints.
 
 extra:
