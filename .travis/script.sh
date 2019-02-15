@@ -36,7 +36,7 @@ end_section "conda.du"
 $SPACER
 
 start_section "conda.clean" "${GREEN}Cleaning up..${NC}"
-conda clean -s --dry-run
+#conda clean -s --dry-run
 end_section "conda.clean"
 
 $SPACER
