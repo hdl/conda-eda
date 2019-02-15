@@ -46,4 +46,4 @@ about:
   home: https://github.com/YosysHQ/nextpnr
   license: ISC
   license_file: COPYING
-  summary: 'nextpnr aims to be a vendor neutral, timing driven, FOSS FPGA place and route tool. '
+  summary: 'nextpnr aims to be a vendor neutral, timing driven, FOSS FPGA place and route tool.'
