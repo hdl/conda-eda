@@ -38,7 +38,7 @@ def output_line(line_bits, last_skip):
     skip = False
     sline = sline.split('make')[-1]
 
-  if re.search("[0-9]+\.[0-9]+", line):
+  if re.search("[0-9]+\.[0-9]+", line) and "PACKAGE_" not in line:
     skip = False
 
   if len(sline) > 1:
