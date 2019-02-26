@@ -50,7 +50,7 @@ end_section "conda.copy"
 $SPACER
 
 start_section "conda.download" "${GREEN}Downloading..${NC}"
-conda build --source $CONDA_BUILD_ARGS || true
+travis_wait conda build --source $CONDA_BUILD_ARGS || true
 end_section "conda.download"
 
 if [ -e $PACKAGE/prescript.$TOOLCHAIN_ARCH.sh ]; then

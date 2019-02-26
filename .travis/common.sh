@@ -13,6 +13,8 @@ export -f travis_nanoseconds
 export -f travis_fold
 export -f travis_time_start
 export -f travis_time_finish
+export -f travis_wait
+export -f travis_jigger
 if [ -z "$DATE_STR" ]; then
 	export DATE_TS="$(git log --format=%ct -n1)"
 	export DATE_NUM="$(date --date=@${DATE_TS} -u +%Y%m%d%H%M%S)"
