@@ -14,8 +14,9 @@ export -f travis_fold
 export -f travis_time_start
 export -f travis_time_finish
 if [ -z "$DATE_STR" ]; then
-	export DATE_NUM="$(date -u +%Y%m%d%H%M%S)"
-	export DATE_STR="$(date -u +%Y%m%d_%H%M%S)"
+	export DATE_TS="$(git log --format=%ct -n1)"
+	export DATE_NUM="$(date --date=@${DATE_TS} -u +%Y%m%d%H%M%S)"
+	export DATE_STR="$(date --date=@${DATE_TS} -u +%Y%m%d_%H%M%S)"
 	echo "Setting date number to $DATE_NUM"
 	echo "Setting date string to $DATE_STR"
 fi
