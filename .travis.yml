@@ -29,73 +29,90 @@ install:
 
 jobs:
   include:
+   # lm32 toolchain
    - stage: "Binutils"
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=lm32
-   - stage: "Binutils"
-     env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=or1k
-   - stage: "Binutils"
-     env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv32
-   - stage: "Binutils"
-     env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=sh2
    - stage: "GCC - nostdc"
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=lm32
+   - stage: "GCC - newlib"
+     env:
+     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=lm32
+   - stage: "GDB"
+     env:
+     - PACKAGE=gdb          TOOLCHAIN_ARCH=lm32
+
+   # or1k toolchain
+   - stage: "Binutils"
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=or1k
    - stage: "GCC - nostdc"
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=or1k
+   - stage: "GCC - newlib"
+     env:
+     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=or1k
+   - stage: "GDB"
+     env:
+     - PACKAGE=gdb          TOOLCHAIN_ARCH=or1k
+
+   # rv32 toolchain
+   - stage: "Binutils"
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv32
    - stage: "GCC - nostdc"
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv32
    - stage: "GCC - newlib"
      env:
-     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=lm32
-   - stage: "GCC - newlib"
-     env:
-     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=or1k
-   - stage: "GCC - newlib"
-     env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv32
    - stage: "GDB"
      env:
-     - PACKAGE=gdb          TOOLCHAIN_ARCH=lm32
-   - stage: "GDB"
-     env:
-     - PACKAGE=gdb          TOOLCHAIN_ARCH=or1k
-   - stage: "GDB"
-     env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv32
+
+   # sh2 toolchain
+   - stage: "Binutils"
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=sh2
+
+   # Verilog tools
    - stage: "Verilog Tools"
      env:
-     # verilog tools
      - PACKAGE=arachne-pnr
+
    - stage: "Verilog Tools"
      env:
      - PACKAGE=icestorm
+
    - stage: "Verilog Tools"
      env:
      - PACKAGE=iverilog
+
    - stage: "Verilog Tools"
      env:
      - PACKAGE=nextpnr
+
    - stage: "Verilog Tools"
      env:
      - PACKAGE=verilator
+
 #   - stage: "Verilog Tools"
 #     env:
 #     - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge
+
    - stage: "Verilog Tools"
      env:
      - PACKAGE=yosys
+
    - stage: "Other Tools"
      env:
      - PACKAGE=sdcc
+
    - stage: "Other Tools"
      env:
      - PACKAGE=openocd
+
    - stage: "Other Tools"
      env:
      - PACKAGE=flterm
