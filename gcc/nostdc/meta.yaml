@@ -50,9 +50,6 @@ requirements:
   {% for package in resolved_packages('host') %}
     - {{ package }}
   {% endfor %}
-  {% for package in resolved_packages('build') %}
-    - {{ package }}
-  {% endfor %}
 
 about:
   home: https://gcc.gnu.org/
