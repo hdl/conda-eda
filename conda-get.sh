@@ -23,3 +23,5 @@ conda install -y conda-verify
 
 conda install -y anaconda-client
 conda install -y jinja2
+
+conda update -y --all
