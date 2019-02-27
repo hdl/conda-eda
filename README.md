@@ -57,12 +57,39 @@ GitHub repository, the Travis CI results can be seen at:
 
 https://travis-ci.org/timvideos/conda-hdmi2usb-packages
 
-And if you enable Travis CI on your GitHub fork of `conda-hdmi2usb-packages`
+On a successful build in the `timvideos` Travis CI, the resulting packages
+are uploaded to:
+
+https://anaconda.org/TimVideos/repo
+
+and can be installed with:
+
+```
+conda install --channel "TimVideos" package
+```
+
+These packages are mostly used by
+[`litex-buildenv`](https://github.com/timvideos/litex-buildenv).
+
+## Building via Travis CI in your own repository
+
+If you [enable Travis CI on your GitHub
+fork](https://travis-ci.com/getting_started) of `conda-hdmi2usb-packages`
 then your Travis CI results will be at:
 
 ```
-https://travis-ci.org/${GITHUB\_USER}/conda-hdmi2usb-packages
+https://travis-ci.org/${GITHUB_USER}/conda-hdmi2usb-packages
 ```
+
+Since the repository includes `.travis.yml` and all the other Travis CI
+setup, you should just need to turn on the Travis CI integration at GitHub,
+and push changes to your GitHub repo, to trigger a Travis CI build, then
+watch the https://travis-ci.org/ site for the build progress.
+
+A full build of everything will take the Travis CI infrastructure a few
+hours if it all builds successfully.
+
+## Common Travis CI build failures
 
 If the build fails, see the [common Travis CI build
 problems](https://docs.travis-ci.com/user/common-build-problems/)
@@ -87,8 +114,10 @@ sudo apt-get update
 sudo apt-get install wget git
 
 # Packages from ~/.travis.yml; realpath is in coreutils in Ubuntu 18.04
+# Plus libtool and pkg-config, which are needed for openocd
+#
 #sudo apt-get install realpath autoconf automake build-essential gperf libftdi-dev libudev-dev libudev1 libusb-1.0-0-dev libusb-dev texinfo
-sudo apt-get install coreutils autoconf automake build-essential gperf libftdi-dev libudev-dev libudev1 libusb-1.0-0-dev libusb-dev texinfo
+sudo apt-get install coreutils autoconf automake build-essential gperf libftdi-dev libudev-dev libudev1 libusb-1.0-0-dev libusb-dev texinfo libtool pkg-config
 
 git clone https://github.com/timvideos/conda-hdmi2usb-packages.git
 conda-hdmi2usb-packages/conda-get.sh
@@ -98,9 +127,20 @@ get_built_package() {
    ./conda-env.sh render --output "$@" 2>/dev/null | grep conda-bld | grep tar.bz2 | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//'
 }
 
-# Anchor the build date/time, so we have predictable filenames
-export DATE_NUM="$(date -u +%Y%m%d%H%M%S)"
-export DATE_STR="$(date -u +%Y%m%d_%H%M%S)"
+# Anchor the build date/time, so we have predictable versions and filenames
+# amongst related packages, and to make it easy to do package installs.
+#
+# Either to current date/time at the start of the build:
+#
+# export DATE_NUM="$(date -u +%Y%m%d%H%M%S)"
+# export DATE_STR="$(date -u +%Y%m%d_%H%M%S)"
+#
+# Or lock to date/time of the last commit on git, as Travis CI config does
+# (see .travis/common.sh)
+#
+export DATE_TS="$(git log --format=%ct -n1)"
+export DATE_NUM="$(date --date=@${DATE_TS} -u +%Y%m%d%H%M%S)"
+export DATE_STR="$(date --date=@${DATE_TS} -u +%Y%m%d_%H%M%S)"
 
 # Combinations taken from .travis.yml
 TOOLCHAIN_ARCH=lm32
