@@ -114,8 +114,10 @@ sudo apt-get update
 sudo apt-get install wget git
 
 # Packages from ~/.travis.yml; realpath is in coreutils in Ubuntu 18.04
+# Plus libtool and pkg-config, which are needed for openocd
+#
 #sudo apt-get install realpath autoconf automake build-essential gperf libftdi-dev libudev-dev libudev1 libusb-1.0-0-dev libusb-dev texinfo
-sudo apt-get install coreutils autoconf automake build-essential gperf libftdi-dev libudev-dev libudev1 libusb-1.0-0-dev libusb-dev texinfo
+sudo apt-get install coreutils autoconf automake build-essential gperf libftdi-dev libudev-dev libudev1 libusb-1.0-0-dev libusb-dev texinfo libtool pkg-config
 
 git clone https://github.com/timvideos/conda-hdmi2usb-packages.git
 conda-hdmi2usb-packages/conda-get.sh
