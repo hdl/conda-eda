@@ -9,16 +9,13 @@ source:
   git_url: git://repo.or.cz/openocd.git
   patches:
     - digilent-arty.patch
-    - digilent-arty-s7.patch
     - digilent-cmod-a7.patch
     - digilent-nexys_video.patch
     - gadgetfactory-papilio_duo.patch
     - numato-neso.patch
     - numato-saturn.patch
     - numato-waxwing.patch
-    - numato-mimas_a7.patch
     - fpga-program.patch
-    - spartan7-idcodes.patch
 
 build:
   # number: 201803050325
