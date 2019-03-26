@@ -1,4 +1,4 @@
-{% set version = "0.20" %}
+{% set version = "0.21" %}
 
 package:
   name: isl
@@ -7,10 +7,10 @@ package:
 source:
   fn: isl-{{ version }}.tar.bz2
   url: http://isl.gforge.inria.fr/isl-{{ version }}.tar.bz2
-  md5: cb396f31b24aeeac49840b519741b0e1
+  md5: e2be862b79d74234e468981bcae2a964
 
 build:
-  number: 1002
+  number: 0
   skip: True   # [win and vc<14]
   run_exports:
     - {{ pin_subpackage("isl", max_pin="x.x") }}
