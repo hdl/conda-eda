@@ -1,14 +1,19 @@
+# This file was generated automatically from conda-smithy. To update this configuration,
+# update the conda-forge.yml and/or the recipe/meta.yaml.
+# -*- mode: yaml -*-
+
 jobs:
-- job: win_64
+- job: win
   pool:
     vmImage: vs2017-win2016
-  timeoutInMinutes: 240
+  timeoutInMinutes: 360
   strategy:
     maxParallel: 4
     matrix:
       win_c_compilervs2015vc14:
         CONFIG: win_c_compilervs2015vc14
         CONDA_BLD_PATH: D:\\bld\\
+        UPLOAD_PACKAGES: False
   steps:
     # TODO: Fast finish on azure pipelines?
     - script: |
@@ -23,7 +28,6 @@ jobs:
     # Cygwin's git breaks conda-build. (See https://github.com/conda-forge/conda-smithy-feedstock/pull/2.)
     # - script: rmdir C:\cygwin /s /q
     #   continueOnError: true
-
 
     - powershell: |
         Set-PSDebug -Trace 1
@@ -61,25 +65,37 @@ jobs:
 
     # Configure the VM
     - script: setup_conda_rc .\ .\recipe .\.ci_support\%CONFIG%.yaml
-    
+
     # Configure the VM.
     - script: |
         run_conda_forge_build_setup
+
       displayName: conda-forge build setup
-    run_conda_forge_build_setup
+    
+
+    - script: |
+        rmdir C:\strawberry /s /q
+      continueOnError: true
+      displayName: remove strawberryperl
 
     # Special cased version setting some more things!
     - script: |
-        conda.exe build recipe -m .ci_support\%CONFIG%.yaml --quiet
+        conda.exe build recipe -m .ci_support\%CONFIG%.yaml
       displayName: Build recipe (vs2008)
-      env: {
-        VS90COMNTOOLS: "C:\\Program Files (x86)\\Common Files\\Microsoft\\Visual C++ for Python\\9.0\\VC\\bin",
-      }
+      env:
+        VS90COMNTOOLS: "C:\\Program Files (x86)\\Common Files\\Microsoft\\Visual C++ for Python\\9.0\\VC\\bin"
+        PYTHONUNBUFFERED: 1
       condition: contains(variables['CONFIG'], 'vs2008')
 
     - script: |
-        conda.exe build recipe -m .ci_support\%CONFIG%.yaml --quiet
+        conda.exe build recipe -m .ci_support\%CONFIG%.yaml
       displayName: Build recipe
+      env:
+        PYTHONUNBUFFERED: 1
       condition: not(contains(variables['CONFIG'], 'vs2008'))
 
-    
+    - script: |
+        upload_package .\ .\recipe .ci_support\%CONFIG%.yaml
+      env:
+        BINSTAR_TOKEN: $(BINSTAR_TOKEN)
+      condition: not(eq(variables['UPLOAD_PACKAGES'], 'False'))
