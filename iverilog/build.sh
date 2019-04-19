@@ -7,7 +7,7 @@ if [ x"$TRAVIS" = xtrue ]; then
 	CPU_COUNT=2
 fi
 
-export CXXFLAGS=-Wno-deprecated-declarations
+export CC_FOR_BUILD=$CC
 
 sh ./autoconf.sh
 ./configure --prefix=$PREFIX
