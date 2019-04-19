@@ -26,6 +26,7 @@ requirements:
     - bison
     - boost
     - cmake
+    - eigen
     - flex
     - fontconfig
     - icestorm
