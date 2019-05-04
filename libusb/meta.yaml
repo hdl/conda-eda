@@ -11,11 +11,20 @@ source:
   sha1: 35e4ca3255b4c1c3068e4bc50077abb7d7bb6162 # [win]
 
 build:
-  number: 0
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
 
 requirements:
   build:
     - system # [linux]
+    - {{ compiler('c') }}
+  host:
+    - pkg-config
 
 about:
   home: http://libusb.org

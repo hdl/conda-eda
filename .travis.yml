@@ -105,6 +105,14 @@ jobs:
      env:
      - PACKAGE=yosys
 
+   - stage: "Libraries"
+     env:
+     - PACKAGE=libusb
+
+   - stage: "Libraries"
+     env:
+     - PACKAGE=libftdi
+
    - stage: "Other Tools"
      env:
      - PACKAGE=sdcc

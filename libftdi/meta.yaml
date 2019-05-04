@@ -8,15 +8,31 @@ source:
   sha1: ff3bdc8ec6f9e0fffc735e2b4708fe574289107f
 
 build:
-  number: 0
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
 
 requirements:
   build:
-    - system # [linux]
+    - boost
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - libusb
+  host:
     - cmake # [linux]
-    - libusb
+    - boost
+    - pkg-config
+    - swig
   run:
+    - {{ compiler('c') }}
+    - libgcc-ng
+    - libstdcxx-ng
     - libusb
+    - python
 
 about:
   home: https://www.intra2net.com/en/developer/libftdi/

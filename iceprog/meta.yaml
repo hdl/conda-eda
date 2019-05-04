@@ -21,16 +21,15 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - pkg-config
-    - gcc_linux-64
-    - gxx_linux-64
+  host:
+    - libftdi
+    - libusb
   run:
     - icestorm
-    - readline
-    - bison
-    - tk
-    - libffi
-    - flex
+    - libftdi
 
 about:
   home: http://www.clifford.at/icestorm/
