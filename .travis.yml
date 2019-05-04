@@ -55,35 +55,6 @@ jobs:
      env:
      - PACKAGE=flterm
 
-   # Verilog tools
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=arachne-pnr
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=icestorm
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=iverilog
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=nextpnr
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=verilator
-
-#   - stage: "Verilog Tools"
-#     env:
-#     - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=yosys
-
    # lm32 toolchain
    - stage: "Binutils"
      env:
@@ -131,7 +102,34 @@ jobs:
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=sh2
 
+   # Verilog tools
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=arachne-pnr
 
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=icestorm
+
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=iverilog
+
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=nextpnr
+
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=verilator
+
+#   - stage: "Verilog Tools"
+#     env:
+#     - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge
+
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=yosys
 
 matrix:
   allow_failures:
