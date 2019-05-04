@@ -111,6 +111,10 @@ jobs:
 
    - stage: "Other Tools"
      env:
+     - PACKAGE=iceprog
+
+   - stage: "Other Tools"
+     env:
      - PACKAGE=openocd
 
    - stage: "Other Tools"
