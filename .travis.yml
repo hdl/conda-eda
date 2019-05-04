@@ -29,6 +29,61 @@ install:
 
 jobs:
   include:
+   # Libraries
+   - stage: "Libraries"
+     env:
+     - PACKAGE=libusb
+
+   - stage: "Libraries"
+     env:
+     - PACKAGE=libftdi
+
+   # Other Tools
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=sdcc
+
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=iceprog
+
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=openocd
+
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=flterm
+
+   # Verilog tools
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=arachne-pnr
+
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=icestorm
+
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=iverilog
+
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=nextpnr
+
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=verilator
+
+#   - stage: "Verilog Tools"
+#     env:
+#     - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge
+
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=yosys
+
    # lm32 toolchain
    - stage: "Binutils"
      env:
@@ -76,58 +131,7 @@ jobs:
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=sh2
 
-   # Verilog tools
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=arachne-pnr
 
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=icestorm
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=iverilog
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=nextpnr
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=verilator
-
-#   - stage: "Verilog Tools"
-#     env:
-#     - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=yosys
-
-   - stage: "Libraries"
-     env:
-     - PACKAGE=libusb
-
-   - stage: "Libraries"
-     env:
-     - PACKAGE=libftdi
-
-   - stage: "Other Tools"
-     env:
-     - PACKAGE=sdcc
-
-   - stage: "Other Tools"
-     env:
-     - PACKAGE=iceprog
-
-   - stage: "Other Tools"
-     env:
-     - PACKAGE=openocd
-
-   - stage: "Other Tools"
-     env:
-     - PACKAGE=flterm
 
 matrix:
   allow_failures:
