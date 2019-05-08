@@ -21,8 +21,8 @@ build:
 
 requirements:
   build:
-    - python 3.6.*
-    - tk 8.5.*
+    - python 3.7
+    - tk
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
@@ -31,13 +31,13 @@ requirements:
     - iverilog
     - libffi
     - pkg-config
-    - python 3.6.*
-    - tk 8.5.*
+    - python 3.7
+    - tk
   run:
     - flex
     - libffi
     - python {{ python }}
-    - tk 8.5.*
+    - tk
 
 about:
   home: http://www.clifford.at/yosys/
