@@ -30,6 +30,10 @@ jobs:
   include:
    - stage: "Temp"
      env:
+     - PACKAGE=icestorm
+
+   - stage: "Temp"
+     env:
      - PACKAGE=nextpnr
 
    # Libraries
@@ -109,10 +113,6 @@ jobs:
    - stage: "Verilog Tools"
      env:
      - PACKAGE=arachne-pnr
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=icestorm
 
    - stage: "Verilog Tools"
      env:
