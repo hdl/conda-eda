@@ -1,4 +1,4 @@
-language: c
+language: minimal
 
 #dist: trusty
 sudo: false
