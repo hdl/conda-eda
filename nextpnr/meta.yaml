@@ -22,13 +22,13 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - python 3.7
+    - fontconfig
   host:
     - bison
     - boost
     - cmake
     - eigen
     - flex
-    - fontconfig
     - icestorm
     - pkg-config
     - python 3.7
