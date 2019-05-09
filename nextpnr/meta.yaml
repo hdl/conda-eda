@@ -21,7 +21,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - python {{ python }}
+    - python 3.7
   host:
     - bison
     - boost
@@ -31,7 +31,7 @@ requirements:
     - fontconfig
     - icestorm
     - pkg-config
-    - python {{ python }}
+    - python 3.7
   run:
     - icestorm
     - libboost
