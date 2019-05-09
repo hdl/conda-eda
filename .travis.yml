@@ -29,6 +29,10 @@ install:
 
 jobs:
   include:
+   - stage: "Temp"
+     env:
+     - PACKAGE=nextpnr
+
    # Libraries
    - stage: "Libraries"
      env:
@@ -114,10 +118,6 @@ jobs:
    - stage: "Verilog Tools"
      env:
      - PACKAGE=iverilog
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=nextpnr
 
    - stage: "Verilog Tools"
      env:
