@@ -1,4 +1,4 @@
-{% set version = '2.31.1' %}
+{% set version = '2.32' %}
 
 package:
   name: binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
@@ -6,8 +6,8 @@ package:
 
 source:
   fn: binutils-{{ version }}.tar.bz2
-  url: https://ftp.gnu.org/gnu/binutils/binutils-{{ version }}.tar.bz2
-  sha256: ffcc382695bf947da6135e7436b8ed52d991cf270db897190f19d6f9838564d0
+  url: https://ftp.gnu.org/gnu/binutils/binutils-{{ version }}.tar.xz
+  sha256: 0ab6c55dd86a92ed561972ba15b9b70a8b9f75557f896446c82e8b36e473ee04
 {% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
   patches:
    - or1k.patch
