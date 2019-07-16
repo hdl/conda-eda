@@ -8,10 +8,6 @@ source:
   fn: binutils-{{ version }}.tar.bz2
   url: https://ftp.gnu.org/gnu/binutils/binutils-{{ version }}.tar.xz
   sha256: 0ab6c55dd86a92ed561972ba15b9b70a8b9f75557f896446c82e8b36e473ee04
-{% if environ.get('TOOLCHAIN_ARCH') == "or1k" %}
-  patches:
-   - or1k.patch
-{% endif %}
 
 build:
   # number: 201803050325
