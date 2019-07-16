@@ -28,32 +28,6 @@ install:
 
 jobs:
   include:
-   # Libraries
-   - stage: "Libraries"
-     env:
-     - PACKAGE=libusb
-
-   - stage: "Libraries"
-     env:
-     - PACKAGE=libftdi
-
-   # Other Tools
-   - stage: "Other Tools"
-     env:
-     - PACKAGE=sdcc
-
-   - stage: "Other Tools"
-     env:
-     - PACKAGE=iceprog
-
-   - stage: "Other Tools"
-     env:
-     - PACKAGE=openocd
-
-   - stage: "Other Tools"
-     env:
-     - PACKAGE=flterm
-
    # lm32 toolchain
    - stage: "Binutils"
      env:
@@ -100,6 +74,32 @@ jobs:
    - stage: "Binutils"
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=sh2
+
+   # Libraries
+   - stage: "Libraries"
+     env:
+     - PACKAGE=libusb
+
+   - stage: "Libraries"
+     env:
+     - PACKAGE=libftdi
+
+   # Other Tools
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=sdcc
+
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=iceprog
+
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=openocd
+
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=flterm
 
    # Verilog tools
    - stage: "Verilog Tools"
