@@ -28,6 +28,19 @@ install:
 
 jobs:
   include:
+   # Libraries
+   - stage: "Libraries"
+     env:
+     - PACKAGE=isl
+
+   - stage: "Libraries"
+     env:
+     - PACKAGE=libusb
+
+   - stage: "Libraries"
+     env:
+     - PACKAGE=libftdi
+
    # lm32 toolchain
    - stage: "Binutils"
      env:
@@ -74,15 +87,6 @@ jobs:
    - stage: "Binutils"
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=sh2
-
-   # Libraries
-   - stage: "Libraries"
-     env:
-     - PACKAGE=libusb
-
-   - stage: "Libraries"
-     env:
-     - PACKAGE=libftdi
 
    # Other Tools
    - stage: "Other Tools"
