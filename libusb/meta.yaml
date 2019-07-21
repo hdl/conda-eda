@@ -21,7 +21,6 @@ build:
 
 requirements:
   build:
-    - system # [linux]
     - {{ compiler('c') }}
   host:
     - pkg-config
