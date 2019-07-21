@@ -12,11 +12,15 @@ source:
   - git_url: https://github.com/mithro/gcc.git
     git_rev: or1k-port-3
     folder: gcc
+    patches:
+     - isl.patch
 {% elif environ.get('TOOLCHAIN_ARCH') %}
   - url: http://ftp.gnu.org/gnu/gcc/gcc-{{ version }}/gcc-{{ version }}.tar.gz
     fn: gcc-{{ version }}.tar.gz
     sha256: 1b0f36be1045ff58cbb9c83743835367b860810f17f0195a4e093458b372020f
     folder: gcc
+    patches:
+     - isl.patch
 {% else %}
   - url: empty.tar.bz2
     folder: other
