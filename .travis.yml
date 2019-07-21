@@ -48,6 +48,9 @@ jobs:
    - stage: "GCC - nostdc"
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=or1k
+   - stage: "GCC - Linux (musl)"
+     env:
+     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=or1k
    - stage: "GCC - newlib"
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=or1k
@@ -62,6 +65,9 @@ jobs:
    - stage: "GCC - nostdc"
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv32
+   - stage: "GCC - Linux (musl)"
+     env:
+     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv32
    - stage: "GCC - newlib"
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv32
