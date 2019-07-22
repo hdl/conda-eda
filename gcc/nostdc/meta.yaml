@@ -9,8 +9,6 @@ source:
     fn: gcc-{{ version }}.tar.gz
     sha256: 79a66834e96a6050d8fe78db2c3b32fb285b230b855d0a66288235bc04b327a0
     folder: gcc
-    patches:
-     - isl.patch
 
 build:
   # number: 201803050325

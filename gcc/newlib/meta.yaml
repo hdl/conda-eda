@@ -9,8 +9,6 @@ source:
     fn: gcc-{{ version }}.tar.gz
     sha256: 79a66834e96a6050d8fe78db2c3b32fb285b230b855d0a66288235bc04b327a0
     folder: gcc
-    patches:
-     - isl.patch
   - url: http://sourceware.org/pub/newlib/newlib-3.0.0.20180831.tar.gz
     fn: newlib-3.0.0.20180831.tar.gz
     sha256: 3ad3664f227357df15ff34e954bfd9f501009a647667cd307bf0658aefd6eb5b
