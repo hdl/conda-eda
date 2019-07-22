@@ -41,20 +41,6 @@ jobs:
      env:
      - PACKAGE=libftdi
 
-   # lm32 toolchain
-   - stage: "Binutils"
-     env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=lm32
-   - stage: "GCC - nostdc"
-     env:
-     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=lm32
-   - stage: "GCC - newlib"
-     env:
-     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=lm32
-   - stage: "GDB"
-     env:
-     - PACKAGE=gdb          TOOLCHAIN_ARCH=lm32
-
    # or1k toolchain
    - stage: "Binutils"
      env:
@@ -83,7 +69,21 @@ jobs:
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv32
 
-   # sh2 toolchain
+   # lm32 toolchain - no linux
+   - stage: "Binutils"
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=lm32
+   - stage: "GCC - nostdc"
+     env:
+     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=lm32
+   - stage: "GCC - newlib"
+     env:
+     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=lm32
+   - stage: "GDB"
+     env:
+     - PACKAGE=gdb          TOOLCHAIN_ARCH=lm32
+
+   # sh2 toolchain - no gcc?
    - stage: "Binutils"
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=sh2
