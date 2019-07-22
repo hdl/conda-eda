@@ -9,9 +9,9 @@ source:
     fn: gcc-{{ version }}.tar.gz
     sha256: 79a66834e96a6050d8fe78db2c3b32fb285b230b855d0a66288235bc04b327a0
     folder: gcc
-  - url: http://sourceware.org/pub/newlib/newlib-3.0.0.20180831.tar.gz
+  - url: http://sourceware.org/pub/newlib/newlib-3.1.0.tar.gz
     fn: newlib-3.0.0.20180831.tar.gz
-    sha256: 3ad3664f227357df15ff34e954bfd9f501009a647667cd307bf0658aefd6eb5b
+    sha256: fb4fa1cc21e9060719208300a61420e4089d6de6ef59cf533b57fe74801d102a
     folder: newlib
 
 build:
