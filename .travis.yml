@@ -99,7 +99,7 @@ jobs:
 
    - stage: "Other Tools"
      env:
-     - PACKAGE=iceFUNprog
+     - PACKAGE=icefunprog
 
    - stage: "Other Tools"
      env:
