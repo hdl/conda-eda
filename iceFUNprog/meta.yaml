@@ -1,7 +1,7 @@
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG or 'v0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 
 package:
-  name: iceFUNprog
+  name: icefunprog
   version: {{ version }}
 
 source:
