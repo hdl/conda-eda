@@ -2,6 +2,7 @@
 
 # gcc linux-musl build
 set -e
+set -x
 
 if [ -z "${TOOLCHAIN_ARCH}" ]; then
 	export | grep -i toolchain
@@ -64,22 +65,42 @@ echo "============================================================"
 echo
 echo
 
-TARGET=${TOOLCHAIN_ARCH}-elf
-GCC=$TARGET-linux-musl-gcc
+METAL_TARGET=${TOOLCHAIN_ARCH}-elf
+LINUX_TARGET=${TOOLCHAIN_ARCH}-linux-musl
+
+# ============================================================
 
 # Check binutils
-$TARGET-as --version
+echo -n "---?"
+which $METAL_TARGET-as
+ls -l $(which $METAL_TARGET-as)
+file $(which $METAL_TARGET-as)
+echo "---"
+$METAL_TARGET-as --version 2>&1
+echo "---"
+
+# Install aliases for the binutil tools
+for BINUTIL in $(ls $PREFIX/bin/$METAL_TARGET-* | grep /$METAL_TARGET-); do
+	LINUX_BINUTIL="$(echo $BINUTIL | sed -e"s_/$METAL_TARGET-_/$LINUX_TARGET-_" -e's/linux-musl-linux-musl/linux-musl/')"
+
+	if [ ! -e "$LINUX_BINUTIL" ]; then
+		ln -sv "$BINUTIL" "$LINUX_BINUTIL"
+	fi
+done
+ls -l $PREFIX/bin/$LINUX_TARGET-*
+
+# ============================================================
 
 # Check the "nostdc" gcc is already installed
 echo -n "---?"
-which $TARGET-gcc
-ls -l $(which $TARGET-gcc)
-file $(which $TARGET-gcc)
+which $METAL_TARGET-gcc
+ls -l $(which $METAL_TARGET-gcc)
+file $(which $METAL_TARGET-gcc)
 echo "---"
-$TARGET-gcc --version 2>&1
+$METAL_TARGET-gcc --version 2>&1
 echo "---"
 
-GCC_STAGE1_VERSION=$($TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (//" -e"s/).*//")
+GCC_STAGE1_VERSION=$($METAL_TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$METAL_TARGET-gcc (//" -e"s/).*//")
 GCC_STAGE2_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//')
 if [ "$GCC_STAGE1_VERSION" != "$GCC_STAGE2_VERSION" ]; then
 	echo
@@ -91,34 +112,18 @@ if [ "$GCC_STAGE1_VERSION" != "$GCC_STAGE2_VERSION" ]; then
  	exit 1
 fi
 
-#set -x
-
 rm -rf libstdc++-v3
 cd ..
 
-mkdir -p build-musl
-cd build-musl
-$SRC_DIR/musl/configure \
-	--target=$TARGET \
-	\
-        --prefix=/ \
-	\
-	--enable-multilib \
-	\
+# ============================================================
 
-make -j$CPU_COUNT
-make DESTDIR=$PREFIX install
-cd ..
+mkdir -p $SRC_DIR/build-gcc
+cd $SRC_DIR/build-gcc
 
-mkdir -p build-gcc
-cd build-gcc
-
-#export LDFLAGS=-static
-#        --prefix=$PREFIX \
 $SRC_DIR/gcc/configure \
 	\
         --prefix=/ \
-	--program-prefix=$TARGET-linux-musl- \
+	--program-prefix=$LINUX_TARGET- \
 	\
         --with-gmp=$CONDA_PREFIX \
         --with-mpfr=$CONDA_PREFIX \
@@ -126,7 +131,7 @@ $SRC_DIR/gcc/configure \
         --with-isl=$CONDA_PREFIX \
         --with-cloog=$CONDA_PREFIX \
 	\
-	--target=$TARGET \
+	--target=$LINUX_TARGET \
 	--with-pkgversion=$PKG_VERSION \
 	--enable-languages="c" \
 	--enable-threads=single \
@@ -147,23 +152,36 @@ $SRC_DIR/gcc/configure \
 	\
 
 
+# Build GCC
+mkdir -p $SRC_DIR/build-gcc
+cd $SRC_DIR/build-gcc
+
 make -j$CPU_COUNT
 make DESTDIR=${PREFIX} install-strip
 
-# Install aliases for the binutil tools
-for BINUTIL in $(ls $PREFIX/bin/$TARGET-* | grep /$TARGET-); do
-	NEWLIB_BINUTIL="$(echo $BINUTIL | sed -e"s_/$TARGET-_/$TARGET-linux-musl-_" -e's/linux-musl-linux-musl/linux-musl/')"
-
-	if [ ! -e "$NEWLIB_BINUTIL" ]; then
-		ln -sv "$BINUTIL" "$NEWLIB_BINUTIL"
-	fi
-done
-ls -l $PREFIX/bin/$TARGET-linux-musl-*
-
 cd ..
 
-$PREFIX/bin/$TARGET-gcc --version
-$PREFIX/bin/${TOOLCHAIN_ARCH}-unknown-elf-gcc --version
-$PREFIX/bin/$TARGET-linux-musl-gcc --version
+# ============================================================
 
-echo $($PREFIX/bin/$TARGET-linux-musl-gcc --version 2>&1 | head -1 | sed -e"s/$TARGET-gcc (GCC) //")
+mkdir -p $SRC_DIR/build-musl
+cd $SRC_DIR/build-musl
+CC=$LINUX_TARGET $SRC_DIR/musl/configure \
+	\
+        --prefix=/ \
+	\
+	--enable-multilib \
+	\
+
+# Build libc (musl)
+mkdir -p $SRC_DIR/build-musl
+cd $SRC_DIR/build-musl
+make -j$CPU_COUNT
+make DESTDIR=$PREFIX install
+cd ..
+
+# ============================================================
+
+$PREFIX/bin/$METAL_TARGET-gcc --version
+$PREFIX/bin/$LINUX_TARGET-gcc --version
+
+echo $($PREFIX/bin/$LINUX_TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$LINUX_TARGET-gcc (GCC) //")
