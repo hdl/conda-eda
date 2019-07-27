@@ -99,6 +99,10 @@ jobs:
 
    - stage: "Other Tools"
      env:
+     - PACKAGE=iceFUNprog
+
+   - stage: "Other Tools"
+     env:
      - PACKAGE=openocd
 
    - stage: "Other Tools"
