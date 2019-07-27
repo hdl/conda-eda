@@ -6,7 +6,7 @@ package:
 
 source:
   git_url: https://github.com/y2kbugger/iceFUNprog.git
-  git_rev: makefile
+  git_rev: master
 
 build:
   # number: 201803050325
@@ -22,8 +22,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - pkg-config
-  host:
-    - libusb
+  host: []
   run: []
 
 about:
