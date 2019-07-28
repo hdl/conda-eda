@@ -42,12 +42,6 @@ requirements:
     - mpc >=0.8.1
     - isl >=0.15.0
     - cloog
-    # Arch specific
-    - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
-    - gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-nostdc {{ version }}.*
-  run:
-    - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
-    - gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-nostdc {{ version }}.*
 
 about:
   home: https://gcc.gnu.org/
