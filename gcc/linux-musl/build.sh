@@ -63,31 +63,38 @@ echo
 echo
 
 LINUX_TARGET=${TOOLCHAIN_ARCH}-linux-musl
+SYSROOT=$PREFIX/$LINUX_TARGET/sysroot
+mkdir -p $SYSROOT/include
+mkdir -p $SYSROOT/lib
+mkdir -p $SYSROOT/usr/include
+mkdir -p $SYSROOT/usr/lib
 
 # ============================================================
+# Binutils
 
-# Configure binutils
-mkdir -p $SRC_DIR/build-binutils
-cd $SRC_DIR/build-binutils
-../binutils/configure \
-	--target=$LINUX_TARGET \
-	\
-	--prefix=/ \
-	--with-sysroot=$PREFIX/$LINUX_TARGET \
-	\
-	--disable-nls \
-	--disable-werror \
-	--enable-deterministic-archives \
+(
+	# Configure binutils
+	mkdir -p $SRC_DIR/build-binutils
+	cd $SRC_DIR/build-binutils
+	../binutils/configure \
+		\
+		--target=$LINUX_TARGET \
+		\
+		--prefix=$PREFIX \
+		--with-sysroot=$SYSROOT \
+		\
+		--disable-nls \
+		--disable-werror \
+		--enable-deterministic-archives \
 
 
-# Build binutils
-mkdir -p $SRC_DIR/build-binutils
-cd $SRC_DIR/build-binutils
+	# Build binutils
+	mkdir -p $SRC_DIR/build-binutils
+	cd $SRC_DIR/build-binutils
 
-make -j$CPU_COUNT
-make DESTDIR=${PREFIX} install-strip
-
-cd ..
+	make -j$CPU_COUNT
+	make install-strip
+)
 
 # Check binutils
 cd $SRC_DIR
@@ -100,29 +107,27 @@ $LINUX_TARGET-as --version 2>&1
 echo "---"
 
 # ============================================================
-
-SYSROOT=$PREFIX/$TARGET/sysroot
-mkdir -p $SYSROOT/usr/include
-
-# ============================================================
+# Stage 1 GCC
 
 (
-	# Stage 1 GCC
 	export CFLAGS="$CFLAGS -O0 -g0"
 	export CXXFLAGS="$CXXFLAGS -O0 -g0"
 
 	mkdir -p $SRC_DIR/build-gcc1
 	cd $SRC_DIR/build-gcc1
-	$SRC_DIR/gcc1/configure \
-		\
-		--prefix=/ \
-		--with-sysroot=$SYSROOT \
+	$SRC_DIR/gcc/configure \
 		\
 		--target=$LINUX_TARGET \
+		\
+		--prefix=$PREFIX \
+		--with-sysroot=$SYSROOT \
+		\
+		--program-prefix=$LINUX_TARGET- \
+		\
 		--with-pkgversion=$PKG_VERSION \
 		--enable-languages="c" \
 		--enable-threads=single \
-		--enable-multilib \
+		--disable-multilib \
 		\
 		--without-headers \
 		\
@@ -143,7 +148,7 @@ mkdir -p $SYSROOT/usr/include
 	cd $SRC_DIR/build-gcc1
 
 	make -j$CPU_COUNT
-	make DESTDIR=${PREFIX} install-strip
+	make install-strip
 
 	# Check GCC
 	cd $SRC_DIR
@@ -157,9 +162,9 @@ mkdir -p $SYSROOT/usr/include
 )
 
 # ============================================================
+# Install Linux Headers + C library headers
 
 (
-	# Install C library
 	unset AS
 	unset AR
 	unset ADDR2LINE
@@ -210,10 +215,7 @@ mkdir -p $SYSROOT/usr/include
 
 	cd $SRC_DIR/kernel-headers
 	make defconfig ARCH=$LINUX_ARCH
-	make headers_install ARCH=$LINUX_ARCH INSTALL_HDR_PATH=$SYSROOT/usr/include
-	find $SYSROOT | sort
-	ls -ld $SYSROOT/include
-	ls -ld $SYSROOT/usr/include
+	make headers_install ARCH=$LINUX_ARCH INSTALL_HDR_PATH=$SYSROOT/include
 
 	# Configure musl
 	mkdir -p $SRC_DIR/build-musl
@@ -222,45 +224,66 @@ mkdir -p $SYSROOT/usr/include
 		\
 		--target=$LINUX_TARGET \
 		\
-		--prefix=/ \
+		--prefix=$SYSROOT \
 		--with-sysroot=$SYSROOT \
 		\
-		--enable-multilib \
+		--disable-multilib \
 		\
 
 	# Build libc (musl)
 	mkdir -p $SRC_DIR/build-musl
 	cd $SRC_DIR/build-musl
-	make -j$CPU_COUNT
-	make DESTDIR=$PREFIX install
+#        CT_DoLog EXTRA "Installing C library headers"
+#        CT_DoExecLog ALL make DESTDIR="${multi_root}" install-headers
+	make DESTDIR=$SYSROOT install-headers
+#        CT_DoLog EXTRA "Building C library start files"
+#        CT_DoExecLog ALL make DESTDIR="${multi_root}" \
+#            obj/crt/crt1.o obj/crt/crti.o obj/crt/crtn.o
+#        CT_DoLog EXTRA "Installing C library start files"
+#        CT_DoExecLog ALL cp -av obj/crt/crt*.o "${multi_root}${multilib_dir}"
+	make DESTDIR=$SYSROOT obj/crt/crt1.o obj/crt/crti.o obj/crt/crtn.o
+	mkdir -p "$SYSROOT/lib"
+	cp -av obj/crt/crt*.o "$SYSROOT/lib"
 
+#        CT_DoExecLog ALL ${CT_TARGET}-${CT_CC} -nostdlib \
+#            -nostartfiles -shared -x c /dev/null -o "${multi_root}${multilib_dir}/libc.so"
+	$LINUX_TARGET-gcc -nostdlib \
+            -nostartfiles -shared -x c /dev/null -o "$SYSROOT/lib/libc.so"
 )
 
+echo
+echo
+echo "--------------------------------------------"
+find $SYSROOT | sort
+echo "--------------------------------------------"
+echo
+echo
+
 # ============================================================
+# Stage 2 GCC
 
 (
-	# Stage 2 GCC
+	# Configure GCC
 	mkdir -p $SRC_DIR/build-gcc2
 	cd $SRC_DIR/build-gcc2
-
-	# Configure GCC
 	$SRC_DIR/gcc/configure \
 		\
-		--prefix=/ \
-		--with-sysroot=$PREFIX/$LINUX_TARGET \
+		--target=$LINUX_TARGET \
+		\
+		--prefix=$PREFIX \
+		--with-sysroot=$SYSROOT \
 		\
 		--program-prefix=$LINUX_TARGET- \
+		\
+		--with-pkgversion=$PKG_VERSION \
+		--enable-languages="c" \
+		--disable-multilib \
 		\
 		--with-gmp=$CONDA_PREFIX \
 		--with-mpfr=$CONDA_PREFIX \
 		--with-mpc=$CONDA_PREFIX \
 		--with-isl=$CONDA_PREFIX \
 		--with-cloog=$CONDA_PREFIX \
-		\
-		--target=$LINUX_TARGET \
-		--with-pkgversion=$PKG_VERSION \
-		--enable-languages="c" \
-		--enable-multilib \
 		\
 		--with-musl \
 		\
@@ -281,7 +304,62 @@ mkdir -p $SYSROOT/usr/include
 	cd $SRC_DIR/build-gcc2
 
 	make -j$CPU_COUNT
-	make DESTDIR=${PREFIX} install-strip
+	make install-strip
+)
+
+# ============================================================
+# Build musl libc
+
+(
+	unset AS
+	unset AR
+	unset ADDR2LINE
+	unset CC
+	unset CFLAGS
+	unset CPP
+	unset CPPFLAGS
+	unset DEBUG_CPPFLAGS
+	unset CXX
+	unset CXXFLAGS
+	unset DEBUG_CXXFLAGS
+	unset GCC
+	unset GCC_AR
+	unset GCC_NM
+	unset GCC_RANLIB
+	unset GPROF
+	unset GXX
+	unset LD
+	unset LDFLAGS
+	unset LD_GOLD
+	unset LD_RUN_PATH
+	unset RANLIB
+	unset READELF
+	unset SIZE
+	unset STRINGS
+	unset STRIP
+
+	export PATH=${PREFIX}/bin:$PATH
+	# GCC_EXEC_PREFIX
+	# COMPILER_PATH
+
+	# Configure musl
+	mkdir -p $SRC_DIR/build-musl
+	cd $SRC_DIR/build-musl
+	$SRC_DIR/musl/configure \
+		\
+		--target=$LINUX_TARGET \
+		\
+		--prefix=$SYSROOT \
+		--with-sysroot=$SYSROOT \
+		\
+		--disable-multilib \
+		\
+
+	# Build libc (musl)
+	mkdir -p $SRC_DIR/build-musl
+	cd $SRC_DIR/build-musl
+	make -j$CPU_COUNT
+	make DESTDIR=${SYSROOT} install
 )
 
 # Check GCC
@@ -294,7 +372,6 @@ $LINUX_TARGET-gcc --version 2>&1
 echo "---"
 
 
-$PREFIX/bin/$METAL_TARGET-gcc --version
 $PREFIX/bin/$LINUX_TARGET-gcc --version
 
 echo $($PREFIX/bin/$LINUX_TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$LINUX_TARGET-gcc (GCC) //")
