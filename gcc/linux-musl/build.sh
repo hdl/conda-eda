@@ -22,6 +22,7 @@ fi
 if [ x"$TRAVIS" = xtrue ]; then
 	CPU_COUNT=2
 fi
+
 echo
 echo
 echo "============================================================"
@@ -51,43 +52,18 @@ echo
 echo "Start directory ============================================"
 echo $PWD
 ls -l $PWD
-echo "------------------------------------------------------------"
-ls -l $PWD/*
 echo "============================================================"
 echo
 echo
 echo "Source directory ==========================================="
 echo $SRC_DIR
 ls -l $SRC_DIR
-echo "------------------------------------------------------------"
-ls -l $SRC_DIR/*
 echo "============================================================"
 echo
 echo
 
 METAL_TARGET=${TOOLCHAIN_ARCH}-elf
 LINUX_TARGET=${TOOLCHAIN_ARCH}-linux-musl
-
-# ============================================================
-
-# Check binutils
-echo -n "---?"
-which $METAL_TARGET-as
-ls -l $(which $METAL_TARGET-as)
-file $(which $METAL_TARGET-as)
-echo "---"
-$METAL_TARGET-as --version 2>&1
-echo "---"
-
-# Install aliases for the binutil tools
-for BINUTIL in $(ls $PREFIX/bin/$METAL_TARGET-* | grep /$METAL_TARGET-); do
-	LINUX_BINUTIL="$(echo $BINUTIL | sed -e"s_/$METAL_TARGET-_/$LINUX_TARGET-_" -e's/linux-musl-linux-musl/linux-musl/')"
-
-	if [ ! -e "$LINUX_BINUTIL" ]; then
-		ln -sv "$BINUTIL" "$LINUX_BINUTIL"
-	fi
-done
-ls -l $PREFIX/bin/$LINUX_TARGET-*
 
 # ============================================================
 
@@ -112,17 +88,70 @@ if [ "$GCC_STAGE1_VERSION" != "$GCC_STAGE2_VERSION" ]; then
  	exit 1
 fi
 
-rm -rf libstdc++-v3
 cd ..
 
 # ============================================================
 
+case "${TOOLCHAIN_ARCH}" in
+	riscv*)	LINUX_ARCH=riscv 	;;
+	or1k*)	LINUX_ARCH=openrisc	;;
+	sh*)	LINUX_ARCH=sh		;;
+esac
+export LINUX_ARCH
+
+cd $SRC_DIR/kernel-headers
+make defconfig ARCH=$LINUX_ARCH
+mkdir -p $PREFIX/$LINUX_TARGET/include
+mkdir -p $PREFIX/$LINUX_TARGET/usr
+ln -s $PREFIX/$LINUX_TARGET/include $PREFIX/$LINUX_TARGET/usr/include
+make headers_install ARCH=$LINUX_ARCH INSTALL_HDR_PATH=$PREFIX/$LINUX_TARGET/include
+find $PREFIX/$LINUX_TARGET | sort
+
+# ============================================================
+
+# Configure binutils
+mkdir -p $SRC_DIR/build-binutils
+cd $SRC_DIR/build-binutils
+../binutils/configure \
+	--target=$LINUX_TARGET \
+	\
+	--prefix=/ \
+	--with-sysroot=$PREFIX/$LINUX_TARGET \
+	\
+	--disable-nls \
+	--disable-werror \
+	--enable-deterministic-archives \
+
+
+# Build binutils
+mkdir -p $SRC_DIR/build-binutils
+cd $SRC_DIR/build-binutils
+
+make -j$CPU_COUNT
+make DESTDIR=${PREFIX} install-strip
+
+cd ..
+
+# Check binutils
+cd $SRC_DIR
+echo -n "---?"
+which $LINUX_TARGET-as
+ls -l $(which $LINUX_TARGET-as)
+file $(which $LINUX_TARGET-as)
+echo "---"
+$LINUX_TARGET-as --version 2>&1
+echo "---"
+
+# ============================================================
+
+# Configure GCC
 mkdir -p $SRC_DIR/build-gcc
 cd $SRC_DIR/build-gcc
-
 $SRC_DIR/gcc/configure \
 	\
         --prefix=/ \
+	--with-sysroot=$PREFIX/$LINUX_TARGET \
+	\
 	--program-prefix=$LINUX_TARGET- \
 	\
         --with-gmp=$CONDA_PREFIX \
@@ -134,7 +163,6 @@ $SRC_DIR/gcc/configure \
 	--target=$LINUX_TARGET \
 	--with-pkgversion=$PKG_VERSION \
 	--enable-languages="c" \
-	--enable-threads=single \
 	--enable-multilib \
 	\
 	--with-musl \
@@ -151,7 +179,6 @@ $SRC_DIR/gcc/configure \
 	--disable-tls \
 	\
 
-
 # Build GCC
 mkdir -p $SRC_DIR/build-gcc
 cd $SRC_DIR/build-gcc
@@ -159,15 +186,69 @@ cd $SRC_DIR/build-gcc
 make -j$CPU_COUNT
 make DESTDIR=${PREFIX} install-strip
 
-cd ..
+# Check GCC
+cd $SRC_DIR
+echo -n "---?"
+which $LINUX_TARGET-gcc
+ls -l $(which $LINUX_TARGET-gcc)
+file $(which $LINUX_TARGET-gcc)
+echo "---"
+$LINUX_TARGET-gcc --version 2>&1
+echo "---"
 
 # ============================================================
 
+unset AS
+unset AR
+unset ADDR2LINE
+unset CC
+unset CFLAGS
+unset CPP
+unset CPPFLAGS
+unset DEBUG_CPPFLAGS
+unset CXX
+unset CXXFLAGS
+unset DEBUG_CXXFLAGS
+unset GCC
+unset GCC_AR
+unset GCC_NM
+unset GCC_RANLIB
+unset GPROF
+unset GXX
+unset LD
+unset LDFLAGS
+unset LD_GOLD
+unset LD_RUN_PATH
+unset RANLIB
+unset READELF
+unset SIZE
+unset STRINGS
+unset STRIP
+
+export PATH=${PREFIX}/bin:$PATH
+# GCC_EXEC_PREFIX
+# COMPILER_PATH
+
+echo "========================================================="
+$PREFIX/bin/$LINUX_TARGET-gcc --version
+$PREFIX/bin/$LINUX_TARGET-gcc -print-search-dirs
+$PREFIX/bin/$LINUX_TARGET-gcc -print-prog-name=as
+echo "========================================================="
+
+export CROSS_COMPILE="$LINUX_TARGET-"
+export CC="$LINUX_TARGET-gcc"
+
+# ============================================================
+
+# Configure musl
 mkdir -p $SRC_DIR/build-musl
 cd $SRC_DIR/build-musl
-CC=$LINUX_TARGET $SRC_DIR/musl/configure \
+$SRC_DIR/musl/configure \
+	\
+	--target=$LINUX_TARGET \
 	\
         --prefix=/ \
+	--with-sysroot=$PREFIX/$LINUX_TARGET \
 	\
 	--enable-multilib \
 	\
@@ -177,7 +258,6 @@ mkdir -p $SRC_DIR/build-musl
 cd $SRC_DIR/build-musl
 make -j$CPU_COUNT
 make DESTDIR=$PREFIX install
-cd ..
 
 # ============================================================
 
