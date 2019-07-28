@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# gcc newlib run test
+# gcc linux-musl run test
 
 set +x
 set +e
 
-TARGET=${TOOLCHAIN_ARCH}-elf
-GCC=$TARGET-newlib-gcc
+TARGET=${TOOLCHAIN_ARCH}-linux-musl
+GCC=$TARGET-gcc
 OBJDUMP=$TARGET-objdump
 
 if [ "${TOOLCHAIN_ARCH}" = "riscv32" ]; then
@@ -101,11 +101,10 @@ if ! $TARGET-objdump -f ./main | grep -q "architecture: ${ELF_ARCH}"; then
 fi
 
 $TARGET-objdump -g ./main 2>&1 \
-	| grep DW_AT_name \
-	| grep newlib \
+	| grep libc \
 	| sed -e's-[^ ]\+/bin/-[BIN]/-g' -e's-[^ ]\+/work/-[WORK]/-g'
 SUCCESS=$?
 if [ $SUCCESS -ne 0 ]; then
-	echo "Compiled binary not linked against newlib!"
+	echo "Compiled binary not linked against musl libc!"
 	exit 1
 fi

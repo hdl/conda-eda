@@ -42,6 +42,9 @@ requirements:
     - mpc >=0.8.1
     - isl >=0.15.0
     - cloog
+  run:
+    - isl
+    - mpc
 
 about:
   home: https://gcc.gnu.org/
