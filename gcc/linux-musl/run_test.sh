@@ -2,12 +2,54 @@
 
 # gcc linux-musl run test
 
-set +x
-set +e
-
 TARGET=${TOOLCHAIN_ARCH}-linux-musl
 GCC=$TARGET-gcc
 OBJDUMP=$TARGET-objdump
+
+set -x
+set -e
+
+echo "============================="
+echo "============================="
+echo "============================="
+echo "============================="
+$GCC --help || true
+echo "-----"
+$GCC --version || true
+echo "-----"
+$GCC -dumpspecs || true
+echo "-----"
+$GCC -dumpversion || true
+echo "-----"
+$GCC -dumpmachine || true
+echo "-----"
+$GCC -print-search-dirs || true
+echo "-----"
+$GCC -print-libgcc-file-name || true
+echo "-----"
+$GCC -print-file-name=m || true
+echo "-----"
+$GCC -print-prog-name=as || true
+echo "-----"
+$GCC -print-multiarch || true
+echo "-----"
+$GCC -print-multi-directory || true
+echo "-----"
+$GCC -print-multi-lib || true
+echo "-----"
+$GCC -print-multi-os-directory || true
+echo "-----"
+$GCC -print-sysroot || true
+echo "-----"
+$GCC -print-sysroot-headers-suffix || true
+echo "============================="
+echo "============================="
+echo "============================="
+echo "============================="
+
+set +x
+set +e
+
 
 if [ "${TOOLCHAIN_ARCH}" = "riscv32" ]; then
 	ELF_ARCH="riscv:rv32"
@@ -45,19 +87,18 @@ fi
 # library.
 echo "==========================================="
 set -x
-$GCC --version
-$GCC --target-help
-$GCC -dumpspecs
-$GCC -dumpversion
-$GCC -dumpmachine
-$GCC -print-search-dirs
-$GCC -print-libgcc-file-name
-$GCC -print-multiarch
-$GCC -print-multi-directory
-$GCC -print-multi-lib
-$GCC -print-multi-os-directory
-$GCC -print-sysroot
-find $($GCC -print-sysroot)
+$GCC -v --version
+$GCC -v --target-help
+$GCC -v -dumpspecs
+$GCC -v -dumpversion
+$GCC -v -dumpmachine
+$GCC -v -print-search-dirs
+$GCC -v -print-libgcc-file-name
+$GCC -v -print-multiarch
+$GCC -v -print-multi-directory
+$GCC -v -print-multi-lib
+$GCC -v -print-multi-os-directory
+$GCC -v -print-sysroot
 $GCC -print-sysroot-headers-suffix
 #$TARGET-cpp -Wp,-v
 echo "==========================================="

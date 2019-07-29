@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e
-set -x
 
 if [ -z "${TOOLCHAIN_ARCH}" ]; then
 	export | grep -i toolchain
@@ -83,7 +82,9 @@ echo "---"
 $LINUX_TARGET-gcc --version 2>&1
 echo "---"
 
-
 $PREFIX/bin/$LINUX_TARGET-gcc --version
-
 echo $($PREFIX/bin/$LINUX_TARGET-gcc --version 2>&1 | head -1 | sed -e"s/$LINUX_TARGET-gcc (GCC) //")
+
+find $PREFIX | sort
+
+bash $RECIPE_DIR/run_test.sh || true

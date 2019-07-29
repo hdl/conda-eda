@@ -30,6 +30,16 @@ build:
     - CI
     - TRAVIS
     - TOOLCHAIN_ARCH
+  detect_binary_files_with_prefix: False
+  binary_relocation:
+    - 'bin/*'
+    - 'lib/*.so*'
+    - 'libexec/**/*.so*'
+    - 'libexec/**/cc1*'
+    - 'libexec/**/collect2'
+    - 'libexec/**/gcc'
+    - 'libexec/**/lto*'
+    - 'libexec/**/plugin/gengtype'
 
 requirements:
   build:
