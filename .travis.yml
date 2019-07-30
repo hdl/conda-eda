@@ -41,6 +41,14 @@ jobs:
      env:
      - PACKAGE=libftdi
 
+   # musl toolchain...
+   - stage: "Toolchain - Linux MUSL"
+     env:
+     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=or1k
+   - stage: "Toolchain - Linux MUSL"
+     env:
+     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
+
    # lm32 toolchain
    - stage: "Binutils"
      env:
