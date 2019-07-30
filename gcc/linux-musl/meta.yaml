@@ -16,10 +16,13 @@ source:
     fn: gcc-{{ version }}.tar.gz
     sha256: 79a66834e96a6050d8fe78db2c3b32fb285b230b855d0a66288235bc04b327a0
     folder: gcc
-  - url: https://www.musl-libc.org/releases/musl-1.1.23.tar.gz
-    fn: musl-1.1.23.tar.gz
-    sha256: 8a0feb41cef26c97dde382c014e68b9bb335c094bbc1356f6edaaf6b79bd14aa
+  - git_url: git://git.musl-libc.org/musl
+    git_rev: ac304227bb3ea1787d581f17d76a5f5f3abff51f
     folder: musl
+{% if environ.get('TOOLCHAIN_ARCH') == 'riscv32' %}
+    patches:
+     - 0001-20190519-merge-riscv.patch
+{% endif %}
 
 build:
   # number: 201803050325
