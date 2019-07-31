@@ -41,28 +41,6 @@ jobs:
      env:
      - PACKAGE=libftdi
 
-   # musl toolchain...
-   - stage: "Toolchain - Linux MUSL"
-     env:
-     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=or1k
-   - stage: "Toolchain - Linux MUSL"
-     env:
-     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
-
-   # lm32 toolchain
-   - stage: "Binutils"
-     env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=lm32
-   - stage: "GCC - nostdc"
-     env:
-     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=lm32
-   - stage: "GCC - newlib"
-     env:
-     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=lm32
-   - stage: "GDB"
-     env:
-     - PACKAGE=gdb          TOOLCHAIN_ARCH=lm32
-
    # or1k toolchain
    - stage: "Binutils"
      env:
@@ -73,6 +51,9 @@ jobs:
    - stage: "GCC - newlib"
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=or1k
+   - stage: "GCC - Linux (musl)"
+     env:
+     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=or1k     
    - stage: "GDB"
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=or1k
@@ -87,14 +68,39 @@ jobs:
    - stage: "GCC - newlib"
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv32
+   - stage: "GCC - Linux (musl)"
+     env:
+     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv32     
    - stage: "GDB"
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv32
 
-   # sh2 toolchain
+   # lm32 toolchain - no linux
+   - stage: "Binutils"
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=lm32
+   - stage: "GCC - nostdc"
+     env:
+     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=lm32
+   - stage: "GCC - newlib"
+     env:
+     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=lm32
+   - stage: "GDB"
+     env:
+     - PACKAGE=gdb          TOOLCHAIN_ARCH=lm32
+
+   # sh2 toolchain - no gcc?
    - stage: "Binutils"
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=sh2
+
+   # Full Linux musl toolchain using musl-cross-make
+   - stage: "Toolchain - Linux MUSL"
+     env:
+     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=or1k
+   - stage: "Toolchain - Linux MUSL"
+     env:
+     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
 
    # Other Tools
    - stage: "Other Tools"
