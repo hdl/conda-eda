@@ -1,0 +1,38 @@
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG or 'v0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+package:
+  name: fxload
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/mithro/fxload.git
+  git_rev: master
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - pkg-config
+  host:
+    - libusb
+  run:
+    - libusb
+
+about:
+  home: https://github.com/mithro/fxload
+  license_file: COPYING
+  summary: 'A continuation of the fxload tool from linux-hotplug.'
+
+extra:
+  maintainers:
+    - Tim 'mithro' Ansell <mithro@mithis.com>
+    - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>

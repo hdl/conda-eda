@@ -123,6 +123,10 @@ jobs:
      env:
      - PACKAGE=flterm
 
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=fxload
+
    # Verilog tools
    - stage: "Verilog Tools"
      env:
