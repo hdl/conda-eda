@@ -31,15 +31,15 @@ jobs:
    # Libraries
    - stage: "Libraries"
      env:
-     - PACKAGE=isl
+     - PACKAGE=lib/isl
 
    - stage: "Libraries"
      env:
-     - PACKAGE=libusb
+     - PACKAGE=lib/usb
 
    - stage: "Libraries"
      env:
-     - PACKAGE=libftdi
+     - PACKAGE=lib/ftdi
 
    # or1k toolchain
    - stage: "Binutils"
