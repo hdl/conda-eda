@@ -48,12 +48,12 @@ jobs:
    - stage: "GCC - nostdc"
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=or1k
-   - stage: "GCC - Linux (musl)"
-     env:
-     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=or1k
    - stage: "GCC - newlib"
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=or1k
+   - stage: "GCC - Linux (musl)"
+     env:
+     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=or1k     
    - stage: "GDB"
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=or1k
@@ -65,12 +65,12 @@ jobs:
    - stage: "GCC - nostdc"
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv32
-   - stage: "GCC - Linux (musl)"
-     env:
-     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv32
    - stage: "GCC - newlib"
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv32
+   - stage: "GCC - Linux (musl)"
+     env:
+     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv32     
    - stage: "GDB"
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv32
@@ -93,6 +93,14 @@ jobs:
    - stage: "Binutils"
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=sh2
+
+   # Full Linux musl toolchain using musl-cross-make
+   - stage: "Toolchain - Linux MUSL"
+     env:
+     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=or1k
+   - stage: "Toolchain - Linux MUSL"
+     env:
+     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
 
    # Other Tools
    - stage: "Other Tools"
