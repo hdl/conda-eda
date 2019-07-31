@@ -102,75 +102,81 @@ jobs:
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
 
-   # Other Tools
+   # Other tools
    - stage: "Other Tools"
      env:
      - PACKAGE=sdcc
 
-   - stage: "Other Tools"
+   # Programming Tools
+
+   - stage: "Programming Tools"
      env:
-     - PACKAGE=iceprog
+     - PACKAGE=prog/iceprog
 
    - stage: "Other Tools"
      env:
-     - PACKAGE=icefunprog
+     - PACKAGE=prog/icefunprog
 
    - stage: "Other Tools"
      env:
-     - PACKAGE=openocd
+     - PACKAGE=prog/openocd
 
    - stage: "Other Tools"
      env:
-     - PACKAGE=flterm
+     - PACKAGE=prog/flterm
 
    - stage: "Other Tools"
      env:
-     - PACKAGE=fxload
+     - PACKAGE=prog/fxload
 
    - stage: "Other Tools"
      env:
-     - PACKAGE=dfu-util
+     - PACKAGE=prog/dfu-util
 
    # Verilog tools
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=arachne-pnr
+     - PACKAGE=verilog/arachne-pnr
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=icestorm
+     - PACKAGE=verilog/icestorm
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=prjtrellis
+     - PACKAGE=verilog/prjtrellis
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=iverilog
+     - PACKAGE=verilog/icarus
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=nextpnr/ice40
+     - PACKAGE=verilog/iverilog
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=nextpnr/ecp5
+     - PACKAGE=verilog/nextpnr/ice40
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=nextpnr/generic
+     - PACKAGE=verilog/nextpnr/ecp5
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=verilator
+     - PACKAGE=verilog/nextpnr/generic
+
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=verilog/verilator
 
 #   - stage: "Verilog Tools"
 #     env:
-#     - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge
+#     - PACKAGE=verilog/vtr                 CONDA_CHANNELS=conda-forge
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=yosys
+     - PACKAGE=verilog/yosys
 
 matrix:
   allow_failures:
