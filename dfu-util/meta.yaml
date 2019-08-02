@@ -1,0 +1,37 @@
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG or 'v0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+package:
+  name: dfu-util
+  version: {{ version }}
+
+source:
+  git_url: https://git.code.sf.net/p/dfu-util/dfu-util.git
+  git_rev: master
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - pkg-config
+  host:
+    - libusb
+  run:
+    - libusb
+
+about:
+  home: http://dfu-util.sourceforge.net
+  license_file: COPYING
+  summary: 'Device Firmware Upgrade Utilities'
+
+extra:
+  maintainers:
+    - Tim 'mithro' Ansell <mithro@mithis.com>
+    - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>

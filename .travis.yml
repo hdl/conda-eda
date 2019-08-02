@@ -127,6 +127,10 @@ jobs:
      env:
      - PACKAGE=fxload
 
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=dfu-util
+
    # Verilog tools
    - stage: "Verilog Tools"
      env:
