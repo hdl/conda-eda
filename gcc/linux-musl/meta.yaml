@@ -1,7 +1,7 @@
 {% set version = '9.1.0' %}
 
 package:
-  name: gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-linux-musl
+  name: gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-linux-musl
   version: {{ version }}
 
 source:
