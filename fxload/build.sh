@@ -9,5 +9,7 @@ fi
 
 make -j$CPU_COUNT
 make prefix=$PREFIX install
+mkdir -p $PREFIX/bin
+ln -s $PREFIX/sbin/fxload $PREFIX/bin/fxload
 
 fxload --help || true
