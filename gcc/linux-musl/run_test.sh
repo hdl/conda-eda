@@ -51,11 +51,24 @@ set +x
 set +e
 
 
-if [ "${TOOLCHAIN_ARCH}" = "riscv32" ]; then
+case "${TOOLCHAIN_ARCH}" in
+riscv32)
 	ELF_ARCH="riscv:rv32"
-else
-	ELF_ARCH="${TOOLCHAIN_ARCH}"
-fi
+	;;
+sh)
+	ELF_ARCH="sh"
+	;;
+or1k)
+	ELF_ARCH="or1k"
+	;;
+lm32)
+	ELF_ARCH="lm32"
+	;;
+*)
+	echo "Unknown architecture! ${TOOLCHAIN_ARCH}"
+	exit 1
+	;;
+esac
 
 # Check the compiler version matches
 GCC_PKG_VERSION=$(echo $PKG_VERSION | sed -e's/-.*//')
