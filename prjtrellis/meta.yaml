@@ -1,0 +1,47 @@
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+package:
+  name: prjtrellis
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/SymbiFlow/prjtrellis.git
+  git_rev: master
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - libboost
+    - py-boost
+    - python 3.7
+  host:
+    - cmake
+    - patchelf
+    - pkg-config
+  run:
+    - bison
+    - flex
+    - libboost
+    - py-boost
+    - python
+
+about:
+  home: https://prjtrellis.readthedocs.io
+  license_file: COPYING
+  summary: 'Project Trellis enables a fully open-source flow for ECP5 FPGAs using Yosys for Verilog synthesis and nextpnr for place and route. Project Trellis itself provides the device database and tools for bitstream creation.'
+
+extra:
+  maintainers:
+    - Tim 'mithro' Ansell <mithro@mithis.com>
+    - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>
