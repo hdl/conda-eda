@@ -108,28 +108,27 @@ jobs:
      - PACKAGE=sdcc
 
    # Programming Tools
-
    - stage: "Programming Tools"
      env:
      - PACKAGE=prog/iceprog
 
-   - stage: "Other Tools"
+   - stage: "Programming Tools"
      env:
      - PACKAGE=prog/icefunprog
 
-   - stage: "Other Tools"
+   - stage: "Programming Tools"
      env:
      - PACKAGE=prog/openocd
 
-   - stage: "Other Tools"
+   - stage: "Programming Tools"
      env:
      - PACKAGE=prog/flterm
 
-   - stage: "Other Tools"
+   - stage: "Programming Tools"
      env:
      - PACKAGE=prog/fxload
 
-   - stage: "Other Tools"
+   - stage: "Programming Tools"
      env:
      - PACKAGE=prog/dfu-util
 
