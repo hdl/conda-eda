@@ -133,50 +133,49 @@ jobs:
      env:
      - PACKAGE=prog/dfu-util
 
-   # Verilog tools
+   # Verilog Tools - Bitstream Tool
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=verilog/arachne-pnr
+     - PACKAGE=verilog/bit/icestorm
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=verilog/icestorm
+     - PACKAGE=verilog/bit/prjtrellis
+
+   # Verilog Tools - Synthesis
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=verilog/syn/yosys
+
+   # Verilog Tools - Place and Route
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=verilog/pnr/arachne
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=verilog/prjtrellis
+     - PACKAGE=verilog/pnr/nextpnr/ice40
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=verilog/icarus
+     - PACKAGE=verilog/pnr/nextpnr/ecp5
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=verilog/iverilog
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=verilog/nextpnr/ice40
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=verilog/nextpnr/ecp5
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=verilog/nextpnr/generic
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=verilog/verilator
+     - PACKAGE=verilog/pnr/nextpnr/generic
 
 #   - stage: "Verilog Tools"
 #     env:
-#     - PACKAGE=verilog/vtr                 CONDA_CHANNELS=conda-forge
+#     - PACKAGE=verilog/pnr/vtr                 CONDA_CHANNELS=conda-forge
+
+   # Verilog Tools - Simulation
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=verilog/sim/icarus
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=verilog/yosys
+     - PACKAGE=verilog/sim/verilator
 
 matrix:
   allow_failures:
