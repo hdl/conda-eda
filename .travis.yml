@@ -158,6 +158,10 @@ jobs:
 
    - stage: "Verilog Tools"
      env:
+     - PACKAGE=nextpnr/generic
+
+   - stage: "Verilog Tools"
+     env:
      - PACKAGE=verilator
 
 #   - stage: "Verilog Tools"
