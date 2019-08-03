@@ -177,3 +177,7 @@ after_failure:
 
 after_success:
  - bash $TRAVIS_BUILD_DIR/.travis/after_success.sh
+
+cache:
+  directories:
+   - /home/travis/.conda/pkgs

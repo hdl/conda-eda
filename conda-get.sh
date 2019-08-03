@@ -12,6 +12,15 @@ if [ ! -d $CONDA_PATH -o ! -z "$CI"  ]; then
 fi
 export PATH=$CONDA_PATH/bin:$PATH
 
+conda info
+
+conda config --set safety_checks disabled
+conda config --set channel_priority strict
+mkdir -p /home/$USER/.conda/pkg
+conda config --prepend pkgs_dirs /home/$USER/.conda/pkg
+
+conda config --show
+
 #echo "python==3.7" > $CONDA_PATH/conda-meta/pinned
 #echo "conda-build==3.14.0" >> $CONDA_PATH/conda-meta/pinned
 
