@@ -150,7 +150,11 @@ jobs:
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=nextpnr
+     - PACKAGE=nextpnr/ice40
+
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=nextpnr/ecp5
 
    - stage: "Verilog Tools"
      env:
