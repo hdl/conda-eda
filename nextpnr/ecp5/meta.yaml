@@ -1,7 +1,7 @@
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 
 package:
-  name: nextpnr
+  name: nextpnr-ecp5
   version: {{ version }}
 
 source:
@@ -29,7 +29,7 @@ requirements:
     - cmake
     - eigen
     - flex
-    - icestorm
+    - prjtrellis
     - pkg-config
     - python 3.7
   run:
@@ -41,7 +41,7 @@ requirements:
 
 test:
   commands:
-    - nextpnr-ice40 -V
+    - nextpnr-ecp5 -V
 
 about:
   home: https://github.com/YosysHQ/nextpnr
