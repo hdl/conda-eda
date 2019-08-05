@@ -3,43 +3,23 @@ language: minimal
 dist: xenial
 addons:
   apt:
-    update: true
     packages:
     - realpath
-    - autoconf
-    - automake
-    - build-essential
-    - gperf
-    - libftdi-dev
-    - libudev-dev
-    - libudev1
-    - libusb-1.0-0-dev
-    - libusb-dev
-    - texinfo
-
-before_install:
- - source $TRAVIS_BUILD_DIR/.travis/common.sh
- - bash $TRAVIS_BUILD_DIR/.travis/fixup-git.sh
- - source $TRAVIS_BUILD_DIR/.travis/common.sh
-
-install:
- - ./.travis/install.sh
-
 
 jobs:
   include:
    # Libraries
    - stage: "Libraries"
      env:
-     - PACKAGE=isl
+     - PACKAGE=lib/isl
 
    - stage: "Libraries"
      env:
-     - PACKAGE=libusb
+     - PACKAGE=lib/usb
 
    - stage: "Libraries"
      env:
-     - PACKAGE=libftdi
+     - PACKAGE=lib/ftdi
 
    # or1k toolchain
    - stage: "Binutils"
@@ -102,86 +82,102 @@ jobs:
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
 
-   # Other Tools
+   # Other tools
    - stage: "Other Tools"
      env:
      - PACKAGE=sdcc
 
-   - stage: "Other Tools"
+   # Programming Tools
+   - stage: "Programming Tools"
      env:
-     - PACKAGE=iceprog
+     - PACKAGE=prog/iceprog
 
-   - stage: "Other Tools"
+   - stage: "Programming Tools"
      env:
-     - PACKAGE=icefunprog
+     - PACKAGE=prog/icefunprog
 
-   - stage: "Other Tools"
+   - stage: "Programming Tools"
      env:
-     - PACKAGE=openocd
+     - PACKAGE=prog/openocd
 
-   - stage: "Other Tools"
+   - stage: "Programming Tools"
      env:
-     - PACKAGE=flterm
+     - PACKAGE=prog/flterm
 
-   - stage: "Other Tools"
+   - stage: "Programming Tools"
      env:
-     - PACKAGE=fxload
+     - PACKAGE=prog/fxload
 
-   - stage: "Other Tools"
+   - stage: "Programming Tools"
      env:
-     - PACKAGE=dfu-util
+     - PACKAGE=prog/dfu-util
 
-   # Verilog tools
+   # Verilog Tools - Bitstream Tool
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=arachne-pnr
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=icestorm
+     - PACKAGE=verilog/bit/icestorm
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=prjtrellis
+     - PACKAGE=verilog/bit/prjtrellis
+
+   # Verilog Tools - Synthesis
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=verilog/syn/yosys
+
+   # Verilog Tools - Place and Route
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=verilog/pnr/arachne
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=iverilog
+     - PACKAGE=verilog/pnr/nextpnr/ice40
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=nextpnr/ice40
+     - PACKAGE=verilog/pnr/nextpnr/ecp5
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=nextpnr/ecp5
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=nextpnr/generic
-
-   - stage: "Verilog Tools"
-     env:
-     - PACKAGE=verilator
+     - PACKAGE=verilog/pnr/nextpnr/generic
 
 #   - stage: "Verilog Tools"
 #     env:
-#     - PACKAGE=vtr                 CONDA_CHANNELS=conda-forge
+#     - PACKAGE=verilog/pnr/vtr                 CONDA_CHANNELS=conda-forge
+
+   # Verilog Tools - Simulation
+   - stage: "Verilog Tools"
+     env:
+     - PACKAGE=verilog/sim/icarus
 
    - stage: "Verilog Tools"
      env:
-     - PACKAGE=yosys
+     - PACKAGE=verilog/sim/verilator
 
 matrix:
   allow_failures:
   - env: PACKAGE=vtr CONDA_CHANNELS=conda-forge
   fast_finish: true
 
+before_install:
+ - source $TRAVIS_BUILD_DIR/.travis/common.sh
+ - bash $TRAVIS_BUILD_DIR/.travis/fixup-git.sh
+ - source $TRAVIS_BUILD_DIR/.travis/common.sh
+
+install:
+ - ./.travis/install.sh
+
 script:
-  - bash $TRAVIS_BUILD_DIR/.travis/script.sh
+ - bash $TRAVIS_BUILD_DIR/.travis/script.sh
 
 after_failure:
-  - bash $TRAVIS_BUILD_DIR/.travis/after_failure.sh
+ - bash $TRAVIS_BUILD_DIR/.travis/after_failure.sh
 
 after_success:
-  - bash $TRAVIS_BUILD_DIR/.travis/after_success.sh
+ - bash $TRAVIS_BUILD_DIR/.travis/after_success.sh
+
+cache:
+  directories:
+   - /home/travis/.conda/pkgs

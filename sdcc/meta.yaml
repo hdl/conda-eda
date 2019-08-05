@@ -23,6 +23,7 @@ requirements:
   host:
     - ncurses
     - boost
+    - texinfo
   run:
     - libboost
   {% for package in resolved_packages('host') %}
