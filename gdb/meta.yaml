@@ -26,6 +26,7 @@ requirements:
     - {{ compiler('cxx') }}
     - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
     - gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-nostdc
+    - texinfo
     - zlib
   run:
     - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
