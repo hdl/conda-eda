@@ -83,5 +83,6 @@ echo "============================================================"
 
 make -j$CPU_COUNT
 make install
-rm $PREFIX/$TOOLCHAIN_ARCH-linux-musl/lib/ld-musl-$TOOLCHAIN_ARCH.so.1
-ln -sf $PREFIX/$TOOLCHAIN_ARCH-linux-musl/lib/libc.so $PREFIX/$TOOLCHAIN_ARCH-linux-musl/lib/ld-musl-$TOOLCHAIN_ARCH.so.1
+ls -l $PREFIX/$TOOLCHAIN_ARCH-linux-musl/lib/ld-musl-*
+rm -f $PREFIX/$TOOLCHAIN_ARCH-linux-musl/lib/ld-musl-$TOOLCHAIN_ARCH*.so.1
+ln -sf $PREFIX/$TOOLCHAIN_ARCH-linux-musl/lib/libc.so $PREFIX/$TOOLCHAIN_ARCH-linux-musl/lib/ld-musl-$TOOLCHAIN_ARCH*.so.1
