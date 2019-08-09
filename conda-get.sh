@@ -29,6 +29,7 @@ conda update -y conda
 
 conda install -y conda-build
 conda install -y conda-verify
+conda install -y ripgrep
 
 conda install -y anaconda-client
 conda install -y jinja2
