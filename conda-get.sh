@@ -16,8 +16,8 @@ conda info
 
 conda config --set safety_checks disabled
 conda config --set channel_priority strict
-mkdir -p /home/$USER/.conda/pkg
-conda config --prepend pkgs_dirs /home/$USER/.conda/pkg
+mkdir -p ~/.conda/pkg
+conda config --prepend pkgs_dirs ~/.conda/pkg
 
 conda config --show
 
