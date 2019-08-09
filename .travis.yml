@@ -69,10 +69,22 @@ jobs:
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=lm32
 
-   # sh2 toolchain - no gcc?
+   # sh2 toolchain
    - stage: "Binutils"
      env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=sh2
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=sh
+   - stage: "GCC - nostdc"
+     env:
+     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=sh
+   - stage: "GCC - newlib"
+     env:
+     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=sh
+   - stage: "GCC - Linux (musl)"
+     env:
+     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=sh
+   - stage: "GDB"
+     env:
+     - PACKAGE=gdb          TOOLCHAIN_ARCH=sh
 
    # Full Linux musl toolchain using musl-cross-make
    - stage: "Toolchain - Linux MUSL"
@@ -81,6 +93,9 @@ jobs:
    - stage: "Toolchain - Linux MUSL"
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
+   - stage: "Toolchain - Linux MUSL"
+     env:
+     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=sh
 
    # Other tools
    - stage: "Other Tools"
