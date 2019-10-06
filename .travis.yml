@@ -127,49 +127,49 @@ jobs:
      env:
      - PACKAGE=prog/dfu-util
 
-   # Verilog Tools - Bitstream Tool
-   - stage: "Verilog Tools"
+   # EDA Tools - Bitstream Tool
+   - stage: "EDA Tools"
      env:
-     - PACKAGE=verilog/bit/icestorm
+     - PACKAGE=eda/bit/icestorm
 
-   - stage: "Verilog Tools"
+   - stage: "EDA Tools"
      env:
-     - PACKAGE=verilog/bit/prjtrellis
+     - PACKAGE=eda/bit/prjtrellis
 
-   # Verilog Tools - Synthesis
-   - stage: "Verilog Tools"
+   # EDA Tools - Synthesis
+   - stage: "EDA Tools"
      env:
-     - PACKAGE=verilog/syn/yosys
+     - PACKAGE=eda/syn/yosys
 
-   # Verilog Tools - Place and Route
-   - stage: "Verilog Tools"
+   # EDA Tools - Place and Route
+   - stage: "EDA Tools"
      env:
-     - PACKAGE=verilog/pnr/arachne
+     - PACKAGE=eda/pnr/arachne
 
-   - stage: "Verilog Tools"
+   - stage: "EDA Tools"
      env:
-     - PACKAGE=verilog/pnr/nextpnr/ice40
+     - PACKAGE=eda/pnr/nextpnr/ice40
 
-   - stage: "Verilog Tools"
+   - stage: "EDA Tools"
      env:
-     - PACKAGE=verilog/pnr/nextpnr/ecp5
+     - PACKAGE=eda/pnr/nextpnr/ecp5
 
-   - stage: "Verilog Tools"
+   - stage: "EDA Tools"
      env:
-     - PACKAGE=verilog/pnr/nextpnr/generic
+     - PACKAGE=eda/pnr/nextpnr/generic
 
-#   - stage: "Verilog Tools"
+#   - stage: "EDA Tools"
 #     env:
-#     - PACKAGE=verilog/pnr/vtr                 CONDA_CHANNELS=conda-forge
+#     - PACKAGE=eda/pnr/vtr                 CONDA_CHANNELS=conda-forge
 
-   # Verilog Tools - Simulation
-   - stage: "Verilog Tools"
+   # EDA Tools - Simulation
+   - stage: "EDA Tools"
      env:
-     - PACKAGE=verilog/sim/icarus
+     - PACKAGE=eda/sim/icarus
 
-   - stage: "Verilog Tools"
+   - stage: "EDA Tools"
      env:
-     - PACKAGE=verilog/sim/verilator
+     - PACKAGE=eda/sim/verilator
 
 matrix:
   allow_failures:
