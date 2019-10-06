@@ -90,12 +90,12 @@ jobs:
    - stage: "Binutils"
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=ppc64le
-   - stage: "GCC - nostdc"
-     env:
-     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=ppc64le
-   - stage: "GCC - newlib"
-     env:
-     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=ppc64le
+#   - stage: "GCC - nostdc"
+#     env:
+#     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=ppc64le
+#   - stage: "GCC - newlib"
+#     env:
+#     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=ppc64le
    - stage: "GCC - Linux (musl)"
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=ppc64le
