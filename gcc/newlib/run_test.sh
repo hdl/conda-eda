@@ -13,6 +13,9 @@ case "${TOOLCHAIN_ARCH}" in
 riscv32)
 	ELF_ARCH="riscv:rv32"
 	;;
+riscv64)
+	ELF_ARCH="riscv:rv64"
+	;;
 sh)
 	ELF_ARCH="sh"
 	;;
