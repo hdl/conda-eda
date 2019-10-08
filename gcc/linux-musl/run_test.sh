@@ -67,6 +67,9 @@ or1k)
 lm32)
 	ELF_ARCH="lm32"
 	;;
+ppc64le)
+	ELF_ARCH="powerpc:common64"
+	;;
 *)
 	echo "Unknown architecture! ${TOOLCHAIN_ARCH}"
 	exit 1
