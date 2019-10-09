@@ -129,6 +129,12 @@ jobs:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
    - stage: "Toolchain - Linux MUSL"
      env:
+     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv64
+   - stage: "Toolchain - Linux MUSL"
+     env:
+     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=ppc64le
+   - stage: "Toolchain - Linux MUSL"
+     env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=sh
 
    # Other tools
