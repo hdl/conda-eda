@@ -55,6 +55,9 @@ case "${TOOLCHAIN_ARCH}" in
 riscv32)
 	ELF_ARCH="riscv:rv32"
 	;;
+riscv64)
+	ELF_ARCH="riscv:rv64"
+	;;
 sh)
 	ELF_ARCH="sh"
 	;;
@@ -63,6 +66,9 @@ or1k)
 	;;
 lm32)
 	ELF_ARCH="lm32"
+	;;
+ppc64le)
+	ELF_ARCH="powerpc:common64"
 	;;
 *)
 	echo "Unknown architecture! ${TOOLCHAIN_ARCH}"

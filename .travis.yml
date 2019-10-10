@@ -59,15 +59,15 @@ jobs:
    - stage: "Binutils"
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv64
-#   - stage: "GCC - nostdc"
-#     env:
-#     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv64
+   - stage: "GCC - nostdc"
+     env:
+     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv64
 #   - stage: "GCC - newlib"
 #     env:
 #     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv64
-#   - stage: "GCC - Linux (musl)"
-#     env:
-#     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv64
+   - stage: "GCC - Linux (musl)"
+     env:
+     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv64
 #   - stage: "GDB"
 #     env:
 #     - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv64
@@ -96,9 +96,9 @@ jobs:
 #   - stage: "GCC - newlib"
 #     env:
 #     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=ppc64le
-#   - stage: "GCC - Linux (musl)"
-#     env:
-#     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=ppc64le
+   - stage: "GCC - Linux (musl)"
+     env:
+     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=ppc64le
 #   - stage: "GDB"
 #     env:
 #     - PACKAGE=gdb          TOOLCHAIN_ARCH=ppc64le
@@ -127,6 +127,12 @@ jobs:
    - stage: "Toolchain - Linux MUSL"
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
+   - stage: "Toolchain - Linux MUSL"
+     env:
+     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv64
+#   - stage: "Toolchain - Linux MUSL"
+#     env:
+#     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=ppc64le
    - stage: "Toolchain - Linux MUSL"
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=sh

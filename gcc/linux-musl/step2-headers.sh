@@ -45,6 +45,7 @@ case "${TOOLCHAIN_ARCH}" in
 	riscv*)	LINUX_ARCH=riscv 	;;
 	or1k*)	LINUX_ARCH=openrisc	;;
 	sh*)	LINUX_ARCH=sh		;;
+	ppc*)	LINUX_ARCH=powerpc	;;
 esac
 export LINUX_ARCH
 
