@@ -62,15 +62,15 @@ jobs:
    - stage: "GCC - nostdc"
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv64
-#   - stage: "GCC - newlib"
-#     env:
-#     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv64
+   - stage: "GCC - newlib"
+     env:
+     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv64
    - stage: "GCC - Linux (musl)"
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv64
-#   - stage: "GDB"
-#     env:
-#     - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv64
+   - stage: "GDB"
+     env:
+     - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv64
 
    # lm32 toolchain - no linux
    - stage: "Binutils"
