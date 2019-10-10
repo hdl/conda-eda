@@ -141,6 +141,9 @@ jobs:
    - stage: "Other Tools"
      env:
      - PACKAGE=sdcc
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=sigrok-cli
 
    # Programming Tools
    - stage: "Programming Tools"

@@ -1,0 +1,46 @@
+package:
+  name: sigrok-cli
+  version: {{ GIT_FULL_HASH }}
+
+source:
+  - git_url: https://github.com/sigrokproject/libserialport
+    git_rev: master
+    folder: libserialport
+  - git_url: https://github.com/sigrokproject/libsigrok
+    git_rev: master
+    folder: libsigrok
+  - git_url: https://github.com/sigrokproject/libsigrokdecode
+    git_rev: master
+    folder: libsigrokdecode
+  - git_url: https://github.com/sigrokproject/sigrok-cli
+    git_rev: master
+    folder: sigrok-cli
+
+build:
+  number: {{ '1%04i00%s'|format(GIT_DESCRIBE_NUMBER|int, os.environ.get('DATESTR')) }}
+  string: {{ '%04i'|format(GIT_DESCRIBE_NUMBER|int) }}.{{ os.environ.get('DATESTR') }}.{{ GIT_DESCRIBE_HASH }}
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - python {{ python }}
+    - pkg-config
+    - libusb
+    - libzip
+    - glib
+    - glibmm
+    - doxygen
+  host:
+    - python {{ python }}
+    - pkg-config
+    - libzip
+    - glib
+
+about:
+  home: http://sigrok.org/
+  license: GPLv3
+  summary: 'The sigrok project aims at creating a portable, cross-platform, Free/Libre/Open-Source signal analysis software suite that supports various device types (e.g. logic analyzers, oscilloscopes, and many more).'
