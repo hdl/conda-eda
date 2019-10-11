@@ -4,25 +4,26 @@ Conda recipes for FPGA EDA tools (for synthesis, place and route and bitstream g
 
 # Synthesis
 
- * Yosys
- * TODO: ghdl?
+ * [Yosys](https://github.com/YosysHQ/yosys)
+ * TODO: [GHDL Synthesis](https://github.com/tgingold/ghdlsynth-beta)
 
 # Place and Route
 
- * arachne
- * nextpnr (iCE40, ECP5, generic)
- * vpr
+ * [arachne](
+ * [nextpnr (iCE40, ECP5, generic)](https://github.com/YosysHQ/nextpnr)
+ * [Versatile Place and Route (vpr)](https://github.com/verilog-to-routing/vtr-verilog-to-routing)
 
 # Bitstream
 
- * icestorm
- * prjtrellis
- * TODO: prjxray
+ * [Project Icestorm](https://github.com/cliffordwolf/icestorm)
+ * [Project Trellis](https://github.com/SymbiFlow/prjtrellis)
+ * TODO: [Project X-Ray](https://github.com/SymbiFlow/prjxray)
 
 # Simulation
 
- * Icarus Verilog
- * Verilator
+ * TODO: [GHDL](http://ghdl.free.fr/)
+ * [Icarus Verilog](http://iverilog.icarus.com/)
+ * [Verilator](https://www.veripool.org/wiki/verilator)
 
 # Building
 
