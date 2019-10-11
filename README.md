@@ -1,44 +1,28 @@
-# conda-hdmi2usb-packages
+# litex-conda-eda
 
-Conda build recipes for HDMI2USB-litex-firmware build dependencies.
+Conda recipes for FPGA EDA tools (for synthesis, place and route and bitstream generation)
 
-Basically, anything which hasn't gotten a proper package at https://launchpad.net/~timvideos/+archive/ubuntu/hdmi2usb
+# Synthesis
 
-# Toolchains
+ * Yosys
+ * TODO: ghdl?
 
-## LiteX "soft-CPU" support
+# Place and Route
 
-The LiteX system supports both a `lm32` and `or1k` "soft-CPU" implementations.
+ * arachne
+ * nextpnr (iCE40, ECP5, generic)
+ * vpr
 
-Current versions are;
+# Bitstream
 
- * binutils - 2.31.0
- * gcc - 8.2.0
- * gcc+newlib - 8.2.0 + 3.0.0
- * gdb - 8.2
+ * icestorm
+ * prjtrellis
+ * TODO: prjxray
 
-### lm32-elf
+# Simulation
 
- * All come from upstream.
-
-### or1k-elf
-
- * binutils, gdb & newlib - upstream
- * gcc - Rebase of Stafford Horn's gcc 9.0 patches
-
-## riscv32-elf
-
- * All come from upstream.
-
-## Cypress FX2 support
-
- * sdcc (Current version: 3.5.0)
-
-# Support Tools
-
-## OpenOCD
-
-Tool for JTAG programming.
+ * Icarus Verilog
+ * Verilator
 
 # Building
 
@@ -51,21 +35,21 @@ Travis CI, and the [`.travis`](.travis) directory for scripts referenced.
 The Travis CI output can be found on the https://travis-ci.org/ for the
 GitHub account and GitHub repository.  For instance, for the main:
 
-https://github.com/timvideos/conda-hdmi2usb-packages
+https://github.com/litex-hub/litex-conda-eda
 
 GitHub repository, the Travis CI results can be seen at:
 
-https://travis-ci.org/timvideos/conda-hdmi2usb-packages
+https://travis-ci.org/litex-hub/litex-conda-eda
 
 On a successful build in the `timvideos` Travis CI, the resulting packages
 are uploaded to:
 
-https://anaconda.org/TimVideos/repo
+https://anaconda.org/litex-hub/repo
 
 and can be installed with:
 
 ```
-conda install --channel "TimVideos" package
+conda install --channel "LiteX-Hub" package
 ```
 
 These packages are mostly used by
@@ -74,11 +58,11 @@ These packages are mostly used by
 ## Building via Travis CI in your own repository
 
 If you [enable Travis CI on your GitHub
-fork](https://travis-ci.com/getting_started) of `conda-hdmi2usb-packages`
+fork](https://travis-ci.com/getting_started) of `litex-conda-eda`
 then your Travis CI results will be at:
 
 ```
-https://travis-ci.org/${GITHUB_USER}/conda-hdmi2usb-packages
+https://travis-ci.org/${GITHUB_USER}/litex-conda-eda
 ```
 
 Since the repository includes `.travis.yml` and all the other Travis CI
@@ -116,11 +100,12 @@ sudo apt-get install wget git
 # Packages from ~/.travis.yml; realpath is in coreutils in Ubuntu 18.04
 # Plus libtool and pkg-config, which are needed for openocd
 #
-#sudo apt-get install realpath autoconf automake build-essential gperf libftdi-dev libudev-dev libudev1 libusb-1.0-0-dev libusb-dev texinfo
-sudo apt-get install coreutils autoconf automake build-essential gperf libftdi-dev libudev-dev libudev1 libusb-1.0-0-dev libusb-dev texinfo libtool pkg-config
+# sudo apt-get install realpath
+sudo apt-get install coreutils
 
-git clone https://github.com/timvideos/conda-hdmi2usb-packages.git
-conda-hdmi2usb-packages/conda-get.sh
+git clone https://github.com/litex-hub/litex-conda-eda.git
+cd litex-conda-eda
+./conda-get.sh
 
 # Adapted from .travis/common.sh
 get_built_package() {
@@ -146,9 +131,7 @@ export DATE_STR="$(date --date=@${DATE_TS} -u +%Y%m%d_%H%M%S)"
 TOOLCHAIN_ARCH=lm32
 export PACKAGE TOOLCHAIN_ARCH
 
-cd conda-hdmi2usb-packages
-
-for PACKAGE in binutils gcc/nostdc gcc/newlib; do
+for PACKAGE in bit/* syn/* pnr/* sim/*; do
   ./conda-env.sh build --check "${PACKAGE}"   # Downloads and caches stuff
   ./conda-env.sh build         "${PACKAGE}"   # Actually build package
   CONDA_OUT="$(get_built_package ${PACKAGE})" # Calculate output package
