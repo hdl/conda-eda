@@ -7,6 +7,8 @@ if [ x"$TRAVIS" = xtrue ]; then
 	CPU_COUNT=2
 fi
 
+unset CXXFLAGS # Will be set by configure below
+
 for f in libserialport libsigrok libsigrokdecode sigrok-cli
 do
 	cd $f

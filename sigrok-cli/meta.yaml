@@ -33,12 +33,26 @@ requirements:
     - libzip
     - glib
     - glibmm
+    # C++ bindings
     - doxygen
+    # Python bindings
+    - swig
   host:
     - python {{ python }}
     - pkg-config
     - libzip
     - glib
+    # C++ bindings
+    - glibmm
+    - libsigcpp
+    # Python bindings
+    - pygobject
+    - numpy
+  run:
+    - python {{ python }}
+    - libzip
+    - libsigcpp
+    - glibmm
 
 about:
   home: http://sigrok.org/
