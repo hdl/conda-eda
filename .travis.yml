@@ -8,213 +8,49 @@ addons:
 
 jobs:
   include:
-   # Libraries
-   - stage: "Libraries"
-     env:
-     - PACKAGE=lib/isl
-
-   - stage: "Libraries"
-     env:
-     - PACKAGE=lib/usb
-
-   - stage: "Libraries"
-     env:
-     - PACKAGE=lib/ftdi
-
-   # or1k toolchain
-   - stage: "Binutils"
-     env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=or1k
-   - stage: "GCC - nostdc"
-     env:
-     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=or1k
-   - stage: "GCC - newlib"
-     env:
-     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=or1k
-   - stage: "GCC - Linux (musl)"
-     env:
-     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=or1k
-   - stage: "GDB"
-     env:
-     - PACKAGE=gdb          TOOLCHAIN_ARCH=or1k
-
-   # rv32 toolchain
-   - stage: "Binutils"
-     env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv32
-   - stage: "GCC - nostdc"
-     env:
-     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv32
-   - stage: "GCC - newlib"
-     env:
-     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv32
-   - stage: "GCC - Linux (musl)"
-     env:
-     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv32
-   - stage: "GDB"
-     env:
-     - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv32
-
-   # rv64 toolchain
-   - stage: "Binutils"
-     env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv64
-   - stage: "GCC - nostdc"
-     env:
-     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv64
-   - stage: "GCC - newlib"
-     env:
-     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv64
-   - stage: "GCC - Linux (musl)"
-     env:
-     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv64
-   - stage: "GDB"
-     env:
-     - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv64
-
-   # lm32 toolchain - no linux
-   - stage: "Binutils"
-     env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=lm32
-   - stage: "GCC - nostdc"
-     env:
-     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=lm32
-   - stage: "GCC - newlib"
-     env:
-     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=lm32
-   - stage: "GDB"
-     env:
-     - PACKAGE=gdb          TOOLCHAIN_ARCH=lm32
-
-   # ppc64le toolchain
-   - stage: "Binutils"
-     env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=ppc64le
-#   - stage: "GCC - nostdc"
-#     env:
-#     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=ppc64le
-#   - stage: "GCC - newlib"
-#     env:
-#     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=ppc64le
-   - stage: "GCC - Linux (musl)"
-     env:
-     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=ppc64le
-#   - stage: "GDB"
-#     env:
-#     - PACKAGE=gdb          TOOLCHAIN_ARCH=ppc64le
-
-   # sh2 toolchain
-   - stage: "Binutils"
-     env:
-     - PACKAGE=binutils     TOOLCHAIN_ARCH=sh
-   - stage: "GCC - nostdc"
-     env:
-     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=sh
-   - stage: "GCC - newlib"
-     env:
-     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=sh
-   - stage: "GCC - Linux (musl)"
-     env:
-     - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=sh
-   - stage: "GDB"
-     env:
-     - PACKAGE=gdb          TOOLCHAIN_ARCH=sh
-
-   # Full Linux musl toolchain using musl-cross-make
-   - stage: "Toolchain - Linux MUSL"
-     env:
-     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=or1k
-   - stage: "Toolchain - Linux MUSL"
-     env:
-     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
-   - stage: "Toolchain - Linux MUSL"
-     env:
-     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv64
-#   - stage: "Toolchain - Linux MUSL"
-#     env:
-#     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=ppc64le
-   - stage: "Toolchain - Linux MUSL"
-     env:
-     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=sh
-
-   # Other tools
-   - stage: "Other Tools"
-     env:
-     - PACKAGE=sdcc
-
-   # Programming Tools
-   - stage: "Programming Tools"
-     env:
-     - PACKAGE=prog/iceprog
-
-   - stage: "Programming Tools"
-     env:
-     - PACKAGE=prog/icefunprog
-
-   - stage: "Programming Tools"
-     env:
-     - PACKAGE=prog/openocd
-
-   - stage: "Programming Tools"
-     env:
-     - PACKAGE=prog/flterm
-
-   - stage: "Programming Tools"
-     env:
-     - PACKAGE=prog/fxload
-
-   - stage: "Programming Tools"
-     env:
-     - PACKAGE=prog/dfu-util
-
    # EDA Tools - Bitstream Tool
    - stage: "EDA Tools"
      env:
-     - PACKAGE=eda/bit/icestorm
+     - PACKAGE=bit/icestorm
 
    - stage: "EDA Tools"
      env:
-     - PACKAGE=eda/bit/prjtrellis
+     - PACKAGE=bit/prjtrellis
 
    # EDA Tools - Synthesis
    - stage: "EDA Tools"
      env:
-     - PACKAGE=eda/syn/yosys
+     - PACKAGE=syn/yosys
 
    # EDA Tools - Place and Route
    - stage: "EDA Tools"
      env:
-     - PACKAGE=eda/pnr/arachne
+     - PACKAGE=pnr/arachne
 
    - stage: "EDA Tools"
      env:
-     - PACKAGE=eda/pnr/nextpnr/ice40
+     - PACKAGE=pnr/nextpnr/ice40
 
    - stage: "EDA Tools"
      env:
-     - PACKAGE=eda/pnr/nextpnr/ecp5
+     - PACKAGE=pnr/nextpnr/ecp5
 
    - stage: "EDA Tools"
      env:
-     - PACKAGE=eda/pnr/nextpnr/generic
+     - PACKAGE=pnr/nextpnr/generic
 
 #   - stage: "EDA Tools"
 #     env:
-#     - PACKAGE=eda/pnr/vtr                 CONDA_CHANNELS=conda-forge
+#     - PACKAGE=pnr/vtr                 CONDA_CHANNELS=conda-forge
 
    # EDA Tools - Simulation
    - stage: "EDA Tools"
      env:
-     - PACKAGE=eda/sim/icarus
+     - PACKAGE=sim/icarus
 
    - stage: "EDA Tools"
      env:
-     - PACKAGE=eda/sim/verilator
-
-matrix:
-  allow_failures:
-  - env: PACKAGE=vtr CONDA_CHANNELS=conda-forge
-  fast_finish: true
+     - PACKAGE=sim/verilator
 
 before_install:
  - source $TRAVIS_BUILD_DIR/.travis/common.sh

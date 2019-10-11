@@ -1,8 +1,0 @@
-binutils_version:
- - 2.32
-gcc_version:
- - 9.1.0
-musl_version:
- -  git-ac304227bb3ea1787d581f17d76a5f5f3abff51f
-linux_version:
- - 4.19.44
