@@ -141,6 +141,10 @@ jobs:
    - stage: "Other Tools"
      env:
      - PACKAGE=sdcc
+   - stage: "Other Tools"
+     env:
+     - PACKAGE=sigrok-cli                 CONDA_CHANNELS=conda-forge
+
 
    # Programming Tools
    - stage: "Programming Tools"
