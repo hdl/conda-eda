@@ -1,0 +1,39 @@
+{% set version = '1.1.1' %}
+
+package:
+  name: symbiyosys
+  version: {{ version }}
+
+source:
+  git_rev: master
+  git_url: https://github.com/YosysHQ/SymbiYosys.git
+
+build:
+  detect_binary_files_with_prefix: True
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - gperf
+    - gmp
+  host:
+    - yosys
+  run:
+    - yosys
+
+test:
+  files:
+    - test/demo3.sby
+
+about:
+  home: http://symbiyosys.readthedocs.io
+  license: ISC
+  summary: 'SymbiYosys (sby) is a front-end driver program for Yosys-based formal hardware verification flows.'
