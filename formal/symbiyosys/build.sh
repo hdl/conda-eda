@@ -102,6 +102,4 @@ cd ${cwd}
 make -j$CPU_COUNT
 make PREFIX=${PREFIX} install
 
-# Fix hard coded paths in verilator
-# sed -i -e's-/.*_build_env/bin/--' $PREFIX/share/verilator/include/verilated.mk
 
