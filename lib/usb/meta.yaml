@@ -22,6 +22,8 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - automake  [not win]
+    - autoconf  [not win]
   host:
     - pkg-config [not win]
 
