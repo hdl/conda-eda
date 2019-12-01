@@ -348,4 +348,3 @@ after_success:
 cache:
   directories:
    - $HOME/.conda/pkgs
-   - $HOME/sdk
