@@ -6,6 +6,8 @@ package:
 
 source:
   git_url: https://github.com/timvideos/flterm.git
+  patches:
+    - install_macos.patch
 
 build:
   # number: 201803050325

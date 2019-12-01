@@ -1,0 +1,13 @@
+diff --git a/Makefile b/Makefile
+index 8981e2c..3477969 100644
+--- a/Makefile
++++ b/Makefile
+@@ -13,7 +13,7 @@ GIT_VERSION=$(shell git describe)
+ 
+ install: flterm
+ 	install -d $(DESTDIR)$(PREFIX)/bin
+-	install -m755 -t $(DESTDIR)$(PREFIX)/bin $^
++	install -m755 $^ $(DESTDIR)$(PREFIX)/bin
+ 
+ .PHONY: all clean install
+ 
