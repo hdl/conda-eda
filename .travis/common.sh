@@ -43,7 +43,7 @@ function end_section() {
 #     also set similarly at test time.
 export PYTHONWARNINGS=ignore::UserWarning:conda_build.environ
 
-export BASE_PATH="/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path"
+export BASE_PATH="/tmp/really-long-path"
 export CONDA_PATH="$BASE_PATH/conda"
 mkdir -p "$BASE_PATH"
 export PATH="$CONDA_PATH/bin:$PATH"
