@@ -24,6 +24,15 @@ jobs:
 #     dist: xenial
 #     env:
 #     - PACKAGE=lib/ftdi
+   # OSX
+   - stage: "Libraries"
+     os: osx
+     env:
+     - PACKAGE=lib/isl
+   - stage: "Libraries"
+     os: osx
+     env:
+     - PACKAGE=lib/usb
    # Windows
    - stage: "Libraries"
      os: windows
@@ -59,6 +68,11 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=or1k
+   # OSX
+   - stage: "Binutils"
+     os: osx
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=or1k
  # rv32 toolchain
    - stage: "Binutils"
      os: linux
@@ -85,6 +99,11 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv32
+   # OSX
+   - stage: "Binutils"
+     os: osx
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv32
  # rv64 toolchain
    - stage: "Binutils"
      os: linux
@@ -111,6 +130,11 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv64
+   # OSX
+   - stage: "Binutils"
+     os: osx
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv64
  # lm32 toolchain - no linux
    - stage: "Binutils"
      os: linux
@@ -132,6 +156,11 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=lm32
+   # OSX
+   - stage: "Binutils"
+     os: osx
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=lm32
  # ppc64le toolchain
    - stage: "Binutils"  
      os: linux
@@ -143,6 +172,12 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=ppc64le
+   # OSX
+   - stage: "Binutils"
+     os: osx
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=ppc64le
+ # sh toolchain
    - stage: "Binutils"
      os: linux
      dist: xenial
@@ -168,6 +203,11 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=sh
+   # OSX
+   - stage: "Binutils"
+     os: osx
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=sh
  # Full Linux musl toolchain using musl-cross-make
    - stage: "Toolchain - Linux MUSL"
      os: linux
@@ -242,6 +282,15 @@ jobs:
      os: windows
      env:
      - PACKAGE=prog/iceprog
+   # OSX
+   - stage: "Programming Tools"
+     os: osx
+     env:
+     - PACKAGE=prog/iceprog
+   - stage: "Programming Tools"
+     os: osx
+     env:
+     - PACKAGE=prog/flterm
  # EDA Tools - Bitstream Tool
    # Linux
    - stage: "EDA Tools - bitstream"
@@ -263,6 +312,11 @@ jobs:
      os: windows
      env:
      - PACKAGE=eda/bit/prjtrellis
+   # OSX
+   - stage: "EDA Tools"
+     os: osx
+     env:
+     - PACKAGE=eda/bit/icestorm
  # EDA Tools - Synthesis
    # Linux 
    - stage: "EDA Tools"
