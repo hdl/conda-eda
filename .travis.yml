@@ -261,6 +261,11 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=eda/syn/yosys
+   # Windows 
+   - stage: "EDA Tools"
+     os: windows
+     env:
+     - PACKAGE=eda/syn/yosys
  # EDA Tools - Place and Route
    # Linux 
    - stage: "EDA Tools"
