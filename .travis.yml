@@ -249,6 +249,11 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=eda/bit/prjtrellis
+   # Windows
+   - stage: "EDA Tools"
+     os: windows
+     env:
+     - PACKAGE=eda/bit/icestorm
  # EDA Tools - Synthesis
    # Linux 
    - stage: "EDA Tools"
