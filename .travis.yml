@@ -36,6 +36,10 @@ jobs:
      os: osx
      env:
      - PACKAGE=lib/usb
+   - stage: "Libraries"
+     os: osx
+     env:
+     - PACKAGE=lib/ftdi
    # Windows
    - stage: "Libraries"
      os: windows

@@ -44,8 +44,8 @@ requirements:
     - {{ pin_compatible('libusb', min_pin='x.x', max_pin='x.x') }}
   run:
     - {{ compiler('c') }}
-    - libgcc-ng [not win]
-    - libstdcxx-ng [not win]
+    - libgcc-ng    [linux]
+    - libstdcxx-ng [linux]
     - libusb
     - py-boost
     - python
