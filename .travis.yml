@@ -1,9 +1,9 @@
 language: minimal
 
 addons:
-  apt:
+  homebrew:
     packages:
-    - realpath
+    update: false
 
 jobs:
   include:
