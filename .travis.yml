@@ -297,6 +297,10 @@ jobs:
    - stage: "Programming Tools"
      os: osx
      env:
+     - PACKAGE=prog/icefunprog
+   - stage: "Programming Tools"
+     os: osx
+     env:
      - PACKAGE=prog/flterm
  # EDA Tools - Bitstream Tool
    # Linux
