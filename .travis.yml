@@ -237,6 +237,7 @@ jobs:
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=sh
  # Other tools
+   # Linux
    - stage: "Other Tools"
      os: linux
      dist: xenial
@@ -252,6 +253,11 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=dtc
+   # OSX
+   - stage: "Other Tools"
+     os: osx
+     env:
+     - PACKAGE=sdcc
  # Programming Tools
    # Linux 
    - stage: "Programming Tools"
