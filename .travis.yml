@@ -308,6 +308,10 @@ jobs:
      os: osx
      env:
      - PACKAGE=prog/flterm
+   - stage: "Programming Tools"
+     os: osx
+     env:
+     - PACKAGE=prog/dfu-util
  # EDA Tools - Bitstream Tool
    # Linux
    - stage: "EDA Tools - bitstream"
