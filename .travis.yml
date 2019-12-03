@@ -386,6 +386,11 @@ jobs:
      os: windows
      env:
      - PACKAGE=eda/pnr/nextpnr/ice40
+   # OSX
+   - stage: "EDA Tools"
+     os: osx
+     env:
+     - PACKAGE=eda/pnr/nextpnr/ice40
  # EDA Tools - Simulation
    # Linux 
    - stage: "EDA Tools"
