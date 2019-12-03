@@ -4,6 +4,9 @@ addons:
   homebrew:
     packages:
     update: false
+    
+osx_image:
+  - xcode8.3
 
 jobs:
   include:
