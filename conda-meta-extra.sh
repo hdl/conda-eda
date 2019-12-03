@@ -26,6 +26,10 @@ fi
 for meta in $(find -name meta.yaml); do
 	(
 		cd $(dirname $meta);
-		ln -sf $(python3 -c "import os.path; print(os.path.relpath('$TOP/recipe_append.yaml'))") recipe_append.yaml
+		if [ $TRAVIS_OS_NAME != 'windows' ]; then
+			ln -sf $(python3 -c "import os.path; print(os.path.relpath('$TOP/recipe_append.yaml'))") recipe_append.yaml
+		else
+			ln -sf $(python -c "import os.path; path=os.path.abspath('$TOP/recipe_append.yaml'); print(path[:2] + path[4:])") recipe_append.yaml
+		fi
 	)
 done
