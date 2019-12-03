@@ -399,6 +399,12 @@ jobs:
      os: windows
      env:
      - PACKAGE=eda/sim/icarus
+   # OSX
+   - stage: "EDA Tools"
+     os: osx
+     env:
+     - PACKAGE=eda/sim/icarus
+   
   allow_failures:
    - env: PACKAGE=vtr CONDA_CHANNELS=conda-forge
   fast_finish: true
