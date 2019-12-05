@@ -259,6 +259,10 @@ jobs:
      os: windows
      env:
      - PACKAGE=eda/bit/icestorm
+   - stage: "EDA Tools"
+     os: windows
+     env:
+     - PACKAGE=eda/bit/prjtrellis
  # EDA Tools - Synthesis
    # Linux 
    - stage: "EDA Tools"

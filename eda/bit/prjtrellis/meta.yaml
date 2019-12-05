@@ -23,29 +23,31 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - cmake
-    - python
-    - boost {{ boost_version }}
+    - boost     {{ boost_version }}
     - boost-cpp {{ boost_version }}
-    - libboost {{ boost_version }}
-    - py-boost {{ boost_version }}
+    - libboost  {{ boost_version }}
+    - py-boost  {{ boost_version }}
+    - python    {{ python }}
+    - m2-base   [win]
+    - cmake
   host:
     - bison
     - cmake
     - flex
-    - patchelf
-    - pkg-config
-    - python
-    - boost {{ boost_version }}
+    - patchelf   [not win]
+    - pkg-config [not win]
+    - python    {{ python }}
+    - boost     {{ boost_version }}
     - boost-cpp {{ boost_version }}
-    - libboost {{ boost_version }}
-    - py-boost {{ boost_version }}
+    - libboost  {{ boost_version }}
+    - py-boost  {{ boost_version }}
   run:
-    - libgcc-ng
-    - libstdcxx-ng
+    - libgcc-ng    [linux]
+    - libstdcxx-ng [linux]
     - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
-    - libboost {{ boost_version }}
-    - py-boost {{ boost_version }}
+    - libboost {{ boost_version }} [not win]
+    - py-boost {{ boost_version }} [not win]
+    - python   {{ python }}
 
 about:
   home: https://prjtrellis.readthedocs.io
