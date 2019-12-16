@@ -354,6 +354,11 @@ jobs:
      os: windows
      env:
      - PACKAGE=eda/syn/yosys
+   # OSX 
+   - stage: "EDA Tools"
+     os: osx
+     env:
+     - PACKAGE=eda/syn/yosys UPLOAD=storage EXTRA_BUILD_ARGS="--no-test" STORAGE_URL="https://github.com/antmicro/travis-temp-storage.git"
  # EDA Tools - Place and Route
    # Linux 
    - stage: "EDA Tools"
@@ -413,6 +418,12 @@ jobs:
      os: osx
      env:
      - PACKAGE=eda/sim/icarus
+ # Separate tests
+   # OSX
+   - stage: "Separate tests"
+     os: osx
+     env:
+     - PACKAGE=eda/syn/yosys CONDA_TEST=yes STORAGE_URL="https://github.com/antmicro/travis-temp-storage.git"
    
   allow_failures:
    - env: PACKAGE=vtr CONDA_CHANNELS=conda-forge

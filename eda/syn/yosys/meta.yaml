@@ -5,11 +5,15 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/timvideos/yosys.git
-  git_rev: master
-  patches:
-    - makefile-conda-config.patch
-    - disable-failing-ecp5-mux.patch
+  - git_url: https://github.com/timvideos/yosys.git
+    git_rev: master
+    patches:
+      - makefile-conda-config.patch
+      - disable-failing-ecp5-mux.patch
+      - skip-mux16-efinix-test.patch 	[osx]
+  - git_url: https://github.com/antmicro/travis-temp-storage.git  [osx]
+    git_rev: master                                               [osx]
+    folder: travis-temp-storage                                   [osx]
 
 build:
   # number: 201803050325
@@ -19,6 +23,21 @@ build:
   script_env:
     - CI
     - TRAVIS
+    - CONDA_OUT
+    - TEST_PACKAGE
+
+test:                                                      # [osx]
+  files:                                                   # [osx]
+    - test.sh                                              # [osx]
+    - skip-mux16-efinix-test.patch                         # [osx]
+    - only-test.patch                                      # [osx]
+  commands:                                                # [osx]
+    - git clone https://github.com/timvideos/yosys.git     # [osx]
+    - cd yosys                                             # [osx]
+    - git apply ../skip-mux16-efinix-test.patch            # [osx]
+    - git apply ../only-test.patch                         # [osx]
+    - cd ..                                                # [osx]
+    - bash test.sh                                         # [osx]
 
 requirements:
   build:
@@ -41,9 +60,13 @@ requirements:
     - libffi               [not win]
     - pkg-config           [not win]
     - python 3.7
-    - iverilog
+    - tk   [osx]
+    - gawk [osx]
   run:
     - python {{ python }}
+    - tk       [osx]
+    - gawk     [osx]
+    - iverilog [osx]
 
 about:
   home: http://www.clifford.at/yosys/
