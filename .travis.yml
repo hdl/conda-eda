@@ -237,6 +237,11 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=prog/dfu-util
+   # Windows
+   - stage: "Programming Tools"
+     os: windows
+     env:
+     - PACKAGE=prog/iceprog
  # EDA Tools - Bitstream Tool
    # Linux
    - stage: "EDA Tools - bitstream"

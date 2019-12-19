@@ -9,6 +9,7 @@ source:
   git_rev: master
   patches:
    - iceprog-only.patch
+   - win_build.patch [win]
 
 build:
   # number: 201803050325
@@ -23,7 +24,13 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - pkg-config
+    - pkg-config [not win]
+    - msys2:m2w64-toolchain [win]
+    - msys:m2-base      [win]
+    - msys2:m2-make              [win]
+    - vs2017_win-64     [win]
+    - libftdi
+    - libusb
   host:
     - libftdi
     - libusb
