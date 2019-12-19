@@ -19,11 +19,16 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=lib/usb
-  # - stage: "Libraries"
-     # os: linux
-     # dist: xenial
-     # env:
-     # - PACKAGE=lib/ftdi
+#  - stage: "Libraries"
+#     os: linux
+#     dist: xenial
+#     env:
+#     - PACKAGE=lib/ftdi
+   # Windows
+   - stage: "Libraries"
+     os: windows
+     env:
+     - PACKAGE=lib/usb
  # or1k toolchain
    - stage: "Binutils"
      os: linux

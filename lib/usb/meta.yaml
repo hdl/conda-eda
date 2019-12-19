@@ -23,7 +23,7 @@ requirements:
   build:
     - {{ compiler('c') }}
   host:
-    - pkg-config
+    - pkg-config [not win]
 
 about:
   home: http://libusb.org
