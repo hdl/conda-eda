@@ -1,0 +1,12 @@
+diff --git a/vvp/config.h.in b/vvp/config.h.in
+index 3aac6a4c..c80b1881 100644
+--- a/vvp/config.h.in
++++ b/vvp/config.h.in
+@@ -197,6 +197,7 @@ inline int64_t i64round(double x)
+ 
+ #ifdef __MINGW32__
+ # include  <string.h>
++# include  <stdlib.h>
+ static inline char*strndup(const char*s, size_t n)
+ {
+       if (strlen(s) < n) return strdup(s);

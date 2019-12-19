@@ -300,6 +300,11 @@ jobs:
      dist: xenial
      env:
      - PACKAGE=eda/sim/verilator
+   # Windows
+   - stage: "EDA Tools"
+     os: windows
+     env:
+     - PACKAGE=eda/sim/icarus
   allow_failures:
    - env: PACKAGE=vtr CONDA_CHANNELS=conda-forge
   fast_finish: true
