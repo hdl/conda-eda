@@ -31,11 +31,13 @@ requirements:
     - m2-base   [win]
     - cmake
   host:
-    - bison
     - cmake
-    - flex
-    - patchelf   [not win]
+    - m2-bison   [win]
+    - m2-flex    [win]
+    - bison      [not win]
+    - flex       [not win]
     - pkg-config [not win]
+    - patchelf   [linux]
     - python    {{ python }}
     - boost     {{ boost_version }}
     - boost-cpp {{ boost_version }}

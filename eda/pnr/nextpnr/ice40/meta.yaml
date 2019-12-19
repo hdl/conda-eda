@@ -23,34 +23,38 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - m2-base    [win]
+    - fontconfig [not win]
     - cmake
-    - fontconfig
-    - python
-    - boost {{ boost_version }}
+    - python 3.7
+    - boost     {{ boost_version }}
     - boost-cpp {{ boost_version }}
-    - libboost {{ boost_version }}
-    - py-boost {{ boost_version }}
+    - libboost  {{ boost_version }}
+    - py-boost  {{ boost_version }}
   host:
-    - bison
-    - cmake
-    - eigen
-    - flex
-    - patchelf
+    - m2-bison   [win]
+    - m2-flex    [win]
+    - bison      [not win]
+    - eigen      [not win]
+    - flex       [not win]
+    - pkg-config [not win]
+    - patchelf   [linux]
     - icestorm
-    - pkg-config
-    - python
-    - boost {{ boost_version }}
-    - boost-cpp {{ boost_version }}
-    - libboost {{ boost_version }}
-    - py-boost {{ boost_version }}
+    - python 3.7
+    - boost     {{ boost_version }} [not win]
+    - boost-cpp {{ boost_version }} [not win]
+    - libboost  {{ boost_version }} [not win]
+    - py-boost  {{ boost_version }} [not win]
   run:
-    - libgcc-ng
-    - libstdcxx-ng
+    - libgcc-ng    [linux]
+    - libstdcxx-ng [linux]
     - icestorm
     - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
-    - libboost {{ boost_version }}
-    - py-boost {{ boost_version }}
+    - libboost {{ boost_version }} [not win]
+    - py-boost {{ boost_version }} [not win]
     - yosys
+    - python
+    
 
 test:
   commands:
