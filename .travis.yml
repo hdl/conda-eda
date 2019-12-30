@@ -10,6 +10,20 @@ osx_image:
 dist:
   - xenial
 
+stages:
+  - "Libraries"
+  - "Binutils"
+  - "GCC - nostdc"
+  - "GCC - newlib"
+  - "GCC - Linux (musl)"
+  - "GDB"
+  - "Toolchain - linux musl"
+  - "Other tools"
+  - "Programming tools"
+  - "EDA Tools - bitstream"
+  - "Eda tools"
+  - "Separate tests"
+
 jobs:
   include:
  # Libraries
@@ -278,7 +292,7 @@ jobs:
      os: osx
      env:
      - PACKAGE=prog/openocd
- # EDA Tools - Bitstream Tool
+ # EDA Tools - Bitstream Tools
    # Linux
    - stage: "EDA Tools - bitstream"
      os: linux
