@@ -398,6 +398,8 @@ jobs:
    
   allow_failures:
    - env: PACKAGE=vtr CONDA_CHANNELS=conda-forge
+   # Yosys tests on OSX are broken, see https://github.com/YosysHQ/yosys/issues/1556
+   - env: PACKAGE=eda/syn/yosys CONDA_TEST=yes STORAGE_URL="https://github.com/antmicro/travis-temp-storage.git"
   fast_finish: true
 
 before_install:
