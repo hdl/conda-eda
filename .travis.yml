@@ -17,6 +17,50 @@ jobs:
      env:
      - PACKAGE=lib/usb
 
+   # EDA Tools - Bitstream Tool
+   - stage: "EDA Tools"
+     env:
+     - PACKAGE=eda/bit/icestorm
+
+   - stage: "EDA Tools"
+     env:
+     - PACKAGE=eda/bit/prjtrellis
+
+   # EDA Tools - Synthesis
+   - stage: "EDA Tools"
+     env:
+     - PACKAGE=eda/syn/yosys
+
+   # EDA Tools - Place and Route
+   - stage: "EDA Tools"
+     env:
+     - PACKAGE=eda/pnr/arachne
+
+   - stage: "EDA Tools"
+     env:
+     - PACKAGE=eda/pnr/nextpnr/ice40
+
+   - stage: "EDA Tools"
+     env:
+     - PACKAGE=eda/pnr/nextpnr/ecp5
+
+   - stage: "EDA Tools"
+     env:
+     - PACKAGE=eda/pnr/nextpnr/generic
+
+#   - stage: "EDA Tools"
+#     env:
+#     - PACKAGE=eda/pnr/vtr                 CONDA_CHANNELS=conda-forge
+
+   # EDA Tools - Simulation
+   - stage: "EDA Tools"
+     env:
+     - PACKAGE=eda/sim/icarus
+
+   - stage: "EDA Tools"
+     env:
+     - PACKAGE=eda/sim/verilator
+
 #   - stage: "Libraries"
 #     env:
 #     - PACKAGE=lib/ftdi
@@ -170,50 +214,6 @@ jobs:
    - stage: "Programming Tools"
      env:
      - PACKAGE=prog/dfu-util
-
-   # EDA Tools - Bitstream Tool
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/bit/icestorm
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/bit/prjtrellis
-
-   # EDA Tools - Synthesis
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/syn/yosys
-
-   # EDA Tools - Place and Route
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/pnr/arachne
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/pnr/nextpnr/ice40
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/pnr/nextpnr/ecp5
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/pnr/nextpnr/generic
-
-#   - stage: "EDA Tools"
-#     env:
-#     - PACKAGE=eda/pnr/vtr                 CONDA_CHANNELS=conda-forge
-
-   # EDA Tools - Simulation
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/sim/icarus
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/sim/verilator
 
 matrix:
   allow_failures:
