@@ -17,9 +17,9 @@ jobs:
      env:
      - PACKAGE=lib/usb
 
-   - stage: "Libraries"
-     env:
-     - PACKAGE=lib/ftdi
+#   - stage: "Libraries"
+#     env:
+#     - PACKAGE=lib/ftdi
 
    # or1k toolchain
    - stage: "Binutils"
