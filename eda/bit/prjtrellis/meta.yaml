@@ -32,7 +32,7 @@ requirements:
   run:
     - bison
     - flex
-    - libboost
+    - {{ pin_compatible('libboost', max_pin='x.x') }}
     - py-boost
     - python
 
