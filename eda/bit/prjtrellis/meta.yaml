@@ -24,7 +24,7 @@ requirements:
     - cmake
     - libboost
     - py-boost
-    - python 3.7
+    - python
   host:
     - cmake
     - patchelf
