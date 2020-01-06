@@ -1,4 +1,6 @@
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+# cmake 1.15 required for boost 1.71
+{% set boost_version = ">=1.67,<1.68.0a0" %}
 
 package:
   name: nextpnr-ice40
@@ -21,22 +23,33 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - python 3.7
+    - cmake
     - fontconfig
+    - python
+    - boost {{ boost_version }}
+    - boost-cpp {{ boost_version }}
+    - libboost {{ boost_version }}
+    - py-boost {{ boost_version }}
   host:
     - bison
-    - boost
     - cmake
     - eigen
     - flex
+    - patchelf
     - icestorm
     - pkg-config
-    - python 3.7
-  run:
-    - icestorm
-    - libboost
-    - py-boost
     - python
+    - boost {{ boost_version }}
+    - boost-cpp {{ boost_version }}
+    - libboost {{ boost_version }}
+    - py-boost {{ boost_version }}
+  run:
+    - libgcc-ng
+    - libstdcxx-ng
+    - icestorm
+    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
+    - libboost {{ boost_version }}
+    - py-boost {{ boost_version }}
     - yosys
 
 test:
