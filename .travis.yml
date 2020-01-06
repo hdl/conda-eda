@@ -61,9 +61,18 @@ jobs:
      env:
      - PACKAGE=eda/sim/verilator
 
-#   - stage: "Libraries"
-#     env:
-#     - PACKAGE=lib/ftdi
+   # Libraries
+   - stage: "Libraries"
+     env:
+     - PACKAGE=lib/isl
+
+   - stage: "Libraries"
+     env:
+     - PACKAGE=lib/usb
+
+   - stage: "Libraries"
+     env:
+     - PACKAGE=lib/ftdi
 
    # or1k toolchain
    - stage: "Binutils"
