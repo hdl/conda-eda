@@ -9,11 +9,11 @@ addons:
 jobs:
   include:
    # EDA Tools - Bitstream Tool
-   - stage: "EDA Tools"
+   - stage: "EDA Tools - Bitstream"
      env:
      - PACKAGE=eda/bit/icestorm
 
-   - stage: "EDA Tools"
+   - stage: "EDA Tools - Bitstream"
      env:
      - PACKAGE=eda/bit/prjtrellis
 
