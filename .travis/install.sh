@@ -12,6 +12,7 @@ hash -r
 conda config --set always_yes yes --set changeps1 no
 conda install pexpect
 conda config --add channels timvideos
+conda config --add channels litex-hub
 for CHANNEL in $CONDA_CHANNELS; do
 	conda config --add channels $CHANNEL
 done
