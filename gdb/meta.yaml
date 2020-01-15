@@ -26,13 +26,21 @@ requirements:
     - {{ compiler('cxx') }}
     - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
     - gcc-{{ environ.get('TOOLCHAIN_ARCH') }}-elf-nostdc
+    - pkg-config
+    - python
     - texinfo
+  host:
+    - expat
+    - mpfr >=2.4.2
+    - ncurses
+    - python
     - zlib
   run:
     - binutils-{{ environ.get('TOOLCHAIN_ARCH') }}-elf
   {% for package in resolved_packages('host') %}
     - {{ package }}
   {% endfor %}
+    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
 
 test:
   commands:
