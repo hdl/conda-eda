@@ -1,4 +1,6 @@
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+# cmake 1.15 required for boost 1.71
+{% set boost_version = ">=1.67,<1.68.0a0" %}
 
 package:
   name: prjtrellis
@@ -22,26 +24,31 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
-    - libboost
-    - py-boost
-    - python 3.7
+    - python
+    - boost {{ boost_version }}
+    - boost-cpp {{ boost_version }}
+    - libboost {{ boost_version }}
+    - py-boost {{ boost_version }}
   host:
+    - bison
     - cmake
+    - flex
     - patchelf
     - pkg-config
-  run:
-    - bison
-    - flex
-    - libboost
-    - py-boost
     - python
+    - boost {{ boost_version }}
+    - boost-cpp {{ boost_version }}
+    - libboost {{ boost_version }}
+    - py-boost {{ boost_version }}
+  run:
+    - libgcc-ng
+    - libstdcxx-ng
+    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
+    - libboost {{ boost_version }}
+    - py-boost {{ boost_version }}
 
 about:
   home: https://prjtrellis.readthedocs.io
+  license: ISC
   license_file: COPYING
   summary: 'Project Trellis enables a fully open-source flow for ECP5 FPGAs using Yosys for Verilog synthesis and nextpnr for place and route. Project Trellis itself provides the device database and tools for bitstream creation.'
-
-extra:
-  maintainers:
-    - Tim 'mithro' Ansell <mithro@mithis.com>
-    - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>

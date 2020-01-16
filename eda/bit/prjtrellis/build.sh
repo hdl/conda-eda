@@ -24,7 +24,10 @@ cmake \
 	-DPYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())")  \
 	-DPYTHON_LIBRARY=$(python -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") \
 	\
+	-DBOOST_ROOT="${BUILD_PREFIX}" \
+	-DBoost_NO_SYSTEM_PATHS:BOOL=ON \
 	-DBOOST_INCLUDEDIR="${BUILD_PREFIX}/include" \
+	-DBOOST_LIBRARYDIR="${BUILD_PREFIX}/lib" \
 	.
 
 make -j$CPU_COUNT

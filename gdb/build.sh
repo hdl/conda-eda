@@ -15,6 +15,11 @@ cd build
   --target=${TOOLCHAIN_ARCH}-elf \
   --prefix=$PREFIX \
  \
+  --enable-expat \
+  --with-expat=$PREFIX \
+  --with-mpfr=$PREFIX \
+  --enable-tui \
+ \
   --disable-itcl \
   --disable-tk \
   --disable-tcl \
@@ -41,6 +46,8 @@ cd build
 make -j$CPU_COUNT
 make install
 )
+
+$PREFIX/bin/${TOOLCHAIN_ARCH}-elf-gdb --configuration | grep -v expat
 
 $PREFIX/bin/${TOOLCHAIN_ARCH}-elf-gdb --version
 echo $($PREFIX/bin/${TOOLCHAIN_ARCH}-elf-gdb --version 2>&1 | head -1 | sed -e's/.* //')
