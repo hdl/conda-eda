@@ -1,0 +1,47 @@
+{% set version = '1.5.1' %}
+
+package:
+  name: dtc
+  version: {{ version }}
+
+source:
+  fn: binutils-{{ version }}.tar.bz2
+  url: https://git.kernel.org/pub/scm/utils/dtc/dtc.git/snapshot/dtc-{{ version }}.tar.gz
+  sha256: 45f9885f890c5feab8110a721410970deb8f83987d0125f1a2703bc8ec140e33
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+   - {{ compiler('c') }}
+   - flex
+   - bison
+#   - yaml
+   # Python bindings
+   - pkg-config
+   - swig
+   - python {{ python }}
+  host:
+#   - yaml
+   - swig
+   - python {{ python }}
+  run:
+   - python {{ python }}
+
+test:
+  imports:
+    - libfdt
+  commands:
+    - dtc --help
+
+about:
+  home: https://git.kernel.org/pub/scm/utils/dtc/dtc.git
+  license: GPL
+  summary: 'Device Tree Compiler (dtc) toolchain for working with device tree source and binary files and also libfdt, a utility library for reading and manipulating the binary format.'
