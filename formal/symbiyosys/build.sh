@@ -13,24 +13,15 @@ if [ x"$TRAVIS" = xtrue ]; then
 fi
 
 cwd=`pwd`
-
 CFLAGS_ORIG=${CFLAGS}
 
 #********************************************************************
 #* Build Boolector
 #********************************************************************
-cd ${cwd}
 
-# CFLAGS=`echo ${CFLAGS_ORIG} | sed -e 's/-O[0-9]//g'`
 unset CFLAGS
 
-git clone https://github.com/Boolector/boolector.git
-
 cd ${cwd}/boolector
-
-# ilingeling.c contains a variable named 'clone'
-# This conflicts with the clone function, so we rename it
-sed -i -e 's%cd ${LINGELING_DIR}%cd ${LINGELING_DIR}\nsed -i -e "s/\\<clone\\>/_clone/g" ilingeling.c%' contrib/setup-lingeling.sh
 
 echo "CFLAGS=${CFLAGS}"
 ./contrib/setup-btor2tools.sh
@@ -56,12 +47,8 @@ CFLAGS=${CFLAGS_ORIG}
 #********************************************************************
 #* Build Z3
 #********************************************************************
-cd ${cwd}
 
-git clone https://github.com/Z3Prover/z3.git z3
-if test $? -ne 0; then exit 1; fi
-
-cd z3
+cd ${cwd}/z3
 python scripts/mk_make.py
 if test $? -ne 0; then exit 1; fi
 
@@ -98,7 +85,7 @@ if test $? -ne 0; then exit 1; fi
 #********************************************************************
 #* Build SymbiYosys
 #********************************************************************
-cd ${cwd}
+cd ${cwd}/SymbiYosys
 make -j$CPU_COUNT
 make PREFIX=${PREFIX} install
 
