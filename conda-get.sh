@@ -37,7 +37,7 @@ conda config --prepend pkgs_dirs ~/.conda/pkg
 
 conda config --show
 
-echo "python==3.7" > $CONDA_PATH/conda-meta/pinned
+echo "python==3.7.*" > $CONDA_PATH/conda-meta/pinned
 #echo "conda-build==3.14.0" >> $CONDA_PATH/conda-meta/pinned
 
 conda install -y python
