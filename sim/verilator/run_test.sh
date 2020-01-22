@@ -21,7 +21,8 @@ int main(int argc, char **argv, char **env) {
     exit(0);
 }
 EOF
-	$PREFIX/bin/verilator --cc $FILENAME.v $2 $3 --exe sim_main.cpp
+	$PREFIX/bin/verilator --cc --trace-fst \
+            $FILENAME.v $2 $3 --exe sim_main.cpp
 	cd obj_dir
 	cat V$FILENAME.mk
 	make -j -f V$FILENAME.mk V$FILENAME

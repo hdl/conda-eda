@@ -1,0 +1,16 @@
+diff -rcNB include/verilated_fst_c.cpp include/verilated_fst_c.cpp
+*** include/verilated_fst_c.cpp	2020-01-18 17:01:01.169401820 -0800
+--- include/verilated_fst_c.cpp	2020-01-18 18:54:47.301534259 -0800
+***************
+*** 20,25 ****
+--- 20,29 ----
+  //=============================================================================
+  // SPDIFF_OFF
+  
++ // With some GCC versions, inttypes.h only
++ // declares PRI macros if this is declared
++ #define __STDC_FORMAT_MACROS
++ 
+  #include "verilatedos.h"
+  #include "verilated.h"
+  #include "verilated_fst_c.h"
