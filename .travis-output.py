@@ -107,7 +107,7 @@ while True:
 
   try:
     line = line.decode('utf-8')
-  except:
+  except UnicodeDecodeError:
     continue
   logfile.write(line)
   logfile.flush()
