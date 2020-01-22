@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 source .travis/common.sh
 set -e
