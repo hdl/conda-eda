@@ -4,7 +4,7 @@ addons:
   homebrew:
     packages:
     update: false
-    
+
 osx_image:
   - xcode8.3
 dist:
@@ -164,7 +164,7 @@ jobs:
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=lm32
  # ppc64le toolchain
-   - stage: "Binutils"  
+   - stage: "Binutils"
      os: linux
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=ppc64le
@@ -242,7 +242,7 @@ jobs:
      env:
      - PACKAGE=sdcc
  # Programming Tools
-   # Linux 
+   # Linux
    - stage: "Programming Tools"
      os: linux
      env:
@@ -321,23 +321,23 @@ jobs:
      env:
      - PACKAGE=eda/bit/icestorm
  # EDA Tools - Synthesis
-   # Linux 
+   # Linux
    - stage: "EDA Tools"
      os: linux
      env:
      - PACKAGE=eda/syn/yosys
-   # Windows 
+   # Windows
    - stage: "EDA Tools"
      os: windows
      env:
      - PACKAGE=eda/syn/yosys
-   # OSX 
+   # OSX
    - stage: "EDA Tools"
      os: osx
      env:
      - PACKAGE=eda/syn/yosys UPLOAD=storage EXTRA_BUILD_ARGS="--no-test" STORAGE_URL="https://github.com/antmicro/travis-temp-storage.git"
  # EDA Tools - Place and Route
-   # Linux 
+   # Linux
    - stage: "EDA Tools"
      os: linux
      env:
@@ -370,7 +370,7 @@ jobs:
      env:
      - PACKAGE=eda/pnr/nextpnr/ice40
  # EDA Tools - Simulation
-   # Linux 
+   # Linux
    - stage: "EDA Tools"
      os: linux
      env:
@@ -395,7 +395,7 @@ jobs:
      os: osx
      env:
      - PACKAGE=eda/syn/yosys CONDA_TEST=yes STORAGE_URL="https://github.com/antmicro/travis-temp-storage.git"
-   
+
   allow_failures:
    - env: PACKAGE=vtr CONDA_CHANNELS=conda-forge
    # Yosys tests on OSX are broken, see https://github.com/YosysHQ/yosys/issues/1556
