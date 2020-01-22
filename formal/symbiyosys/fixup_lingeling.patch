@@ -1,0 +1,15 @@
+diff -rcNB contrib/setup-lingeling.sh contrib/setup-lingeling.sh
+*** contrib/setup-lingeling.sh	2020-01-18 12:21:52.740076871 -0800
+--- contrib/setup-lingeling.sh	2020-01-18 12:22:50.881077999 -0800
+***************
+*** 10,15 ****
+--- 10,18 ----
+  download_github "arminbiere/lingeling" "$COMMIT_ID" "$LINGELING_DIR"
+  cd ${LINGELING_DIR}
+  
++ # rename 'clone' to '_clone'
++ sed -i -e "s/\\<clone\\>/_clone/g" ilingeling.c
++ 
+  if is_windows; then
+    component="Lingeling"
+    last_patch_date="20190110"

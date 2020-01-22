@@ -17,6 +17,7 @@ jobs:
      env:
      - PACKAGE=bit/prjtrellis
 
+
    # EDA Tools - Synthesis
    - stage: "EDA Tools"
      env:
@@ -51,6 +52,11 @@ jobs:
    - stage: "EDA Tools"
      env:
      - PACKAGE=sim/verilator
+
+   # EDA Tools - Formal
+   - stage: "EDA Tools"
+     env:
+     - PACKAGE=formal/symbiyosys
 
 before_install:
  - source $TRAVIS_BUILD_DIR/.travis/common.sh

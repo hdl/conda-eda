@@ -25,6 +25,10 @@ Conda recipes for FPGA EDA tools (for synthesis, place and route and bitstream g
  * [Icarus Verilog](http://iverilog.icarus.com/)
  * [Verilator](https://www.veripool.org/wiki/verilator)
 
+# Formal
+ 
+ * [Symbiyosys](https://github.com/YosysHQ/SymbiYosys)
+
 # Building
 
 This repository is set up to be built by Travis CI, using the GitHub
