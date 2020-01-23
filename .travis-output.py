@@ -105,10 +105,8 @@ while True:
   if not line:
     break
 
-  try:
-    line = line.decode('utf-8')
-  except UnicodeDecodeError:
-    continue
+  line = line.decode('utf-8', errors='backslashreplace')
+
   logfile.write(line)
   logfile.flush()
 
