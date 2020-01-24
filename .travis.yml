@@ -5,9 +5,6 @@ addons:
     packages:
     update: false
 
-dist:
-  - xenial
-
 stages:
   - "Libraries"
   - "Binutils"
@@ -28,14 +25,17 @@ jobs:
    # Linux
    - stage: "Libraries"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=lib/isl
    - stage: "Libraries"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=lib/usb
 #  - stage: "Libraries"
 #     os: linux
+     dist: xenial
 #     env:
 #     - PACKAGE=lib/ftdi
    # OSX
@@ -66,22 +66,27 @@ jobs:
  # or1k toolchain
    - stage: "Binutils"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=or1k
    - stage: "GCC - nostdc"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=or1k
    - stage: "GCC - newlib"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=or1k
    - stage: "GCC - Linux (musl)"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=or1k
    - stage: "GDB"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=or1k
    # OSX
@@ -93,22 +98,27 @@ jobs:
  # rv32 toolchain
    - stage: "Binutils"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv32
    - stage: "GCC - nostdc"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv32
    - stage: "GCC - newlib"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv32
    - stage: "GCC - Linux (musl)"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv32
    - stage: "GDB"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv32
    # OSX
@@ -120,22 +130,27 @@ jobs:
  # rv64 toolchain
    - stage: "Binutils"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv64
    - stage: "GCC - nostdc"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv64
    - stage: "GCC - newlib"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv64
    - stage: "GCC - Linux (musl)"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv64
    - stage: "GDB"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv64
    # OSX
@@ -147,18 +162,22 @@ jobs:
  # lm32 toolchain - no linux
    - stage: "Binutils"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=lm32
    - stage: "GCC - nostdc"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=lm32
    - stage: "GCC - newlib"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=lm32
    - stage: "GDB"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=lm32
    # OSX
@@ -170,10 +189,12 @@ jobs:
  # ppc64le toolchain
    - stage: "Binutils"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=ppc64le
    - stage: "GCC - Linux (musl)"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=ppc64le
    # OSX
@@ -185,22 +206,27 @@ jobs:
  # sh toolchain
    - stage: "Binutils"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=sh
    - stage: "GCC - nostdc"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=sh
    - stage: "GCC - newlib"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=sh
    - stage: "GCC - Linux (musl)"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=sh
    - stage: "GDB"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=sh
    # OSX
@@ -212,24 +238,29 @@ jobs:
  # Full Linux musl toolchain using musl-cross-make
    - stage: "Toolchain - Linux MUSL"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=or1k
    - stage: "Toolchain - Linux MUSL"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
    - stage: "Toolchain - Linux MUSL"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv64
    - stage: "Toolchain - Linux MUSL"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=sh
  # Other tools
    # Linux
    - stage: "Other Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=sdcc
    - stage: "Other Tools"
@@ -252,22 +283,27 @@ jobs:
    # Linux
    - stage: "Programming Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=prog/iceprog
    - stage: "Programming Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=prog/icefunprog
    - stage: "Programming Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=prog/openocd
    - stage: "Programming Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=prog/fxload
    - stage: "Programming Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=prog/dfu-util
    # Windows
@@ -300,6 +336,7 @@ jobs:
    # Linux
    - stage: "Miscellaneus"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=misc/flterm
    # OSX
@@ -312,10 +349,12 @@ jobs:
    # Linux
    - stage: "EDA Tools - bitstream"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=eda/bit/icestorm
    - stage: "EDA Tools - bitstream"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=eda/bit/prjtrellis
    # Windows
@@ -337,6 +376,7 @@ jobs:
    # Linux
    - stage: "EDA Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=eda/syn/yosys
    # Windows
@@ -354,18 +394,22 @@ jobs:
    # Linux
    - stage: "EDA Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=eda/pnr/arachne
    - stage: "EDA Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=eda/pnr/nextpnr/ice40
    - stage: "EDA Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=eda/pnr/nextpnr/ecp5
    - stage: "EDA Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=eda/pnr/nextpnr/generic
 #  - stage: "EDA Tools"
@@ -388,10 +432,12 @@ jobs:
    # Linux
    - stage: "EDA Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=eda/sim/icarus
    - stage: "EDA Tools"
      os: linux
+     dist: xenial
      env:
      - PACKAGE=eda/sim/verilator
    # Windows
