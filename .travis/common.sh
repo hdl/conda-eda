@@ -68,13 +68,6 @@ if [ -f "$PACKAGE/conda_build_config.$TOOLCHAIN_ARCH.yaml" ]; then
 fi
 export CONDA_OUT="$(conda render --output $CONDA_BUILD_ARGS 2> /dev/null | grep conda-bld | grep tar.bz2 | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')"
 
-if [ ! -z "${UPLOAD}" ] || [ ! -z "${STORAGE_URL}" ]; then
-    export PACKAGE_NAME=`echo $CONDA_OUT | rev | cut -f1 -d"/" | rev`
-    export FULL_PACKAGE_NAME="${TRAVIS_OS_NAME}-${PACKAGE_NAME}"
-    export OS_PACKAGE=`echo $FULL_PACKAGE_NAME | cut -f1-2 -d"-"`*
-fi
-
-
 echo "          GITREV: $GITREV"
 echo "      CONDA_PATH: $CONDA_PATH"
 echo "CONDA_BUILD_ARGS: $CONDA_BUILD_ARGS"
