@@ -8,16 +8,6 @@ travis_fold end after_success
 
 if [[ $UPLOAD == "no-upload" ]]; then
     echo "Job without upload..."
-elif [[ $UPLOAD == "storage" ]]; then
-    echo "Job with storage upload..."
-    git clone $STORAGE_URL storage
-    cd storage
-    rm $OS_PACKAGE*
-    cp $CONDA_OUT $FULL_PACKAGE_NAME
-    git add .
-    git commit -m "Travis: Savepoint $FULL_PACKAGE_NAME"
-    # TODO: change credentials!!!
-    git push -f https://kowalewskijan:$STORAGE_TOKEN@github.com/antmicro/travis-temp-storage.git
 else
     echo "Job with Conda upload..."
 

@@ -17,26 +17,12 @@ end_section "conda.check"
 
 $SPACER
 
-if [[ $CONDA_TEST == "yes" ]]; then
-    start_section "conda.build" "${GREEN}Testing..${NC}"
-    git clone --depth=1 $STORAGE_URL storage
-    cd storage
-    export TEST_PACKAGE=`realpath "$(ls $OS_PACKAGE)"`
-    if [[ -z $TEST_PACKAGE ]]; then
-        echo "Package version changed! Please rerun $PACKAGE..."
-        exit 1
-    fi
-    $CONDA_PATH/bin/python $TRAVIS_BUILD_DIR/.travis-output.py /tmp/output.log conda build $CONDA_TEST_ARGS $TEST_PACKAGE
-    cp $TEST_PACKAGE $CONDA_OUT
-    cd ..
+start_section "conda.build" "${GREEN}Building..${NC}"
+if [ $TRAVIS_OS_NAME != 'windows' ]; then
+    $CONDA_PATH/bin/python $TRAVIS_BUILD_DIR/.travis-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
 else
-    start_section "conda.build" "${GREEN}Building..${NC}"
-    if [ $TRAVIS_OS_NAME != 'windows' ]; then
-        $CONDA_PATH/bin/python $TRAVIS_BUILD_DIR/.travis-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
-    else
-        # Work-around: prevent console output being mangled
-        winpty.exe -Xallow-non-tty -Xplain conda build $CONDA_BUILD_ARGS 2>&1 | tee /tmp/output.log
-    fi
+    # Work-around: prevent console output being mangled
+    winpty.exe -Xallow-non-tty -Xplain conda build $CONDA_BUILD_ARGS 2>&1 | tee /tmp/output.log
 fi
 end_section "conda.build"
 

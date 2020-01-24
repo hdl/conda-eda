@@ -21,7 +21,6 @@ stages:
   - "Miscellaneus"
   - "EDA Tools - bitstream"
   - "Eda tools"
-  - "Separate tests"
 
 jobs:
   include:
@@ -350,7 +349,7 @@ jobs:
      os: osx
      osx_image: xcode8.3
      env:
-     - PACKAGE=eda/syn/yosys UPLOAD=storage EXTRA_BUILD_ARGS="--no-test" STORAGE_URL="https://github.com/antmicro/travis-temp-storage.git"
+     - PACKAGE=eda/syn/yosys EXTRA_BUILD_ARGS="--no-test"
  # EDA Tools - Place and Route
    # Linux
    - stage: "EDA Tools"
@@ -406,18 +405,9 @@ jobs:
      osx_image: xcode8.3
      env:
      - PACKAGE=eda/sim/icarus
- # Separate tests
-   # OSX
-   - stage: "Separate tests"
-     os: osx
-     osx_image: xcode8.3
-     env:
-     - PACKAGE=eda/syn/yosys CONDA_TEST=yes STORAGE_URL="https://github.com/antmicro/travis-temp-storage.git"
 
   allow_failures:
    - env: PACKAGE=vtr CONDA_CHANNELS=conda-forge
-   # Yosys tests on OSX are broken, see https://github.com/YosysHQ/yosys/issues/1556
-   - env: PACKAGE=eda/syn/yosys CONDA_TEST=yes STORAGE_URL="https://github.com/antmicro/travis-temp-storage.git"
   fast_finish: true
 
 before_install:

@@ -5,15 +5,12 @@ package:
   version: {{ version }}
 
 source:
-  - git_url: https://github.com/timvideos/yosys.git
-    git_rev: master
-    patches:
-      - makefile-conda-config.patch
-      - disable-failing-ecp5-mux.patch
-      - skip-mux16-efinix-test.patch 	[osx]
-  - git_url: https://github.com/antmicro/travis-temp-storage.git  [osx]
-    git_rev: master                                               [osx]
-    folder: travis-temp-storage                                   [osx]
+   git_url: https://github.com/timvideos/yosys.git
+   git_rev: master
+   patches:
+     - makefile-conda-config.patch
+     - disable-failing-ecp5-mux.patch
+     - skip-mux16-efinix-test.patch 	[osx]
 
 build:
   # number: 201803050325
