@@ -3,9 +3,9 @@ package:
   version: 1.0.20
 
 source:
-  fn:   libusb-1.0.20.tar.bz2 # [linux]
-  url:  https://github.com/libusb/libusb/releases/download/v1.0.20/libusb-1.0.20.tar.bz2 # [linux]
-  sha1: 9537243f165927bde74ad742e6b3effb0bd50cd2 # [linux]
+  fn:   libusb-1.0.20.tar.bz2 # [linux, osx]
+  url:  https://github.com/libusb/libusb/releases/download/v1.0.20/libusb-1.0.20.tar.bz2 # [linux, osx]
+  sha1: 9537243f165927bde74ad742e6b3effb0bd50cd2 # [linux, osx]
   fn:   libusb.7z # [win]
   url:  https://github.com/libusb/libusb/releases/download/v1.0.20/libusb-1.0.20.7z # [win]
   sha1: 35e4ca3255b4c1c3068e4bc50077abb7d7bb6162 # [win]
@@ -22,8 +22,10 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - automake  [not win]
+    - autoconf  [not win]
   host:
-    - pkg-config
+    - pkg-config [not win]
 
 about:
   home: http://libusb.org

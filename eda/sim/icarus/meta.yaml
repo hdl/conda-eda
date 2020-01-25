@@ -9,6 +9,7 @@ source:
   git_rev: master
   patches:
     - fix-vvp-path.patch
+    - vvp-config.patch
 
 build:
   # number: 201803050325
@@ -21,10 +22,21 @@ build:
 
 requirements:
   build:
-    - readline
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - gperf
+    - readline [not win]
+    - {{ compiler('c') }}   [not win]
+    - {{ compiler('cxx') }} [not win]
+    - gperf         [not win]
+    - bison         [not win]
+    - m2-bash       [win]
+    - m2-m4         [win]
+    - m2-sed        [win]
+    - m2-grep       [win]
+    - m2-flex       [win]
+    - m2-autoconf   [win]
+    - m2-make       [win]
+    - m2w64-gcc     [win]
+    - m2-gperf      [win]
+    - m2-bison      [win]
   run:
   {% for package in resolved_packages('host') %}
     - {{ package }}

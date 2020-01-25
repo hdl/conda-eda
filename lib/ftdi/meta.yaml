@@ -21,8 +21,9 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - python
+    - {{ compiler('c') }}   [not win]
+    - {{ compiler('cxx') }} [not win]
     - cmake
     - libusb
     - boost {{ boost_version }}
@@ -32,7 +33,7 @@ requirements:
     - python
   host:
     - cmake
-    - pkg-config
+    - pkg-config [not win]
     - swig
     # cmake 1.15 required for boost 1.71
     - {{ pin_compatible('boost', min_pin='x.x', max_pin='x.x') }}
@@ -40,10 +41,12 @@ requirements:
     - {{ pin_compatible('libboost', min_pin='x.x', max_pin='x.x') }}
     - {{ pin_compatible('libusb', min_pin='x.x', max_pin='x.x') }}
   run:
-    - libgcc-ng
-    - libstdcxx-ng
-    - py-boost
+    - {{ compiler('c') }}
+    - libgcc-ng    [linux]
+    - libstdcxx-ng [linux]
+    - libusb
     - python
+    - py-boost {{ boost_version }}
     - {{ pin_compatible('libboost', min_pin='x.x', max_pin='x.x') }}
     - {{ pin_compatible('libusb', min_pin='x.x', max_pin='x.x') }}
 

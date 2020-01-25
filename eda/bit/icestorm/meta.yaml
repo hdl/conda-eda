@@ -21,16 +21,23 @@ build:
 
 requirements:
   build:
+    - msys2:m2w64-toolchain [win]
+    - msys2:m2-base         [win]
+    - msys2:m2-make         [win]
+    - vs2017_win-64         [win]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - pkg-config
+    - pkg-config [not win]
   run:
-    - readline
-    - bison
-    - tk
-    - libffi
-    - flex
+    - readline  [not win]
+    - bison     [not win]
+    - tk        [not win]
+    - libffi    [not win]
+    - flex      [not win]
+    - msys2:m2-bison    [win]
+    - msys2:m2-flex     [win]
+    - msys2:m2-libffi   [win]
 
 about:
   home: http://www.clifford.at/icestorm/

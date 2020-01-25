@@ -1,230 +1,465 @@
-language: minimal
+language: shell
 
-dist: xenial
 addons:
-  apt:
+  homebrew:
     packages:
-    - realpath
+    update: false
+
+stages:
+  - "Libraries"
+  - "Binutils"
+  - "GCC - nostdc"
+  - "GCC - newlib"
+  - "GCC - Linux (musl)"
+  - "GDB"
+  - "Toolchain - linux musl"
+  - "Other tools"
+  - "Programming tools"
+  - "Miscellaneus"
+  - "EDA Tools - bitstream"
+  - "Eda tools"
 
 jobs:
   include:
-   # EDA Tools - Bitstream Tool
-   - stage: "EDA Tools - Bitstream"
-     env:
-     - PACKAGE=eda/bit/icestorm
-
-   - stage: "EDA Tools - Bitstream"
-     env:
-     - PACKAGE=eda/bit/prjtrellis
-
-   # EDA Tools - Synthesis
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/syn/yosys
-
-   # EDA Tools - Place and Route
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/pnr/arachne
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/pnr/nextpnr/ice40
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/pnr/nextpnr/ecp5
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/pnr/nextpnr/generic
-
-#   - stage: "EDA Tools"
-#     env:
-#     - PACKAGE=eda/pnr/vtr                 CONDA_CHANNELS=conda-forge
-
-   # EDA Tools - Simulation
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/sim/icarus
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=eda/sim/verilator
-
-   # Libraries
+ # Libraries
+   # Linux
    - stage: "Libraries"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=lib/isl
-
    - stage: "Libraries"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=lib/usb
-
-#   - stage: "Libraries"
+#  - stage: "Libraries"
+#     os: linux
+     dist: xenial
 #     env:
 #     - PACKAGE=lib/ftdi
-
-   # or1k toolchain
+   # OSX
+   - stage: "Libraries"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=lib/isl
+   - stage: "Libraries"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=lib/usb
+   - stage: "Libraries"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=lib/ftdi
+   # Windows
+   - stage: "Libraries"
+     os: windows
+     env:
+     - PACKAGE=lib/usb
+   - stage: "Libraries"
+     os: windows
+     env:
+     - PACKAGE=lib/ftdi
+ # or1k toolchain
    - stage: "Binutils"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=or1k
    - stage: "GCC - nostdc"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=or1k
    - stage: "GCC - newlib"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=or1k
    - stage: "GCC - Linux (musl)"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=or1k
    - stage: "GDB"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=or1k
-
-   # rv32 toolchain
+   # OSX
    - stage: "Binutils"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=or1k
+ # rv32 toolchain
+   - stage: "Binutils"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv32
    - stage: "GCC - nostdc"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv32
    - stage: "GCC - newlib"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv32
    - stage: "GCC - Linux (musl)"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv32
    - stage: "GDB"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv32
-
-   # rv64 toolchain
+   # OSX
    - stage: "Binutils"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv32
+ # rv64 toolchain
+   - stage: "Binutils"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv64
    - stage: "GCC - nostdc"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=riscv64
    - stage: "GCC - newlib"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=riscv64
    - stage: "GCC - Linux (musl)"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=riscv64
    - stage: "GDB"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=riscv64
-
-   # lm32 toolchain - no linux
+   # OSX
    - stage: "Binutils"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=riscv64
+ # lm32 toolchain - no linux
+   - stage: "Binutils"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=lm32
    - stage: "GCC - nostdc"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=lm32
    - stage: "GCC - newlib"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=lm32
    - stage: "GDB"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=lm32
-
-   # ppc64le toolchain
+   # OSX
    - stage: "Binutils"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=lm32
+ # ppc64le toolchain
+   - stage: "Binutils"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=ppc64le
-#   - stage: "GCC - nostdc"
-#     env:
-#     - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=ppc64le
-#   - stage: "GCC - newlib"
-#     env:
-#     - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=ppc64le
    - stage: "GCC - Linux (musl)"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=ppc64le
-#   - stage: "GDB"
-#     env:
-#     - PACKAGE=gdb          TOOLCHAIN_ARCH=ppc64le
-
-   # sh2 toolchain
+   # OSX
    - stage: "Binutils"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=ppc64le
+ # sh toolchain
+   - stage: "Binutils"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=binutils     TOOLCHAIN_ARCH=sh
    - stage: "GCC - nostdc"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/nostdc   TOOLCHAIN_ARCH=sh
    - stage: "GCC - newlib"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/newlib   TOOLCHAIN_ARCH=sh
    - stage: "GCC - Linux (musl)"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gcc/linux-musl TOOLCHAIN_ARCH=sh
    - stage: "GDB"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=gdb          TOOLCHAIN_ARCH=sh
-
-   # Full Linux musl toolchain using musl-cross-make
+   # OSX
+   - stage: "Binutils"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=binutils     TOOLCHAIN_ARCH=sh
+ # Full Linux musl toolchain using musl-cross-make
    - stage: "Toolchain - Linux MUSL"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=or1k
    - stage: "Toolchain - Linux MUSL"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv32
    - stage: "Toolchain - Linux MUSL"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=riscv64
-#   - stage: "Toolchain - Linux MUSL"
-#     env:
-#     - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=ppc64le
    - stage: "Toolchain - Linux MUSL"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=toolchain/linux-musl TOOLCHAIN_ARCH=sh
-
-   # Other tools
+ # Other tools
+   # Linux
    - stage: "Other Tools"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=sdcc
    - stage: "Other Tools"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=sigrok-cli                 CONDA_CHANNELS=conda-forge
    - stage: "Other Tools"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=dtc
-
-   # Programming Tools
+   # OSX
+   - stage: "Other Tools"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=sdcc
+ # Programming Tools
+   # Linux
    - stage: "Programming Tools"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=prog/iceprog
-
    - stage: "Programming Tools"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=prog/icefunprog
-
    - stage: "Programming Tools"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=prog/openocd
-
    - stage: "Programming Tools"
-     env:
-     - PACKAGE=prog/flterm
-
-   - stage: "Programming Tools"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=prog/fxload
-
    - stage: "Programming Tools"
+     os: linux
+     dist: xenial
      env:
      - PACKAGE=prog/dfu-util
+   # Windows
+   - stage: "Programming Tools"
+     os: windows
+     env:
+     - PACKAGE=prog/iceprog
+   # OSX
+   - stage: "Programming Tools"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=prog/iceprog
+   - stage: "Programming Tools"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=prog/icefunprog
+   - stage: "Programming Tools"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=prog/dfu-util
+   - stage: "Programming Tools"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=prog/openocd
+ # Miscellaneus
+   # Linux
+   - stage: "Miscellaneus"
+     os: linux
+     dist: xenial
+     env:
+     - PACKAGE=misc/flterm
+   # OSX
+   - stage: "Miscellaneus"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=misc/flterm
+ # EDA Tools - Bitstream Tools
+   # Linux
+   - stage: "EDA Tools - bitstream"
+     os: linux
+     dist: xenial
+     env:
+     - PACKAGE=eda/bit/icestorm
+   - stage: "EDA Tools - bitstream"
+     os: linux
+     dist: xenial
+     env:
+     - PACKAGE=eda/bit/prjtrellis
+   # Windows
+   - stage: "EDA Tools"
+     os: windows
+     env:
+     - PACKAGE=eda/bit/icestorm
+   - stage: "EDA Tools"
+     os: windows
+     env:
+     - PACKAGE=eda/bit/prjtrellis
+   # OSX
+   - stage: "EDA Tools"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=eda/bit/icestorm
+ # EDA Tools - Synthesis
+   # Linux
+   - stage: "EDA Tools"
+     os: linux
+     dist: xenial
+     env:
+     - PACKAGE=eda/syn/yosys
+   # Windows
+   - stage: "EDA Tools"
+     os: windows
+     env:
+     - PACKAGE=eda/syn/yosys
+   # OSX
+   - stage: "EDA Tools"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=eda/syn/yosys EXTRA_BUILD_ARGS="--no-test"
+ # EDA Tools - Place and Route
+   # Linux
+   - stage: "EDA Tools"
+     os: linux
+     dist: xenial
+     env:
+     - PACKAGE=eda/pnr/arachne
+   - stage: "EDA Tools"
+     os: linux
+     dist: xenial
+     env:
+     - PACKAGE=eda/pnr/nextpnr/ice40
+   - stage: "EDA Tools"
+     os: linux
+     dist: xenial
+     env:
+     - PACKAGE=eda/pnr/nextpnr/ecp5
+   - stage: "EDA Tools"
+     os: linux
+     dist: xenial
+     env:
+     - PACKAGE=eda/pnr/nextpnr/generic
+#  - stage: "EDA Tools"
+#    os: linux
+#    dist: xenial
+#    env:
+#    - PACKAGE=eda/pnr/vtr                 CONDA_CHANNELS=conda-forge
+   # Windows
+   - stage: "EDA Tools"
+     os: windows
+     env:
+     - PACKAGE=eda/pnr/nextpnr/ice40
+   # OSX
+   - stage: "EDA Tools"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=eda/pnr/nextpnr/ice40
+ # EDA Tools - Simulation
+   # Linux
+   - stage: "EDA Tools"
+     os: linux
+     dist: xenial
+     env:
+     - PACKAGE=eda/sim/icarus
+   - stage: "EDA Tools"
+     os: linux
+     dist: xenial
+     env:
+     - PACKAGE=eda/sim/verilator
+   # Windows
+   - stage: "EDA Tools"
+     os: windows
+     env:
+     - PACKAGE=eda/sim/icarus
+   # OSX
+   - stage: "EDA Tools"
+     os: osx
+     osx_image: xcode8.3
+     env:
+     - PACKAGE=eda/sim/icarus
 
-matrix:
   allow_failures:
-  - env: PACKAGE=vtr CONDA_CHANNELS=conda-forge
+   - env: PACKAGE=vtr CONDA_CHANNELS=conda-forge
   fast_finish: true
 
 before_install:
  - source $TRAVIS_BUILD_DIR/.travis/common.sh
  - bash $TRAVIS_BUILD_DIR/.travis/fixup-git.sh
+ - bash $TRAVIS_BUILD_DIR/.travis/download_sdk.sh
  - source $TRAVIS_BUILD_DIR/.travis/common.sh
 
 install:
@@ -241,4 +476,4 @@ after_success:
 
 cache:
   directories:
-   - /home/travis/.conda/pkgs
+   - $HOME/.conda/pkgs
