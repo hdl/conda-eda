@@ -105,7 +105,8 @@ while True:
   if not line:
     break
 
-  line = line.decode('utf-8')
+  line = line.decode('utf-8', errors='backslashreplace')
+
   logfile.write(line)
   logfile.flush()
 

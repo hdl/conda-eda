@@ -15,10 +15,16 @@ export -f travis_time_start
 export -f travis_time_finish
 export -f travis_wait
 export -f travis_jigger
+
+if [ $TRAVIS_OS_NAME = 'osx' ]; then
+    DATE_SWITCH="-r "
+else
+    DATE_SWITCH="--date=@"
+fi
 if [ -z "$DATE_STR" ]; then
 	export DATE_TS="$(git log --format=%ct -n1)"
-	export DATE_NUM="$(date --date=@${DATE_TS} -u +%Y%m%d%H%M%S)"
-	export DATE_STR="$(date --date=@${DATE_TS} -u +%Y%m%d_%H%M%S)"
+	export DATE_NUM="$(date ${DATE_SWITCH}${DATE_TS} -u +%Y%m%d%H%M%S)"
+	export DATE_STR="$(date ${DATE_SWITCH}${DATE_TS} -u +%Y%m%d_%H%M%S)"
 	echo "Setting date number to $DATE_NUM"
 	echo "Setting date string to $DATE_STR"
 fi
@@ -43,14 +49,20 @@ function end_section() {
 #     also set similarly at test time.
 export PYTHONWARNINGS=ignore::UserWarning:conda_build.environ
 
-export BASE_PATH="/tmp/really-really-really-really-really-really-really-really-really-really-really-really-really-long-path"
-export CONDA_PATH="$BASE_PATH/conda"
+export BASE_PATH="/tmp/really-long-path"
 mkdir -p "$BASE_PATH"
-export PATH="$CONDA_PATH/bin:$PATH"
+if [ $TRAVIS_OS_NAME = 'windows' ]; then
+    export CONDA_PATH='/c/tools/miniconda3'
+    export PATH=$CONDA_PATH/Scripts/:$CONDA_PATH/:$PATH
+else
+    export CONDA_PATH="$BASE_PATH/conda"
+    export PATH="$CONDA_PATH/bin:$PATH"
+fi
 
 export GIT_SSL_NO_VERIFY=1
 export GITREV="$(git describe --long 2>/dev/null || echo "unknown")"
-export CONDA_BUILD_ARGS=$PACKAGE
+export CONDA_BUILD_ARGS="$EXTRA_BUILD_ARGS $PACKAGE"
+export CONDA_TEST_ARGS="--test"
 if [ -f "$PACKAGE/conda_build_config.$TOOLCHAIN_ARCH.yaml" ]; then
 	export CONDA_BUILD_ARGS="$CONDA_BUILD_ARGS -m $PACKAGE/conda_build_config.$TOOLCHAIN_ARCH.yaml"
 fi
