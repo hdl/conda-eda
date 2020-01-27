@@ -15,15 +15,43 @@ stages:
 jobs:
  include:
  # EDA Tools - Bitstream Tools
-  # Linux
+  # Linux - x86 64bit
   - stage: "EDA Tools - Bitstream"
     os: linux
     dist: xenial
+    arch: amd64
     env:
     - PACKAGE=bit/icestorm
   - stage: "EDA Tools - Bitstream"
     os: linux
     dist: xenial
+    arch: amd64
+    env:
+    - PACKAGE=bit/prjtrellis
+#  # Linux - ARM64
+#  - stage: "EDA Tools - Bitstream"
+#    os: linux
+#    dist: xenial
+#    arch: arm64
+#    env:
+#    - PACKAGE=bit/icestorm
+#  - stage: "EDA Tools - Bitstream"
+#    os: linux
+#    dist: xenial
+#    arch: arm64
+#    env:
+#    - PACKAGE=bit/prjtrellis
+  # Linux - Power
+  - stage: "EDA Tools - Bitstream"
+    os: linux
+    dist: xenial
+    arch: ppc64le
+    env:
+    - PACKAGE=bit/icestorm
+  - stage: "EDA Tools - Bitstream"
+    os: linux
+    dist: xenial
+    arch: ppc64le
     env:
     - PACKAGE=bit/prjtrellis
   # Windows
@@ -43,15 +71,30 @@ jobs:
     - PACKAGE=bit/icestorm
 
  # EDA Tools - Simulation
-  # Linux
+  # Linux - x86 64bit
   - stage: "EDA Tools - Simulation"
     os: linux
     dist: xenial
+    arch: amd64
     env:
     - PACKAGE=sim/icarus
   - stage: "EDA Tools - Simulation"
     os: linux
     dist: xenial
+    arch: amd64
+    env:
+    - PACKAGE=sim/verilator
+  # Linux - Power
+  - stage: "EDA Tools - Simulation"
+    os: linux
+    dist: xenial
+    arch: ppc64le
+    env:
+    - PACKAGE=sim/icarus
+  - stage: "EDA Tools - Simulation"
+    os: linux
+    dist: xenial
+    arch: ppc64le
     env:
     - PACKAGE=sim/verilator
   # Windows
@@ -67,10 +110,18 @@ jobs:
     - PACKAGE=sim/icarus
 
  # EDA Tools - Synthesis
-  # Linux
+  # Linux - x86 64bit
   - stage: "EDA Tools - Synthesis"
     os: linux
     dist: xenial
+    arch: amd64
+    env:
+    - PACKAGE=syn/yosys
+  # Linux - Power
+  - stage: "EDA Tools - Synthesis"
+    os: linux
+    dist: xenial
+    arch: ppc64le
     env:
     - PACKAGE=syn/yosys
   # Windows
@@ -86,27 +137,68 @@ jobs:
     - PACKAGE=syn/yosys EXTRA_BUILD_ARGS="--no-test"
 
  # EDA Tools - Place and Route
-  # Linux
+  # Linux - x86 64bit
   - stage: "EDA Tools - PnR"
     os: linux
     dist: xenial
+    arch: amd64
     env:
     - PACKAGE=pnr/arachne
   - stage: "EDA Tools - PnR"
     os: linux
     dist: xenial
+    arch: amd64
     env:
     - PACKAGE=pnr/nextpnr/ice40
   - stage: "EDA Tools - PnR"
     os: linux
     dist: xenial
+    arch: amd64
     env:
     - PACKAGE=pnr/nextpnr/ecp5
   - stage: "EDA Tools - PnR"
     os: linux
     dist: xenial
+    arch: amd64
     env:
     - PACKAGE=pnr/nextpnr/generic
+#  - stage: "EDA Tools - PnR"
+#    os: linux
+#    dist: xenial
+#    arch: amd64
+#    env:
+#    - PACKAGE=pnr/vtr                 CONDA_CHANNELS=conda-forge
+  # Linux - Power
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    arch: ppc64le
+    env:
+    - PACKAGE=pnr/arachne
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    arch: ppc64le
+    env:
+    - PACKAGE=pnr/nextpnr/ice40
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    arch: ppc64le
+    env:
+    - PACKAGE=pnr/nextpnr/ecp5
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    arch: ppc64le
+    env:
+    - PACKAGE=pnr/nextpnr/generic
+#  - stage: "EDA Tools - PnR"
+#    os: linux
+#    dist: xenial
+#    arch: ppc64le
+#    env:
+#    - PACKAGE=pnr/vtr                 CONDA_CHANNELS=conda-forge
   # Windows
   - stage: "EDA Tools - PnR"
     os: windows
@@ -119,16 +211,32 @@ jobs:
     env:
     - PACKAGE=pnr/nextpnr/ice40
 
-#  - stage: "EDA Tools - PnR"
-#    os: linux
-#    dist: xenial
-#    env:
-#    - PACKAGE=pnr/vtr                 CONDA_CHANNELS=conda-forge
-
  # EDA Tools - Formal
+  # Linux - x86 64bit
   - stage: "EDA Tools - Formal"
+    os: linux
+    dist: xenial
+    arch: amd64
     env:
     - PACKAGE=formal/symbiyosys
+  # Linux - Power
+  - stage: "EDA Tools - Formal"
+    os: linux
+    dist: xenial
+    arch: ppc64le
+    env:
+    - PACKAGE=formal/symbiyosys
+  # Windows
+#  - stage: "EDA Tools - Formal"
+#    os: windows
+#    env:
+#    - PACKAGE=formal/symbiyosys
+  # OSX
+#  - stage: "EDA Tools - Formal"
+#    os: osx
+#    osx_image: xcode8.3
+#    env:
+#    - PACKAGE=formal/symbiyosys
 
 before_install:
  - source $TRAVIS_BUILD_DIR/.travis/common.sh

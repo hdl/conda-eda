@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -x
 set -e
 
 CONDA_PATH=${1:-~/conda}
@@ -14,14 +13,34 @@ if [ $TRAVIS_OS_NAME = 'windows' ]; then
 else
     if [ $TRAVIS_OS_NAME = 'linux' ]; then
         sys_name=Linux
+	machine_arch=$(uname -m)
+	echo "Linux running on $machine_arch - '$(uname -a)'"
+	case $machine_arch in
+	    x86_64)
+		arch_name=x86_64
+		;;
+	    ppc64le)
+		arch_name=ppc64le
+		;;
+	    aarch64)
+		arch_name=armv7l
+		;;
+	    *)
+		echo "Unknown architecture $arch_name"
+		exit 1
+		;;
+	esac
     else
         sys_name=MacOSX
+	arch_name=x86_64
     fi
 
-    wget -c https://repo.continuum.io/miniconda/Miniconda3-latest-${sys_name}-x86_64.sh
-    chmod a+x Miniconda3-latest-${sys_name}-x86_64.sh
+    # https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh
+
+    wget -c https://repo.continuum.io/miniconda/Miniconda3-latest-${sys_name}-${arch_name}.sh
+    chmod a+x Miniconda3-latest-${sys_name}-${arch_name}.sh
     if [ ! -d $CONDA_PATH -o ! -z "$CI"  ]; then
-            ./Miniconda3-latest-${sys_name}-x86_64.sh -p $CONDA_PATH -b -f
+            yes | ./Miniconda3-latest-${sys_name}-${arch_name}.sh -p $CONDA_PATH -b -f
     fi
     export PATH=$CONDA_PATH/bin:$PATH
 fi
@@ -33,6 +52,8 @@ conda info
 conda config --set safety_checks disabled
 conda config --set channel_priority strict
 mkdir -p ~/.conda/pkg
+touch ~/.conda/pkg/urls.txt
+ls -l ~/.conda/pkg/urls.txt
 conda config --prepend pkgs_dirs ~/.conda/pkg
 
 conda config --show
