@@ -1,66 +1,139 @@
-language: minimal
+language: shell
 
-dist: xenial
 addons:
-  apt:
+  homebrew:
     packages:
-    - realpath
+    update: false
+
+stages:
+  - "EDA Tools - Bitstream"
+  - "EDA Tools - Simulation"
+  - "EDA Tools - Synthesis"
+  - "EDA Tools - PnR"
+  - "EDA Tools - Formal"
 
 jobs:
-  include:
-   # EDA Tools - Bitstream Tool
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=bit/icestorm
+ include:
+ # EDA Tools - Bitstream Tools
+  # Linux
+  - stage: "EDA Tools - Bitstream"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=bit/icestorm
+  - stage: "EDA Tools - Bitstream"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=bit/prjtrellis
+  # Windows
+  - stage: "EDA Tools - Bitstream"
+    os: windows
+    env:
+    - PACKAGE=bit/icestorm
+  - stage: "EDA Tools - Bitstream"
+    os: windows
+    env:
+    - PACKAGE=bit/prjtrellis
+  # OSX
+  - stage: "EDA Tools - Bitstream"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=bit/icestorm
 
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=bit/prjtrellis
+ # EDA Tools - Simulation
+  # Linux
+  - stage: "EDA Tools - Simulation"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=sim/icarus
+  - stage: "EDA Tools - Simulation"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=sim/verilator
+  # Windows
+  - stage: "EDA Tools - Simulation"
+    os: windows
+    env:
+    - PACKAGE=sim/icarus
+  # OSX
+  - stage: "EDA Tools - Simulation"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=sim/icarus
 
+ # EDA Tools - Synthesis
+  # Linux
+  - stage: "EDA Tools - Synthesis"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=syn/yosys
+  # Windows
+  - stage: "EDA Tools - Synthesis"
+    os: windows
+    env:
+    - PACKAGE=syn/yosys
+  # OSX
+  - stage: "EDA Tools - Synthesis"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=syn/yosys EXTRA_BUILD_ARGS="--no-test"
 
-   # EDA Tools - Synthesis
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=syn/yosys
+ # EDA Tools - Place and Route
+  # Linux
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/arachne
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/nextpnr/ice40
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/nextpnr/ecp5
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/nextpnr/generic
+  # Windows
+  - stage: "EDA Tools - PnR"
+    os: windows
+    env:
+    - PACKAGE=pnr/nextpnr/ice40
+  # OSX
+  - stage: "EDA Tools - PnR"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=pnr/nextpnr/ice40
 
-   # EDA Tools - Place and Route
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=pnr/arachne
+#  - stage: "EDA Tools - PnR"
+#    os: linux
+#    dist: xenial
+#    env:
+#    - PACKAGE=pnr/vtr                 CONDA_CHANNELS=conda-forge
 
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=pnr/nextpnr/ice40
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=pnr/nextpnr/ecp5
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=pnr/nextpnr/generic
-
-#   - stage: "EDA Tools"
-#     env:
-#     - PACKAGE=pnr/vtr                 CONDA_CHANNELS=conda-forge
-
-   # EDA Tools - Simulation
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=sim/icarus
-
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=sim/verilator
-
-   # EDA Tools - Formal
-   - stage: "EDA Tools"
-     env:
-     - PACKAGE=formal/symbiyosys
+ # EDA Tools - Formal
+  - stage: "EDA Tools - Formal"
+    env:
+    - PACKAGE=formal/symbiyosys
 
 before_install:
  - source $TRAVIS_BUILD_DIR/.travis/common.sh
  - bash $TRAVIS_BUILD_DIR/.travis/fixup-git.sh
+ - bash $TRAVIS_BUILD_DIR/.travis/download_sdk.sh
  - source $TRAVIS_BUILD_DIR/.travis/common.sh
 
 install:
@@ -77,4 +150,4 @@ after_success:
 
 cache:
   directories:
-   - /home/travis/.conda/pkgs
+   - $HOME/.conda/pkgs

@@ -1,6 +1,7 @@
 # litex-conda-eda
 
-Conda recipes for FPGA EDA tools (for synthesis, place and route and bitstream generation)
+Conda recipes for FPGA EDA tools (for synthesis, place and route and bitstream
+generation).
 
 # Synthesis
 
@@ -9,7 +10,7 @@ Conda recipes for FPGA EDA tools (for synthesis, place and route and bitstream g
 
 # Place and Route
 
- * [arachne](
+ * [arachne](https://github.com/cseed/arachne-pnr)
  * [nextpnr (iCE40, ECP5, generic)](https://github.com/YosysHQ/nextpnr)
  * [Versatile Place and Route (vpr)](https://github.com/verilog-to-routing/vtr-verilog-to-routing)
 
@@ -26,7 +27,7 @@ Conda recipes for FPGA EDA tools (for synthesis, place and route and bitstream g
  * [Verilator](https://www.veripool.org/wiki/verilator)
 
 # Formal
- 
+
  * [Symbiyosys](https://github.com/YosysHQ/SymbiYosys)
 
 # Building
@@ -46,7 +47,7 @@ GitHub repository, the Travis CI results can be seen at:
 
 https://travis-ci.org/litex-hub/litex-conda-eda
 
-On a successful build in the `timvideos` Travis CI, the resulting packages
+On a successful build in the `litex-hub` Travis CI, the resulting packages
 are uploaded to:
 
 https://anaconda.org/litex-hub/repo
@@ -58,7 +59,7 @@ conda install --channel "LiteX-Hub" package
 ```
 
 These packages are mostly used by
-[`litex-buildenv`](https://github.com/timvideos/litex-buildenv).
+[`litex-buildenv`](https://github.com/litex-hub/litex-buildenv).
 
 ## Building via Travis CI in your own repository
 
@@ -98,7 +99,7 @@ locally.
 
 This can be done with something like:
 
-```
+```shell-session
 sudo apt-get update
 sudo apt-get install wget git
 

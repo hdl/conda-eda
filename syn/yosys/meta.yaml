@@ -5,10 +5,12 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/timvideos/yosys.git
-  git_rev: master
-  patches:
-    - makefile-conda-config.patch
+   git_url: https://github.com/timvideos/yosys.git
+   git_rev: master
+   patches:
+     - makefile-conda-config.patch
+     - disable-failing-ecp5-mux.patch
+     - skip-mux16-efinix-test.patch 	[osx]
 
 build:
   # number: 201803050325
@@ -18,26 +20,50 @@ build:
   script_env:
     - CI
     - TRAVIS
+    - CONDA_OUT
+    - TEST_PACKAGE
+
+test:                                                      # [osx]
+  files:                                                   # [osx]
+    - test.sh                                              # [osx]
+    - skip-mux16-efinix-test.patch                         # [osx]
+    - only-test.patch                                      # [osx]
+  commands:                                                # [osx]
+    - git clone https://github.com/timvideos/yosys.git     # [osx]
+    - cd yosys                                             # [osx]
+    - git apply ../skip-mux16-efinix-test.patch            # [osx]
+    - git apply ../only-test.patch                         # [osx]
+    - cd ..                                                # [osx]
+    - bash test.sh                                         # [osx]
 
 requirements:
   build:
+    - m2w64-toolchain 5.3.0 [win]
+    - m2-make               [win]
+    - m2-base 1.0.0         [win]
+    - m2-bash 4.3           [win]
+    - m2-bison 3.0.4        [win]
+    - m2-flex  2.6.0        [win]
     - python 3.7
-    - tk
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - bison
-    - flex
-    - iverilog
-    - libffi
-    - pkg-config
+    - m2-base 1.0.0        [win]
+    - m2-bison 3.0.4       [win]
+    - m2-flex 2.6.0        [win]
+    - m2-libreadline 6.3   [win]
+    - bison                [not win]
+    - flex                 [not win]
+    - libffi               [not win]
+    - pkg-config           [not win]
     - python 3.7
-    - tk
+    - tk   [osx]
+    - gawk [osx]
   run:
-    - flex
-    - libffi
     - python {{ python }}
-    - tk
+    - tk       [osx]
+    - gawk     [osx]
+    - iverilog [osx]
 
 about:
   home: http://www.clifford.at/yosys/

@@ -12,7 +12,7 @@ cd test
 echo
 echo
 echo "Hello World Test ====="
-$PREFIX/bin/iverilog -v hello_world.v -o hello_world
+$PREFIX/bin/iverilog -o hello_world -v hello_world.v
 echo "----------------------"
 cat hello_world
 echo "----------------------"
