@@ -7,10 +7,10 @@ index 6e7681cf..be6b5878 100644
  ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H"
  
 +else ifeq ($(CONFIG),conda-linux)
-+CXX = x86_64-conda_cos6-linux-gnu-gcc
-+LD = x86_64-conda_cos6-linux-gnu-gcc
 +CXXFLAGS += -std=c++11 -Os
-+CFLAGS += -Wno-unused-function -Wno-unused-but-set-variable
++LD = $(CC)
++CFLAGS += -Wno-unused-function -Wno-unused-but-set-variable -Wno-narrowing
++ABCMKARGS = CC="$(CC)" CXX="$(CXX)" ABC_USE_LIBSTDCXX=1
 +ABCMKARGS += "ABC_READLINE_INCLUDES=-I${PREFIX}/include"
 +ABCMKARGS += "ABC_READLINE_LIBRARIES=-L${PREFIX}/lib -lreadline"
 +
