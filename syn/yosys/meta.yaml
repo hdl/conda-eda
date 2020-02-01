@@ -10,7 +10,6 @@ source:
    patches:
      - makefile-conda-config.patch
      - disable-failing-ecp5-mux.patch
-     - skip-mux16-efinix-test.patch 	[osx]
 
 build:
   # number: 201803050325
@@ -26,12 +25,10 @@ build:
 test:                                                      # [osx]
   files:                                                   # [osx]
     - test.sh                                              # [osx]
-    - skip-mux16-efinix-test.patch                         # [osx]
     - only-test.patch                                      # [osx]
   commands:                                                # [osx]
     - git clone https://github.com/timvideos/yosys.git     # [osx]
     - cd yosys                                             # [osx]
-    - git apply ../skip-mux16-efinix-test.patch            # [osx]
     - git apply ../only-test.patch                         # [osx]
     - cd ..                                                # [osx]
     - bash test.sh                                         # [osx]
