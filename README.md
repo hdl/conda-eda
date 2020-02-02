@@ -38,14 +38,14 @@ integration to Travis CI.
 See [`.travis.yml`](.travis.yml) for the build configuration given to
 Travis CI, and the [`.travis`](.travis) directory for scripts referenced.
 
-The Travis CI output can be found on the https://travis-ci.org/ for the
+The Travis CI output can be found on the https://travis-ci.com/ for the
 GitHub account and GitHub repository.  For instance, for the main:
 
 https://github.com/litex-hub/litex-conda-eda
 
 GitHub repository, the Travis CI results can be seen at:
 
-https://travis-ci.org/litex-hub/litex-conda-eda
+https://travis-ci.com/litex-hub/litex-conda-eda
 
 On a successful build in the `litex-hub` Travis CI, the resulting packages
 are uploaded to:
