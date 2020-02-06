@@ -9,7 +9,6 @@ source:
    git_rev: master
    patches:
      - makefile-conda-config.patch
-     - disable-failing-ecp5-mux.patch
 
 build:
   # number: 201803050325
