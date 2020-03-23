@@ -89,6 +89,11 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=syn/yosys EXTRA_BUILD_ARGS="--no-test"
+  - stage: "EDA Tools - Synthesis"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=syn/yosys-plugins
 
  # EDA Tools - Place and Route
   # Linux
