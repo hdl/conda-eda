@@ -7,6 +7,9 @@ package:
 source:
   git_url: https://github.com/SymbiFlow/yosys-symbiflow-plugins.git
   git_rev: master
+  patches:
+   - fasm_build.patch  [win]
+
 
 build:
   # number: 201803050325
@@ -19,15 +22,20 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}  [not win]
+    - {{ compiler('cxx') }}  [not win]
+    - m2-make    [win]
+    - m2w64-toolchain   [win]
   host:
-    - pkg-config
-    - readline
-    - bison
+    - m2-bison   [win]
+    - m2-flex    [win]
+
+    - bison      [not win]
+    - flex       [not win]
+    - libffi     [not win]
+    - pkg-config [not win]
+    - readline   [not win]
     - tk
-    - libffi
-    - flex
     - iverilog
     - yosys
   run:

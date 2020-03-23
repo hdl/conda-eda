@@ -83,6 +83,10 @@ jobs:
     os: windows
     env:
     - PACKAGE=syn/yosys
+  - stage: "EDA Tools - Synthesis"
+    os: windows
+    env:
+    - PACKAGE=syn/yosys-plugins
   # OSX
   - stage: "EDA Tools - Synthesis"
     os: osx
