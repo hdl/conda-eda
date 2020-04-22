@@ -42,6 +42,10 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=bit/icestorm
+  - stage: "EDA Tools - Bitstream"
+    os: osx
+    env:
+    - PACKAGE=bit/prjtrellis
 
  # EDA Tools - Simulation
   # Linux
