@@ -37,7 +37,7 @@ fi
 conda build purge
 #conda clean -s --dry-run
 
-./conda-meta-extra.sh
+./conda-meta-extra.sh $PACKAGE
 
 end_section "environment.conda"
 
