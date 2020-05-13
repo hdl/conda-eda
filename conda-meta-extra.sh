@@ -1,7 +1,13 @@
 #!/bin/bash
-TOP=$(pwd)
 
-cat > recipe_append.yaml <<EOF
+PACKAGE=${1:-PACKAGE}
+if [ x$PACKAGE = x"" ]; then
+	echo "\$PACKAGE not set!"
+	exit 1
+fi
+
+rm -f $PACKAGE/recipe_append.yaml
+cat > $PACKAGE/recipe_append.yaml <<EOF
 extra:
   maintainers:
     - Tim 'mithro' Ansell <mithro@mithis.com>
@@ -23,13 +29,7 @@ if [ ! -z "${TOOLCHAIN_ARCH}" ]; then
 EOF
 fi
 
-for meta in $(find -name meta.yaml); do
-	(
-		cd $(dirname $meta);
-		if [ $TRAVIS_OS_NAME != 'windows' ]; then
-			ln -sf $(python3 -c "import os.path; print(os.path.relpath('$TOP/recipe_append.yaml'))") recipe_append.yaml
-		else
-			ln -sf $(python -c "import os.path; path=os.path.abspath('$TOP/recipe_append.yaml'); print(path[:2] + path[4:])") recipe_append.yaml
-		fi
-	)
-done
+if [ -e "$PACKAGE_CONDARC" ]; then
+	echo '  condarc:' >> $PACKAGE/recipe_append.yaml
+	cat $PACKAGE_CONDARC | sed -e's/^/    /' >> $PACKAGE/recipe_append.yaml
+fi
