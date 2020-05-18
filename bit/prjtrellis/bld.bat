@@ -15,7 +15,7 @@ if errorlevel 1 exit 1
 
 REM Compile and install libtrellis
 cd ..\libtrellis 
-cmake -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static -A "x64" -DBUILD_SHARED=OFF -DSTATIC_BUILD=ON "-DCMAKE_INSTALL_PREFIX=%BASH_PREFIX%" .
+cmake -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static -DBUILD_SHARED=OFF -DSTATIC_BUILD=ON "-DCMAKE_INSTALL_PREFIX=%BASH_PREFIX%" .
 if errorlevel 1 exit 1
 cmake --build . --target install --config Release
 if errorlevel 1 exit 1
