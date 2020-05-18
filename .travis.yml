@@ -107,6 +107,11 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=pnr/nextpnr/generic
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/vtr
   # Windows
   - stage: "EDA Tools - PnR"
     os: windows
@@ -118,12 +123,11 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/nextpnr/ice40
-
-#  - stage: "EDA Tools - PnR"
-#    os: linux
-#    dist: xenial
-#    env:
-#    - PACKAGE=pnr/vtr                 CONDA_CHANNELS=conda-forge
+  - stage: "EDA Tools - PnR"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=pnr/vtr
 
  # EDA Tools - Formal
   - stage: "EDA Tools - Formal"
