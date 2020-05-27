@@ -6,7 +6,7 @@ package:
 
 source:
   git_url: https://github.com/SymbiFlow/yosys-symbiflow-plugins.git
-  git_rev: master
+  git_rev: 3a9569733f4630300c0ef38d978b60e563fdad2f
   patches:
    - fasm_build.patch  [win]
 
