@@ -21,12 +21,14 @@ build:
 
 requirements:
   build:
-    - msys2:m2w64-toolchain [win]
-    - msys2:m2-base         [win]
-    - msys2:m2-make         [win]
-    - vs2017_win-64         [win]
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - msys2:m2w64-toolchain     [win]
+    - msys2:m2-base             [win]
+    - msys2:m2-make             [win]
+    - vs2017_win-64             [win]
+    - {{ compiler('c') }}       [not osx]
+    - {{ compiler('cxx') }}     [not osx]
+    - {{ compiler('c') }} 4.0   [osx]
+    - {{ compiler('cxx') }} 4.0 [osx]
   host:
     - pkg-config [not win]
   run:
