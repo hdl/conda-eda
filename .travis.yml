@@ -11,6 +11,7 @@ stages:
   - "EDA Tools - Synthesis"
   - "EDA Tools - PnR"
   - "EDA Tools - Formal"
+  - "EDA Tools - Xilinx Vivado metapackages"
 
 jobs:
  include:
@@ -129,6 +130,18 @@ jobs:
   - stage: "EDA Tools - Formal"
     env:
     - PACKAGE=formal/symbiyosys
+
+ # EDA Tools - Xilinx Vivado metapackages
+  - stage: "EDA Tools - Xilinx Vivado metapackages"
+    os: linux
+    dist: xenial
+    env:
+      - PACKAGE=xilinx/vivado
+      - VERSIONS=$TRAVIS_BUILD_DIR/xilinx/vivado/versions
+    script:
+      - bash $TRAVIS_BUILD_DIR/xilinx/vivado/gen_metapackages.sh
+    after_success:
+      - echo "Xilinx Vivado metapackages built for versions:" && cat $VERSIONS
 
 before_install:
  - source $TRAVIS_BUILD_DIR/.travis/common.sh
