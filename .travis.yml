@@ -65,6 +65,11 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=sim/icarus
+  - stage: "EDA Tools - Simulation"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=sim/verilator
 
  # EDA Tools - Synthesis
   # Linux
