@@ -123,6 +123,10 @@ jobs:
     os: windows
     env:
     - PACKAGE=pnr/nextpnr/ice40
+  - stage: "EDA Tools - PnR"
+    os: windows
+    env:
+    - PACKAGE=pnr/nextpnr/generic
   # OSX
   - stage: "EDA Tools - PnR"
     os: osx
