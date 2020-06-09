@@ -138,6 +138,11 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/vtr
+  - stage: "EDA Tools - PnR"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=pnr/nextpnr/generic
 
  # EDA Tools - Formal
   - stage: "EDA Tools - Formal"
