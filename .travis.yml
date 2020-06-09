@@ -127,6 +127,11 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/nextpnr/ice40
+  - stage: "EDA Tools - PnR"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=pnr/nextpnr/generic
 
 #  - stage: "EDA Tools - PnR"
 #    os: linux
