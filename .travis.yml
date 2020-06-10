@@ -112,6 +112,11 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=pnr/nextpnr/generic
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/vtr
   # Windows
   - stage: "EDA Tools - PnR"
     os: windows
@@ -133,11 +138,11 @@ jobs:
     env:
     - PACKAGE=pnr/nextpnr/generic
 
-#  - stage: "EDA Tools - PnR"
-#    os: linux
-#    dist: xenial
-#    env:
-#    - PACKAGE=pnr/vtr                 CONDA_CHANNELS=conda-forge
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/vtr
 
  # EDA Tools - Formal
   - stage: "EDA Tools - Formal"
