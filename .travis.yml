@@ -143,6 +143,12 @@ jobs:
     after_success:
       - echo "Xilinx Vivado metapackages built for versions:" && cat $VERSIONS
 
+ allow_failures:
+  - stage: "EDA Tools - PnR"
+    os: windows
+    env:
+    - PACKAGE=pnr/nextpnr/ice40
+
 before_install:
  - source $TRAVIS_BUILD_DIR/.travis/common.sh
  - bash $TRAVIS_BUILD_DIR/.travis/fixup-git.sh
