@@ -111,11 +111,11 @@ sudo apt-get install coreutils
 
 git clone https://github.com/litex-hub/litex-conda-eda.git
 cd litex-conda-eda
-./conda-get.sh
+./.travis/conda-get.sh
 
 # Adapted from .travis/common.sh
 get_built_package() {
-   ./conda-env.sh render --output "$@" 2>/dev/null | grep conda-bld | grep tar.bz2 | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//'
+   .travis/conda-env.sh render --output "$@" 2>/dev/null | grep conda-bld | grep tar.bz2 | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//'
 }
 
 # Anchor the build date/time, so we have predictable versions and filenames
@@ -138,10 +138,10 @@ TOOLCHAIN_ARCH=lm32
 export PACKAGE TOOLCHAIN_ARCH
 
 for PACKAGE in bit/* syn/* pnr/* sim/*; do
-  ./conda-env.sh build --check "${PACKAGE}"   # Downloads and caches stuff
-  ./conda-env.sh build         "${PACKAGE}"   # Actually build package
+  .travis/conda-env.sh build --check "${PACKAGE}"   # Downloads and caches stuff
+  .travis/conda-env.sh build         "${PACKAGE}"   # Actually build package
   CONDA_OUT="$(get_built_package ${PACKAGE})" # Calculate output package
-  ./conda-env.sh install       "${CONDA_OUT}"
+  .travis/conda-env.sh install       "${CONDA_OUT}"
 done
 ```
 
