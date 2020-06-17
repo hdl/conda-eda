@@ -121,6 +121,11 @@ jobs:
     os: linux
     dist: xenial
     env:
+    - PACKAGE=pnr/vtr
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    env:
     - PACKAGE=pnr/vtr-gui
   # Windows
   - stage: "EDA Tools - PnR"
@@ -147,6 +152,11 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/nextpnr/generic
+  - stage: "EDA Tools - PnR"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=pnr/vtr-gui
 
  # EDA Tools - Formal
   - stage: "EDA Tools - Formal"
