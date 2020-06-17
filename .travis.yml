@@ -111,6 +111,11 @@ jobs:
     os: linux
     dist: xenial
     env:
+    - PACKAGE=pnr/vtr
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
     - PACKAGE=pnr/vtr-gui
   - stage: "Has first level dependencies"
     os: linux
@@ -142,6 +147,11 @@ jobs:
     env:
     - PACKAGE=pnr/nextpnr/generic
   # OSX
+  - stage: "No dependencies"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=pnr/vtr
   - stage: "No dependencies"
     os: osx
     osx_image: xcode8.3
@@ -198,6 +208,10 @@ jobs:
     os: osx
     env:
     - PACKAGE=pnr/vtr-gui
+  - stage: "No dependencies"
+    os: osx
+    env:
+    - PACKAGE=pnr/vtr
   - stage: "No dependencies"
     os: windows
     env:
