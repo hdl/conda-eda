@@ -117,7 +117,7 @@ jobs:
     os: linux
     dist: xenial
     env:
-    - PACKAGE=pnr/vtr
+    - PACKAGE=pnr/vtr-gui
   # Windows
   - stage: "EDA Tools - PnR"
     os: windows
