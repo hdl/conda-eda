@@ -79,17 +79,45 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=syn/yosys
+  - stage: "EDA Tools - Synthesis"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=syn/symbiflow-yosys
+  - stage: "EDA Tools - Synthesis"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=syn/symbiflow-yosys-plugins
   # Windows
   - stage: "EDA Tools - Synthesis"
     os: windows
     env:
     - PACKAGE=syn/yosys
+  - stage: "EDA Tools - Synthesis"
+    os: windows
+    env:
+    - PACKAGE=syn/symbiflow-yosys
+  - stage: "EDA Tools - Synthesis"
+    os: windows
+    env:
+    - PACKAGE=syn/symbiflow-yosys-plugins
   # OSX
   - stage: "EDA Tools - Synthesis"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=syn/yosys EXTRA_BUILD_ARGS="--no-test"
+  - stage: "EDA Tools - Synthesis"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=syn/symbiflow-yosys EXTRA_BUILD_ARGS="--no-test"
+  - stage: "EDA Tools - Synthesis"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=syn/symbiflow-yosys-plugins EXTRA_BUILD_ARGS="--no-test"
 
  # EDA Tools - Place and Route
   # Linux
@@ -123,6 +151,16 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=pnr/vtr-gui
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/symbiflow-vtr
+  - stage: "EDA Tools - PnR"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/symbiflow-vtr-gui
   # Windows
   - stage: "EDA Tools - PnR"
     os: windows
@@ -153,6 +191,16 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/vtr-gui
+  - stage: "EDA Tools - PnR"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=pnr/symbiflow-vtr
+  - stage: "EDA Tools - PnR"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=pnr/symbiflow-vtr-gui
 
  # EDA Tools - Formal
   - stage: "EDA Tools - Formal"
