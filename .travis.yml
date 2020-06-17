@@ -166,6 +166,10 @@ jobs:
     os: windows
     env:
     - PACKAGE=pnr/nextpnr/ice40
+  - stage: "EDA Tools - PnR"
+    os: osx
+    env:
+    - PACKAGE=pnr/vtr
 
 before_install:
  - source $TRAVIS_BUILD_DIR/.travis/common.sh
