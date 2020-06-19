@@ -1,13 +1,13 @@
 #!/bin/bash
 
-source $TRAVIS_BUILD_DIR/.travis/common.sh
+source $TRAVIS_BUILD_DIR/litex-conda-ci/.travis/common.sh
 set -e
 
 # Getting the conda environment
 start_section "environment.conda" "Setting up basic ${YELLOW}conda environment${NC}"
 
 mkdir -p $BASE_PATH
-./conda-get.sh $CONDA_PATH
+./litex-conda-ci/conda-get.sh $CONDA_PATH
 hash -r
 conda config --set always_yes yes --set changeps1 no
 conda install pexpect
@@ -37,7 +37,7 @@ fi
 conda build purge
 #conda clean -s --dry-run
 
-./conda-meta-extra.sh $PACKAGE
+./litex-conda-ci/conda-meta-extra.sh $PACKAGE
 
 end_section "environment.conda"
 

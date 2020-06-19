@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $TRAVIS_BUILD_DIR/.travis/common.sh
+source $TRAVIS_BUILD_DIR/litex-conda-ci/.travis/common.sh
 set -e
 
 # Git repo fixup
