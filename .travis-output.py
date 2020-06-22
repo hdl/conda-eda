@@ -1,12 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import io
 import pexpect
+import re
 import string
 import sys
 import time
-
-sys.stdin = io.TextIOWrapper(sys.stdin.detach(), newline='')
 
 output_to=sys.stdout
 
@@ -16,14 +15,34 @@ child = pexpect.spawn(' '.join(args))
 
 def output_line(line_bits, last_skip):
   line = "".join(line_bits)
+  line = re.sub("/really.*/conda/", "/.../conda/", line)
+  line = re.sub("/_b_env_[^/]*/", "/_b_env_.../", line)
   sline = line.strip()
 
   skip = True
-  if line.startswith(" "):
+  if line.startswith(" ") and not sline.startswith('/'):
     skip = False
 
-  if len(sline) > 0:
-    if sline[0] in string.ascii_uppercase:
+  if "da es fi" in sline:
+    skip = True
+  if "setting rpath" in sline:
+    skip = True
+  if "fprintf" in sline:
+    skip = True
+  if " from " in sline:
+    skip = True
+  if "if (" in sline:
+    skip = True
+
+  if "Entering directory" in sline:
+    skip = False
+    sline = sline.split('make')[-1]
+
+  if re.search("[0-9]+\.[0-9]+", line) and "PACKAGE_" not in line and "SRC_DIR" not in line:
+    skip = False
+
+  if len(sline) > 1:
+    if sline[0] in string.ascii_uppercase and sline[1] not in string.ascii_uppercase:
       skip = False
     if sline[0] in ('[', '=', '!', '+'):
       skip = False
@@ -86,7 +105,8 @@ while True:
   if not line:
     break
 
-  line = line.decode('utf-8')
+  line = line.decode('utf-8', errors='backslashreplace')
+
   logfile.write(line)
   logfile.flush()
 
@@ -103,3 +123,5 @@ while True:
 
   cont.append('\n')
   last_skip = output_line(cont, last_skip)
+
+sys.exit(child.exitstatus)
