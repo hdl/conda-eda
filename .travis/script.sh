@@ -19,7 +19,11 @@ $SPACER
 
 start_section "conda.build" "${GREEN}Building..${NC}"
 if [ $TRAVIS_OS_NAME != 'windows' ]; then
-    $CONDA_PATH/bin/python $TRAVIS_BUILD_DIR/.travis-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
+    if [ $KEEP_ALIVE = 'true' ]; then
+        travis_wait $TRAVIS_MAX_TIME $CONDA_PATH/bin/python $TRAVIS_BUILD_DIR/.travis-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
+    else
+        $CONDA_PATH/bin/python $TRAVIS_BUILD_DIR/.travis-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
+    fi
 else
     # Work-around: prevent console output being mangled
     winpty.exe -Xallow-non-tty -Xplain conda build $CONDA_BUILD_ARGS 2>&1 | tee /tmp/output.log
