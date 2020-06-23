@@ -154,6 +154,12 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/nextpnr/generic
+  - stage: "EDA Tools - PnR"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=pnr/nextpnr/ecp5
+    - KEEP_ALIVE=true
 
  # EDA Tools - Formal
   - stage: "EDA Tools - Formal"
@@ -185,6 +191,11 @@ jobs:
     os: windows
     env:
     - PACKAGE=sim/icarus
+  - stage: "EDA Tools - PnR"
+    os: osx
+    env:
+    - PACKAGE=pnr/nextpnr/ecp5
+    - KEEP_ALIVE=true
 
 before_install:
  - source $TRAVIS_BUILD_DIR/.travis/common.sh
