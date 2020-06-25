@@ -37,6 +37,6 @@ echo "TRAVIS_COMMIT='${TRAVIS_COMMIT}'"
 export TRAVIS_REPO_SLUG="$(git rev-parse --abbrev-ref --symbolic-full-name @{u})"
 echo "TRAVIS_REPO_SLUG='${TRAVIS_REPO_SLUG}'"
 
-./litex-conda-ci/conda-meta-extra.sh
+./.travis/conda-meta-extra.sh
 echo conda $@
 conda $@
