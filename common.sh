@@ -13,8 +13,66 @@ export -f travis_nanoseconds
 export -f travis_fold
 export -f travis_time_start
 export -f travis_time_finish
-export -f travis_wait
-export -f travis_jigger
+
+TRAVIS_MAX_TIME=50
+
+# Override default travis_wait to pipe the output
+travis_wait() {
+	local timeout="${1}"
+
+	if [[ "${timeout}" =~ ^[0-9]+$ ]]; then
+		shift
+	else
+		timeout=20
+	fi
+
+	local cmd=("${@}")
+	local log_file="travis_wait_${$}.log"
+
+	"${cmd[@]}" &
+	local cmd_pid="${!}"
+
+	travis_jigger "${!}" "${timeout}" "${cmd[@]}" &
+	local jigger_pid="${!}"
+	local result
+
+	{
+		wait "${cmd_pid}" 2>/dev/null
+		result="${?}"
+		ps -p"${jigger_pid}" &>/dev/null && kill "${jigger_pid}"
+	}
+
+	if [[ "${result}" -eq 0 ]]; then
+		printf "\\n${ANSI_GREEN}The command %s exited with ${result}.${ANSI_RESET}\\n" "${cmd[*]}"
+	else
+		printf "\\n${ANSI_RED}The command %s exited with ${result}.${ANSI_RESET}\\n" "${cmd[*]}"
+	fi
+
+	echo -e "\\n${ANSI_GREEN}Log:${ANSI_RESET}\\n"
+
+	return "${result}"
+}
+
+# Override default travis_jigger to print invisible character to keep build alive
+travis_jigger() {
+	local cmd_pid="${1}"
+	shift
+	local timeout="${1}"
+	shift
+	local count=0
+
+	echo -e "\\n"
+
+	while [[ "${count}" -lt "${timeout}" ]]; do
+		count="$((count + 1))"
+		# print invisible character
+		echo -ne "\xE2\x80\x8B"
+		sleep 60
+	done
+
+	echo -e "\\n${ANSI_RED}Timeout (${timeout} minutes) reached. Terminating \"${*}\"${ANSI_RESET}\\n"
+	kill -9 "${cmd_pid}"
+}
 
 if [ $TRAVIS_OS_NAME = 'osx' ]; then
     DATE_SWITCH="-r "
