@@ -1,0 +1,14 @@
+diff --git a/scripts/defs.mak.in b/scripts/defs.mak.in
+index 0404e2e..45d65f5 100755
+--- a/scripts/defs.mak.in
++++ b/scripts/defs.mak.in
+@@ -56,7 +56,7 @@ RM                     = rm -f
+ CP                     = cp
+ AR                     = ar
+ ARFLAGS                = crv
+-LINK                   = ld -r
++LINK                   = @LD@ -r
+ LD                     = @LD@
+ MCPP                  = @MCPP@
+ MSED                  = @MSED@
+

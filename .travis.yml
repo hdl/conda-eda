@@ -6,6 +6,7 @@ addons:
     update: false
 
 stages:
+  - "EDA Tools - Misc"
   - "EDA Tools - Bitstream"
   - "EDA Tools - Simulation"
   - "EDA Tools - Synthesis"
@@ -15,6 +16,12 @@ stages:
 
 jobs:
  include:
+ # EDA Tools - Misc
+  - stage: "EDA Tools - Misc"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=misc/magic
  # EDA Tools - Bitstream Tools
   # Linux
   - stage: "EDA Tools - Bitstream"
