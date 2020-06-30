@@ -181,6 +181,10 @@ jobs:
     os: osx
     env:
     - PACKAGE=pnr/vtr
+  - stage: "EDA Tools - Simulation"
+    os: windows
+    env:
+    - PACKAGE=sim/icarus
 
 before_install:
  - source $TRAVIS_BUILD_DIR/.travis/common.sh
