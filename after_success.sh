@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./litex-conda-ci/.travis/common.sh
+source ./.travis/common.sh
 set -e
 
 # Close the after_success fold travis has created already.

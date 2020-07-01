@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $TRAVIS_BUILD_DIR/litex-conda-ci/.travis/common.sh
+source $TRAVIS_BUILD_DIR/.travis/common.sh
 
 # Close the after_failure fold travis has created already.
 travis_fold end after_failure
