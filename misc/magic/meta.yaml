@@ -9,7 +9,6 @@ source:
    git_rev: master
    patches:
      - csh.patch
-     - ld.patch
 
 build:
   # number: 201803050325
