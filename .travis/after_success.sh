@@ -11,15 +11,16 @@ if [[ $UPLOAD == "no-upload" ]]; then
 else
     echo "Job with Conda upload..."
 
+    $SPACER
+    start_section "package.upload" "${GREEN}Package uploading...${NC}"
+    anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER --label $TRAVIS_BUILD_ID $CONDA_OUT
     if [ x$TRAVIS_BRANCH = x"master" -a x$TRAVIS_EVENT_TYPE != x"cron" -a x$TRAVIS_PULL_REQUEST == xfalse ]; then
-    	$SPACER
-
-    	start_section "package.upload" "${GREEN}Package uploading...${NC}"
+        echo "Uploading to the main channel"
     	anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER --label main $CONDA_OUT
-    	end_section "package.upload"
     else
-        echo "Conditions unmet, will not upload"
+        echo "Conditions unmet, will not upload to the main channel"
     fi
+    end_section "package.upload"
 
     $SPACER
 fi

@@ -11,9 +11,8 @@ mkdir -p $BASE_PATH
 hash -r
 conda config --set always_yes yes --set changeps1 no
 conda install pexpect
-conda config --add channels litex-hub
-conda config --add channels antmicro
-conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')
+conda config --add channels litex-hub/labels/$TRAVIS_BUILD_ID
+conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')/labels/$TRAVIS_BUILD_ID
 
 if [ -e $PACKAGE/condarc_$TRAVIS_OS_NAME ]; then
 	export PACKAGE_CONDARC=$PACKAGE/condarc_$TRAVIS_OS_NAME
