@@ -6,78 +6,73 @@ addons:
     update: false
 
 stages:
-  - "EDA Tools - Misc"
-  - "EDA Tools - Bitstream"
-  - "EDA Tools - Simulation"
-  - "EDA Tools - Synthesis"
-  - "EDA Tools - PnR"
-  - "EDA Tools - Formal"
-  - "EDA Tools - Xilinx Vivado metapackages"
+  - "Stage one"
+  - "Stage two"
 
 jobs:
  include:
  # EDA Tools - Misc
-  - stage: "EDA Tools - Misc"
+  - stage: "Stage one"
     os: linux
     dist: xenial
     env:
     - PACKAGE=misc/magic
  # EDA Tools - Bitstream Tools
   # Linux
-  - stage: "EDA Tools - Bitstream"
+  - stage: "Stage one"
     os: linux
     dist: xenial
     env:
     - PACKAGE=bit/icestorm
-  - stage: "EDA Tools - Bitstream"
+  - stage: "Stage one"
     os: linux
     dist: xenial
     env:
     - PACKAGE=bit/prjtrellis
   # Windows
-  - stage: "EDA Tools - Bitstream"
+  - stage: "Stage one"
     os: windows
     env:
     - PACKAGE=bit/icestorm
-  - stage: "EDA Tools - Bitstream"
+  - stage: "Stage one"
     os: windows
     env:
     - PACKAGE=bit/prjtrellis
   # OSX
-  - stage: "EDA Tools - Bitstream"
+  - stage: "Stage one"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=bit/icestorm
-  - stage: "EDA Tools - Bitstream"
+  - stage: "Stage one"
     os: osx
     env:
     - PACKAGE=bit/prjtrellis
 
  # EDA Tools - Simulation
   # Linux
-  - stage: "EDA Tools - Simulation"
+  - stage: "Stage one"
     os: linux
     dist: xenial
     env:
     - PACKAGE=sim/icarus
-  - stage: "EDA Tools - Simulation"
+  - stage: "Stage one"
     os: linux
     dist: xenial
     env:
     - PACKAGE=sim/verilator
   # Windows
-  - stage: "EDA Tools - Simulation"
+  - stage: "Stage one"
     os: windows
     env:
     - PACKAGE=sim/icarus
   # OSX
-  - stage: "EDA Tools - Simulation"
+  - stage: "Stage one"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=sim/icarus
-  - stage: "EDA Tools - Simulation"
+  - stage: "Stage one"
     os: osx
     osx_image: xcode8.3
     env:
@@ -85,18 +80,18 @@ jobs:
 
  # EDA Tools - Synthesis
   # Linux
-  - stage: "EDA Tools - Synthesis"
+  - stage: "Stage one"
     os: linux
     dist: xenial
     env:
     - PACKAGE=syn/yosys
   # Windows
-  - stage: "EDA Tools - Synthesis"
+  - stage: "Stage one"
     os: windows
     env:
     - PACKAGE=syn/yosys
   # OSX
-  - stage: "EDA Tools - Synthesis"
+  - stage: "Stage one"
     os: osx
     osx_image: xcode8.3
     env:
@@ -104,57 +99,57 @@ jobs:
 
  # EDA Tools - Place and Route
   # Linux
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage two"
     os: linux
     dist: xenial
     env:
     - PACKAGE=pnr/arachne
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage two"
     os: linux
     dist: xenial
     env:
     - PACKAGE=pnr/nextpnr/ice40
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage two"
     os: linux
     dist: xenial
     env:
     - PACKAGE=pnr/nextpnr/ecp5
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage two"
     os: linux
     dist: xenial
     env:
     - PACKAGE=pnr/nextpnr/generic
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage one"
     os: linux
     dist: xenial
     env:
     - PACKAGE=pnr/vtr
   # Windows
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage two"
     os: windows
     env:
     - PACKAGE=pnr/nextpnr/ice40
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage two"
     os: windows
     env:
     - PACKAGE=pnr/nextpnr/generic
   # OSX
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage two"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/nextpnr/ice40
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage one"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/vtr
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage one"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/nextpnr/generic
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage two"
     os: osx
     osx_image: xcode8.3
     env:
@@ -162,12 +157,12 @@ jobs:
     - KEEP_ALIVE=true
 
  # EDA Tools - Formal
-  - stage: "EDA Tools - Formal"
+  - stage: "Stage two"
     env:
     - PACKAGE=formal/symbiyosys
 
  # EDA Tools - Xilinx Vivado metapackages
-  - stage: "EDA Tools - Xilinx Vivado metapackages"
+  - stage: "Stage one"
     os: linux
     dist: xenial
     env:
@@ -179,19 +174,19 @@ jobs:
       - echo "Xilinx Vivado metapackages built for versions:" && cat $VERSIONS
 
  allow_failures:
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage one"
     os: windows
     env:
     - PACKAGE=pnr/nextpnr/ice40
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage one"
     os: osx
     env:
     - PACKAGE=pnr/vtr
-  - stage: "EDA Tools - Simulation"
+  - stage: "Stage one"
     os: windows
     env:
     - PACKAGE=sim/icarus
-  - stage: "EDA Tools - PnR"
+  - stage: "Stage one"
     os: osx
     env:
     - PACKAGE=pnr/nextpnr/ecp5
