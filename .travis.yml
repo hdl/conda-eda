@@ -6,78 +6,73 @@ addons:
     update: false
 
 stages:
-  - "EDA Tools - Misc"
-  - "EDA Tools - Bitstream"
-  - "EDA Tools - Simulation"
-  - "EDA Tools - Synthesis"
-  - "EDA Tools - PnR"
-  - "EDA Tools - Formal"
-  - "EDA Tools - Xilinx Vivado metapackages"
+  - "No dependencies" # Doesn't depend on anything apart from upstream packages
+  - "Has first level dependencies" # Depends on a package in the "no dependencies" group
 
 jobs:
  include:
  # EDA Tools - Misc
-  - stage: "EDA Tools - Misc"
+  - stage: "No dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=misc/magic
  # EDA Tools - Bitstream Tools
   # Linux
-  - stage: "EDA Tools - Bitstream"
+  - stage: "No dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=bit/icestorm
-  - stage: "EDA Tools - Bitstream"
+  - stage: "No dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=bit/prjtrellis
   # Windows
-  - stage: "EDA Tools - Bitstream"
+  - stage: "No dependencies"
     os: windows
     env:
     - PACKAGE=bit/icestorm
-  - stage: "EDA Tools - Bitstream"
+  - stage: "No dependencies"
     os: windows
     env:
     - PACKAGE=bit/prjtrellis
   # OSX
-  - stage: "EDA Tools - Bitstream"
+  - stage: "No dependencies"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=bit/icestorm
-  - stage: "EDA Tools - Bitstream"
+  - stage: "No dependencies"
     os: osx
     env:
     - PACKAGE=bit/prjtrellis
 
  # EDA Tools - Simulation
   # Linux
-  - stage: "EDA Tools - Simulation"
+  - stage: "No dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=sim/icarus
-  - stage: "EDA Tools - Simulation"
+  - stage: "No dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=sim/verilator
   # Windows
-  - stage: "EDA Tools - Simulation"
+  - stage: "No dependencies"
     os: windows
     env:
     - PACKAGE=sim/icarus
   # OSX
-  - stage: "EDA Tools - Simulation"
+  - stage: "No dependencies"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=sim/icarus
-  - stage: "EDA Tools - Simulation"
+  - stage: "No dependencies"
     os: osx
     osx_image: xcode8.3
     env:
@@ -85,18 +80,18 @@ jobs:
 
  # EDA Tools - Synthesis
   # Linux
-  - stage: "EDA Tools - Synthesis"
+  - stage: "No dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=syn/yosys
   # Windows
-  - stage: "EDA Tools - Synthesis"
+  - stage: "No dependencies"
     os: windows
     env:
     - PACKAGE=syn/yosys
   # OSX
-  - stage: "EDA Tools - Synthesis"
+  - stage: "No dependencies"
     os: osx
     osx_image: xcode8.3
     env:
@@ -104,64 +99,64 @@ jobs:
 
  # EDA Tools - Place and Route
   # Linux
-  - stage: "EDA Tools - PnR"
+  - stage: "Has first level dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=pnr/arachne
-  - stage: "EDA Tools - PnR"
+  - stage: "Has first level dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=pnr/nextpnr/ice40
-  - stage: "EDA Tools - PnR"
+  - stage: "Has first level dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=pnr/nextpnr/ecp5
-  - stage: "EDA Tools - PnR"
+  - stage: "Has first level dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=pnr/nextpnr/generic
-  - stage: "EDA Tools - PnR"
+  - stage: "No dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=pnr/vtr
   # Windows
-  - stage: "EDA Tools - PnR"
+  - stage: "Has first level dependencies"
     os: windows
     env:
     - PACKAGE=pnr/nextpnr/ice40
-  - stage: "EDA Tools - PnR"
+  - stage: "Has first level dependencies"
     os: windows
     env:
     - PACKAGE=pnr/nextpnr/generic
   # OSX
-  - stage: "EDA Tools - PnR"
+  - stage: "Has first level dependencies"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/nextpnr/ice40
-  - stage: "EDA Tools - PnR"
+  - stage: "No dependencies"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/vtr
-  - stage: "EDA Tools - PnR"
+  - stage: "Has first level dependencies"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/nextpnr/generic
 
  # EDA Tools - Formal
-  - stage: "EDA Tools - Formal"
+  - stage: "Has first level dependencies"
     env:
     - PACKAGE=formal/symbiyosys
 
  # EDA Tools - Xilinx Vivado metapackages
-  - stage: "EDA Tools - Xilinx Vivado metapackages"
+  - stage: "No dependencies"
     os: linux
     dist: xenial
     env:
@@ -173,15 +168,15 @@ jobs:
       - echo "Xilinx Vivado metapackages built for versions:" && cat $VERSIONS
 
  allow_failures:
-  - stage: "EDA Tools - PnR"
+  - stage: "Has first level dependencies"
     os: windows
     env:
     - PACKAGE=pnr/nextpnr/ice40
-  - stage: "EDA Tools - PnR"
+  - stage: "No dependencies"
     os: osx
     env:
     - PACKAGE=pnr/vtr
-  - stage: "EDA Tools - Simulation"
+  - stage: "No dependencies"
     os: windows
     env:
     - PACKAGE=sim/icarus
