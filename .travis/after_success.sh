@@ -13,7 +13,9 @@ else
 
     $SPACER
     start_section "package.upload" "${GREEN}Package uploading...${NC}"
+    set -x 
     anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER --label $TRAVIS_BUILD_ID $CONDA_OUT
+    set +x
     if [ x$TRAVIS_BRANCH = x"master" -a x$TRAVIS_EVENT_TYPE != x"cron" -a x$TRAVIS_PULL_REQUEST == xfalse ]; then
         echo "Uploading to the main channel"
     	anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER --label main $CONDA_OUT
