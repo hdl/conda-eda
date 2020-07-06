@@ -12,11 +12,13 @@ stages:
 jobs:
  include:
  # EDA Tools - Misc
+  # Linux
   - stage: "No dependencies"
     os: linux
     dist: xenial
     env:
     - PACKAGE=misc/magic
+
  # EDA Tools - Bitstream Tools
   # Linux
   - stage: "No dependencies"
@@ -99,6 +101,11 @@ jobs:
 
  # EDA Tools - Place and Route
   # Linux
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/vtr
   - stage: "Has first level dependencies"
     os: linux
     dist: xenial
@@ -119,12 +126,12 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=pnr/nextpnr/generic
+  # Windows
   - stage: "No dependencies"
-    os: linux
-    dist: xenial
+    os: osx
+    osx_image: xcode8.3
     env:
     - PACKAGE=pnr/vtr
-  # Windows
   - stage: "Has first level dependencies"
     os: windows
     env:
@@ -139,11 +146,6 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/nextpnr/ice40
-  - stage: "No dependencies"
-    os: osx
-    osx_image: xcode8.3
-    env:
-    - PACKAGE=pnr/vtr
   - stage: "Has first level dependencies"
     os: osx
     osx_image: xcode8.3
