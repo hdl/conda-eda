@@ -18,8 +18,8 @@ end_section "conda.check"
 $SPACER
 
 start_section "conda.build" "${GREEN}Building..${NC}"
-if [ $TRAVIS_OS_NAME != 'windows' ]; then
-    if [ $KEEP_ALIVE = 'true' ]; then
+if [[ $TRAVIS_OS_NAME != 'windows' ]]; then
+    if [[ $KEEP_ALIVE = 'true' ]]; then
         travis_wait $TRAVIS_MAX_TIME $CONDA_PATH/bin/python $TRAVIS_BUILD_DIR/.travis/.travis-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
     else
         $CONDA_PATH/bin/python $TRAVIS_BUILD_DIR/.travis/.travis-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
