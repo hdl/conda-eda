@@ -6,8 +6,15 @@ addons:
     update: false
 
 stages:
-  - "No dependencies" # Doesn't depend on anything apart from upstream packages
-  - "Has first level dependencies" # Depends on a package in the "no dependencies" group
+  - name: "No dependencies" # Doesn't depend on anything apart from upstream packages
+    if: type != cron
+  - name: "Has first level dependencies" # Depends on a package in the "no dependencies" group
+    if: type != cron
+  - name: "Main label upload" # Puts Anaconda packages to the main label
+    if: type = push AND \
+        branch = master
+  - name: "Cleanup" # Job for removing old Anaconda labels
+    if: type = cron
 
 jobs:
  include:
@@ -168,6 +175,20 @@ jobs:
       - bash $TRAVIS_BUILD_DIR/xilinx/vivado/gen_metapackages.sh
     after_success:
       - echo "Xilinx Vivado metapackages built for versions:" && cat $VERSIONS
+
+ # Move packages from the current label to main
+  - stage: "Main label upload"
+    os: linux
+    dist: xenial
+    script:
+      - bash $TRAVIS_BUILD_DIR/.travis/master-package.sh
+
+ # Remove old labels
+  - stage: "Cleanup"
+    os: linux
+    dist: xenial
+    script:
+      - bash $TRAVIS_BUILD_DIR/.travis/cleanup-anaconda.sh
 
  allow_failures:
   - stage: "Has first level dependencies"
