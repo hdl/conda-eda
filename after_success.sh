@@ -18,7 +18,8 @@ else
         anaconda -t $ANACONDA_TOKEN upload --no-progress --user $ANACONDA_USER --label travis-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}-$TRAVIS_BUILD_ID $CONDA_OUT
         end_section "package.upload"
     else
-        echo "Cannot upload packages from branches not uploaded to the original repository"
+        echo "ANACONDA_TOKEN not found. Please consult README of litex-conda-ci for details on setting up Travis tests properly."
+        echo "Packages cannot be uploaded when tests are running for cross-repository Pull Requests."
     fi
 
     $SPACER
