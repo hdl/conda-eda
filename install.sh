@@ -6,14 +6,14 @@ set -e
 # Getting the conda environment
 start_section "environment.conda" "Setting up basic ${YELLOW}conda environment${NC}"
 
+branch=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
 mkdir -p $BASE_PATH
 ./.travis/conda-get.sh $CONDA_PATH
 hash -r
 conda config --set always_yes yes --set changeps1 no
 conda install pexpect
-conda config --add channels litex-hub
-conda config --add channels antmicro
-conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')
+conda config --add channels litex-hub/label/travis-$branch-$TRAVIS_BUILD_ID
+conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')/label/travis-$branch-$TRAVIS_BUILD_ID
 
 if [ -e $PACKAGE/condarc_$TRAVIS_OS_NAME ]; then
 	export PACKAGE_CONDARC=$PACKAGE/condarc_$TRAVIS_OS_NAME
