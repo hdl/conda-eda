@@ -11,14 +11,15 @@ if [[ $UPLOAD == "no-upload" ]]; then
 else
     echo "Job with Conda upload..."
 
-    if [ x$TRAVIS_BRANCH = x"master" -a x$TRAVIS_EVENT_TYPE != x"cron" -a x$TRAVIS_PULL_REQUEST == xfalse ]; then
-    	$SPACER
-
-    	start_section "package.upload" "${GREEN}Package uploading...${NC}"
-    	anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USER --label main $CONDA_OUT
-    	end_section "package.upload"
+    $SPACER
+    # Travis will not expose the ANACONDA_TOKEN var for pull requests coming from other forks than the original one
+    if [ x$ANACONDA_TOKEN != x ]; then
+        start_section "package.upload" "${GREEN}Package uploading...${NC}"
+        anaconda -t $ANACONDA_TOKEN upload --no-progress --user $ANACONDA_USER --label travis-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}-$TRAVIS_BUILD_ID $CONDA_OUT
+        end_section "package.upload"
     else
-        echo "Conditions unmet, will not upload"
+        echo "ANACONDA_TOKEN not found. Please consult README of litex-conda-ci for details on setting up Travis tests properly."
+        echo "Packages cannot be uploaded when tests are running for cross-repository Pull Requests."
     fi
 
     $SPACER
