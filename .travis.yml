@@ -202,6 +202,16 @@ jobs:
     os: windows
     env:
     - PACKAGE=sim/icarus
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
+      - PACKAGE=xilinx/vivado
+      - VERSIONS=$TRAVIS_BUILD_DIR/xilinx/vivado/versions
+    script:
+      - bash $TRAVIS_BUILD_DIR/xilinx/vivado/gen_metapackages.sh
+    after_success:
+      - echo "Xilinx Vivado metapackages built for versions:" && cat $VERSIONS
 
 before_install:
  - source $TRAVIS_BUILD_DIR/.travis/common.sh
