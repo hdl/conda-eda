@@ -12,6 +12,8 @@ mkdir -p $BASE_PATH
 hash -r
 conda config --set always_yes yes --set changeps1 no
 conda install pexpect
+conda config --add channels litex-hub
+conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')
 conda config --add channels litex-hub/label/travis-$branch-$TRAVIS_BUILD_ID
 conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')/label/travis-$branch-$TRAVIS_BUILD_ID
 
