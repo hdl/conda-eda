@@ -29,32 +29,8 @@ fi
 echo $PATH
 
 conda info
-
-conda config --set safety_checks disabled
-conda config --set channel_priority strict
-mkdir -p ~/.conda/pkg
-conda config --prepend pkgs_dirs ~/.conda/pkg
-
-conda config --show
+conda list
 
 echo "python==3.7.*" > $CONDA_PATH/conda-meta/pinned
 conda install -y python
-
-# `conda` has to be updated before pinning `conda-build`.
-# Otherwise it automatically installs `conda-build` which
-# is then removed by the `conda update -y --all` -- BUG??
 conda update -y conda
-
-# Version has to be both pinned and passed to `conda install`
-echo "conda-build==3.20.3" >> $CONDA_PATH/conda-meta/pinned
-conda install -y conda-build==3.20.3
-
-conda install -y conda-verify
-if [ $TRAVIS_OS_NAME != 'windows' ]; then
-    conda install -y ripgrep
-fi
-
-conda install -y anaconda-client
-conda install -y jinja2
-
-conda update -y --all
