@@ -23,8 +23,8 @@ requirements:
   build:
     - {{ compiler('c') }}   [linux]
     - {{ compiler('cxx') }} [linux]
-    - clang 8.0             [osx]
-    - clangxx 8.0           [osx]
+    - clang 9.0             [osx]
+    - clangxx 9.0           [osx]
     - python                {{ python }}
   host:
     - bison 3.4
