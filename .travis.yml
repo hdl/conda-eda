@@ -133,11 +133,6 @@ jobs:
     env:
     - PACKAGE=pnr/nextpnr/generic
   # Windows
-  - stage: "No dependencies"
-    os: osx
-    osx_image: xcode8.3
-    env:
-    - PACKAGE=pnr/vtr
   - stage: "Has first level dependencies"
     os: windows
     env:
@@ -147,6 +142,11 @@ jobs:
     env:
     - PACKAGE=pnr/nextpnr/generic
   # OSX
+  - stage: "No dependencies"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=pnr/vtr
   - stage: "Has first level dependencies"
     os: osx
     osx_image: xcode8.3
