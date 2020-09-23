@@ -17,6 +17,11 @@ conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')
 conda config --add channels litex-hub/label/travis-$branch-$TRAVIS_BUILD_ID
 conda config --add channels $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')/label/travis-$branch-$TRAVIS_BUILD_ID
 
+if [ x$PACKAGE = x"" ]; then
+    echo '$PACKAGE not set, skipping the rest of install script'
+    exit 0
+fi
+
 if [ -e $PACKAGE/condarc_$TRAVIS_OS_NAME ]; then
 	export PACKAGE_CONDARC=$PACKAGE/condarc_$TRAVIS_OS_NAME
 elif [ -e $PACKAGE/condarc ]; then
