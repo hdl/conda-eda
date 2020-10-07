@@ -299,6 +299,10 @@ jobs:
     env:
     - PACKAGE=sim/icarus
   - stage: "No dependencies"
+    os: windows
+    env:
+    - PACKAGE=bit/prjtrellis
+  - stage: "No dependencies"
     os: linux
     dist: xenial
     env:
