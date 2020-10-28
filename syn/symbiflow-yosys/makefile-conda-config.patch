@@ -9,7 +9,7 @@ index eb8f0f59..b1460a7a 100644
 +else ifeq ($(CONFIG),conda-linux)
 +CXX = x86_64-conda_cos6-linux-gnu-gcc
 +LD = x86_64-conda_cos6-linux-gnu-gcc
-+CXXFLAGS += -std=c++11 -Os
++CXXFLAGS += -std=c++11 -Os -fno-merge-constants
 +CFLAGS += -Wno-unused-function -Wno-unused-but-set-variable
 +ABCMKARGS += "ABC_READLINE_INCLUDES=-I${PREFIX}/include"
 +ABCMKARGS += "ABC_READLINE_LIBRARIES=-L${PREFIX}/lib -lreadline"

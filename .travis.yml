@@ -93,6 +93,16 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=syn/yosys
+  - stage: "Has first level dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.2.1
+  - stage: "Has first level dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.3
   # Windows
   - stage: "No dependencies"
     os: windows

@@ -1,4 +1,5 @@
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('yosys-', '') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+{% set build_string = '%s_libffi%s'|format(DATE_STR, LIBFFI_VERSION|replace('.', '')) %}
 
 package:
   name: symbiflow-yosys
@@ -13,8 +14,8 @@ source:
 build:
   # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
-  # string: 20180305_0325
-  string: {{ environ.get('DATE_STR') }}
+  # string: 20180305_0325_libffi321
+  string: {{ build_string }}
   script_env:
     - CI
     - TRAVIS
@@ -28,13 +29,13 @@ requirements:
     - readline
     - bison
     - tk
-    - libffi
+    - libffi={{ environ.get('LIBFFI_VERSION') }}
     - flex
     - iverilog
   run:
     - readline
     - tk
-    - libffi
+    - libffi={{ environ.get('LIBFFI_VERSION') }}
 
 about:
   home: http://www.clifford.at/yosys/
