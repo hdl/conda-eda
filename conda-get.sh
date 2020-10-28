@@ -38,14 +38,18 @@ conda config --prepend pkgs_dirs ~/.conda/pkg
 conda config --show
 
 echo "python==3.7.*" > $CONDA_PATH/conda-meta/pinned
-#echo "conda-build==3.14.0" >> $CONDA_PATH/conda-meta/pinned
-
 conda install -y python
+
+# `conda` has to be updated before pinning `conda-build`.
+# Otherwise it automatically installs `conda-build` which
+# is then removed by the `conda update -y --all` -- BUG??
 conda update -y conda
 
-conda install -y conda-build
-conda install -y conda-verify
+# Version has to be both pinned and passed to `conda install`
+echo "conda-build==3.20.3" >> $CONDA_PATH/conda-meta/pinned
+conda install -y conda-build==3.20.3
 
+conda install -y conda-verify
 if [ $TRAVIS_OS_NAME != 'windows' ]; then
     conda install -y ripgrep
 fi
