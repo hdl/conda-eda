@@ -1,0 +1,55 @@
+#{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+{% set version = '0.0' %}
+
+package:
+  name: nextpnr-xilinx
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/daveshah1/nextpnr-xilinx.git
+  git_rev: xilinx-upstream
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+    - USE_PYPY
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - python {{ python }}
+    - libboost {{ boost }}
+    - py-boost {{ boost }}
+    - symbiflow-yosys
+  host:
+    - bison
+    - boost {{ boost }}
+    - cmake
+    - eigen
+    - flex
+    - fontconfig
+    - pkg-config
+    - python {{ python }}
+    - libboost {{ boost }}
+    - py-boost {{ boost }}
+  run:
+    - libboost {{ boost }}
+    - py-boost {{ boost }}
+    - python
+    - symbiflow-yosys
+
+test:
+  commands:
+    - nextpnr-xilinx -V
+
+about:
+  home: https://github.com/daveshah1/nextpnr-xilinx.git
+  license: ISC
+  license_file: COPYING
+  summary: 'nextpnr aims to be a vendor neutral, timing driven, FOSS FPGA place and route tool.'
