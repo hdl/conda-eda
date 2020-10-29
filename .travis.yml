@@ -37,6 +37,11 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=bit/prjtrellis
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=bit/prjxray-db
   # Windows
   - stage: "No dependencies"
     os: windows
