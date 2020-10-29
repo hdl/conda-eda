@@ -22,7 +22,6 @@ build:
 
 requirements:
   build:
-    - readline [not win]
     - {{ compiler('c') }}       [linux]
     - {{ compiler('cxx') }}     [linux]
     - {{ compiler('c') }} 4.0   [osx]
@@ -39,13 +38,10 @@ requirements:
     - m2w64-gcc                 [win]
     - m2-gperf                  [win]
     - m2-bison                  [win]
-  run:
-  {% for package in resolved_packages('host') %}
-    - {{ package }}
-  {% endfor %}
-  {% for package in resolved_packages('build') %}
-    - {{ package }}
-  {% endfor %}
+  host:
+    # `readline` has to be a `host` req. to be included as a `run`
+    # requirement in the resulting package (through `run_export`)
+    - readline                  [not win]
 
 test:
   files:
