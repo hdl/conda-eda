@@ -10,6 +10,7 @@ source:
   git_rev: master+wip
   patches:
     - makefile-conda-config.patch
+    - tests-use-vvp.patch
 
 build:
   # number: 201803050325
@@ -22,8 +23,12 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}         # [not osx]
+    - {{ compiler('cxx') }}       # [not osx]
+    - {{ compiler('c') }} 4.*     # [osx]
+    - {{ compiler('cxx') }} 4.*   # [osx]
+    - make
+    - gawk
   host:
     - pkg-config
     - readline
@@ -36,6 +41,14 @@ requirements:
     - readline
     - tk
     - libffi={{ environ.get('LIBFFI_VERSION') }}
+
+test:
+  source_files:
+    - tests/simple/always01.v
+  commands:
+    - yosys -V
+    - yosys-abc -v 2>&1 | grep compiled
+    - yosys -Q -S tests/simple/always01.v
 
 about:
   home: http://www.clifford.at/yosys/

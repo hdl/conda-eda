@@ -16,13 +16,28 @@ fi
 
 which pkg-config
 
-make config-conda-linux
+# Identify OS
+UNAME_OUT="$(uname -s)"
+case "${UNAME_OUT}" in
+    Linux*)     OS=Linux;;
+    Darwin*)    OS=Mac;;
+    *)          OS="${UNAME_OUT}"
+                echo "Unknown OS: ${OS}"
+                exit;;
+esac
+echo "Build started for ${OS}..."
+
+if [[ $OS == "Linux" ]]; then
+        make config-conda-linux
+elif [[ $OS == "Mac" ]]; then
+        make config-conda-mac
+        echo "ENABLE_READLINE := 0" >> Makefile.conf
+fi
+
 echo "PREFIX := $PREFIX" >> Makefile.conf
 
 make V=1 -j$CPU_COUNT
-make test
+if [[ $OS == "Linux" ]]; then
+        make test
+fi
 make install
-
-$PREFIX/bin/yosys -V
-$PREFIX/bin/yosys-abc -v 2>&1 | grep compiled
-$PREFIX/bin/yosys -Q -S tests/simple/always01.v
