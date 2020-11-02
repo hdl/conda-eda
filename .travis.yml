@@ -93,17 +93,31 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=syn/yosys
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=syn/quicklogic-yosys
   # Windows
   - stage: "No dependencies"
     os: windows
     env:
     - PACKAGE=syn/yosys
+  - stage: "No dependencies"
+    os: windows
+    env:
+    - PACKAGE=syn/quicklogic-yosys
   # OSX
   - stage: "No dependencies"
     os: osx
     osx_image: xcode8.3
     env:
     - PACKAGE=syn/yosys EXTRA_BUILD_ARGS="--no-test"
+  - stage: "No dependencies"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=syn/quicklogic-yosys EXTRA_BUILD_ARGS="--no-test"
 
  # EDA Tools - Place and Route
   # Linux

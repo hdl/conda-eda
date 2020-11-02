@@ -1,0 +1,17 @@
+diff --git a/kernel/yosys.cc b/kernel/yosys.cc
+index 2ec3dca0..ff87ddbf 100644
+--- a/kernel/yosys.cc
++++ b/kernel/yosys.cc
+@@ -844,7 +844,11 @@ std::string proc_share_dirname()
+ 	std::string proc_share_path = proc_self_path + "share/";
+ 	if (check_file_exists(proc_share_path, true))
+ 		return proc_share_path;
+-	proc_share_path = proc_self_path + "../share/" + proc_program_prefix()+ "yosys/";
++	if (proc_program_prefix().empty()) {
++		proc_share_path = proc_self_path + "../share/yosys/";
++	} else {
++		proc_share_path = proc_self_path + "../share/" + proc_program_prefix() + "yosys/";
++	}
+ 	if (check_file_exists(proc_share_path, true))
+ 		return proc_share_path;
+ #    ifdef YOSYS_DATDIR

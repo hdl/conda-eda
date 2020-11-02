@@ -1,0 +1,50 @@
+diff --git a/Makefile b/Makefile
+index 6e7681cf..be6b5878 100644
+--- a/Makefile
++++ b/Makefile
+@@ -221,6 +221,20 @@ LD = gcc
+ CXXFLAGS += -std=gnu++11 -Os
+ ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H"
+ 
++else ifeq ($(CONFIG),conda-linux)
++CXX = x86_64-conda_cos6-linux-gnu-gcc
++LD = x86_64-conda_cos6-linux-gnu-gcc
++CXXFLAGS += -std=c++11 -Os
++CFLAGS += -Wno-unused-function -Wno-unused-but-set-variable
++ABCMKARGS += "ABC_READLINE_INCLUDES=-I${PREFIX}/include"
++ABCMKARGS += "ABC_READLINE_LIBRARIES=-L${PREFIX}/lib -lreadline"
++
++else ifeq ($(CONFIG),conda-mac)
++CXX = x86_64-apple-darwin13.4.0-clang
++LD = x86_64-apple-darwin13.4.0-clang++
++CXXFLAGS += -std=c++11 -Os
++ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H"
++
+ else ifeq ($(CONFIG),emcc)
+ CXX = emcc
+ LD = emcc
+@@ -497,6 +511,11 @@ EXTRA_OBJS += $(1)
+ .SECONDARY: $(1)
+ endef
+ 
++ifeq ($(V), 1)
++PRETTY = 0
++ABCMKARGS += ABC_MAKE_VERBOSE=1
++endif
++
+ ifeq ($(PRETTY), 1)
+ P_STATUS = 0
+ P_OFFSET = 0
+@@ -874,6 +893,12 @@ config-gcc-static: clean
+ 	echo 'ENABLE_READLINE := 0' >> Makefile.conf
+ 	echo 'ENABLE_TCL := 0' >> Makefile.conf
+ 
++config-conda-linux: clean
++	echo 'CONFIG := conda-linux' > Makefile.conf
++
++config-conda-mac: clean
++	echo 'CONFIG := conda-mac' > Makefile.conf
++
+ config-gcc-4.8: clean
+ 	echo 'CONFIG := gcc-4.8' > Makefile.conf
+ 
