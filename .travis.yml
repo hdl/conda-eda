@@ -155,6 +155,11 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.3
+  - stage: "Has second level dependencies"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=syn/symbiflow-yosys-plugins
 
  # EDA Tools - Place and Route
   # Linux
