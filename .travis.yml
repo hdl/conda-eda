@@ -10,6 +10,8 @@ stages:
     if: type != cron
   - name: "Has first level dependencies" # Depends on a package in the "no dependencies" group
     if: type != cron
+  - name: "Has second level dependencies" # Depends on a package in the "Has first level dependencies" group
+    if: type != cron
   - name: "Main label upload" # Puts Anaconda packages to the main label
     if: type = push AND branch = master
   - name: "Cleanup" # Job for removing old Anaconda labels
@@ -118,6 +120,11 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.3
+  - stage: "Has second level dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=syn/symbiflow-yosys-plugins
   # Windows
   - stage: "No dependencies"
     os: windows
@@ -148,6 +155,11 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.3
+  - stage: "Has second level dependencies"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=syn/symbiflow-yosys-plugins
 
  # EDA Tools - Place and Route
   # Linux
