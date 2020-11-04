@@ -1,7 +1,7 @@
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('vpr-', '')|replace('-', '') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 
 package:
-  name: vtr
+  name: vtr-gui
   version: {{ version }}
 
 source:
@@ -28,13 +28,27 @@ requirements:
     - python                {{ python }}
   host:
     - bison 3.4
+    - cairo
     - cmake
     - flex
+    - fontconfig
+    - ncurses
     - pkg-config
-    - tbb
-    - tbb-devel
+    - readline
+    - tk
+    - xorg-libice
+    - xorg-libsm
+    - xorg-libx11
+    - xorg-libxcb
+    - xorg-libxext
+    - xorg-libxft
   run:
-    - tbb
+    - readline
+    - tk
+    - cairo
+    - fontconfig
+    - xorg-libx11
+    - xorg-libxft
 
 #test:
 #  commands:

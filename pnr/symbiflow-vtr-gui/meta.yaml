@@ -1,14 +1,12 @@
-{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('vpr-', '')|replace('-', '') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v','')|replace('-', '') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 
 package:
-  name: vtr
+  name: symbiflow-vtr-gui
   version: {{ version }}
 
 source:
-  git_url: https://github.com/verilog-to-routing/vtr-verilog-to-routing.git
-  git_rev: master
-  patches:
-    - osx.patch             [osx]
+  git_url: https://github.com/SymbiFlow/vtr-verilog-to-routing.git
+  git_rev: master+wip
 
 build:
   # number: 201803050325
@@ -21,20 +19,32 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}   [linux]
-    - {{ compiler('cxx') }} [linux]
-    - clang 8.0             [osx]
-    - clangxx 8.0           [osx]
-    - python                {{ python }}
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
   host:
-    - bison 3.4
+    - bison
     - cmake
     - flex
+    - fontconfig
+    - ncurses
     - pkg-config
+    - tk
+    - xorg-libice
+    - xorg-libsm
+    - xorg-libx11
+    - xorg-libxcb
+    - xorg-libxext
+    - xorg-libxft
     - tbb
     - tbb-devel
+    - gtk3
   run:
+    - tk
+    - fontconfig
+    - xorg-libx11
+    - xorg-libxft
     - tbb
+    - gtk3
 
 #test:
 #  commands:

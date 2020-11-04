@@ -156,6 +156,21 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=pnr/vtr
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/vtr-gui
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/symbiflow-vtr
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/symbiflow-vtr-gui
   - stage: "Has first level dependencies"
     os: linux
     dist: xenial
@@ -191,6 +206,11 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/vtr
+  - stage: "No dependencies"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=pnr/vtr-gui
   - stage: "Has first level dependencies"
     os: osx
     osx_image: xcode8.3
@@ -238,6 +258,10 @@ jobs:
     os: windows
     env:
     - PACKAGE=pnr/nextpnr/ice40
+  - stage: "No dependencies"
+    os: osx
+    env:
+    - PACKAGE=pnr/vtr-gui
   - stage: "No dependencies"
     os: osx
     env:
