@@ -1,0 +1,22 @@
+{% set ns = namespace(version='0.0', build_string='0') %}
+{% for package in resolved_packages('host') %}
+  {% if package.startswith( 'vtr ' ) %}
+    {% set ns.version = package.split()[1] %}
+    {% set ns.build_string = package.split()[2] %}
+  {% endif %}
+{% endfor %}
+
+package:
+  name: quicklogic-vtr
+  version: {{ ns.version }}
+build:
+  string: {{ ns.build_string }}
+requirements:
+  host:
+    - vtr
+  run:
+    - vtr={{ ns.version }}={{ ns.build_string }}
+about:
+  home: http://verilogtorouting.org/
+  license: MIT
+  summary: 'A metapackage installing upstream version of the Verilog-to-Routing (VTR).'
