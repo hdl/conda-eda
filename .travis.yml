@@ -114,6 +114,11 @@ jobs:
     os: linux
     dist: xenial
     env:
+    - PACKAGE=syn/quicklogic-yosys-plugins
+  - stage: "Has first level dependencies"
+    os: linux
+    dist: xenial
+    env:
     - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.2.1
   - stage: "Has first level dependencies"
     os: linux
@@ -145,6 +150,11 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=syn/quicklogic-yosys EXTRA_BUILD_ARGS="--no-test"
+  - stage: "Has first level dependencies"
+    os: osx
+    osx_image: xcode8.3
+    env:
+    - PACKAGE=syn/quicklogic-yosys-plugins
   - stage: "Has first level dependencies"
     os: osx
     osx_image: xcode8.3
