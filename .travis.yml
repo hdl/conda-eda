@@ -114,22 +114,22 @@ jobs:
     os: linux
     dist: xenial
     env:
-    - PACKAGE=syn/quicklogic-yosys-plugins
+    - PACKAGE=syn/quicklogic-yosys-plugins  # Uses: iverilog, quicklogic-yosys
   - stage: "Has first level dependencies"
     os: linux
     dist: xenial
     env:
-    - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.2.1
+    - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.2.1  # Uses: iverilog
   - stage: "Has first level dependencies"
     os: linux
     dist: xenial
     env:
-    - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.3
+    - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.3  # Uses: iverilog
   - stage: "Has second level dependencies"
     os: linux
     dist: xenial
     env:
-    - PACKAGE=syn/symbiflow-yosys-plugins
+    - PACKAGE=syn/symbiflow-yosys-plugins  # Uses: iverilog, symbiflow-yosys
   # Windows
   - stage: "No dependencies"
     os: windows
@@ -154,22 +154,22 @@ jobs:
     os: osx
     osx_image: xcode8.3
     env:
-    - PACKAGE=syn/quicklogic-yosys-plugins
+    - PACKAGE=syn/quicklogic-yosys-plugins  # Uses: iverilog, quicklogic-yosys
   - stage: "Has first level dependencies"
     os: osx
     osx_image: xcode8.3
     env:
-    - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.2.1
+    - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.2.1  # Uses: iverilog
   - stage: "Has first level dependencies"
     os: osx
     osx_image: xcode8.3
     env:
-    - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.3
+    - PACKAGE=syn/symbiflow-yosys LIBFFI_VERSION=3.3  # Uses: iverilog
   - stage: "Has second level dependencies"
     os: osx
     osx_image: xcode8.3
     env:
-    - PACKAGE=syn/symbiflow-yosys-plugins
+    - PACKAGE=syn/symbiflow-yosys-plugins  # Uses: iverilog, symbiflow-yosys
 
  # EDA Tools - Place and Route
   # Linux
@@ -193,35 +193,35 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=pnr/symbiflow-vtr-gui
-  - stage: "Has first level dependencies"
+  - stage: "Has second level dependencies"
     os: linux
     dist: xenial
     env:
-    - PACKAGE=pnr/arachne
-  - stage: "Has first level dependencies"
+    - PACKAGE=pnr/arachne  # Uses: icestorm, iverilog, symbiflow-yosys
+  - stage: "Has second level dependencies"
     os: linux
     dist: xenial
     env:
-    - PACKAGE=pnr/nextpnr/ice40
-  - stage: "Has first level dependencies"
+    - PACKAGE=pnr/nextpnr/ice40  # Uses: icestorm, symbiflow-yosys (run)
+  - stage: "Has second level dependencies"
     os: linux
     dist: xenial
     env:
-    - PACKAGE=pnr/nextpnr/ecp5
-  - stage: "Has first level dependencies"
+    - PACKAGE=pnr/nextpnr/ecp5  # Uses: prjtrellis, symbiflow-yosys (run)
+  - stage: "Has second level dependencies"
     os: linux
     dist: xenial
     env:
-    - PACKAGE=pnr/nextpnr/generic
+    - PACKAGE=pnr/nextpnr/generic  # Uses: symbiflow-yosys (run)
   # Windows
-  - stage: "Has first level dependencies"
+  - stage: "Has second level dependencies"
     os: windows
     env:
-    - PACKAGE=pnr/nextpnr/ice40
-  - stage: "Has first level dependencies"
+    - PACKAGE=pnr/nextpnr/ice40  # Uses: icestorm, symbiflow-yosys (run)
+  - stage: "Has second level dependencies"
     os: windows
     env:
-    - PACKAGE=pnr/nextpnr/generic
+    - PACKAGE=pnr/nextpnr/generic  # Uses: symbiflow-yosys (run)
   # OSX
   - stage: "No dependencies"
     os: osx
@@ -233,21 +233,21 @@ jobs:
     osx_image: xcode8.3
     env:
     - PACKAGE=pnr/vtr-gui
-  - stage: "Has first level dependencies"
+  - stage: "Has second level dependencies"
     os: osx
     osx_image: xcode8.3
     env:
-    - PACKAGE=pnr/nextpnr/ice40
-  - stage: "Has first level dependencies"
+    - PACKAGE=pnr/nextpnr/ice40  # Uses: icestorm, symbiflow-yosys (run)
+  - stage: "Has second level dependencies"
     os: osx
     osx_image: xcode8.3
     env:
-    - PACKAGE=pnr/nextpnr/generic
+    - PACKAGE=pnr/nextpnr/generic  # Uses: symbiflow-yosys (run)
 
  # EDA Tools - Formal
   - stage: "Has first level dependencies"
     env:
-    - PACKAGE=formal/symbiyosys
+    - PACKAGE=formal/symbiyosys  # Uses: yosys
 
  # EDA Tools - Xilinx Vivado metapackages
   - stage: "No dependencies"
@@ -276,10 +276,16 @@ jobs:
       - bash $TRAVIS_BUILD_DIR/.travis/cleanup-anaconda.sh
 
  allow_failures:
-  - stage: "Has first level dependencies"
+  # Often exceeds 50 mins; symbiflow-yosys isn't built for Windows
+  - stage: "Has second level dependencies"
     os: windows
     env:
-    - PACKAGE=pnr/nextpnr/ice40
+    - PACKAGE=pnr/nextpnr/ice40  # Uses: icestorm, symbiflow-yosys (run)
+  # symbiflow-yosys isn't built for Windows
+  - stage: "Has second level dependencies"
+    os: windows
+    env:
+    - PACKAGE=pnr/nextpnr/generic  # Uses: symbiflow-yosys (run)
   - stage: "No dependencies"
     os: osx
     env:

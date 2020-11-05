@@ -30,7 +30,7 @@ requirements:
     - pkg-config
     - readline
     - tk
-    - yosys
+    - symbiflow-yosys
   run:
     - icestorm
   {% for package in resolved_packages('host') %}
