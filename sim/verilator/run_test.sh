@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-set +x
+set -x
 
 $PREFIX/bin/verilator -V
 #$PREFIX/bin/verilator --help || true

@@ -23,22 +23,25 @@ requirements:
     - {{ compiler('cxx') }}
     - bison
     - flex
+    - pkg-config
+    - readline
+  host:
     - icestorm
     - iverilog
     - libffi
-    - libgcc-ng
-    - pkg-config
-    - readline
     - tk
     - symbiflow-yosys
   run:
     - icestorm
-  {% for package in resolved_packages('host') %}
-    - {{ package }}
-  {% endfor %}
-  {% for package in resolved_packages('build') %}
-    - {{ package }}
-  {% endfor %}
+    - iverilog
+    - libffi
+    - tk
+    - symbiflow-yosys
+
+test:
+  commands:
+    - arachne-pnr -h
+    - arachne-pnr -v
 
 about:
   home: http://www.clifford.at/arachne-pnr/

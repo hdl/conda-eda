@@ -13,7 +13,7 @@ unset CPPFLAGS
 unset DEBUG_CXXFLAGS
 unset DEBUG_CPPFLAGS
 
-export ICEBOX=$(realpath $(dirname $(which $CC))/../share/icebox)
+export ICEBOX=$PREFIX/share/icebox
 echo
 echo "IceStorm config"
 echo "--------------------------------------"
