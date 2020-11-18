@@ -193,6 +193,16 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=pnr/symbiflow-vtr-gui
+  - stage: "Has first level dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/quicklogic-vtr  # Uses: vtr
+  - stage: "Has first level dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=pnr/quicklogic-vtr-gui  # Uses: vtr-gui
   - stage: "Has second level dependencies"
     os: linux
     dist: xenial
