@@ -25,24 +25,15 @@ requirements:
     - {{ compiler('c') }} 4.0   [osx]
     - {{ compiler('cxx') }} 4.0 [osx]
   host:
-    - {{ compiler('c') }}       [not osx]
-    - {{ compiler('cxx') }}     [not osx]
-    - {{ compiler('c') }} 4.0   [osx]
-    - {{ compiler('cxx') }} 4.0 [osx]
     - bison
     - flex
     - zlib
-  run:
-    - {{ compiler('cxx') }}     [not osx]
-    - {{ compiler('cxx') }} 4.0 [osx]
-  {% for package in resolved_packages('host') %}
-    - {{ package }}
-  {% endfor %}
-  {% for package in resolved_packages('build') %}
-    - {{ package }}
-  {% endfor %}
 
 test:
+  requires:
+    - gxx_linux-64   [linux]
+    - clangxx_osx-64 [osx]
+    - make
   files:
     - test/counter.v
     - test/counter_tb.v
