@@ -271,6 +271,12 @@ jobs:
     after_success:
       - echo "Xilinx Vivado metapackages built for versions:" && cat $VERSIONS
 
+ # EDA Tools - Toolchains
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env: PACKAGE=toolchain/symbiflow-toolchain
+
  # Move packages from the current label to main
   - stage: "Main label upload"
     os: linux
