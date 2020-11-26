@@ -1,6 +1,5 @@
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
-# cmake 1.15 required for boost 1.71
-{% set boost_version = ">=1.67,<1.68.0a0" %}
+{% set boost_version = "1.73.0" %}
 
 package:
   name: nextpnr-ice40
