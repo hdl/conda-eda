@@ -33,12 +33,12 @@ requirements:
     - m4
     - tk
     - ncurses
-    - python 3.7
+    - python>=3.7
     - readline
     - fontconfig
     - xorg-libx11
   run:
-    - python 3.7
+    - python>=3.7
     - cairo
     - ncurses
     - readline
