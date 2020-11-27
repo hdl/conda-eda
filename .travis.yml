@@ -223,11 +223,11 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=pnr/nextpnr/generic  # Uses: symbiflow-yosys (run)
-  - stage: "Has first level dependencies"
+  - stage: "Has second level dependencies"
     os: linux
     dist: xenial
     env:
-    - PACKAGE=pnr/nextpnr/xilinx KEEP_ALIVE=true USE_PYPY=1
+    - PACKAGE=pnr/nextpnr/xilinx KEEP_ALIVE=true USE_PYPY=1  # Uses: symbiflow-yosys
     before_script:
       - sudo add-apt-repository ppa:pypy/ppa -y
       - sudo apt update
