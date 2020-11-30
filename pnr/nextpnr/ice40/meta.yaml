@@ -27,11 +27,6 @@ requirements:
     - m2-base    [win]
     - fontconfig [not win]
     - cmake
-    - python 3.7
-    - boost     {{ boost_version }}
-    - boost-cpp {{ boost_version }}
-    - libboost  {{ boost_version }}
-    - py-boost  {{ boost_version }}
   host:
     - m2-bison   [win]
     - m2-flex    [win]
