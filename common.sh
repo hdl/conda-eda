@@ -112,19 +112,41 @@ mkdir -p "$BASE_PATH"
 if [ $TRAVIS_OS_NAME = 'windows' ]; then
     export CONDA_PATH='/c/tools/miniconda3'
     export PATH=$CONDA_PATH/Scripts/:$CONDA_PATH/:$PATH
+
+    # It is much shorter than '$PWD/workdir/conda-env' which in the end (+conda-bld/...)
+    # causes some build paths to exceed 255 chars (e.g. during prjtrellis building)
+    export CONDA_ENV='/c/Users/travis/conda-env'
+    if [ -d 'workdir/conda-env' ]; then
+        mv 'workdir/conda-env' "$CONDA_ENV"
+    fi
 else
     export CONDA_PATH="$BASE_PATH/conda"
     export PATH="$CONDA_PATH/bin:$PATH"
+    export CONDA_ENV='workdir/conda-env'
+fi
+
+if [ -d "$CONDA_ENV" ] && which conda &>/dev/null; then
+    # >>> conda initialize >>>
+    eval "$('conda' 'shell.bash' 'hook' 2> /dev/null)"
+    # <<< conda initialize <<<
+
+    conda activate "$CONDA_ENV"
 fi
 
 export GIT_SSL_NO_VERIFY=1
 export GITREV="$(git describe --long 2>/dev/null || echo "unknown")"
-export CONDA_BUILD_ARGS="$EXTRA_BUILD_ARGS $PACKAGE"
-export CONDA_TEST_ARGS="--test"
-if [ -f "$PACKAGE/conda_build_config.$TOOLCHAIN_ARCH.yaml" ]; then
-	export CONDA_BUILD_ARGS="$CONDA_BUILD_ARGS -m $PACKAGE/conda_build_config.$TOOLCHAIN_ARCH.yaml"
+
+# 'workdir/recipe' contains $PACKAGE recipe prepared by conda-build-prepare
+if [ -d "workdir/recipe" ]; then
+    export CONDA_BUILD_ARGS="$EXTRA_BUILD_ARGS workdir/recipe"
+    export CONDA_OUT="$(conda render --output $CONDA_BUILD_ARGS | grep conda-bld | grep tar.bz2 | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')"
+
+    if [ "$TRAVIS_OS_NAME" = 'windows' ]; then
+        # conda render outputs Windows-style path which may contain wildcards;
+        # 'git bash' used by Travis works well with wildcards only in Unix-style paths
+        export CONDA_OUT="$(cygpath -u $CONDA_OUT)"
+    fi
 fi
-export CONDA_OUT="$(conda render --output $CONDA_BUILD_ARGS 2> /dev/null | grep conda-bld | grep tar.bz2 | tail -n 1 | sed -e's/-[0-9]\+\.tar/*.tar/' -e's/-git//')"
 
 echo "          GITREV: $GITREV"
 echo "      CONDA_PATH: $CONDA_PATH"
