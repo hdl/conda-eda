@@ -1,3 +1,0 @@
-CONDA_BUILD_SYSROOT:
-  - /Users/travis/sdk/MacOSX10.9.sdk        # [osx]
-

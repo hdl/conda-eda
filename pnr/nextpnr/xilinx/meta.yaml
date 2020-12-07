@@ -1,5 +1,8 @@
-#{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
-{% set version = '0.0' %}
+# Any version string with `GIT_*` variables will break Conda rendering.
+# That's the reason behind this "dummy" version string.
+#
+# Use `conda-build-prepare` before building for some reasonable version string.
+{% set version = 'v0.0_X_gUNKNOWN' %}
 
 package:
   name: nextpnr-xilinx
