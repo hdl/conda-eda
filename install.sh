@@ -20,7 +20,7 @@ fi
 cat "$TRAVIS_BUILD_DIR/.travis/conda_build_config.yaml" >> "$PACKAGE/conda_build_config.yaml"
 
 # Install conda-build-prepare
-python -m pip install git+https://github.com/antmicro/conda-build-prepare@v0.1#egg=conda-build-prepare
+python -m pip install git+https://github.com/litex-hub/conda-build-prepare@v0.1#egg=conda-build-prepare
 
 # The last channel will be on top of the environment's channel list
 ADDITIONAL_CHANNELS="litex-hub $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@') litex-hub/label/travis-$branch-$TRAVIS_BUILD_ID $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')/label/travis-$branch-$TRAVIS_BUILD_ID"
