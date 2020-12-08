@@ -18,6 +18,8 @@ else
         conda activate base
 
         start_section "package.upload" "${GREEN}Package uploading...${NC}"
+        # Test `anaconda` with ANACONDA_TOKEN before uploading
+        source $TRAVIS_BUILD_DIR/.travis/test_anaconda.sh
         anaconda -t $ANACONDA_TOKEN upload --no-progress --user $ANACONDA_USER --label travis-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}-$TRAVIS_BUILD_ID $CONDA_OUT
         end_section "package.upload"
     else
