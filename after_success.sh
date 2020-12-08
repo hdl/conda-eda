@@ -14,6 +14,9 @@ else
     $SPACER
     # Travis will not expose the ANACONDA_TOKEN var for pull requests coming from other forks than the original one
     if [ x$ANACONDA_TOKEN != x ]; then
+        # `anaconda-client` is installed in the `base` environment
+        conda activate base
+
         start_section "package.upload" "${GREEN}Package uploading...${NC}"
         anaconda -t $ANACONDA_TOKEN upload --no-progress --user $ANACONDA_USER --label travis-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}-$TRAVIS_BUILD_ID $CONDA_OUT
         end_section "package.upload"

@@ -25,7 +25,7 @@ python -m pip install git+https://github.com/litex-hub/conda-build-prepare@v0.1#
 # The last channel will be on top of the environment's channel list
 ADDITIONAL_CHANNELS="litex-hub $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@') litex-hub/label/travis-$branch-$TRAVIS_BUILD_ID $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')/label/travis-$branch-$TRAVIS_BUILD_ID"
 
-ADDITIONAL_PACKAGES="anaconda-client conda-build=3.20.3 conda-verify jinja2 pexpect python=3.7"
+ADDITIONAL_PACKAGES="conda-build=3.20.3 conda-verify jinja2 pexpect python=3.7"
 if [[ "$TRAVIS_OS_NAME" != 'windows' ]]; then
     ADDITIONAL_PACKAGES="$ADDITIONAL_PACKAGES ripgrep"
 fi
