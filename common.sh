@@ -9,10 +9,6 @@ NC='\033[0m' # No Color
 
 SPACER="echo -e ${GRAY} - ${NC}"
 
-export -f travis_nanoseconds
-export -f travis_fold
-export -f travis_time_start
-export -f travis_time_finish
 
 TRAVIS_MAX_TIME=50
 
@@ -88,16 +84,12 @@ if [ -z "$DATE_STR" ]; then
 fi
 
 function start_section() {
-	travis_fold start "$1"
-	travis_time_start
 	echo -e "${PURPLE}${PACKAGE}${NC}: - $2${NC}"
 	echo -e "${GRAY}-------------------------------------------------------------------${NC}"
 }
 
 function end_section() {
 	echo -e "${GRAY}-------------------------------------------------------------------${NC}"
-	travis_time_finish
-	travis_fold end "$1"
 }
 
 # Disable this warning;
