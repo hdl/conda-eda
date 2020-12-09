@@ -22,21 +22,20 @@ if [ -z "$GITREV" ]; then
 	echo "Setting git revision $GITREV"
 fi
 
-export TRAVIS=0
 export CI=0
 
-export TRAVIS_EVENT_TYPE="local"
-echo "TRAVIS_EVENT_TYPE='${TRAVIS_EVENT_TYPE}'"
+export CI_EVENT_TYPE="local"
+echo "CI_EVENT_TYPE='${CI_EVENT_TYPE}'"
 
-export TRAVIS_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-echo "TRAVIS_BRANCH='${TRAVIS_BRANCH}'"
+export CI_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+echo "CI_BRANCH='${CI_BRANCH}'"
 
-export TRAVIS_COMMIT="$(git rev-parse HEAD)"
-echo "TRAVIS_COMMIT='${TRAVIS_COMMIT}'"
+export CI_COMMIT="$(git rev-parse HEAD)"
+echo "CI_COMMIT='${CI_COMMIT}'"
 
-export TRAVIS_REPO_SLUG="$(git rev-parse --abbrev-ref --symbolic-full-name @{u})"
-echo "TRAVIS_REPO_SLUG='${TRAVIS_REPO_SLUG}'"
+export CI_REPO_SLUG="$(git rev-parse --abbrev-ref --symbolic-full-name @{u})"
+echo "CI_REPO_SLUG='${CI_REPO_SLUG}'"
 
-./.travis/conda-meta-extra.sh
+$GITHUB_WORKSPACE/.github/scripts/conda-meta-extra.sh
 echo conda $@
 conda $@

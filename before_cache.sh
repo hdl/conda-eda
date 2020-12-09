@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./.travis/common.sh
+source $GITHUB_WORKSPACE/.github/scripts/common.sh
 set -e
 
 start_section "conda.clean.1" "${GREEN}Clean status...${NC}"

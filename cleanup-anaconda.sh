@@ -13,7 +13,7 @@ echo "Will remove labels older than $limit_date timestamp"
 
 for label in $(anaconda -t $ANACONDA_TOKEN label --list -o litex-hub 2>&1 | grep ' + ' | cut -f2 -d1+)
 do
-    if [[ $label != travis* ]]
+    if [[ $label != ci* ]]
     then
         continue
     fi

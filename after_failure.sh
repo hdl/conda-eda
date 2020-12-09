@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $TRAVIS_BUILD_DIR/.travis/common.sh
+source $GITHUB_WORKSPACE/.github/scripts/common.sh
 
 $SPACER
 

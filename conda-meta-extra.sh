@@ -12,14 +12,14 @@ extra:
   maintainers:
     - Tim 'mithro' Ansell <mithro@mithis.com>
     - HDMI2USB Project - https://hdmi2usb.tv <hdmi2usb@googlegroups.com>
-  travis:
-    job_id:  $TRAVIS_JOB_ID
-    job_num: $TRAVIS_JOB_NUMBER
-    type:    $TRAVIS_EVENT_TYPE
+  ci:
+    job_id:  $GITHUB_RUN_ID
+    job_num: $GITHUB_RUN_NUMBER
+    type:    $CI_EVENT_TYPE
   recipe:
-    repo:     'https://github.com/$TRAVIS_REPO_SLUG'
-    branch:   $TRAVIS_BRANCH
-    commit:   $TRAVIS_COMMIT
+    repo:     'https://github.com/$CI_REPO_SLUG'
+    branch:   $CI_BRANCH
+    commit:   $CI_COMMIT
     describe: $GITREV
     date:     $DATESTR
 EOF
