@@ -99,7 +99,12 @@ if [ $OS_NAME = 'windows' ]; then
 
     # It is much shorter than '$PWD/workdir/conda-env' which in the end (+conda-bld/...)
     # causes some build paths to exceed 255 chars (e.g. during prjtrellis building)
-    export CONDA_ENV='/c/Users/runner/conda-env'
+    RUNNER_DIR='/c/Users/runner/'
+    if [ ! -d "$RUNNER_DIR" ]; then
+    	mkdir "$RUNNER_DIR"
+    fi
+
+    export CONDA_ENV="$RUNNER_DIR/conda-env"
     if [ -d 'workdir/conda-env' ]; then
         mv 'workdir/conda-env' "$CONDA_ENV"
     fi
