@@ -16,7 +16,7 @@ if [ x$PACKAGE = x"" ]; then
     exit 0
 fi
 
-# Add '.travis' build variants to the recipe dir (appended keys win in case of any conflict)
+# Add build variants to the recipe dir (appended keys win in case of any conflict)
 cat "$GITHUB_WORKSPACE/.github/scripts/conda_build_config.yaml" >> "$PACKAGE/conda_build_config.yaml"
 
 # Install conda-build-prepare

@@ -11,7 +11,6 @@ SPACER="echo -e ${GRAY} - ${NC}"
 
 CI_MAX_TIME=50
 
-# Override default travis_wait to pipe the output
 ci_wait() {
 	local timeout="${1}"
 
@@ -48,7 +47,6 @@ ci_wait() {
 	return "${result}"
 }
 
-# Override default travis_jigger to print invisible character to keep build alive
 ci_jigger() {
 	local cmd_pid="${1}"
 	shift
@@ -91,11 +89,6 @@ function end_section() {
 	echo -e "${GRAY}-------------------------------------------------------------------${NC}"
 }
 
-# Disable this warning;
-# xxxx/conda_build/environ.py:377: UserWarning: The environment variable
-#     'TRAVIS' is being passed through with value 0.  If you are splitting
-#     build and test phases with --no-test, please ensure that this value is
-#     also set similarly at test time.
 export PYTHONWARNINGS=ignore::UserWarning:conda_build.environ
 
 export BASE_PATH="/tmp/really-long-path"
@@ -134,7 +127,6 @@ if [ -d "workdir/recipe" ]; then
 
     if [ "$OS_NAME" = 'windows' ]; then
         # conda render outputs Windows-style path which may contain wildcards;
-        # 'git bash' used by Travis works well with wildcards only in Unix-style paths
         export CONDA_OUT="$(cygpath -u $CONDA_OUT)"
     fi
 fi
