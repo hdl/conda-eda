@@ -23,7 +23,7 @@ cat "$GITHUB_WORKSPACE/.github/scripts/conda_build_config.yaml" >> "$PACKAGE/con
 python -m pip install git+https://github.com/litex-hub/conda-build-prepare@v0.1#egg=conda-build-prepare
 
 # The last channel will be on top of the environment's channel list
-ADDITIONAL_CHANNELS="litex-hub $(echo $CI_REPO_SLUG | sed -e's@/.*$@@') litex-hub/label/ci-$branch-$GITHUB_RUN_ID $(echo $CI_REPO_SLUG | sed -e's@/.*$@@')/label/ci-$branch-$CI_BUILD_ID"
+ADDITIONAL_CHANNELS="litex-hub litex-hub/label/ci-$branch-$GITHUB_RUN_ID"
 
 ADDITIONAL_PACKAGES="conda-build=3.20.3 conda-verify jinja2 pexpect python=3.7"
 if [[ "$TRAVIS_OS_NAME" != 'windows' ]]; then
