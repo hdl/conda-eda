@@ -25,3 +25,8 @@ make install
 
 mkdir -p ${PREFIX}/lib
 mv ${PREFIX}/bin/*.a ${PREFIX}/lib/
+
+CAPNP_SCHEMAS=${PREFIX}/bin/capnp-schemas-dir
+
+echo -e "#!/bin/bash\n\necho ${PREFIX}/capnp" > ${CAPNP_SCHEMAS}
+chmod +x ${CAPNP_SCHEMAS}
