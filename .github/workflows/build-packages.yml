@@ -1,0 +1,130 @@
+name: build-packages
+on: [push, pull_request]
+jobs:
+  packages:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {package: "misc/magic", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "bit/icestorm", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "bit/prjtrellis", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "bit/prjxray-db", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "bit/prjxray-tools", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "bit/icestorm", os: "windows-latest", os-name: "windows"}
+          - {package: "bit/prjtrellis", os: "windows-2016", os-name: "windows"}
+          - {package: "bit/icestorm", os: "macos-latest", os-name: "osx"}
+          - {package: "bit/prjtrellis", os: "macos-latest", os-name: "osx"}
+          - {package: "sim/icarus", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "sim/verilator", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "sim/icarus", os: "windows-latest", os-name: "windows"}
+          - {package: "sim/icarus", os: "macos-latest", os-name: "osx"}
+          - {package: "sim/verilator", os: "macos-10.15", os-name: "osx", xcode: "10.3"}
+          - {package: "syn/yosys", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "syn/quicklogic-yosys", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "syn/quicklogic-yosys-plugins", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "syn/symbiflow-yosys", libffi: "3.2.1", os: "ubuntu-16.04", os-name: "linux", uses: "iverilog"}
+          - {package: "syn/symbiflow-yosys", libffi: "3.3", os: "ubuntu-16.04", os-name: "linux", uses: "iverilog"}
+          - {package: "syn/symbiflow-yosys-plugins", os: "ubuntu-16.04", os-name: "linux", uses: "iverilog, symbiflow-yosys"}
+          - {package: "syn/yosys", os: "windows-latest", os-name: "windows"}
+          - {package: "syn/quicklogic-yosys", os: "windows-latest", os-name: "windows"}
+          - {package: "syn/yosys", extra-args: "--no-test", os: "macos-latest", os-name: "osx"}
+          - {package: "syn/quicklogic-yosys", extra-args: "--no-test", os: "macos-latest", os-name: "osx"}
+          - {package: "syn/quicklogic-yosys-plugins", os: "macos-latest", os-name: "osx", uses: "iverilog, quicklogic-yosys"}
+          - {package: "syn/symbiflow-yosys", libffi: "3.2.1", os: "macos-latest", os-name: "osx", uses: "iverilog"}
+          - {package: "syn/symbiflow-yosys", libffi: "3.2.1", os: "macos-latest", os-name: "osx", uses: "iverilog"}
+          - {package: "syn/symbiflow-yosys", libffi: "3.3", os: "macos-latest", os-name: "osx", uses: "iverilog, symbiflow-yosys"}
+          - {package: "syn/symbiflow-yosys-plugins", os: "macos-latest", os-name: "osx", uses: "iverilog, symbiflow-yosys"} 
+          - {package: "pnr/vtr", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "pnr/vtr-gui", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "pnr/symbiflow-vtr", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "pnr/symbiflow-vtr-gui", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "pnr/quicklogic-vtr", os: "ubuntu-16.04", os-name: "linux", uses: "vtr"}
+          - {package: "pnr/quicklogic-vtr-gui", os: "ubuntu-16.04", os-name: "linux", uses: "vtr-gui"}
+          - {package: "pnr/arachne", os: "ubuntu-16.04", os-name: "linux", uses: "icestorm, iverilog, symbiflow-yosys"}
+          - {package: "pnr/nextpnr/ice40", os: "ubuntu-16.04", os-name: "linux", uses: "icestorm, symbiflow-yosys"}
+          - {package: "pnr/nextpnr/ecp5", os: "ubuntu-16.04", os-name: "linux", uses: "prjtrellis, symbiflow-yosys"}
+          - {package: "pnr/nextpnr/generic", os: "ubuntu-16.04", os-name: "linux", uses: "symbiflow-yosys"}
+          - {package: "pnr/nextpnr/xilinx", keep-alive: "true", use-pypy: "1", os: "ubuntu-16.04", os-name: "linux", uses: "symbiflow-yosys"}
+          - {package: "pnr/nextpnr/ice40", os: "windows-latest", os-name: "windows", uses: "icestorm, symbiflow-yosys", skip: "true"}
+          - {package: "pnr/nextpnr/generic", os: "windows-latest", os-name: "windows", uses: "symbiflow-yosys", skip: "true"}
+          - {package: "pnr/vtr", os: "macos-latest", os-name: "osx", skip: "true"}
+          - {package: "pnr/vtr-gui", os: "macos-latest", os-name: "osx", skip: "true"}
+          - {package: "pnr/nextpnr/ice40", os: "macos-latest", os-name: "osx", uses: "icestorm, symbiflow-yosys"}
+          - {package: "pnr/nextpnr/generic", os: "macos-latest", os-name: "osx", uses: "symbiflow-yosys"}
+          - {package: "formal/symbiyosys", os: "ubuntu-16.04", os-name: "linux", uses: "yosys"}
+          - {package: "xilinx/vivado", versions: "/xilinx/vivado/versions", script: "bash $GITHUB_WORKSPACE/xilinx/vivado/gen_metapackages.sh", os: "ubuntu-16.04", os-name: "linux"}
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'true'
+    - name: 'windows: add msys2 to PATH'
+      if: matrix.os-name == 'windows'
+      run: echo "C:\msys64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      shell: powershell
+    - name: 'macos: install coreutils'
+      if: matrix.os-name == 'osx'
+      run: brew install coreutils
+    - name: 'linux: install pypy'
+      if: matrix.os-name == 'linux' && matrix.use-pypy == '1'
+      run: |
+        sudo add-apt-repository ppa:pypy/ppa -y
+        sudo apt update
+        sudo apt install -y pypy3
+    - name: build
+      if: matrix.skip != 'true' && matrix.script == ''
+      env:
+        PACKAGE: ${{ matrix.package }}
+        OS_NAME: ${{ matrix.os-name }}
+        LIBFFI_VERSION: ${{ matrix.libffi }}
+        EXTRA_BUILD_ARGS: ${{ matrix.extra-args }}
+        KEEP_ALIVE: ${{ matrix.keep-alive }}
+        USE_PYPY: ${{ matrix.use-pypy }}
+      run: |
+        export PATH="$PATH:/c/ProgramData/Chocolatey/bin/"
+        export PATH="$PATH:/c/Program Files/Git/usr/bin/"
+        source .github/scripts/common.sh
+        bash .github/scripts/fixup-git.sh
+        bash .github/scripts/download_sdk.sh
+        source .github/scripts/common.sh
+        bash .github/scripts/install.sh
+        set -x
+        bash .github/scripts/script.sh
+    - name: inline build
+      if: matrix.skip != 'true' && matrix.script != ''
+      env:
+        VERSIONS: ${{ format('{0}{1}', github.workspace, matrix.versions) }}
+        PACKAGE: ${{ matrix.package }}
+        OS_NAME: ${{ matrix.os-name }}
+        LIBFFI_VERSION: ${{ matrix.libffi }}
+        EXTRA_BUILD_ARGS: ${{ matrix.extra-args }}
+        KEEP_ALIVE: ${{ matrix.keep-alive }}
+        USE_PYPY: ${{ matrix.use-pypy }}
+      run: |
+        export PATH="$PATH:/c/ProgramData/Chocolatey/bin/"
+        export PATH="$PATH:/c/Program Files/Git/usr/bin/"
+        source .github/scripts/common.sh
+        bash .github/scripts/fixup-git.sh
+        bash .github/scripts/download_sdk.sh
+        source .github/scripts/common.sh
+        bash .github/scripts/install.sh
+        set -x
+        ${{ matrix.script }}
+    - name: on_success
+      env:
+        PACKAGE: ${{ matrix.package }}
+        OS_NAME: ${{ matrix.os-name }}
+      if: success() && matrix.skip != 'true'
+      run: |
+        source .github/scripts/after_success.sh
+    - name: on_failure
+      env:
+        PACKAGE: ${{ matrix.package }}
+        OS_NAME: ${{ matrix.os-name }}
+      if: failure() && matrix.skip != 'true'
+      run: |
+        source .github/scripts/after_failure.sh
