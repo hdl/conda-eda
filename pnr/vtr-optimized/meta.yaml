@@ -1,7 +1,7 @@
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v','') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN')|replace('-','_') %}
 
 package:
-  name: symbiflow-vtr-optimized
+  name: vtr-optimized
   version: {{ version }}
 
 source:
@@ -26,7 +26,6 @@ requirements:
     - libiconv
     - libxslt
     - libxml2
-    - python-constraint
     - simplejson
     - intervaltree
     - curl
