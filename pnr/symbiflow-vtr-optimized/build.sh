@@ -31,7 +31,7 @@ echo "DEBUG_CPPFLAGS='$DEBUG_CPPFLAGS'"
 echo "LDFLAGS='$LDFLAGS'"
 env
 
-# Where to get the SymbiFlow architecture install package.
+# Where to get data needed to collect profile data in run-sf.sh
 URL_BASE=https://storage.googleapis.com/symbiflow-arch-defs-gha/
 declare -A PACKAGE
 PACKAGE[benckmarks]=symbiflow-benchmarks-latest
@@ -39,6 +39,9 @@ PACKAGE[toolchain]=symbiflow-toolchain-latest
 PACKAGE[architecture]=symbiflow-xc7a50t_test-latest
 
 BUILD_ROOT=$PWD
+
+# Executables needed for PGO
+PGO_TARGETS="vpr genfasm"
 
 # This will take a while to download, so fork it and rejoin later.
 mkdir symbiflow
@@ -62,7 +65,7 @@ cmake \
     -DVPR_PGO_DATA_DIR=${BUILD_ROOT}/pgo \
     ..
 
-make -k -j$CPU_COUNT || make VERBOSE=1
+make -k -j$CPU_COUNT $PGO_TARGETS || make VERBOSE=1
 popd
 
 wait $FETCH_SYMBIFLOW_PID
