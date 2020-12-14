@@ -53,7 +53,6 @@ mkdir symbiflow
 ) &
 FETCH_SYMBIFLOW_PID=$!
 
-export M4=${PREFIX}/bin/m4
 mkdir build
 pushd build
 # ODIN and ABC are disabled to keep build time less than Travis CI timeout.
