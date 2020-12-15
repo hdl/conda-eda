@@ -187,6 +187,11 @@ jobs:
     os: linux
     dist: xenial
     env:
+    - PACKAGE=pnr/vtr-optimized
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
     - PACKAGE=pnr/symbiflow-vtr
   - stage: "No dependencies"
     os: linux
