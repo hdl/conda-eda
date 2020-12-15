@@ -26,6 +26,7 @@ requirements:
     - libiconv
     - libxslt
     - libxml2
+    - python-constraint
     - simplejson
     - intervaltree
     - curl
