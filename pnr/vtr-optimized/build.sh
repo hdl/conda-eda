@@ -33,13 +33,10 @@ env
 
 # Where to get data needed to collect profile data in run-sf.sh
 URL_BASE=https://storage.googleapis.com/symbiflow-arch-defs-gha/
-declare -A PACKAGE FILE
+declare -A PACKAGE
 PACKAGE[benckmarks]=symbiflow-benchmarks-latest
 PACKAGE[toolchain]=symbiflow-toolchain-latest
 PACKAGE[architecture]=symbiflow-xc7a50t_test-latest
-
-# Workaround for corrupt or missing files
-FILE["symbiflow/benchmarks/sdc/ibex_arty.sdc"]=https://raw.githubusercontent.com/SymbiFlow/symbiflow-arch-defs/master/xc/xc7/tests/soc/ibex/pins_artya7.sdc
 
 BUILD_ROOT=$PWD
 
@@ -52,10 +49,6 @@ mkdir symbiflow
     for data in "${!PACKAGE[@]}"; do
         # Given URL points to another URL containing a .tar.xz
         curl ${URL_BASE}${PACKAGE["$data"]} | xargs curl | tar xJ -C symbiflow
-    done
-    for file in "${!FILE[@]}"; do
-        rm -f "$file"
-        curl ${FILE["$file"]} > "$file"
     done
 ) &
 FETCH_SYMBIFLOW_PID=$!
