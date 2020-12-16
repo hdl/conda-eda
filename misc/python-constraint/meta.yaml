@@ -1,0 +1,51 @@
+{% set name = "python-constraint" %}
+{% set version = "1.4.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.bz2"
+  sha256: 501d6f17afe0032dfc6ea6c0f8acc12e44f992733f00e8538961031ef27ccb8e
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+    - CONDA_OUT
+    - TEST_PACKAGE
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+test:
+  imports:
+    - constraint
+    - examples
+    - examples.abc
+    - examples.coins
+    - examples.crosswords
+    - examples.einstein
+    - examples.queens
+    - examples.rooks
+    - examples.studentdesks
+    - examples.sudoku
+    - examples.wordmath
+    - examples.xsum
+
+about:
+  home: "https://github.com/python-constraint/python-constraint"
+  license: BSD
+  license_family: BSD
+  license_file: LICENSE
+  summary: "python-constraint is a module implementing support for handling CSPs (Constraint Solving Problems) over finite domain"

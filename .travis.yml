@@ -26,6 +26,11 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=misc/magic
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=misc/python-constraint
 
  # EDA Tools - Bitstream Tools
   # Linux
@@ -183,7 +188,7 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=pnr/vtr-gui
-  - stage: "No dependencies"
+  - stage: "Has first level dependencies"
     os: linux
     dist: xenial
     env:
