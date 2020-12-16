@@ -1,0 +1,48 @@
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v','') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN')|replace('-','_') %}
+
+package:
+  name: vtr-optimized
+  version: {{ version }}
+
+source:
+  - git_url: https://github.com/verilog-to-routing/vtr-verilog-to-routing.git
+    git_rev: master
+  - path: . # Extra files needed for PGO
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - lxml
+    - libiconv
+    - libxslt
+    - libxml2
+    - python-constraint
+    - simplejson
+    - intervaltree
+    - curl
+    - xz
+  host:
+    - bison
+    - cmake
+    - flex
+    - pkg-config
+    - tbb
+    - tbb-devel
+  run:
+    - tbb
+
+about:
+  home: http://verilogtorouting.org/
+  license: MIT
+  license_file: LICENSE.md
+  summary: 'The Verilog-to-Routing (VTR) project is a world-wide collaborative effort to provide a open-source framework for conducting FPGA architecture and CAD research and development. The VTR design flow takes as input a Verilog description of a digital circuit, and a description of the target FPGA architecture.'
