@@ -26,6 +26,11 @@ jobs:
     dist: xenial
     env:
     - PACKAGE=misc/magic
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=misc/magic BUILDONLY_CHANNELS=conda-forge
 
  # EDA Tools - Bitstream Tools
   # Linux
@@ -300,6 +305,11 @@ jobs:
       - bash $TRAVIS_BUILD_DIR/.travis/cleanup-anaconda.sh
 
  allow_failures:
+  - stage: "No dependencies"
+    os: linux
+    dist: xenial
+    env:
+    - PACKAGE=misc/magic BUILDONLY_CHANNELS=conda-forge
   # Often exceeds 50 mins; symbiflow-yosys isn't built for Windows
   - stage: "Has second level dependencies"
     os: windows
