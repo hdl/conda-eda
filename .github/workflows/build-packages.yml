@@ -38,6 +38,7 @@ jobs:
           - {package: "syn/symbiflow-yosys-plugins", os: "macos-latest", os-name: "osx", uses: "iverilog, symbiflow-yosys"} 
           - {package: "pnr/vtr", os: "ubuntu-16.04", os-name: "linux"}
           - {package: "pnr/vtr-gui", os: "ubuntu-16.04", os-name: "linux"}
+          - {package: "pnr/vtr-optimized", os: "ubuntu-16.04", os-name: "linux"}
           - {package: "pnr/symbiflow-vtr", os: "ubuntu-16.04", os-name: "linux"}
           - {package: "pnr/symbiflow-vtr-gui", os: "ubuntu-16.04", os-name: "linux"}
           - {package: "pnr/quicklogic-vtr", os: "ubuntu-16.04", os-name: "linux", uses: "vtr"}
