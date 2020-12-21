@@ -1,0 +1,25 @@
+name: 'Package build'
+description: 'Build a package'
+runs:
+  using: "composite"
+  steps:
+    - name: build
+      run: |
+        if [ $SKIP ]; then
+          exit 0;
+        fi
+        export PATH="$PATH:/c/ProgramData/Chocolatey/bin/"
+        export PATH="$PATH:/c/Program Files/Git/usr/bin/"
+        source .github/scripts/common.sh
+        bash .github/scripts/fixup-git.sh
+        bash .github/scripts/download_sdk.sh
+        source .github/scripts/common.sh
+        bash .github/scripts/install.sh
+        set -x
+        bash .github/scripts/script.sh
+        if [ $? -eq 0 ]; then
+          source .github/scripts/after_success.sh
+        else
+          source .github/scripts/after_failure.sh
+        fi
+      shell: bash
