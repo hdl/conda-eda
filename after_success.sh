@@ -17,7 +17,7 @@ else
         # Test `anaconda` with ANACONDA_TOKEN before uploading
         source $GITHUB_WORKSPACE/.github/scripts/test_anaconda.sh
         branch="$(git rev-parse --abbrev-ref HEAD)"
-        anaconda -t $ANACONDA_TOKEN upload --no-progress --user $ANACONDA_USER --label ci-$branch-$GITHUB_RUN_ID $CONDA_OUT
+        anaconda -t $ANACONDA_TOKEN upload --force --no-progress --user $ANACONDA_USER --label ci-$branch-$GITHUB_RUN_ID $CONDA_OUT
         end_section "package.upload"
     else
         echo "ANACONDA_TOKEN not found. Please consult README of litex-conda-ci for details on setting up tests properly."
