@@ -11,7 +11,6 @@ runs:
         export PATH="$PATH:/c/ProgramData/Chocolatey/bin/"
         export PATH="$PATH:/c/Program Files/Git/usr/bin/"
         source .github/scripts/common.sh
-        bash .github/scripts/fixup-git.sh
         bash .github/scripts/download_sdk.sh
         source .github/scripts/common.sh
         bash .github/scripts/install.sh
