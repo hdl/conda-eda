@@ -293,7 +293,7 @@ jobs:
       PACKAGE: "xilinx/vivado"
       OS_NAME: "linux"
       VERSIONS: ${{ format('{0}{1}', github.workspace, '/xilinx/vivado/versions') }} 
-      SCRIPT: "bash $GITHUB_WORKSPACE/xilinx/vivado/gen_metapackages.sh"
+      SCRIPT: ${{ format('{0}{1}', github.workspace, '/xilinx/vivado/gen_metapackages.sh') }}
     steps:
       - uses: actions/checkout@v2
         with:

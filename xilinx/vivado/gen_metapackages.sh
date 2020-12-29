@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Versions file: $VERSIONS"
+cat "$VERSIONS"
 input=$VERSIONS
 while IFS= read -r version
 do
