@@ -1,7 +1,8 @@
 #!/bin/bash
 
+source $GITHUB_WORKSPACE/.github/scripts/common.sh
 # `for ... in $(anaconda ...` fails silently if there's any problem with anaconda
-source $TRAVIS_BUILD_DIR/.travis/test_anaconda.sh
+source $GITHUB_WORKSPACE/.github/scripts/test_anaconda.sh
 
 #if the timestamp is older than one week, remove the whole label
 ago="7 days ago"

@@ -26,7 +26,7 @@ python -m pip install git+https://github.com/litex-hub/conda-build-prepare@v0.1#
 ADDITIONAL_CHANNELS="litex-hub $(echo $GITHUB_REPOSITORY | sed -e's@/.*$@@') litex-hub/label/ci-$branch-$GITHUB_RUN_ID $(echo $GITHUB_REPOSITORY | sed -e's@/.*$@@')/label/ci-$branch-$GITHUB_RUN_ID"
 
 ADDITIONAL_PACKAGES="conda-build=3.20.3 conda-verify jinja2 pexpect python=3.7"
-if [[ "$TRAVIS_OS_NAME" != 'windows' ]]; then
+if [[ "$OS_NAME" != 'windows' ]]; then
     ADDITIONAL_PACKAGES="$ADDITIONAL_PACKAGES ripgrep"
 fi
 
