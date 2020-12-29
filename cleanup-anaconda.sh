@@ -7,6 +7,12 @@ source $GITHUB_WORKSPACE/.github/scripts/test_anaconda.sh
 #if the timestamp is older than one week, remove the whole label
 ago="7 days ago"
 
+if [ $OS_NAME = 'osx' ]; then
+    DATE_SWITCH="-r "
+else
+    DATE_SWITCH="--date=@"
+fi
+
 #extract date in  milliseconds
 limit_date=$(date $DATE_SWITCH "$ago" +'%s%N' | cut -b1-13)
 
