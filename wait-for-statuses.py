@@ -22,3 +22,5 @@ while(True):
     break
 
 subprocess.call(os.environ['GITHUB_WORKSPACE'] + "/.github/scripts/master-package.sh")
+subprocess.call(os.environ['GITHUB_WORKSPACE'] + "/.github/scripts/cleanup-anaconda.sh")
+
