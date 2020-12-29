@@ -13,7 +13,12 @@ runs:
         source .github/scripts/common.sh
         bash .github/scripts/download_sdk.sh
         bash .github/scripts/install.sh
-        bash .github/scripts/script.sh
+        set -x
+        if [ $SCRIPT ]; then
+          bash $SCRIPT
+        else
+          bash .github/scripts/script.sh
+        fi
         if [ $? -eq 0 ]; then
           source .github/scripts/after_success.sh
         else
