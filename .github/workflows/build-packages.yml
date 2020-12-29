@@ -1,131 +1,541 @@
 name: build-packages
 on: [push, pull_request]
+env:
+  ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+  ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
+defaults:
+  run:
+    shell: bash
 jobs:
-  packages:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - {package: "misc/magic", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "bit/icestorm", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "bit/prjtrellis", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "bit/prjxray-db", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "bit/prjxray-tools", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "bit/icestorm", os: "windows-latest", os-name: "windows"}
-          - {package: "bit/prjtrellis", os: "windows-2016", os-name: "windows"}
-          - {package: "bit/icestorm", os: "macos-latest", os-name: "osx"}
-          - {package: "bit/prjtrellis", os: "macos-latest", os-name: "osx"}
-          - {package: "sim/icarus", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "sim/verilator", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "sim/icarus", os: "windows-latest", os-name: "windows"}
-          - {package: "sim/icarus", os: "macos-latest", os-name: "osx"}
-          - {package: "sim/verilator", os: "macos-10.15", os-name: "osx", xcode: "10.3"}
-          - {package: "syn/yosys", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "syn/quicklogic-yosys", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "syn/quicklogic-yosys-plugins", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "syn/symbiflow-yosys", libffi: "3.2.1", os: "ubuntu-16.04", os-name: "linux", uses: "iverilog"}
-          - {package: "syn/symbiflow-yosys", libffi: "3.3", os: "ubuntu-16.04", os-name: "linux", uses: "iverilog"}
-          - {package: "syn/symbiflow-yosys-plugins", os: "ubuntu-16.04", os-name: "linux", uses: "iverilog, symbiflow-yosys"}
-          - {package: "syn/yosys", os: "windows-latest", os-name: "windows"}
-          - {package: "syn/quicklogic-yosys", os: "windows-latest", os-name: "windows"}
-          - {package: "syn/yosys", extra-args: "--no-test", os: "macos-latest", os-name: "osx"}
-          - {package: "syn/quicklogic-yosys", extra-args: "--no-test", os: "macos-latest", os-name: "osx"}
-          - {package: "syn/quicklogic-yosys-plugins", os: "macos-latest", os-name: "osx", uses: "iverilog, quicklogic-yosys"}
-          - {package: "syn/symbiflow-yosys", libffi: "3.2.1", os: "macos-latest", os-name: "osx", uses: "iverilog"}
-          - {package: "syn/symbiflow-yosys", libffi: "3.2.1", os: "macos-latest", os-name: "osx", uses: "iverilog"}
-          - {package: "syn/symbiflow-yosys", libffi: "3.3", os: "macos-latest", os-name: "osx", uses: "iverilog, symbiflow-yosys"}
-          - {package: "syn/symbiflow-yosys-plugins", os: "macos-latest", os-name: "osx", uses: "iverilog, symbiflow-yosys"} 
-          - {package: "pnr/vtr", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "pnr/vtr-gui", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "pnr/vtr-optimized", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "pnr/symbiflow-vtr", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "pnr/symbiflow-vtr-gui", os: "ubuntu-16.04", os-name: "linux"}
-          - {package: "pnr/quicklogic-vtr", os: "ubuntu-16.04", os-name: "linux", uses: "vtr"}
-          - {package: "pnr/quicklogic-vtr-gui", os: "ubuntu-16.04", os-name: "linux", uses: "vtr-gui"}
-          - {package: "pnr/arachne", os: "ubuntu-16.04", os-name: "linux", uses: "icestorm, iverilog, symbiflow-yosys"}
-          - {package: "pnr/nextpnr/ice40", os: "ubuntu-16.04", os-name: "linux", uses: "icestorm, symbiflow-yosys"}
-          - {package: "pnr/nextpnr/ecp5", os: "ubuntu-16.04", os-name: "linux", uses: "prjtrellis, symbiflow-yosys"}
-          - {package: "pnr/nextpnr/generic", os: "ubuntu-16.04", os-name: "linux", uses: "symbiflow-yosys"}
-          - {package: "pnr/nextpnr/xilinx", keep-alive: "true", use-pypy: "1", os: "ubuntu-16.04", os-name: "linux", uses: "symbiflow-yosys"}
-          - {package: "pnr/nextpnr/ice40", os: "windows-latest", os-name: "windows", uses: "icestorm, symbiflow-yosys", skip: "true"}
-          - {package: "pnr/nextpnr/generic", os: "windows-latest", os-name: "windows", uses: "symbiflow-yosys", skip: "true"}
-          - {package: "pnr/vtr", os: "macos-latest", os-name: "osx", skip: "true"}
-          - {package: "pnr/vtr-gui", os: "macos-latest", os-name: "osx", skip: "true"}
-          - {package: "pnr/nextpnr/ice40", os: "macos-latest", os-name: "osx", uses: "icestorm, symbiflow-yosys"}
-          - {package: "pnr/nextpnr/generic", os: "macos-latest", os-name: "osx", uses: "symbiflow-yosys"}
-          - {package: "formal/symbiyosys", os: "ubuntu-16.04", os-name: "linux", uses: "yosys"}
-          - {package: "xilinx/vivado", versions: "/xilinx/vivado/versions", script: "bash $GITHUB_WORKSPACE/xilinx/vivado/gen_metapackages.sh", os: "ubuntu-16.04", os-name: "linux"}
-    defaults:
-      run:
-        shell: bash
+  magic-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "misc/magic"
+      OS_NAME: "linux"
     steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: 'true'
-    - name: 'windows: add msys2 to PATH'
-      if: matrix.os-name == 'windows'
-      run: echo "C:\msys64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-      shell: powershell
-    - name: 'macos: install coreutils'
-      if: matrix.os-name == 'osx'
-      run: brew install coreutils
-    - name: 'linux: install pypy'
-      if: matrix.os-name == 'linux' && matrix.use-pypy == '1'
-      run: |
-        sudo add-apt-repository ppa:pypy/ppa -y
-        sudo apt update
-        sudo apt install -y pypy3
-    - name: build
-      if: matrix.skip != 'true' && matrix.script == ''
-      env:
-        PACKAGE: ${{ matrix.package }}
-        OS_NAME: ${{ matrix.os-name }}
-        LIBFFI_VERSION: ${{ matrix.libffi }}
-        EXTRA_BUILD_ARGS: ${{ matrix.extra-args }}
-        KEEP_ALIVE: ${{ matrix.keep-alive }}
-        USE_PYPY: ${{ matrix.use-pypy }}
-      run: |
-        export PATH="$PATH:/c/ProgramData/Chocolatey/bin/"
-        export PATH="$PATH:/c/Program Files/Git/usr/bin/"
-        source .github/scripts/common.sh
-        bash .github/scripts/fixup-git.sh
-        bash .github/scripts/download_sdk.sh
-        source .github/scripts/common.sh
-        bash .github/scripts/install.sh
-        set -x
-        bash .github/scripts/script.sh
-    - name: inline build
-      if: matrix.skip != 'true' && matrix.script != ''
-      env:
-        VERSIONS: ${{ format('{0}{1}', github.workspace, matrix.versions) }}
-        PACKAGE: ${{ matrix.package }}
-        OS_NAME: ${{ matrix.os-name }}
-        LIBFFI_VERSION: ${{ matrix.libffi }}
-        EXTRA_BUILD_ARGS: ${{ matrix.extra-args }}
-        KEEP_ALIVE: ${{ matrix.keep-alive }}
-        USE_PYPY: ${{ matrix.use-pypy }}
-      run: |
-        export PATH="$PATH:/c/ProgramData/Chocolatey/bin/"
-        export PATH="$PATH:/c/Program Files/Git/usr/bin/"
-        source .github/scripts/common.sh
-        bash .github/scripts/fixup-git.sh
-        bash .github/scripts/download_sdk.sh
-        source .github/scripts/common.sh
-        bash .github/scripts/install.sh
-        set -x
-        ${{ matrix.script }}
-    - name: on_success
-      env:
-        PACKAGE: ${{ matrix.package }}
-        OS_NAME: ${{ matrix.os-name }}
-      if: success() && matrix.skip != 'true'
-      run: |
-        source .github/scripts/after_success.sh
-    - name: on_failure
-      env:
-        PACKAGE: ${{ matrix.package }}
-        OS_NAME: ${{ matrix.os-name }}
-      if: failure() && matrix.skip != 'true'
-      run: |
-        source .github/scripts/after_failure.sh
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  icestorm-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "bit/icestorm"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  prjtrellis-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "bit/prjtrellis"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  prjxray-db-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "bit/prjxray-db"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  prjxray-tools-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "bit/prjxray-tools"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  icarus-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "sim/icarus"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  verilator-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "sim/verilator"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  yosys-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "syn/yosys"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  quicklogic-yosys-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "syn/quicklogic-yosys"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  quicklogic-yosys-plugins-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "syn/quicklogic-yosys-plugins"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  symbiflow-yosys-3_2_1-linux:
+    runs-on: "ubuntu-16.04"
+    needs: "icarus-linux"
+    env:
+      PACKAGE: "syn/symbiflow-yosys"
+      OS_NAME: "linux"
+      LIBFFI_VERSION: "3.2.1"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  symbiflow-yosys-3_3-linux:
+    runs-on: "ubuntu-16.04"
+    needs: "icarus-linux"
+    env:
+      PACKAGE: "syn/symbiflow-yosys"
+      OS_NAME: "linux"
+      LIBFFI_VERSION: "3.3"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  symbiflow-yosys-plugins-linux:
+    runs-on: "ubuntu-16.04"
+    needs: ["icarus-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
+    env:
+      PACKAGE: "syn/symbiflow-yosys-plugins"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  vtr-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "pnr/vtr"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  vtr-gui-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "pnr/vtr-gui"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  vtr-optimized-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "pnr/vtr-optimized"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  symbiflow-vtr-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "pnr/symbiflow-vtr"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  symbiflow-vtr-gui-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "pnr/symbiflow-vtr-gui"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  quicklogic-vtr-linux:
+    runs-on: "ubuntu-16.04"
+    needs: "vtr-linux"
+    env:
+      PACKAGE: "pnr/quicklogic-vtr"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  quicklogic-vtr-gui-linux:
+    runs-on: "ubuntu-16.04"
+    needs: "vtr-gui-linux"
+    env:
+      PACKAGE: "pnr/quicklogic-vtr-gui"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  arachne-linux:
+    runs-on: "ubuntu-16.04"
+    needs: ["icarus-linux", "icestorm-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
+    env:
+      PACKAGE: "pnr/arachne"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  nextpnr-ice40-linux:
+    runs-on: "ubuntu-16.04"
+    needs: ["icestorm-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
+    env:
+      PACKAGE: "pnr/nextpnr/ice40"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  nextpnr-ecp5-linux:
+    runs-on: "ubuntu-16.04"
+    needs: ["prjtrellis-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
+    env:
+      PACKAGE: "pnr/nextpnr/ecp5"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  nextpnr-generic-linux:
+    runs-on: "ubuntu-16.04"
+    needs: ["symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
+    env:
+      PACKAGE: "pnr/nextpnr/generic"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  nextpnr-xilinx-linux:
+    runs-on: "ubuntu-16.04"
+    needs: ["symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
+    env:
+      PACKAGE: "pnr/nextpnr/xilinx"
+      OS_NAME: "linux"
+      KEEP_ALIVE: "true"
+      USE_PYPY: "1"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - name: 'Install pypy'
+        run: |
+          sudo add-apt-repository ppa:pypy/ppa -y
+          sudo apt update
+          sudo apt install -y pypy3
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  symbiyosys-linux:
+    runs-on: "ubuntu-16.04"
+    needs: "yosys-linux"
+    env:
+      PACKAGE: "formal/symbiyosys"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  xilinx-vivado-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "xilinx/vivado"
+      OS_NAME: "linux"
+      VERSIONS: ${{ format('{0}{1}', github.workspace, '/xilinx/vivado/versions') }} 
+      SCRIPT: "bash $GITHUB_WORKSPACE/xilinx/vivado/gen_metapackages.sh"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  icestorm-osx:
+    runs-on: "macos-latest"
+    env:
+      PACKAGE: "bit/icestorm"
+      OS_NAME: "osx"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  prjtrellis-osx:
+    runs-on: "macos-latest"
+    env:
+      PACKAGE: "bit/prjtrellis"
+      OS_NAME: "osx"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  icarus-osx:
+    runs-on: "macos-latest"
+    env:
+      PACKAGE: "sim/icarus"
+      OS_NAME: "osx"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  verilator-osx:
+    runs-on: "macos-latest"
+    env:
+      PACKAGE: "sim/verilator"
+      OS_NAME: "osx"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  yosys-osx:
+    runs-on: "macos-latest"
+    env:
+      PACKAGE: "syn/yosys"
+      OS_NAME: "osx"
+      EXTRA_BUILD_ARGS: "--no-test"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  quicklogic-yosys-osx:
+    runs-on: "macos-latest"
+    env:
+      PACKAGE: "syn/quicklogic-yosys"
+      OS_NAME: "osx"
+      EXTRA_BUILD_ARGS: "--no-test"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  quicklogic-yosys-plugins-osx:
+    runs-on: "macos-latest"
+    needs: ["icarus-osx", "quicklogic-yosys-osx"]
+    env:
+      PACKAGE: "syn/quicklogic-yosys-plugins"
+      OS_NAME: "osx"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  symbiflow-yosys-3_2_1-osx:
+    runs-on: "macos-latest"
+    needs: "icarus-osx"
+    env:
+      PACKAGE: "syn/symbiflow-yosys"
+      OS_NAME: "osx"
+      LIBFFI_VERSION: "3.2.1"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  symbiflow-yosys-3_3-osx:
+    runs-on: "macos-latest"
+    needs: "icarus-osx"
+    env:
+      PACKAGE: "syn/symbiflow-yosys"
+      OS_NAME: "osx"
+      LIBFFI_VERSION: "3.3"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  symbiflow-yosys-plugins-osx:
+    runs-on: "macos-latest"
+    needs: ["icarus-osx", "symbiflow-yosys-3_2_1-osx", "symbiflow-yosys-3_3-osx"]
+    env:
+      PACKAGE: "syn/symbiflow-yosys-plugins"
+      OS_NAME: "osx"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  vtr-osx:
+    runs-on: "macos-latest"
+    env:
+      PACKAGE: "pnr/vtr"
+      OS_NAME: "osx"
+      SKIP: "true"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  vtr-gui-osx:
+    runs-on: "macos-latest"
+    env:
+      PACKAGE: "pnr/vtr-gui"
+      OS_NAME: "osx"
+      SKIP: "true"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  nextpnr-ice40-osx:
+    runs-on: "macos-latest"
+    needs: ["icestorm-osx", "symbiflow-yosys-3_2_1-osx", "symbiflow-yosys-3_3-osx"]
+    env:
+      PACKAGE: "pnr/nextpnr/ice40"
+      OS_NAME: "osx"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  nextpnr-generic-osx:
+    runs-on: "macos-latest"
+    needs: ["symbiflow-yosys-3_2_1-osx", "symbiflow-yosys-3_3-osx"]
+    env:
+      PACKAGE: "pnr/nextpnr/generic"
+      OS_NAME: "osx"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  icestorm-windows:
+    runs-on: "windows-latest"
+    env:
+      PACKAGE: "bit/icestorm"
+      OS_NAME: "windows"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  prjtrellis-windows:
+    runs-on: "windows-2016"
+    env:
+      PACKAGE: "bit/prjtrellis"
+      OS_NAME: "windows"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  icarus-windows:
+    runs-on: "windows-latest"
+    env:
+      PACKAGE: "sim/icarus"
+      OS_NAME: "windows"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  yosys-windows:
+    runs-on: "windows-latest"
+    env:
+      PACKAGE: "syn/yosys"
+      OS_NAME: "windows"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  quicklogic-yosys-windows:
+    runs-on: "windows-latest"
+    env:
+      PACKAGE: "syn/quicklogic-yosys"
+      OS_NAME: "windows"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  nextpnr-ice40-windows:
+    runs-on: "windows-latest"
+    needs: ["icestorm-windows"] 
+    env:
+      PACKAGE: "pnr/nextpnr/ice40"
+      OS_NAME: "windows"
+      SKIP: "true" # Uses symbiflow-yosys (not built for windows)
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  nextpnr-generic-windows:
+    runs-on: "windows-latest"
+    env:
+      PACKAGE: "pnr/nextpnr/generic"
+      OS_NAME: "windows"
+      SKIP: "true" # Uses symbiflow-yosys (not built for windows)
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: antmicro/litex-conda-ci@move-to-ghactions
+  master-package:
+    runs-on: "ubuntu-16.04"
+    env:
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: actions/setup-python@v1
+      - uses: BSFishy/pip-action@v1
+        with:
+          packages: urllib3
+      - run: |
+          bash .github/scripts/install.sh
+          python .github/scripts/wait-for-statuses.py
