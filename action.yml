@@ -8,8 +8,10 @@ runs:
         if [ $SKIP ]; then
           exit 0;
         fi
-        export PATH="$PATH:/c/ProgramData/Chocolatey/bin/"
-        export PATH="$PATH:/c/Program Files/Git/usr/bin/"
+        if [ $OS_NAME = "windows" ]; then
+          export PATH="$PATH:/c/ProgramData/Chocolatey/bin/"
+          export PATH="$PATH:/c/Program Files/Git/usr/bin/"
+        fi
         source .github/scripts/common.sh
         bash .github/scripts/download_sdk.sh
         bash .github/scripts/install.sh
