@@ -11,7 +11,7 @@ ago="7 days ago"
 if [ $OS_NAME = 'osx' ]; then
     DATE_SWITCH="-r "
 else
-    DATE_SWITCH="--date=@"
+    DATE_SWITCH="--date "
 fi
 
 #extract date in  milliseconds
