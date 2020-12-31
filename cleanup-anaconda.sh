@@ -19,7 +19,7 @@ limit_date=$(date $DATE_SWITCH "$ago" +'%s%N' | cut -b1-13)
 
 echo "Will remove labels older than $limit_date timestamp"
 
-for label in $(anaconda -t $ANACONDA_TOKEN label --list -o litex-hub 2>&1 | grep ' + ' | cut -f2 -d1+)
+for label in $(anaconda -t $ANACONDA_TOKEN label --list -o litex-hub 2>&1 | grep ' + ' | cut -f2 -d+)
 do
     if [[ $label != ci* ]]
     then
