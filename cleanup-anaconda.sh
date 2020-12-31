@@ -3,6 +3,7 @@
 source $GITHUB_WORKSPACE/.github/scripts/common.sh
 # `for ... in $(anaconda ...` fails silently if there's any problem with anaconda
 source $GITHUB_WORKSPACE/.github/scripts/test_anaconda.sh
+set -x
 
 #if the timestamp is older than one week, remove the whole label
 ago="7 days ago"
