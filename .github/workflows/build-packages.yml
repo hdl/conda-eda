@@ -1,5 +1,5 @@
 name: build-packages
-on: [push, pull_request]
+on: push
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
