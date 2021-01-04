@@ -3,7 +3,7 @@ on: [push, pull_request]
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 60
+  NUM_OF_JOBS: 63
 defaults:
   run:
     shell: bash
@@ -768,6 +768,45 @@ jobs:
     env:
       PACKAGE: "sim/uhdm-integration-yosys"
       USE_SYSTEM_GCC_VERSION: "9"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #61
+  antmicro-yosys-complete-linux:
+    runs-on: "ubuntu-16.04"
+    needs: "antmicro-yosys-plugins-linux"
+    env:
+      PACKAGE: "sim/antmicro-yosys-complete"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #62
+  antmicro-yosys-plugins-linux:
+    runs-on: "ubuntu-16.04"
+    needs: ["antmicro-yosys-linux", "icarus-linux"]
+    env:
+      PACKAGE: "syn/antmicro-yosys-plugins"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #63
+  antmicro-yosys-linux:
+    runs-on: "ubuntu-16.04"
+    needs: "icarus-linux"
+    env:
+      PACKAGE: "syn/antmicro-yosys"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
