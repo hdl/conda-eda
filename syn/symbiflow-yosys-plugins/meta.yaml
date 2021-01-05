@@ -1,6 +1,8 @@
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v','') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
 package:
   name: symbiflow-yosys-plugins
-  version: 0.0
+  version: {{ version }}
 
 source:
   git_url: https://github.com/SymbiFlow/yosys-symbiflow-plugins.git
