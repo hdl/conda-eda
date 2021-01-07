@@ -32,7 +32,7 @@ while(True):
     for j in data["jobs"]:
       if(j["status"] == "completed"):
         countCompleted += 1
-      if(j["conclusion"] == "failure"):
+      if(j["conclusion"] != "success"):
         jobFailure = True
 
   print("Completed jobs: " + str(countCompleted) + ". Jobs overall: " + str(numOfJobs))
