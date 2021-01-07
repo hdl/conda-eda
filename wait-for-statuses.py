@@ -35,7 +35,7 @@ while(True):
       if(j["conclusion"] == "failure"):
         jobFailure = True
 
-  print("Completed jobs:" + str(countCompleted) + ". Jobs overall: " + str(numOfJobs))
+  print("Completed jobs: " + str(countCompleted) + ". Jobs overall: " + str(numOfJobs))
   if(countCompleted >= numOfJobs):
     break
 
