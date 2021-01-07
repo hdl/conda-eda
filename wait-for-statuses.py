@@ -18,7 +18,6 @@ status_url = "https://api.github.com/repos/" \
 
 numOfJobs = int(os.environ['NUM_OF_JOBS'])
 
-
 if(numOfJobs > max_jobs):
   sys.exit("ERROR: number of jobs exceeded max_jobs: " + str(max_jobs))
 
@@ -42,8 +41,9 @@ while(True):
 
 # Upload packages only when whole build succeeded
 if(not jobFailure):
-  subprocess.call(os.environ['GITHUB_WORKSPACE'] + "/.github/scripts/master-package.sh")
+  subprocess.call(os.path.join(os.environ['GITHUB_WORKSPACE'],
+                               ".github/scripts/master-package.sh"))
 
 # Always clean up
-subprocess.call(os.environ['GITHUB_WORKSPACE'] + "/.github/scripts/cleanup-anaconda.sh")
-
+subprocess.call(os.path.join(os.environ['GITHUB_WORKSPACE'],
+                             ".github/scripts/cleanup-anaconda.sh"))
