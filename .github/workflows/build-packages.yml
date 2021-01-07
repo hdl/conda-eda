@@ -8,6 +8,8 @@ defaults:
   run:
     shell: bash
 jobs:
+
+  #1
   magic-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -18,6 +20,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #2
   icestorm-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -28,6 +32,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #3
   prjtrellis-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -38,6 +44,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #4
   prjxray-db-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -48,6 +56,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #5
   prjxray-tools-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -58,6 +68,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #6
   icarus-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -68,6 +80,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #7
   verilator-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -78,6 +92,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #8
   yosys-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -88,6 +104,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #9
   quicklogic-yosys-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -98,6 +116,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #10
   quicklogic-yosys-plugins-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -108,6 +128,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #11
   symbiflow-yosys-3_2_1-linux:
     runs-on: "ubuntu-16.04"
     needs: "icarus-linux"
@@ -120,6 +142,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #12
   symbiflow-yosys-3_3-linux:
     runs-on: "ubuntu-16.04"
     needs: "icarus-linux"
@@ -132,6 +156,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #13
   symbiflow-yosys-plugins-linux:
     runs-on: "ubuntu-16.04"
     needs: ["icarus-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
@@ -143,6 +169,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #14
   vtr-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -153,6 +181,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #15
   vtr-gui-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -163,6 +193,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #16
   vtr-optimized-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -173,6 +205,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #17
   symbiflow-vtr-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -183,6 +217,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #18
   symbiflow-vtr-gui-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -193,6 +229,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #19
   quicklogic-vtr-linux:
     runs-on: "ubuntu-16.04"
     needs: "vtr-linux"
@@ -204,6 +242,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #20
   quicklogic-vtr-gui-linux:
     runs-on: "ubuntu-16.04"
     needs: "vtr-gui-linux"
@@ -215,6 +255,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #21
   arachne-linux:
     runs-on: "ubuntu-16.04"
     needs: ["icarus-linux", "icestorm-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
@@ -226,6 +268,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #22
   nextpnr-ice40-linux:
     runs-on: "ubuntu-16.04"
     needs: ["icestorm-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
@@ -237,6 +281,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #23
   nextpnr-ecp5-linux:
     runs-on: "ubuntu-16.04"
     needs: ["prjtrellis-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
@@ -248,6 +294,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #24
   nextpnr-generic-linux:
     runs-on: "ubuntu-16.04"
     needs: ["symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
@@ -259,6 +307,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #25
   nextpnr-xilinx-linux:
     runs-on: "ubuntu-16.04"
     needs: ["symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
@@ -277,6 +327,8 @@ jobs:
           sudo apt update
           sudo apt install -y pypy3
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #26
   symbiyosys-linux:
     runs-on: "ubuntu-16.04"
     needs: "yosys-linux"
@@ -288,6 +340,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #27
   xilinx-vivado-linux:
     runs-on: "ubuntu-16.04"
     env:
@@ -300,6 +354,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #28
   icestorm-osx:
     runs-on: "macos-latest"
     env:
@@ -310,6 +366,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #29
   prjtrellis-osx:
     runs-on: "macos-latest"
     env:
@@ -320,6 +378,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #30
   icarus-osx:
     runs-on: "macos-latest"
     env:
@@ -330,6 +390,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #31
   verilator-osx:
     runs-on: "macos-latest"
     env:
@@ -340,6 +402,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #32
   yosys-osx:
     runs-on: "macos-latest"
     env:
@@ -351,6 +415,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #33
   quicklogic-yosys-osx:
     runs-on: "macos-latest"
     env:
@@ -362,6 +428,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #34
   quicklogic-yosys-plugins-osx:
     runs-on: "macos-latest"
     needs: ["icarus-osx", "quicklogic-yosys-osx"]
@@ -373,6 +441,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #35
   symbiflow-yosys-3_2_1-osx:
     runs-on: "macos-latest"
     needs: "icarus-osx"
@@ -385,6 +455,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #36
   symbiflow-yosys-3_3-osx:
     runs-on: "macos-latest"
     needs: "icarus-osx"
@@ -397,6 +469,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #37
   symbiflow-yosys-plugins-osx:
     runs-on: "macos-latest"
     needs: ["icarus-osx", "symbiflow-yosys-3_2_1-osx", "symbiflow-yosys-3_3-osx"]
@@ -408,6 +482,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #38
   vtr-osx:
     runs-on: "macos-latest"
     env:
@@ -419,6 +495,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #39
   vtr-gui-osx:
     runs-on: "macos-latest"
     env:
@@ -430,6 +508,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #40
   nextpnr-ice40-osx:
     runs-on: "macos-latest"
     needs: ["icestorm-osx", "symbiflow-yosys-3_2_1-osx", "symbiflow-yosys-3_3-osx"]
@@ -441,6 +521,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #41
   nextpnr-generic-osx:
     runs-on: "macos-latest"
     needs: ["symbiflow-yosys-3_2_1-osx", "symbiflow-yosys-3_3-osx"]
@@ -452,6 +534,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #42
   icestorm-windows:
     runs-on: "windows-latest"
     env:
@@ -462,6 +546,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #43
   prjtrellis-windows:
     runs-on: "windows-2016"
     env:
@@ -472,6 +558,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #44
   icarus-windows:
     runs-on: "windows-latest"
     env:
@@ -482,6 +570,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #45
   yosys-windows:
     runs-on: "windows-latest"
     env:
@@ -492,6 +582,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #46
   quicklogic-yosys-windows:
     runs-on: "windows-latest"
     env:
@@ -502,6 +594,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #47
   nextpnr-ice40-windows:
     runs-on: "windows-latest"
     needs: ["icestorm-windows"] 
@@ -514,6 +608,8 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
+  #48
   nextpnr-generic-windows:
     runs-on: "windows-latest"
     env:
@@ -525,6 +621,7 @@ jobs:
         with:
           submodules: 'true'
       - uses: litex-hub/litex-conda-ci@move-to-ghactions
+
   master-package:
     runs-on: "ubuntu-16.04"
     env:
