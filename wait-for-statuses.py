@@ -21,7 +21,6 @@ numOfJobs = int(os.environ['NUM_OF_JOBS'])
 if(numOfJobs > max_jobs):
   sys.exit("ERROR: number of jobs exceeded max_jobs: " + str(max_jobs))
 
-jobFailure = False
 
 while(True):
   time.sleep(60)
@@ -32,12 +31,20 @@ while(True):
     for j in data["jobs"]:
       if(j["status"] == "completed"):
         countCompleted += 1
-      if(j["conclusion"] != "success"):
-        jobFailure = True
 
   print("Completed jobs: " + str(countCompleted) + ". Jobs overall: " + str(numOfJobs))
   if(countCompleted >= numOfJobs):
     break
+
+# Check if all jobs succeeded
+jobFailure = False
+with urllib.request.urlopen(status_url) as url:
+  data = json.loads(url.read().decode())
+  for j in data["jobs"]:
+    # THIS is master-package job, still in progress (not concluded)
+    if(j["conclusion"] != "success" and j["name"] != "master-package"):
+      jobFailure = True
+      break
 
 # Upload packages only when whole build succeeded
 if(not jobFailure):
