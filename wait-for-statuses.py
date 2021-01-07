@@ -47,3 +47,6 @@ if(not jobFailure):
 # Always clean up
 subprocess.call(os.path.join(os.environ['GITHUB_WORKSPACE'],
                              ".github/scripts/cleanup-anaconda.sh"))
+
+if(jobFailure):
+  sys.exit("ERROR: some jobs failed")
