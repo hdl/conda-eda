@@ -17,15 +17,10 @@ end_section "conda.check"
 
 $SPACER
 
-echo "Install pexpect"
-if [ -f $CONDA_PATH/bin/python ]; then
-    $CONDA_PATH/bin/python -m pip install pexpect
-fi
-
 start_section "conda.build" "${GREEN}Building..${NC}"
 if [[ $OS_NAME != 'windows' ]]; then
     if [[ $KEEP_ALIVE = 'true' ]]; then
-        ci_wait $CI_MAX_TIME $CONDA_PATH/bin/python $GITHUB_WORKSPACE/.github/scripts/.ci-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
+        ci_wait $CI_MAX_TIME python $GITHUB_WORKSPACE/.github/scripts/.ci-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
     else
         python $GITHUB_WORKSPACE/.github/scripts/.ci-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
     fi
