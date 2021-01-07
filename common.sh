@@ -81,12 +81,14 @@ if [ -z "$DATE_STR" ]; then
 fi
 
 function start_section() {
+	echo "::group::$1"
 	echo -e "${PURPLE}${PACKAGE}${NC}: - $2${NC}"
 	echo -e "${GRAY}-------------------------------------------------------------------${NC}"
 }
 
 function end_section() {
 	echo -e "${GRAY}-------------------------------------------------------------------${NC}"
+	echo ::endgroup::
 }
 
 export PYTHONWARNINGS=ignore::UserWarning:conda_build.environ

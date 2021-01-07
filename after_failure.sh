@@ -2,6 +2,9 @@
 
 source $GITHUB_WORKSPACE/.github/scripts/common.sh
 
+# Close the after_failure fold
+echo ::endgroup::
+
 $SPACER
 
 start_section "failure.tail" "${RED}Failure output...${NC}"

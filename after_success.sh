@@ -3,6 +3,9 @@
 source $GITHUB_WORKSPACE/.github/scripts/common.sh
 set -e
 
+# Close the after_success fold
+echo ::endgroup::
+
 if [[ $UPLOAD == "no-upload" ]]; then
     echo "Job without upload..."
 else
