@@ -22,6 +22,8 @@ numOfJobs = int(os.environ['NUM_OF_JOBS'])
 if(numOfJobs > max_jobs):
   sys.exit("ERROR: number of jobs exceeded max_jobs: " + str(max_jobs))
 
+jobFailure = False
+
 while(True):
   time.sleep(60)
   countCompleted = 0
@@ -31,11 +33,17 @@ while(True):
     for j in data["jobs"]:
       if(j["status"] == "completed"):
         countCompleted += 1
+      if(j["conclusion"] == "failure"):
+        jobFailure = True
 
   print("Completed jobs:" + str(countCompleted) + ". Jobs overall: " + str(numOfJobs))
   if(countCompleted >= numOfJobs):
     break
 
-subprocess.call(os.environ['GITHUB_WORKSPACE'] + "/.github/scripts/master-package.sh")
+# Upload packages only when whole build succeeded
+if(not jobFailure):
+  subprocess.call(os.environ['GITHUB_WORKSPACE'] + "/.github/scripts/master-package.sh")
+
+# Always clean up
 subprocess.call(os.environ['GITHUB_WORKSPACE'] + "/.github/scripts/cleanup-anaconda.sh")
 
