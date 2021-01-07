@@ -68,9 +68,9 @@ ci_jigger() {
 }
 
 if [ $OS_NAME = 'osx' ]; then
-    DATE_SWITCH="-r "
+    export DATE_SWITCH="-r "
 else
-    DATE_SWITCH="--date=@"
+    export DATE_SWITCH="--date=@"
 fi
 if [ -z "$DATE_STR" ]; then
 	export DATE_TS="$(git log --format=%ct -n1)"
