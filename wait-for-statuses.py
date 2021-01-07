@@ -3,6 +3,7 @@ import json
 import subprocess
 import time
 import os
+import sys
 
 # We're limited to this number by GH Actions API
 # https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-jobs-for-a-workflow-run
@@ -16,6 +17,10 @@ status_url = "https://api.github.com/repos/" \
          + "?per_page=" + str(max_jobs)
 
 numOfJobs = int(os.environ['NUM_OF_JOBS'])
+
+
+if(numOfJobs > max_jobs):
+  sys.exit("ERROR: number of jobs exceeded max_jobs: " + str(max_jobs))
 
 while(True):
   time.sleep(60)
