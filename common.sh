@@ -114,7 +114,7 @@ else
     export CONDA_ENV='workdir/conda-env'
 fi
 
-if [ -d "$CONDA_ENV/conda-meta" ] && which conda &>/dev/null; then
+if [ -d "$CONDA_ENV" ] && which conda &>/dev/null; then
     # >>> conda initialize >>>
     eval "$('conda' 'shell.bash' 'hook' 2> /dev/null)"
     # <<< conda initialize <<<
