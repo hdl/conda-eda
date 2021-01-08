@@ -1,4 +1,4 @@
 [submodule "litex-conda-ci"]
 	path = .github/scripts
 	url = https://github.com/litex-hub/litex-conda-ci.git
-	branch = move-to-ghactions
+	branch = master
