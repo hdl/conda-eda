@@ -40,6 +40,7 @@ requirements:
     - m2-bash 4.3               [win]
     - m2-bison 3.0.4            [win]
     - m2-flex  2.6.0            [win]
+    - make                      [not win]
     - python 3.7
     - {{ compiler('c') }}       [not osx]
     - {{ compiler('cxx') }}     [not osx]

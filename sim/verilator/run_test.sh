@@ -7,6 +7,11 @@ export CONDA_BUILD_SYSROOT=/Users/runner/sdk/MacOSX10.9.sdk
 $PREFIX/bin/verilator -V
 #$PREFIX/bin/verilator --help || true
 
+cd $PREFIX/bin
+ln -s "$AR" ar
+ln -s "$RANLIB" ranlib
+cd -
+
 function run {
 	FILENAME=$1
 	rm -rf sim_main.cpp

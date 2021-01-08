@@ -26,6 +26,7 @@ requirements:
     - clang 8.0             [osx]
     - clangxx 8.0           [osx]
     - python                {{ python }}
+    - make
   host:
     - bison 3.4
     - cmake

@@ -7,6 +7,10 @@ if [ x"$TRAVIS" = xtrue ]; then
 	CPU_COUNT=2
 fi
 
+cd $BUILD_PREFIX/bin
+ln -s "$AR" ar
+cd -
+
 unset VERILATOR_ROOT
 autoconf
 ./configure \

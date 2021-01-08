@@ -30,6 +30,7 @@ requirements:
     - python    {{ python }}
     - m2-base   [win]
     - cmake
+    - make      [not win]
   host:
     - cmake
     - m2-bison   [win]

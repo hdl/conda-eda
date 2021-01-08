@@ -24,6 +24,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - fontconfig  [not win]
+    - make        [not win]
     - cmake
     - python    {{ python }}
     - boost     {{ boost_version }}
