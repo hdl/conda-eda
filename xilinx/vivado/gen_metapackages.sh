@@ -1,12 +1,14 @@
 #!/bin/bash
 
+echo "Versions file: $VERSIONS"
+cat "$VERSIONS"
 input=$VERSIONS
 while IFS= read -r version
 do
 	export XILINX_VIVADO_VERSION=$version
 
 	# Initialize Conda
-	. $TRAVIS_BUILD_DIR/.travis/common.sh
+	. $GITHUB_WORKSPACE/.github/scripts/common.sh
 	eval "$('conda' 'shell.bash' 'hook' 2> /dev/null)"
 
 	# Remove previously prepared recipe directory
@@ -18,6 +20,6 @@ do
 	python -m conda_build_prepare --dir workdir --packages $ADDITIONAL_PACKAGES -- $PACKAGE
 
 	# Build metapackage
-	bash $TRAVIS_BUILD_DIR/.travis/script.sh
-	bash $TRAVIS_BUILD_DIR/.travis/after_success.sh
+	bash $GITHUB_WORKSPACE/.github/scripts/script.sh
+	bash $GITHUB_WORKSPACE/.github/scripts/after_success.sh
 done < "$input"

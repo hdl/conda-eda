@@ -3,6 +3,7 @@
 set -e
 set -x
 
+export CONDA_BUILD_SYSROOT=/Users/runner/sdk/MacOSX10.9.sdk
 $PREFIX/bin/verilator -V
 #$PREFIX/bin/verilator --help || true
 

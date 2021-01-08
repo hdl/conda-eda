@@ -6,7 +6,7 @@ package:
 
 source:
   git_url: https://github.com/steveicarus/iverilog.git
-  git_rev: master
+  git_rev: 540555fca318f142fbddaac7c93b9dc66c1febdb
   patches:
     - fix-vvp-path.patch
     - vvp-config.patch
