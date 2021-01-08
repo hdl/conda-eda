@@ -1,7 +1,9 @@
 #!/bin/bash
 
+source $GITHUB_WORKSPACE/.github/scripts/common.sh
 # `for ... in $(anaconda ...` fails silently if there's any problem with anaconda
-source $TRAVIS_BUILD_DIR/.travis/test_anaconda.sh
+source $GITHUB_WORKSPACE/.github/scripts/test_anaconda.sh
+set -x
 
 #if the timestamp is older than one week, remove the whole label
 ago="7 days ago"
@@ -11,9 +13,9 @@ limit_date=$(date $DATE_SWITCH "$ago" +'%s%N' | cut -b1-13)
 
 echo "Will remove labels older than $limit_date timestamp"
 
-for label in $(anaconda -t $ANACONDA_TOKEN label --list -o litex-hub 2>&1 | grep ' + ' | cut -f2 -d1+)
+for label in $(anaconda -t $ANACONDA_TOKEN label --list -o litex-hub 2>&1 | grep ' + ' | cut -f2 -d+)
 do
-    if [[ $label != travis* ]]
+    if [[ $label != ci* ]]
     then
         continue
     fi

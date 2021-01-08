@@ -1,14 +1,14 @@
 #!/bin/bash
 
-source $TRAVIS_BUILD_DIR/.travis/common.sh
+source $GITHUB_WORKSPACE/.github/scripts/common.sh
 set -e
 
 # Getting the conda environment
 start_section "environment.conda" "Setting up basic ${YELLOW}conda environment${NC}"
 
-branch=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+branch="$(git rev-parse --abbrev-ref HEAD)"
 mkdir -p $BASE_PATH
-./.travis/conda-get.sh $CONDA_PATH
+$GITHUB_WORKSPACE/.github/scripts/conda-get.sh $CONDA_PATH
 hash -r
 
 if [ x$PACKAGE = x"" ]; then
@@ -16,17 +16,17 @@ if [ x$PACKAGE = x"" ]; then
     exit 0
 fi
 
-# Add '.travis' build variants to the recipe dir (appended keys win in case of any conflict)
-cat "$TRAVIS_BUILD_DIR/.travis/conda_build_config.yaml" >> "$PACKAGE/conda_build_config.yaml"
+# Add build variants to the recipe dir (appended keys win in case of any conflict)
+cat "$GITHUB_WORKSPACE/.github/scripts/conda_build_config.yaml" >> "$PACKAGE/conda_build_config.yaml"
 
 # Install conda-build-prepare
 python -m pip install git+https://github.com/litex-hub/conda-build-prepare@v0.1#egg=conda-build-prepare
 
 # The last channel will be on top of the environment's channel list
-ADDITIONAL_CHANNELS="litex-hub $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@') litex-hub/label/travis-$branch-$TRAVIS_BUILD_ID $(echo $TRAVIS_REPO_SLUG | sed -e's@/.*$@@')/label/travis-$branch-$TRAVIS_BUILD_ID"
+ADDITIONAL_CHANNELS="litex-hub $(echo $GITHUB_REPOSITORY | sed -e's@/.*$@@') litex-hub/label/ci-$branch-$GITHUB_RUN_ID $(echo $GITHUB_REPOSITORY | sed -e's@/.*$@@')/label/ci-$branch-$GITHUB_RUN_ID"
 
 ADDITIONAL_PACKAGES="conda-build=3.20.3 conda-verify jinja2 pexpect python=3.7"
-if [[ "$TRAVIS_OS_NAME" != 'windows' ]]; then
+if [[ "$OS_NAME" != 'windows' ]]; then
     ADDITIONAL_PACKAGES="$ADDITIONAL_PACKAGES ripgrep"
 fi
 
@@ -34,7 +34,7 @@ fi
 python -m conda_build_prepare --channels $ADDITIONAL_CHANNELS --packages $ADDITIONAL_PACKAGES --dir workdir $PACKAGE
 
 # Freshly created conda environment will be activated by the common.sh
-source $TRAVIS_BUILD_DIR/.travis/common.sh
+source $GITHUB_WORKSPACE/.github/scripts/common.sh
 
 end_section "environment.conda"
 

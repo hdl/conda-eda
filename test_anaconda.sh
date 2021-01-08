@@ -3,18 +3,21 @@
 echo
 if [ x$ANACONDA_TOKEN != x ]; then
     if ! anaconda -h &>/dev/null; then
-        echo 'WARNING: Missing `anaconda-client` package!'
+        echo 'ERROR: Missing `anaconda-client` package!'
         echo 'This Conda environment contains the following packages:'
         conda list
+        exit 1
     else
         echo 'Testing ANACONDA_TOKEN with a simple `anaconda` call...'
         if anaconda -t $ANACONDA_TOKEN label --show main &>/dev/null; then
             echo 'ANACONDA_TOKEN works!'
         else
-            echo 'WARNING: Invalid ANACONDA_TOKEN!'
+            echo 'ERROR: Invalid ANACONDA_TOKEN!'
+            exit 1
         fi
     fi
 else
-    echo 'WARNING: ANACONDA_TOKEN not set!'
+    echo 'ERROR: ANACONDA_TOKEN not set!'
+    exit 1
 fi
 echo
