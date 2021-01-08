@@ -1,0 +1,28 @@
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v','') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+package:
+  name: sv-parser
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/dalance/sv-parser
+  git_rev: master
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+
+test:
+  commands:
+    - parse_sv --version
+
+about:
+  home: https://github.com/dalance/sv-parser
+  license: MIT
+  license_file: LICENSE-MIT
+  summary: SystemVerilog parser library fully complient with IEEE 1800-2017

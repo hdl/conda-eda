@@ -1,0 +1,30 @@
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+package:
+  name: slang
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/MikePopoloski/slang
+  git_rev: master
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+    - USE_SYSTEM_GCC_VERSION
+
+requirements:
+  build:
+    - make
+    - cmake
+    - conan
+about:
+  home: https://github.com/MikePopoloski/slang
+  license: MIT
+  license_file: LICENSE
+  summary: 'Parser and compiler library for SystemVerilog'

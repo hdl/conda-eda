@@ -1,0 +1,29 @@
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v','') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+package:
+  name: verible
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/google/verible
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+    - USE_SYSTEM_GCC_VERSION
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+
+about:
+  home: https://github.com/google/verible
+  license: Apache 2.0
+  license_file: LICENSE
+  summary: 'The main mission is to parse SystemVerilog (IEEE 1800-2017) for a wide variety of applications.'

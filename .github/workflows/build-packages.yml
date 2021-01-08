@@ -3,7 +3,7 @@ on: [push, pull_request]
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 48
+  NUM_OF_JOBS: 60
 defaults:
   run:
     shell: bash
@@ -616,6 +616,159 @@ jobs:
       PACKAGE: "pnr/nextpnr/generic"
       OS_NAME: "windows"
       SKIP: "true" # Uses symbiflow-yosys (not built for windows)
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #49
+  verible-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "sv-front/verible"
+      USE_SYSTEM_GCC_VERSION: "8"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #50
+  tree-sitter-verilog-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "misc/tree-sitter-verilog"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #51
+  odin-ii-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "pnr/odin_II"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #52
+  slang-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "sv-front/slang"
+      OS_NAME: "linux"
+      USE_SYSTEM_GCC_VERSION: "8"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #53
+  sv-parser-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "sv-front/sv-parser"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #54
+  moore-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "sv-front/moore"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #55
+  surelog-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "sv-front/surelog"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #56
+  surelog-uhdm-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "sv-front/surelog-uhdm"
+      USE_SYSTEM_GCC_VERSION: "9"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #57
+  yosys-uhdm-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "syn/yosys-uhdm"
+      USE_SYSTEM_GCC_VERSION: "9"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #58
+  verilator-uhdm-linux:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "sim/verilator-uhdm"
+      USE_SYSTEM_GCC_VERSION: "9"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #59
+  uhdm-integration-verilator-linux:
+    runs-on: "ubuntu-16.04"
+    needs: ["surelog-uhdm-linux", "verilator-uhdm-linux"]
+    env:
+      PACKAGE: "sim/uhdm-integration-verilator"
+      USE_SYSTEM_GCC_VERSION: "9"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #60
+  uhdm-integration-yosys-linux:
+    runs-on: "ubuntu-16.04"
+    needs: ["surelog-uhdm-linux", "yosys-uhdm-linux"]
+    env:
+      PACKAGE: "sim/uhdm-integration-yosys"
+      USE_SYSTEM_GCC_VERSION: "9"
+      OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
         with:
