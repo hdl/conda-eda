@@ -8,6 +8,12 @@ source:
   git_rev: master
   git_url: https://github.com/alainmarcel/uhdm-integration.git
 
+build:
+  number: {{ environ.get('DATE_NUM') }}
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+
 requirements:
   run:
     - surelog-uhdm
