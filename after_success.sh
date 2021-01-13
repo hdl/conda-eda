@@ -30,7 +30,13 @@ else
         version="${BASH_REMATCH[3]}"
 
         check_path="$ANACONDA_USER/$name/$version/$os_and_package"
+        # This command may return non-zero exit code when
+        # the package doesn't exist in this version in Anaconda
+        # and it's okay
+        set +e
         labels=$(anaconda show $check_path |& egrep "^labels.*'main'")
+        set -e
+
         force_param="--force"
         if [[ "$labels" == *"main"* ]]; then
             echo "Package $check_path is present in main label. Disabling --force parameter in anaconda upload..."
