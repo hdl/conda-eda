@@ -24,7 +24,7 @@ else
         [[ $CONDA_OUT =~ $os_package_match ]]
         os_and_package="${BASH_REMATCH[1]}"
 
-        name_version_match='conda-bld/(.*)/(.*)-(.*)-'
+        name_version_match='conda-bld/(.*)/(.*)-([^-]*)-[^-]*$'
         [[ $CONDA_OUT =~ $name_version_match ]]
         name="${BASH_REMATCH[2]}"
         version="${BASH_REMATCH[3]}"
