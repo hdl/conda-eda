@@ -46,10 +46,10 @@ with urllib.request.urlopen(status_url) as url:
       jobFailure = True
       break
 
-branch = subprocess.check_output("git rev-parse --abbrev-ref HEAD", text=True, shell=True)
+branch = os.environ.get('GITHUB_REF', '')
 # Upload packages only when whole build succeeded
 # and we are on master branch
-if(branch == 'master\n'):
+if(branch == 'refs/heads/master'):
   if(not jobFailure):
     subprocess.call(os.path.join(os.environ['GITHUB_WORKSPACE'],
                                  ".github/scripts/master-package.sh"))
