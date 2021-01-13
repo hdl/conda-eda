@@ -19,7 +19,6 @@ build:
   string: {{ build_string }}
   script_env:
     - CI
-    - TRAVIS
 
 requirements:
   build:

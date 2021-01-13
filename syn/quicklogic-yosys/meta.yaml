@@ -18,7 +18,6 @@ build:
   string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
-    - TRAVIS
     - CONDA_OUT
     - TEST_PACKAGE
 

@@ -14,7 +14,6 @@ build:
   string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
-    - TRAVIS
 
 requirements:
   build:
