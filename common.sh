@@ -88,7 +88,7 @@ function start_section() {
 
 function end_section() {
 	echo -e "${GRAY}-------------------------------------------------------------------${NC}"
-	echo ::endgroup::
+	echo "::endgroup::"
 }
 
 export PYTHONWARNINGS=ignore::UserWarning:conda_build.environ

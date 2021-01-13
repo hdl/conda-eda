@@ -7,7 +7,7 @@ import sys
 
 # We're limited to this number by GH Actions API
 # https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-jobs-for-a-workflow-run
-max_jobs=100
+max_jobs = 100
 
 status_url = "https://api.github.com/repos/" \
          + os.environ['GITHUB_REPOSITORY'] \
