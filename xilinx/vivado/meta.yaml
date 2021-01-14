@@ -1,3 +1,4 @@
+# Use `conda-build-prepare` before building for a better version string.
 {% set version = environ.get('XILINX_VIVADO_VERSION') %}
 
 package:
