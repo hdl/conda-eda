@@ -28,10 +28,11 @@ requirements:
     - libunwind
     - swig
     - ncurses
+  run:
+    - ncurses
+    - readline
+    - libffi
+
 test:
-    requires:
-        - ncurses
-        - readline
-        - libffi
     commands:
         - yosys-uhdm --version
