@@ -30,23 +30,16 @@ else
         version="${BASH_REMATCH[3]}"
 
         check_path="$ANACONDA_USER/$name/$version/$os_and_package"
-        # This command may return non-zero exit code when
-        # the package doesn't exist in this version in Anaconda
-        # and it's okay
-        set +e
-        labels=$(anaconda show $check_path |& egrep "^labels.*'main'")
-        set -e
+        branch="$(git rev-parse --abbrev-ref HEAD)"
 
-        force_param="--force"
-        if [[ "$labels" == *"main"* ]]; then
-            echo "Package $check_path is present in main label. Disabling --force parameter in anaconda upload..."
-            force_param=""
+        if anaconda show $check_path |& egrep "^labels.*'main'"; then
+            echo "Package $check_path is present in main label. Uploading will be skipped because doing so would remove the 'main' one."
+            exit 1
         else
             echo "Package $check_path not present in 'main' label"
+            anaconda -t $ANACONDA_TOKEN upload --force --no-progress --user $ANACONDA_USER --label ci-$branch-$GITHUB_RUN_ID $CONDA_OUT
         fi
 
-        branch="$(git rev-parse --abbrev-ref HEAD)"
-        anaconda -t $ANACONDA_TOKEN upload $force_param --no-progress --user $ANACONDA_USER --label ci-$branch-$GITHUB_RUN_ID $CONDA_OUT
         end_section "package.upload"
     else
         echo "ANACONDA_TOKEN not found. Please consult README of litex-conda-ci for details on setting up tests properly."
