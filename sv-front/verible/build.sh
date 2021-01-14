@@ -3,10 +3,6 @@
 set -e
 set -x
 
-export CC=gcc-${USE_SYSTEM_GCC_VERSION}
-export CXX=g++-${USE_SYSTEM_GCC_VERSION}
-
-
 mkdir bazel-install
 BAZEL_PREFIX=$PWD/bazel-install
 
