@@ -26,6 +26,7 @@ requirements:
     - {{ compiler('cxx') }} 4.0 [osx]
     - m2-base    [win]
     - fontconfig [not win]
+    - make       [not win]
     - cmake
   host:
     - m2-bison   [win]

@@ -24,6 +24,8 @@ requirements:
     - {{ compiler('cxx') }}     [not osx]
     - {{ compiler('c') }} 4.0   [osx]
     - {{ compiler('cxx') }} 4.0 [osx]
+    - autoconf
+    - make
   host:
     - bison
     - flex

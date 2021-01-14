@@ -26,9 +26,11 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - cmake
     - curl
     - gperf
     - gmp
+    - make
   host:
     - yosys
   run:

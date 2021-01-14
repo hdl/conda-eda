@@ -29,6 +29,7 @@ requirements:
     - {{ compiler('cxx') }}     [not osx]
     - {{ compiler('c') }} 4.0   [osx]
     - {{ compiler('cxx') }} 4.0 [osx]
+    - make                      [not win]
   host:
     - pkg-config [not win]
   run:

@@ -27,6 +27,7 @@ requirements:
     - clangxx_osx-64 4.0     [osx]
     - m2-base    [win]
     - fontconfig [not win]
+    - make       [not win]
     - cmake
     - python 3.7
     - libboost  {{ boost_version }}
