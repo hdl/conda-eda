@@ -32,7 +32,7 @@ else
         check_path="$ANACONDA_USER/$name/$version/$os_and_package"
         branch="$(git rev-parse --abbrev-ref HEAD)"
 
-        if anaconda show $check_path |& egrep "^labels.*'main'"; then
+        if anaconda show $check_path 2>&1 | grep -E "^labels.*'main'"; then
             echo "Package $check_path is present in main label. Uploading will be skipped because doing so would remove the 'main' one."
             exit 1
         else
