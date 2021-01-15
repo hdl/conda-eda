@@ -15,6 +15,7 @@ build:
   string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
+    - USE_SYSTEM_GCC_VERSION
 
 requirements:
   build:
