@@ -19,8 +19,27 @@ else
         start_section "package.upload" "${GREEN}Package uploading...${NC}"
         # Test `anaconda` with ANACONDA_TOKEN before uploading
         source $GITHUB_WORKSPACE/.github/scripts/test_anaconda.sh
+
+        os_package_match='conda-bld/(.*)'
+        [[ $CONDA_OUT =~ $os_package_match ]]
+        os_and_package="${BASH_REMATCH[1]}"
+
+        name_version_match='conda-bld/(.*)/(.*)-([^-]*)-[^-]*$'
+        [[ $CONDA_OUT =~ $name_version_match ]]
+        name="${BASH_REMATCH[2]}"
+        version="${BASH_REMATCH[3]}"
+
+        check_path="$ANACONDA_USER/$name/$version/$os_and_package"
         branch="$(git rev-parse --abbrev-ref HEAD)"
-        anaconda -t $ANACONDA_TOKEN upload --force --no-progress --user $ANACONDA_USER --label ci-$branch-$GITHUB_RUN_ID $CONDA_OUT
+
+        if anaconda show $check_path 2>&1 | grep -E "^labels.*'main'"; then
+            echo "Package $check_path is present in main label. Uploading will be skipped because doing so would remove the 'main' one."
+            exit 1
+        else
+            echo "Package $check_path not present in 'main' label"
+            anaconda -t $ANACONDA_TOKEN upload --force --no-progress --user $ANACONDA_USER --label ci-$branch-$GITHUB_RUN_ID $CONDA_OUT
+        fi
+
         end_section "package.upload"
     else
         echo "ANACONDA_TOKEN not found. Please consult README of litex-conda-ci for details on setting up tests properly."

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 source $GITHUB_WORKSPACE/.github/scripts/common.sh
 # `for ... in $(anaconda ...` fails silently if there's any problem with anaconda
 source $GITHUB_WORKSPACE/.github/scripts/test_anaconda.sh
