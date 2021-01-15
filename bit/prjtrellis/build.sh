@@ -3,10 +3,6 @@
 set -e
 set -x
 
-if [ x"$TRAVIS" = xtrue ]; then
-	CPU_COUNT=2
-fi
-
 cd libtrellis
 cmake \
 	-DCMAKE_INSTALL_PREFIX=/ 			\

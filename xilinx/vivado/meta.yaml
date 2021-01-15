@@ -1,3 +1,4 @@
+# Use `conda-build-prepare` before building for a better version string.
 {% set version = environ.get('XILINX_VIVADO_VERSION') %}
 
 package:
@@ -11,7 +12,6 @@ build:
   string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
-    - TRAVIS
 
 about:
   summary: 'Conda metapackage for Xilinx Vivado SDK. Package checks only Vivado version.'

@@ -3,10 +3,6 @@
 set -e
 set -x
 
-if [ x"$TRAVIS" = xtrue ]; then
-	CPU_COUNT=2
-fi
-
 cmake \
 	-DARCH=ecp5				\
 	-DBUILD_GUI=OFF				\

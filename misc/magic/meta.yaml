@@ -1,3 +1,4 @@
+# Use `conda-build-prepare` before building for a better version string.
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 
 package:
@@ -17,7 +18,6 @@ build:
   string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
-    - TRAVIS
     - CONDA_OUT
     - TEST_PACKAGE
 
