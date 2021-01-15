@@ -3,7 +3,7 @@ on: [push, pull_request]
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 63
+  NUM_OF_JOBS: 65
 defaults:
   run:
     shell: bash
@@ -94,11 +94,25 @@ jobs:
       - uses: litex-hub/litex-conda-ci@master
 
   #8
-  yosys-linux:
+  yosys-linux-py37:
     runs-on: "ubuntu-16.04"
     env:
       PACKAGE: "syn/yosys"
       OS_NAME: "linux"
+      PYTHON_VERSION: "3.7"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #64
+  yosys-linux-py38:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "syn/yosys"
+      OS_NAME: "linux"
+      PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v2
         with:
@@ -331,7 +345,8 @@ jobs:
   #26
   symbiyosys-linux:
     runs-on: "ubuntu-16.04"
-    needs: "yosys-linux"
+    # Wait for both since it's unsure which of them will be used.
+    needs: ["yosys-linux-py37", "yosys-linux-py38"]
     env:
       PACKAGE: "formal/symbiyosys"
       OS_NAME: "linux"
@@ -699,11 +714,25 @@ jobs:
       - uses: litex-hub/litex-conda-ci@master
 
   #55
-  surelog-linux:
+  surelog-linux-py37:
     runs-on: "ubuntu-16.04"
     env:
       PACKAGE: "sv-front/surelog"
       OS_NAME: "linux"
+      PYTHON_VERSION: "3.7"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #65
+  surelog-linux-py38:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "sv-front/surelog"
+      OS_NAME: "linux"
+      PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v2
         with:
