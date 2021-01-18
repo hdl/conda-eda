@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #2
   icestorm-linux:
@@ -31,7 +31,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #3
   prjtrellis-linux:
@@ -43,7 +43,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #4
   prjxray-db-linux:
@@ -55,7 +55,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #5
   prjxray-tools-linux:
@@ -67,7 +67,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #6
   icarus-linux:
@@ -79,7 +79,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #7
   verilator-linux:
@@ -91,7 +91,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #8
   yosys-linux:
@@ -103,7 +103,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #9
   quicklogic-yosys-linux:
@@ -115,7 +115,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #10
   quicklogic-yosys-plugins-linux:
@@ -127,7 +127,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #11
   symbiflow-yosys-3_2_1-linux:
@@ -141,7 +141,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #12
   symbiflow-yosys-3_3-linux:
@@ -155,7 +155,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #13
   symbiflow-yosys-plugins-linux:
@@ -168,7 +168,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #14
   vtr-linux:
@@ -180,7 +180,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #15
   vtr-gui-linux:
@@ -192,7 +192,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #16
   vtr-optimized-linux:
@@ -204,7 +204,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #17
   symbiflow-vtr-linux:
@@ -216,7 +216,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #18
   symbiflow-vtr-gui-linux:
@@ -228,7 +228,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #19
   quicklogic-vtr-linux:
@@ -241,7 +241,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #20
   quicklogic-vtr-gui-linux:
@@ -254,7 +254,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #21
   arachne-linux:
@@ -267,7 +267,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #22
   nextpnr-ice40-linux:
@@ -280,7 +280,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #23
   nextpnr-ecp5-linux:
@@ -293,7 +293,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #24
   nextpnr-generic-linux:
@@ -306,7 +306,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #25
   nextpnr-xilinx-linux:
@@ -326,7 +326,7 @@ jobs:
           sudo add-apt-repository ppa:pypy/ppa -y
           sudo apt update
           sudo apt install -y pypy3
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #26
   symbiyosys-linux:
@@ -339,7 +339,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #27
   xilinx-vivado-linux:
@@ -353,7 +353,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #28
   icestorm-osx:
@@ -365,7 +365,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #29
   prjtrellis-osx:
@@ -377,7 +377,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #30
   icarus-osx:
@@ -389,7 +389,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #31
   verilator-osx:
@@ -401,7 +401,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #32
   yosys-osx:
@@ -414,7 +414,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #33
   quicklogic-yosys-osx:
@@ -427,7 +427,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #34
   quicklogic-yosys-plugins-osx:
@@ -440,7 +440,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #35
   symbiflow-yosys-3_2_1-osx:
@@ -454,7 +454,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #36
   symbiflow-yosys-3_3-osx:
@@ -468,7 +468,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #37
   symbiflow-yosys-plugins-osx:
@@ -481,7 +481,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #38
   vtr-osx:
@@ -494,7 +494,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #39
   vtr-gui-osx:
@@ -507,7 +507,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #40
   nextpnr-ice40-osx:
@@ -520,7 +520,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #41
   nextpnr-generic-osx:
@@ -533,7 +533,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #42
   icestorm-windows:
@@ -545,7 +545,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #43
   prjtrellis-windows:
@@ -557,7 +557,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #44
   icarus-windows:
@@ -569,7 +569,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #45
   yosys-windows:
@@ -581,7 +581,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #46
   quicklogic-yosys-windows:
@@ -593,7 +593,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #47
   nextpnr-ice40-windows:
@@ -607,7 +607,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #48
   nextpnr-generic-windows:
@@ -620,7 +620,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #49
   verible-linux:
@@ -633,7 +633,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #50
   tree-sitter-verilog-linux:
@@ -645,7 +645,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #51
   odin-ii-linux:
@@ -657,7 +657,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #52
   slang-linux:
@@ -670,7 +670,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #53
   sv-parser-linux:
@@ -682,7 +682,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #54
   moore-linux:
@@ -694,7 +694,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #55
   surelog-linux:
@@ -706,7 +706,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #56
   surelog-uhdm-linux:
@@ -719,7 +719,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #57
   yosys-uhdm-linux:
@@ -732,7 +732,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #58
   verilator-uhdm-linux:
@@ -745,7 +745,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #59
   uhdm-integration-verilator-linux:
@@ -759,7 +759,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #60
   uhdm-integration-yosys-linux:
@@ -773,7 +773,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #61
   antmicro-yosys-complete-linux:
@@ -786,7 +786,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #62
   antmicro-yosys-plugins-linux:
@@ -799,7 +799,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   #63
   antmicro-yosys-linux:
@@ -812,7 +812,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: litex-hub/litex-conda-compilers/.github/action@test-changed-channel-importance
 
   master-package:
     runs-on: "ubuntu-16.04"
