@@ -10,8 +10,8 @@ export CC=gcc-${USE_SYSTEM_GCC_VERSION}
 export CXX=g++-${USE_SYSTEM_GCC_VERSION}
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BUILD_PREFIX/lib"
 
-make -j$CPU_COUNT surelog/parse
-make -j$CPU_COUNT prep
+cd Surelog && make PREFIX=$PWD/../image release install -j$CPU_COUNT && cd ..
+autoconf && ./configure --prefix=$PWD/image && make install
 
 mkdir -p "$PREFIX/bin"
 
