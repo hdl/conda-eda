@@ -6,7 +6,8 @@ set +x
 echo "TEST: pwd=`pwd`"
 echo "TEST: dir: `ls`"
 
-$PREFIX/bin/sby test/demo3.sby > output 2>&1
+# `|| true` is needed because of the `set -e` option.
+$PREFIX/bin/sby test/demo3.sby > output 2>&1 || true
 
 passed=`grep 'Status: passed' output | wc -l`
 
