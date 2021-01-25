@@ -10,6 +10,10 @@ source:
   git_url: https://github.com/alainmarcel/uhdm-integration.git
 
 build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
     - USE_SYSTEM_GCC_VERSION
