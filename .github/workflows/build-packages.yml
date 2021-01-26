@@ -335,6 +335,7 @@ jobs:
     env:
       PACKAGE: "formal/symbiyosys"
       OS_NAME: "linux"
+      SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/70
     steps:
       - uses: actions/checkout@v2
         with:
@@ -477,6 +478,7 @@ jobs:
     env:
       PACKAGE: "syn/symbiflow-yosys-plugins"
       OS_NAME: "osx"
+      SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/71
     steps:
       - uses: actions/checkout@v2
         with:
