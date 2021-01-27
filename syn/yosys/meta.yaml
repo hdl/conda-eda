@@ -1,6 +1,9 @@
 # Use `conda-build-prepare` before building for a better version string.
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('yosys-', '') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 
+{% set python_version = PYTHON_VERSION | default('3.7') %}
+{% set py_suffix = 'py%s'|format(python_version|replace('.', '')) %}
+
 package:
   name: yosys
   version: {{ version }}
@@ -14,8 +17,8 @@ source:
 build:
   # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
-  # string: 20180305_0325
-  string: {{ environ.get('DATE_STR') }}
+  # string: 20180305_0325_py37
+  string: {{ environ.get('DATE_STR') }}_{{ py_suffix }}
   script_env:
     - CI
     - CONDA_OUT
@@ -41,7 +44,6 @@ requirements:
     - m2-bison 3.0.4            [win]
     - m2-flex  2.6.0            [win]
     - make                      [not win]
-    - python 3.7
     - {{ compiler('c') }}       [not osx]
     - {{ compiler('cxx') }}     [not osx]
     - {{ compiler('c') }} 4.0   [osx]
@@ -55,11 +57,11 @@ requirements:
     - flex                 [not win]
     - libffi               [not win]
     - pkg-config           [not win]
-    - python 3.7
+    - python {{ python_version }}
     - tk   [osx]
     - gawk [osx]
   run:
-    - python {{ python }}
+    - python {{ python_version }}
     - tk       [osx]
     - gawk     [osx]
     - iverilog [osx]
