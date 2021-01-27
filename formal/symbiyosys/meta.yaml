@@ -1,6 +1,9 @@
 # Use `conda-build-prepare` before building for a better version string.
 {% set version = '%s.0_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 
+{% set python_version = PYTHON_VERSION | default('3.7') %}
+{% set py_suffix = 'py%s'|format(python_version|replace('.', '')) %}
+
 package:
   name: symbiyosys
   version: {{ version }}
@@ -18,7 +21,7 @@ source:
 build:
   detect_binary_files_with_prefix: True
   number: {{ environ.get('DATE_NUM') }}
-  string: {{ environ.get('DATE_STR') }}
+  string: {{ environ.get('DATE_STR') }}_{{ py_suffix }}
   script_env:
     - CI
 
@@ -32,9 +35,10 @@ requirements:
     - gmp
     - make
   host:
-    - yosys
+    # Yosys's build string needs to end with `py_suffix`
+    - yosys * *_{{ py_suffix }}
   run:
-    - yosys
+    - yosys * *_{{ py_suffix }}
 
 test:
   files:

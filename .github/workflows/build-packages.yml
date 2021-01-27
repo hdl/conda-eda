@@ -3,7 +3,7 @@ on: [push, pull_request]
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 65
+  NUM_OF_JOBS: 66
 defaults:
   run:
     shell: bash
@@ -343,13 +343,28 @@ jobs:
       - uses: litex-hub/litex-conda-ci@master
 
   #26
-  symbiyosys-linux:
+  symbiyosys-linux-py37:
     runs-on: "ubuntu-16.04"
-    # Wait for both since it's unsure which of them will be used.
-    needs: ["yosys-linux-py37", "yosys-linux-py38"]
+    needs: "yosys-linux-py37"
     env:
       PACKAGE: "formal/symbiyosys"
       OS_NAME: "linux"
+      PYTHON_VERSION: "3.7"
+      SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/70
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: litex-hub/litex-conda-ci@master
+
+  #66
+  symbiyosys-linux-py38:
+    runs-on: "ubuntu-16.04"
+    needs: "yosys-linux-py38"
+    env:
+      PACKAGE: "formal/symbiyosys"
+      OS_NAME: "linux"
+      PYTHON_VERSION: "3.8"
       SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/70
     steps:
       - uses: actions/checkout@v2
