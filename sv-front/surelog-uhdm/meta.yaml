@@ -7,7 +7,7 @@ package:
 
 source:
   git_rev: master
-  git_url: https://github.com/alainmarcel/uhdm-integration.git
+  git_url: https://github.com/alainmarcel/Surelog.git
 
 build:
   # number: 201803050325

@@ -10,9 +10,9 @@ export CC=gcc-${USE_SYSTEM_GCC_VERSION}
 export CXX=g++-${USE_SYSTEM_GCC_VERSION}
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BUILD_PREFIX/lib"
 
-make -j$CPU_COUNT surelog/parse
-make -j$CPU_COUNT prep
+cd Surelog && make PREFIX=$PWD/../image release install -j$CPU_COUNT && cd ..
+make PREFIX=$PWD/image install -j$CPU_COUNT
 
 mkdir -p "$PREFIX/bin"
 
-cp "$SRC_DIR/yosys/yosys" "$PREFIX/bin/yosys-uhdm"
+cp "$SRC_DIR/image/bin/yosys" "$PREFIX/bin/yosys-uhdm"

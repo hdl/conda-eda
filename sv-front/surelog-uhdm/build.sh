@@ -10,8 +10,7 @@ export CC=gcc-${USE_SYSTEM_GCC_VERSION}
 export CXX=g++-${USE_SYSTEM_GCC_VERSION}
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BUILD_PREFIX/lib"
 
-make -j$CPU_COUNT surelog/parse
-make -j$CPU_COUNT prep
+make PREFIX=./image release install -j$CPU_COUNT
 
 mkdir -p "$PREFIX/bin"
 mkdir -p "$PREFIX/lib/surelog/sv"
