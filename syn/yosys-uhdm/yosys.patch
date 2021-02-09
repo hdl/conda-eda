@@ -1,0 +1,25 @@
+diff --git a/Makefile b/Makefile
+index 72ca15e36..85f131096 100644
+--- a/Makefile
++++ b/Makefile
+@@ -342,6 +342,19 @@ LDLIBS := $(filter-out -lrt,$(LDLIBS))
+ ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H -DWIN32_NO_DLL -DHAVE_STRUCT_TIMESPEC -fpermissive -w"
+ ABCMKARGS += LIBS="-lpthread -s" ABC_USE_NO_READLINE=0 CC="x86_64-w64-mingw32-gcc" CXX="$(CXX)"
+ EXE = .exe
++else ifeq ($(CONFIG),conda-linux)
++CXX = x86_64-conda_cos6-linux-gnu-gcc
++LD = x86_64-conda_cos6-linux-gnu-gcc
++CXXFLAGS += -std=c++11 -Os -fno-merge-constants
++CFLAGS += -Wno-unused-function -Wno-unused-but-set-variable
++ABCMKARGS += "ABC_READLINE_INCLUDES=-I${PREFIX}/include"
++ABCMKARGS += "ABC_READLINE_LIBRARIES=-L${PREFIX}/lib -lreadline"
++
++else ifeq ($(CONFIG),conda-mac)
++CXX = x86_64-apple-darwin13.4.0-clang
++LD = x86_64-apple-darwin13.4.0-clang++
++CXXFLAGS += -std=c++11 -Os
++ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H"
+ 
+ else ifneq ($(CONFIG),none)
+ $(error Invalid CONFIG setting '$(CONFIG)'. Valid values: clang, gcc, gcc-4.8, emcc, mxe, msys2, msys2-64)
+
