@@ -5,6 +5,10 @@ set -x
 
 export CC_FOR_BUILD=$CC
 
+echo "TEST LIBREADLINE"
+$CC rltest.c -lreadline || true
+echo "TEST LIBREADLINE"
+
 sh ./autoconf.sh
 ./configure --prefix=$PREFIX || true
 

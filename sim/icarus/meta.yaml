@@ -43,7 +43,7 @@ requirements:
   host:
     # `readline` has to be a `host` req. to be included as a `run`
     # requirement in the resulting package (through `run_export`)
-    - readline                  [osx]
+    - readline                  [not win]
 
 test:
   files:
