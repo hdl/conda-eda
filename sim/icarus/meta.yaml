@@ -40,11 +40,10 @@ requirements:
     - m2w64-gcc                 [win]
     - m2-gperf                  [win]
     - m2-bison                  [win]
-    - readline                  [not win]
   host:
     # `readline` has to be a `host` req. to be included as a `run`
     # requirement in the resulting package (through `run_export`)
-    - readline                  [not win]
+    - readline                  [osx]
 
 test:
   files:
