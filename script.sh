@@ -20,9 +20,9 @@ $SPACER
 start_section "conda.build" "${GREEN}Building..${NC}"
 if [[ $OS_NAME != 'windows' ]]; then
     if [[ $KEEP_ALIVE = 'true' ]]; then
-        ci_wait $CI_MAX_TIME python $GITHUB_WORKSPACE/.github/scripts/.ci-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
+        ci_wait $CI_MAX_TIME conda build $CONDA_BUILD_ARGS 2>&1 | tee /tmp/output.log
     else
-        python $GITHUB_WORKSPACE/.github/scripts/.ci-output.py /tmp/output.log conda build $CONDA_BUILD_ARGS
+        conda build $CONDA_BUILD_ARGS 2>&1 | tee /tmp/output.log
     fi
 else
     # Work-around: prevent console output being mangled
