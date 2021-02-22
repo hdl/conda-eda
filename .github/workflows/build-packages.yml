@@ -1,5 +1,12 @@
 name: build-packages
-on: [push, pull_request]
+on:
+  push:
+    # Prevents triggering multiple workflows in PRs. Workflows triggered from
+    # the same commit shouldn't run simultaneously because they're overwriting
+    # each other's packages on Anaconda.
+    branches: [ master ]
+  pull_request:
+  workflow_dispatch:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
