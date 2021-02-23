@@ -24,17 +24,18 @@ requirements:
   build:
     - {{ compiler('c') }} <9
     - {{ compiler('cxx') }} <9
-    - python {{ python_version }}
     - cmake
     - pkg-config
-    - libuuid
-    - gperftools
     - flex
+    - bison
+  host:
+    - gperftools
     - libunwind
-    - swig 3.0.*
+    - libuuid
     - ncurses
     - openjdk
-    - bison
+    - python {{ python_version }}
+    - swig 3.0.*
   run:
     - python {{python_version}}
     - ncurses
