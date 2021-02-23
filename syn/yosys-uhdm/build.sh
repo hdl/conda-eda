@@ -8,8 +8,6 @@ export CXXFLAGS="$CXXFLAGS -I$BUILD_PREFIX/include"
 export LDFLAGS="$CXXFLAGS -L$BUILD_PREFIX/lib -lrt -ltinfo"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BUILD_PREFIX/lib"
 
-export CMAKE_PREFIX_PATH="$BUILD_PREFIX"
-export PYTHONHOME="<prefix>:<exec_prefix>"
 
 cd Surelog && make PREFIX=$PWD/../image release install -j$CPU_COUNT && cd ..
 #Create aliases for gcc/gxx as `abc` uses them directly in Makefile

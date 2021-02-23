@@ -31,7 +31,7 @@ requirements:
     - gperftools
     - flex
     - libunwind
-    - swig
+    - swig 3.0.*
     - ncurses
     - openjdk
     - bison
