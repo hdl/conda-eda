@@ -34,7 +34,7 @@ requirements:
     - ncurses
     - openjdk
     - python {{ python_version }}
-    - swig 3.0.*
+    - swig
   run:
     - python {{python_version}}
     - ncurses
