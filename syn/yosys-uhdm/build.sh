@@ -9,8 +9,9 @@ export LDFLAGS="$CXXFLAGS -L$BUILD_PREFIX/lib -lrt -ltinfo"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BUILD_PREFIX/lib"
 
 export CMAKE_PREFIX_PATH="$BUILD_PREFIX"
-cd Surelog && make PREFIX=$PWD/../image release install -j$CPU_COUNT && cd ..
+export PYTHONHOME="<prefix>:<exec_prefix>"
 
+cd Surelog && make PREFIX=$PWD/../image release install -j$CPU_COUNT && cd ..
 #Create aliases for gcc/gxx as `abc` uses them directly in Makefile
 alias gcc=x86_64-conda_cos6-linux-gnu-gcc
 alias gxx=x86_64-conda_cos6-linux-gnu-gcc
