@@ -22,8 +22,8 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('c') }} <9
+    - {{ compiler('cxx') }} <9
     - python {{ python_version }}
     - cmake
     - pkg-config
