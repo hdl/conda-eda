@@ -28,7 +28,6 @@ requirements:
     - pkg-config
     - flex
     - bison
-  host:
     - gperftools
     - libunwind
     - libuuid
