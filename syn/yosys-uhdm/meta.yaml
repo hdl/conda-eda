@@ -21,8 +21,10 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    # These version restrictions make the dependencies resolvable with
+    # packages from the `defaults` channel (libgcc-ng/libstdcxx-ng).
+    - {{ compiler('c') }} <9
+    - {{ compiler('cxx') }} <9
     - python {{ python_version }}
     - cmake
     - pkg-config
