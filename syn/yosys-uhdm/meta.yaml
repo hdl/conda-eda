@@ -34,6 +34,8 @@ requirements:
     - libunwind
     - swig
     - ncurses
+    - bison
+    - openjdk
   run:
     - python {{python_version}}
     - ncurses
