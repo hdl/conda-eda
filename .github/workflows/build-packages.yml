@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #2
   icestorm-linux:
@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #3
   prjtrellis-linux:
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #4
   prjxray-db-linux:
@@ -62,7 +62,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #5
   prjxray-tools-linux:
@@ -74,7 +74,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #6
   icarus-linux:
@@ -86,7 +86,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #7
   verilator-linux:
@@ -98,7 +98,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #8
   yosys-linux-py37:
@@ -111,7 +111,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #64
   yosys-linux-py38:
@@ -124,7 +124,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #9
   quicklogic-yosys-linux:
@@ -136,7 +136,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #10
   quicklogic-yosys-plugins-linux:
@@ -148,7 +148,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #11
   symbiflow-yosys-3_2_1-linux:
@@ -162,7 +162,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #12
   symbiflow-yosys-3_3-linux:
@@ -176,7 +176,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #13
   symbiflow-yosys-plugins-linux:
@@ -189,7 +189,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #14
   vtr-linux:
@@ -201,7 +201,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #15
   vtr-gui-linux:
@@ -213,7 +213,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #16
   vtr-optimized-linux:
@@ -225,7 +225,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #17
   symbiflow-vtr-linux:
@@ -237,7 +237,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #18
   symbiflow-vtr-gui-linux:
@@ -249,7 +249,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #19
   quicklogic-vtr-linux:
@@ -262,7 +262,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #20
   quicklogic-vtr-gui-linux:
@@ -275,7 +275,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #21
   arachne-linux:
@@ -288,7 +288,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #22
   nextpnr-ice40-linux:
@@ -301,7 +301,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #23
   nextpnr-ecp5-linux:
@@ -314,7 +314,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #24
   nextpnr-generic-linux:
@@ -327,7 +327,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #25
   nextpnr-xilinx-linux:
@@ -347,7 +347,7 @@ jobs:
           sudo add-apt-repository ppa:pypy/ppa -y
           sudo apt update
           sudo apt install -y pypy3
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #26
   symbiyosys-linux-py37:
@@ -362,7 +362,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #66
   symbiyosys-linux-py38:
@@ -377,7 +377,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #27
   xilinx-vivado-linux:
@@ -391,7 +391,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #28
   icestorm-osx:
@@ -403,7 +403,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #29
   prjtrellis-osx:
@@ -415,7 +415,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #30
   icarus-osx:
@@ -427,7 +427,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #31
   verilator-osx:
@@ -439,7 +439,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #32
   yosys-osx:
@@ -452,7 +452,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #33
   quicklogic-yosys-osx:
@@ -465,7 +465,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #34
   quicklogic-yosys-plugins-osx:
@@ -478,7 +478,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #35
   symbiflow-yosys-3_2_1-osx:
@@ -492,7 +492,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #36
   symbiflow-yosys-3_3-osx:
@@ -506,7 +506,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #37
   symbiflow-yosys-plugins-osx:
@@ -520,7 +520,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #38
   vtr-osx:
@@ -533,7 +533,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #39
   vtr-gui-osx:
@@ -546,7 +546,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #40
   nextpnr-ice40-osx:
@@ -559,7 +559,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #41
   nextpnr-generic-osx:
@@ -572,7 +572,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #42
   icestorm-windows:
@@ -584,7 +584,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #43
   prjtrellis-windows:
@@ -596,7 +596,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #44
   icarus-windows:
@@ -608,7 +608,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #45
   yosys-windows:
@@ -620,7 +620,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #46
   quicklogic-yosys-windows:
@@ -632,7 +632,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #47
   nextpnr-ice40-windows:
@@ -646,7 +646,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #48
   nextpnr-generic-windows:
@@ -659,7 +659,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #49
   verible-linux:
@@ -672,7 +672,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #50
   tree-sitter-verilog-linux:
@@ -685,7 +685,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #51
   odin-ii-linux:
@@ -697,7 +697,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #52
   slang-linux:
@@ -710,7 +710,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #53
   sv-parser-linux:
@@ -722,7 +722,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #54
   moore-linux:
@@ -734,7 +734,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #55
   surelog-linux-py37:
@@ -747,7 +747,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #65
   surelog-linux-py38:
@@ -760,7 +760,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #56
   surelog-uhdm-linux-py37:
@@ -774,7 +774,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #67
   surelog-uhdm-linux-py38:
@@ -788,7 +788,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #57
   yosys-uhdm-linux-py37:
@@ -801,7 +801,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #68
   yosys-uhdm-linux-py38:
@@ -814,7 +814,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #58
   verilator-uhdm-linux:
@@ -827,7 +827,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #59
   uhdm-integration-verilator-linux:
@@ -841,7 +841,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #60
   uhdm-integration-yosys-linux:
@@ -855,7 +855,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #61
   antmicro-yosys-complete-linux:
@@ -868,7 +868,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #62
   antmicro-yosys-plugins-linux:
@@ -881,7 +881,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #63
   antmicro-yosys-linux:
@@ -894,7 +894,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   #69
   netgen-linux:
@@ -906,7 +906,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - uses: litex-hub/litex-conda-ci@master
+      - uses: hdl/conda-ci@master
 
   master-package:
     runs-on: "ubuntu-16.04"
