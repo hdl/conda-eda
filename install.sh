@@ -6,7 +6,6 @@ set -e
 # Getting the conda environment
 start_section "environment.conda" "Setting up basic ${YELLOW}conda environment${NC}"
 
-branch="$(git rev-parse --abbrev-ref HEAD)"
 mkdir -p $BASE_PATH
 $GITHUB_WORKSPACE/.github/scripts/conda-get.sh $CONDA_PATH
 hash -r
@@ -22,8 +21,14 @@ cat "$GITHUB_WORKSPACE/.github/scripts/conda_build_config.yaml" >> "$PACKAGE/con
 # Install conda-build-prepare
 python -m pip install git+https://github.com/litex-hub/conda-build-prepare@v0.1.1#egg=conda-build-prepare
 
-# The last channel will be on top of the environment's channel list
-ADDITIONAL_CHANNELS="litex-hub $ANACONDA_USER $ANACONDA_USER/label/ci-$branch-$GITHUB_RUN_ID"
+# ANACONDA_USER isn't available in cross-repository PRs
+if [ "$ANADONDA_USER" != "" ]; then
+    branch="$(git rev-parse --abbrev-ref HEAD)"
+    # The last channel will be on top of the environment's channel list
+    ADDITIONAL_CHANNELS="litex-hub $ANACONDA_USER $ANACONDA_USER/label/ci-$branch-$GITHUB_RUN_ID"
+else
+    ADDITIONAL_CHANNELS="litex-hub"
+fi
 
 ADDITIONAL_PACKAGES="conda-build=3.20.3 conda-verify jinja2 pexpect python=3.7"
 if [[ "$OS_NAME" != 'windows' ]]; then
