@@ -1,12 +1,12 @@
-# litex-conda-ci
+# conda-ci
 
-Travis scripts for Litex-Hub/litex-conda-(compilers|eda|misc|prog) .
+GitHub Actions scripts for hdl/conda-(compilers|eda|misc|prog) .
 
 This repository is not meant to be used on its own, but as submodule for above repositories.
 
 ## Setting up Github Actions for your own fork
 
-To use any of the litex-conda-* repositories in Github Actions you must meet the following requirements:
+To use any of the conda-* repositories in Github Actions you must meet the following requirements:
 
 * create an account on https://anaconda.org/
 * create an access token on https://anaconda.org/{your-account}/settings/access

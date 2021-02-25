@@ -42,7 +42,7 @@ else
 
         end_section "package.upload"
     else
-        echo "ANACONDA_TOKEN not found. Please consult README of litex-conda-ci for details on setting up tests properly."
+        echo "ANACONDA_TOKEN not found. Please consult README of conda-ci for details on setting up tests properly."
         echo "Packages cannot be uploaded when tests are running for cross-repository Pull Requests."
     fi
 
