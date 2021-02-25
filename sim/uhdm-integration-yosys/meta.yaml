@@ -1,21 +1,28 @@
-# Use `conda-build-prepare` before building for a better version string.
-{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v','') or '0.X.X', GIT_DESCRIBE_NUMBER|int,   GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+{% set ns = namespace(surelog_version='0.0', yosys_version='0.0') %}
+{% for package in resolved_packages('host') %}
+  {% if package.startswith( 'surelog-uhdm ' ) %}
+    {% set ns.surelog_version = package.split()[1] %}
+  {% endif %}
+  {% if package.startswith( 'yosys-uhdm ' ) %}
+    {% set ns.yosys_version = package.split()[1] %}
+  {% endif %}
+{% endfor %}
+
+{% set python_version = PYTHON_VERSION | default('3.7') %}
+{% set py_suffix = 'py%s'|format(python_version|replace('.', '')) %}
+{% set build_string = '%s_%s'|format(DATE_STR, py_suffix) %}
 
 package:
   name: uhdm-integration-yosys
-  version: {{ version }}
-
-source:
-  git_rev: master
-  git_url: https://github.com/alainmarcel/uhdm-integration.git
+  version: {{ ns.yosys_version }}
 
 build:
-  number: {{ environ.get('DATE_NUM') }}
-  string: {{ environ.get('DATE_STR') }}
-  script_env:
-    - CI
+  string: {{ build_string }}
 
 requirements:
+  host:
+    - surelog-uhdm=*={{ build_string }}
+    - yosys-uhdm=*={{ build_string }}
   run:
-    - surelog-uhdm
-    - yosys-uhdm
+    - surelog-uhdm={{ ns.surelog_version }}={{ build_string }}
+    - yosys-uhdm={{ ns.yosys_version }}={{ build_string }}
