@@ -22,7 +22,7 @@ cat "$GITHUB_WORKSPACE/.github/scripts/conda_build_config.yaml" >> "$PACKAGE/con
 python -m pip install git+https://github.com/litex-hub/conda-build-prepare@v0.1.1#egg=conda-build-prepare
 
 # ANACONDA_USER isn't available in cross-repository PRs
-if [ "$ANADONDA_USER" != "" ]; then
+if [ "$ANACONDA_USER" != "" ]; then
     branch="$(git rev-parse --abbrev-ref HEAD)"
     # The last channel will be on top of the environment's channel list
     ADDITIONAL_CHANNELS="litex-hub $ANACONDA_USER $ANACONDA_USER/label/ci-$branch-$GITHUB_RUN_ID"
