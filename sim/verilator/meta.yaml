@@ -30,6 +30,11 @@ requirements:
     - bison
     - flex
     - zlib
+  run:
+    - {{ compiler('cxx') }}
+    - bison
+    - flex
+    - ncurses
 
 test:
   requires:
