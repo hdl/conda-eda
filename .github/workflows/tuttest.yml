@@ -1,0 +1,98 @@
+name: tuttest
+
+on:
+  pull_request:
+    paths:
+    - 'syn/symbiflow-yosys/*'
+    - '.github/workflows/tuttest.yml'
+    - 'README.md'
+  push:
+    paths:
+    - 'syn/symbiflow-yosys/*'
+    - '.github/workflows/tuttest.yml'
+    - 'README.md'
+  workflow_dispatch:
+
+env:
+  ARTIFACT_NAME: tuttest-script
+  SCRIPT: tuttest-script.sh
+
+jobs:
+  grab-readme-commands:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install tuttest
+        run: |
+          python3 -m pip install setuptools
+          python3 -m pip install git+https://github.com/antmicro/tuttest@5dbe5845c9ef46f1c0315129449743db010ff966
+          # On GitHub Actions, pip installs "binaries" to this directory
+          echo "/home/runner/.local/bin" >> $GITHUB_PATH
+
+      - name: Test tuttest
+        run: tuttest --help
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Grab install-prerequisites commands with tuttest
+        run: |
+          echo "# README.md/install-prerequisites" >$SCRIPT
+          echo >>$SCRIPT
+          # SED changes URL in case the CI is running on a fork
+          #   and adds conda-eda as a directory name
+          tuttest README.md install-prerequisites | sed -e "s#git clone .*\.git.*#git clone https://github.com/$GITHUB_REPOSITORY.git conda-eda#" >>$SCRIPT
+          echo >>$SCRIPT
+
+      - name: Add checkout commands
+        run: |
+          echo "# Checkout commands" >>$SCRIPT
+          echo >>$SCRIPT
+          _branch="$GITHUB_SHA"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            _branch="ci-pr-branch"
+            echo "git fetch origin $GITHUB_REF:${_branch}" >>$SCRIPT
+          fi
+          echo "git checkout ${_branch}" >>$SCRIPT
+          echo >>$SCRIPT
+
+      - name: Grab prepare-and-build commands with tuttest
+        run: |
+          echo "# README.md/prepare-and-build" >>$SCRIPT
+          echo >>$SCRIPT
+          tuttest README.md prepare-and-build >>$SCRIPT
+
+      - name: Print ${{ env.SCRIPT }}
+        run: cat $SCRIPT
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.SCRIPT }}
+
+  test-readme-commands:
+    needs: grab-readme-commands
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.container-os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        container-os:
+          - ubuntu:16.04
+          - ubuntu:18.04
+          - ubuntu:20.04
+          - debian:8
+          - debian:9
+          - debian:10
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+      - name: Test
+        run: |
+          set -e
+          set -x
+          source $SCRIPT
