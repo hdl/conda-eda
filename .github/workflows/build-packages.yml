@@ -5,7 +5,13 @@ on:
     # the same commit shouldn't run simultaneously because they're overwriting
     # each other's packages on Anaconda.
     branches: [ master ]
+    paths-ignore:
+      - '.github/workflows/tuttest.yml'
+      - 'README.md'
   pull_request:
+    paths-ignore:
+      - '.github/workflows/tuttest.yml'
+      - 'README.md'
   workflow_dispatch:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
