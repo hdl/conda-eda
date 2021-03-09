@@ -1,8 +1,7 @@
-{% set ns = namespace(version='0.0', build_string='0') %}
+{% set ns = namespace(version='0.0') %}
 {% for package in resolved_packages('host') %}
   {% if package.startswith( 'vtr-gui ' ) %}
     {% set ns.version = package.split()[1] %}
-    {% set ns.build_string = package.split()[2] %}
   {% endif %}
 {% endfor %}
 
@@ -10,12 +9,12 @@ package:
   name: quicklogic-vtr-gui
   version: {{ ns.version }}
 build:
-  string: {{ ns.build_string }}
+  string: {{ DATE_STR }}
 requirements:
   host:
-    - vtr-gui
+    - vtr-gui=*={{ DATE_STR }}
   run:
-    - vtr-gui={{ ns.version }}={{ ns.build_string }}
+    - vtr-gui={{ ns.version }}={{ DATE_STR }}
 about:
   home: http://verilogtorouting.org/
   license: MIT
