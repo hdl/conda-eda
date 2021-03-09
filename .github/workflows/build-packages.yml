@@ -261,6 +261,8 @@ jobs:
 
   #19
   quicklogic-vtr-linux:
+    # Skip if token isn't available (cross-repository PRs mainly)
+    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: "vtr-linux"
     env:
@@ -274,6 +276,8 @@ jobs:
 
   #20
   quicklogic-vtr-gui-linux:
+    # Skip if token isn't available (cross-repository PRs mainly)
+    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: "vtr-gui-linux"
     env:
@@ -839,6 +843,8 @@ jobs:
 
   #59
   uhdm-integration-verilator-linux-py37:
+    # Skip if token isn't available (cross-repository PRs mainly)
+    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: ["surelog-uhdm-linux-py37", "verilator-uhdm-linux"]
     env:
@@ -854,6 +860,8 @@ jobs:
 
   #70
   uhdm-integration-verilator-linux-py38:
+    # Skip if token isn't available (cross-repository PRs mainly)
+    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: ["surelog-uhdm-linux-py38", "verilator-uhdm-linux"]
     env:
@@ -869,6 +877,8 @@ jobs:
 
   #60
   uhdm-integration-yosys-linux-py37:
+    # Skip if token isn't available (cross-repository PRs mainly)
+    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: ["surelog-uhdm-linux-py37", "yosys-uhdm-linux-py37"]
     env:
@@ -884,6 +894,8 @@ jobs:
 
   #71
   uhdm-integration-yosys-linux-py38:
+    # Skip if token isn't available (cross-repository PRs mainly)
+    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: ["surelog-uhdm-linux-py38", "yosys-uhdm-linux-py38"]
     env:
