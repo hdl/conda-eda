@@ -27,10 +27,10 @@ requirements:
     - cmake
     - flex
     - pkg-config
-    - tbb
-    - tbb-devel
+    - tbb <2021.0.0a0
+    - tbb-devel <2021.0.0a0
   run:
-    - tbb
+    - tbb <2021.0.0a0
 
 #test:
 #  commands:
