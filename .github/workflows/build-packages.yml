@@ -261,14 +261,14 @@ jobs:
 
   #19
   quicklogic-vtr-linux:
-    # Skip if token isn't available (cross-repository PRs mainly)
-    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: "vtr-linux"
     env:
       PACKAGE: "pnr/quicklogic-vtr"
       OS_NAME: "linux"
     steps:
+      # Skip if token isn't available (cross-repository PRs mainly)
+      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
@@ -276,14 +276,14 @@ jobs:
 
   #20
   quicklogic-vtr-gui-linux:
-    # Skip if token isn't available (cross-repository PRs mainly)
-    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: "vtr-gui-linux"
     env:
       PACKAGE: "pnr/quicklogic-vtr-gui"
       OS_NAME: "linux"
     steps:
+      # Skip if token isn't available (cross-repository PRs mainly)
+      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
@@ -843,8 +843,6 @@ jobs:
 
   #59
   uhdm-integration-verilator-linux-py37:
-    # Skip if token isn't available (cross-repository PRs mainly)
-    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: ["surelog-uhdm-linux-py37", "verilator-uhdm-linux"]
     env:
@@ -853,6 +851,8 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
+      # Skip if token isn't available (cross-repository PRs mainly)
+      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
@@ -860,8 +860,6 @@ jobs:
 
   #70
   uhdm-integration-verilator-linux-py38:
-    # Skip if token isn't available (cross-repository PRs mainly)
-    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: ["surelog-uhdm-linux-py38", "verilator-uhdm-linux"]
     env:
@@ -870,6 +868,8 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
     steps:
+      # Skip if token isn't available (cross-repository PRs mainly)
+      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
@@ -877,8 +877,6 @@ jobs:
 
   #60
   uhdm-integration-yosys-linux-py37:
-    # Skip if token isn't available (cross-repository PRs mainly)
-    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: ["surelog-uhdm-linux-py37", "yosys-uhdm-linux-py37"]
     env:
@@ -887,6 +885,8 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
+      # Skip if token isn't available (cross-repository PRs mainly)
+      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
@@ -894,8 +894,6 @@ jobs:
 
   #71
   uhdm-integration-yosys-linux-py38:
-    # Skip if token isn't available (cross-repository PRs mainly)
-    if: ${{ github.env.ANACONDA_TOKEN != '' }}
     runs-on: "ubuntu-16.04"
     needs: ["surelog-uhdm-linux-py38", "yosys-uhdm-linux-py38"]
     env:
@@ -904,6 +902,8 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
     steps:
+      # Skip if token isn't available (cross-repository PRs mainly)
+      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
