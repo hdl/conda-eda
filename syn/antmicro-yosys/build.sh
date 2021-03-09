@@ -8,8 +8,6 @@ which pkg-config
 cd yosys
 
 make V=1 -j$CPU_COUNT
-make install V=1 -j$CPU_COUNT
-cp yosys "$PREFIX/bin/antmicro-yosys"
-cp yosys-config "$PREFIX/bin/yosys-config"
+make PROGRAM_PREFIX="antmicro-" install V=1 -j$CPU_COUNT
 
 $PREFIX/bin/antmicro-yosys -V
