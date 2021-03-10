@@ -1,0 +1,69 @@
+diff --git a/.github/workflows/setup.sh b/.github/workflows/setup.sh
+index abe6e8d..17eb1b2 100755
+--- a/.github/workflows/setup.sh
++++ b/.github/workflows/setup.sh
+@@ -43,9 +43,9 @@ start_section Install-Yosys
+         cd yosys
+         PREFIX=$HOME/.local-bin make -j$(nproc)
+         PREFIX=$HOME/.local-bin make install
+-        echo $(which yosys)
+-        echo $(which yosys-config)
+-        echo $(yosys-config --datdir)
++        echo $(which antmicro-yosys)
++        echo $(which antmicro-yosys-config)
++        echo $(antmicro-yosys-config --datdir)
+     fi
+ )
+ end_section
+diff --git a/Makefile_plugin.common b/Makefile_plugin.common
+index 06f2c61..8e093b4 100644
+--- a/Makefile_plugin.common
++++ b/Makefile_plugin.common
+@@ -36,11 +36,11 @@
+ # |       |   |-- ...
+ # |-- example2-plugin
+ # |-- ...
+-CXX = $(shell yosys-config --cxx)
+-CXXFLAGS = $(shell yosys-config --cxxflags) #-DSDC_DEBUG
+-LDFLAGS = $(shell yosys-config --ldflags)
+-LDLIBS = $(shell yosys-config --ldlibs)
+-PLUGINS_DIR = $(shell yosys-config --datdir)/plugins
++CXX = $(shell antmicro-yosys-config --cxx)
++CXXFLAGS = $(shell antmicro-yosys-config --cxxflags) #-DSDC_DEBUG
++LDFLAGS = $(shell antmicro-yosys-config --ldflags)
++LDLIBS = $(shell antmicro-yosys-config --ldlibs)
++PLUGINS_DIR = $(shell antmicro-yosys-config --datdir)/plugins
+ 
+ OBJS := $(SOURCES:cc=o)
+ 
+diff --git a/Makefile_test.common b/Makefile_test.common
+index 2b6fb9e..2f5c221 100644
+--- a/Makefile_test.common
++++ b/Makefile_test.common
+@@ -13,10 +13,10 @@
+ # test2_verify = $(call diff_test,test2,ext)
+ #
+ GTEST_DIR = ../../third_party/googletest/googletest
+-CXX = $(shell yosys-config --cxx)
+-CXXFLAGS = $(shell yosys-config --cxxflags) -I.. -I$(GTEST_DIR)/include
+-LDLIBS = $(shell yosys-config --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
+-LDFLAGS = $(shell yosys-config --ldflags)
++CXX = $(shell antmicro-yosys-config --cxx)
++CXXFLAGS = $(shell antmicro-yosys-config --cxxflags) -I.. -I$(GTEST_DIR)/include
++LDLIBS = $(shell antmicro-yosys-config --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
++LDFLAGS = $(shell antmicro-yosys-config --ldflags)
+ TEST_UTILS=../../../test-utils/test-utils.tcl
+ 
+ define test_tpl =
+@@ -40,7 +40,7 @@ $(1)/ok: $(1)/$(1).v
+ 	echo "source $(TEST_UTILS)" > run-$(1).tcl ;\
+ 	echo "source $(1).tcl" >> run-$(1).tcl ;\
+ 	DESIGN_TOP=$(1) TEST_OUTPUT_PREFIX=./ \
+-	yosys -c "run-$(1).tcl" -q -l $(1).log; \
++	antmicro-yosys -c "run-$(1).tcl" -q -l $(1).log; \
+ 	RETVAL=$$$$?; \
+ 	rm -f run-$(1).tcl; \
+ 	if [ ! -z "$$($(1)_negative)" ] && [ $$($(1)_negative) -eq 1 ]; then \
+-- 
+2.30.1
+
