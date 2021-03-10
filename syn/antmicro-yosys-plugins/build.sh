@@ -7,5 +7,11 @@ which pkg-config
 
 echo "PREFIX := $PREFIX" >> Makefile.conf
 
+# create local symlink
+mkdir -p "$PWD/.local/bin"
+export PATH="$PWD/.local/bin:$PATH"
+ln -s $(which antmicro-yosys) $PWD/.local/bin/yosys
+ln -s $(which antmicro-yosys-config) $PWD/.local/bin/yosys-config
+
 cd yosys-symbiflow-plugins
 make install -j$CPU_COUNT
