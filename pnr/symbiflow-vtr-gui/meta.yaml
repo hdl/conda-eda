@@ -36,15 +36,15 @@ requirements:
     - xorg-libxcb
     - xorg-libxext
     - xorg-libxft
-    - tbb
-    - tbb-devel
+    - tbb <2021.0.0a0
+    - tbb-devel <2021.0.0a0
     - gtk3
   run:
     - tk
     - fontconfig
     - xorg-libx11
     - xorg-libxft
-    - tbb
+    - tbb <2021.0.0a0
     - gtk3
 
 #test:
