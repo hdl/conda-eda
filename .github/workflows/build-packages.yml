@@ -916,7 +916,6 @@ jobs:
     env:
       PACKAGE: "sim/antmicro-yosys-complete"
       OS_NAME: "linux"
-      SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/91
     steps:
       - uses: actions/checkout@v2
         with:
@@ -930,7 +929,6 @@ jobs:
     env:
       PACKAGE: "syn/antmicro-yosys-plugins"
       OS_NAME: "linux"
-      SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/91
     steps:
       - uses: actions/checkout@v2
         with:
