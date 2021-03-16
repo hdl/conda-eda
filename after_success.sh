@@ -34,7 +34,9 @@ else
 
         if anaconda show $check_path 2>&1 | grep -E "^labels.*'main'"; then
             echo "Package $check_path is present in main label. Uploading will be skipped because doing so would remove the 'main' one."
-            exit 1
+            if [ "$branch" != "master" ]; then
+                exit 1
+            fi
         else
             echo "Package $check_path not present in 'main' label"
             anaconda -t $ANACONDA_TOKEN upload --force --no-progress --user $ANACONDA_USER --label ci-$branch-$GITHUB_RUN_ID $CONDA_OUT
