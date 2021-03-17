@@ -447,6 +447,7 @@ jobs:
     env:
       PACKAGE: "sim/verilator"
       OS_NAME: "osx"
+      SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/97
     steps:
       - uses: actions/checkout@v2
         with:
@@ -567,6 +568,7 @@ jobs:
     env:
       PACKAGE: "pnr/nextpnr/ice40"
       OS_NAME: "osx"
+      SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/98
     steps:
       - uses: actions/checkout@v2
         with:
@@ -580,6 +582,7 @@ jobs:
     env:
       PACKAGE: "pnr/nextpnr/generic"
       OS_NAME: "osx"
+      SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/98
     steps:
       - uses: actions/checkout@v2
         with:
