@@ -25,16 +25,17 @@ requirements:
     # packages from the `defaults` channel (libgcc-ng/libstdcxx-ng).
     - {{ compiler('c') }} <9
     - {{ compiler('cxx') }} <9
-    - python {{ python_version }}
+    - bison
     - cmake
-    - pkg-config
-    - libuuid
-    - gperftools
     - flex
+    - libuuid
+    - pkg-config
+  host:
+    - python {{ python_version }}
+    - gperftools
     - libunwind
     - swig
     - ncurses
-    - bison
     - openjdk
   run:
     - python {{python_version}}
