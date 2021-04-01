@@ -1,0 +1,77 @@
+# Use `conda-build-prepare` before building for a better version string.
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+{% set boost_version = "1.73.*" %}
+
+package:
+  name: nextpnr-fpga_interchange
+  version: {{ version }}
+
+source:
+  - git_url: https://github.com/YosysHQ/nextpnr.git
+    git_rev: master
+    folder:  nextpnr
+    patches:
+      - change_patch_format.patch
+  - git_url: https://github.com/Xilinx/RapidWright.git
+    git_rev: master
+    folder:  RapidWright
+  - git_url: https://github.com/SymbiFlow/python-fpga-interchange.git
+    git_rev: master
+    folder:  python-fpga-interchange
+    patches:
+      - capnp_add_prefix_include_dir.patch
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+    - bison
+    - flex
+    - pkg-config
+    - patchelf
+    - cmake
+  host:
+    # nextpnr-fpga_interchange dependencies
+    - boost     {{ boost_version }}
+    - boost-cpp {{ boost_version }}
+    - libboost  {{ boost_version }}
+    - py-boost  {{ boost_version }}
+    - capnproto
+    - capnproto-java
+    - eigen
+    - fontconfig
+    - swig
+    - openjdk
+    - tk
+    - tbb <2021.0.0a0
+    - tbb-devel <2021.0.0a0
+    - python
+    # python-fpga-interchange dependencies
+    - pip
+    - pyyaml
+    - pycapnp
+  run:
+    - libboost {{ boost_version }}
+    - py-boost {{ boost_version }}
+    - symbiflow-yosys
+    - python
+    - zlib
+
+test:
+  commands:
+    - nextpnr-fpga_interchange -V
+
+about:
+  home: https://github.com/YosysHQ/nextpnr
+  license: ISC
+  license_file: nextpnr/COPYING
+  summary: 'nextpnr aims to be a vendor neutral, timing driven, FOSS FPGA place and route tool.'

@@ -1,0 +1,4 @@
+channels:
+  - defaults
+  - litex-hub
+  - conda-forge
