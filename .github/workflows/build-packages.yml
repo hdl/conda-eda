@@ -681,7 +681,7 @@ jobs:
     runs-on: "ubuntu-16.04"
     env:
       PACKAGE: "sv-front/verible"
-      USE_SYSTEM_GCC_VERSION: "8"
+      USE_SYSTEM_GCC_VERSION: "9"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
@@ -720,7 +720,7 @@ jobs:
     env:
       PACKAGE: "sv-front/slang"
       OS_NAME: "linux"
-      USE_SYSTEM_GCC_VERSION: "8"
+      USE_SYSTEM_GCC_VERSION: "9"
     steps:
       - uses: actions/checkout@v2
         with:
