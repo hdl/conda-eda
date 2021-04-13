@@ -18,7 +18,7 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 71
+  NUM_OF_JOBS: 72
 defaults:
   run:
     shell: bash
@@ -359,6 +359,19 @@ jobs:
           sudo add-apt-repository ppa:pypy/ppa -y
           sudo apt update
           sudo apt install -y pypy3
+      - uses: hdl/conda-ci@master
+
+  #72
+  nextpnr-fpga_interchange-linux:
+    runs-on: "ubuntu-16.04"
+    needs: ["symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
+    env:
+      PACKAGE: "pnr/nextpnr/fpga_interchange"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
       - uses: hdl/conda-ci@master
 
   #26
