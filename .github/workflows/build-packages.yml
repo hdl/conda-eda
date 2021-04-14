@@ -328,6 +328,19 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
+  #73
+  nextpnr-ecp5-osx:
+    runs-on: "macos-latest"
+    needs: ["prjtrellis-osx", "symbiflow-yosys-3_2_1-osx", "symbiflow-yosys-3_3-osx"]
+    env:
+      PACKAGE: "pnr/nextpnr/ecp5"
+      OS_NAME: "osx"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: hdl/conda-ci@master
+
   #24
   nextpnr-generic-linux:
     runs-on: "ubuntu-16.04"
