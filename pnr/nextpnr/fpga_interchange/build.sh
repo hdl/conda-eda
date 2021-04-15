@@ -36,10 +36,13 @@ mkdir -p $CHIPDB_DIR
 mkdir -p $DEVICES_DIR
 
 # Compute chipdbs for nextpnr-fpga_interchange
+# TODO: change the <device>.device names as soon as more architectures are added.
+#       In fact, the `constraints-luts` nomenclature corresponds
+#       to the patches specifically applied to xc7 devices only.
 for device in $DEVICES; do
 	make chipdb-${device}-bin -j${CPU_COUNT}
-	cp `find -iname "chipdb-${device}.bin"` $CHIPDB_DIR
-	cp `find -name "*.device" | grep -v luts | grep -v constr` $DEVICES_DIR
+	cp `find -iname "chipdb-${device}.bin"` $CHIPDB_DIR/${device}.bin
+	cp `find -name "${device}_constraints-luts.device"` $DEVICES_DIR/${device}.device
 done
 
 make install

@@ -364,7 +364,6 @@ jobs:
   #72
   nextpnr-fpga_interchange-linux:
     runs-on: "ubuntu-16.04"
-    needs: ["symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
     env:
       PACKAGE: "pnr/nextpnr/fpga_interchange"
       OS_NAME: "linux"
