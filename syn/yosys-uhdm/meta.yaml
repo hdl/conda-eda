@@ -46,3 +46,4 @@ requirements:
 test:
     commands:
         - uhdm-yosys --version
+        - surelog --version

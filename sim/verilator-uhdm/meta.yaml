@@ -37,3 +37,4 @@ requirements:
 test:
     commands:
         - verilator-uhdm --version
+        - surelog --version

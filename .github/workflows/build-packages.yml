@@ -18,7 +18,7 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 72
+  NUM_OF_JOBS: 68
 defaults:
   run:
     shell: bash
@@ -851,74 +851,6 @@ jobs:
       USE_SYSTEM_GCC_VERSION: "9"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: 'true'
-      - uses: hdl/conda-ci@master
-
-  #59
-  uhdm-integration-verilator-linux-py37:
-    runs-on: "ubuntu-16.04"
-    needs: ["surelog-uhdm-linux-py37", "verilator-uhdm-linux"]
-    env:
-      PACKAGE: "sim/uhdm-integration-verilator"
-      USE_SYSTEM_GCC_VERSION: "9"
-      OS_NAME: "linux"
-      PYTHON_VERSION: "3.7"
-    steps:
-      # Skip if token isn't available (cross-repository PRs mainly)
-      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
-      - uses: actions/checkout@v2
-        with:
-          submodules: 'true'
-      - uses: hdl/conda-ci@master
-
-  #70
-  uhdm-integration-verilator-linux-py38:
-    runs-on: "ubuntu-16.04"
-    needs: ["surelog-uhdm-linux-py38", "verilator-uhdm-linux"]
-    env:
-      PACKAGE: "sim/uhdm-integration-verilator"
-      USE_SYSTEM_GCC_VERSION: "9"
-      OS_NAME: "linux"
-      PYTHON_VERSION: "3.8"
-    steps:
-      # Skip if token isn't available (cross-repository PRs mainly)
-      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
-      - uses: actions/checkout@v2
-        with:
-          submodules: 'true'
-      - uses: hdl/conda-ci@master
-
-  #60
-  uhdm-integration-yosys-linux-py37:
-    runs-on: "ubuntu-16.04"
-    needs: ["surelog-uhdm-linux-py37", "yosys-uhdm-linux-py37"]
-    env:
-      PACKAGE: "sim/uhdm-integration-yosys"
-      USE_SYSTEM_GCC_VERSION: "9"
-      OS_NAME: "linux"
-      PYTHON_VERSION: "3.7"
-    steps:
-      # Skip if token isn't available (cross-repository PRs mainly)
-      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
-      - uses: actions/checkout@v2
-        with:
-          submodules: 'true'
-      - uses: hdl/conda-ci@master
-
-  #71
-  uhdm-integration-yosys-linux-py38:
-    runs-on: "ubuntu-16.04"
-    needs: ["surelog-uhdm-linux-py38", "yosys-uhdm-linux-py38"]
-    env:
-      PACKAGE: "sim/uhdm-integration-yosys"
-      USE_SYSTEM_GCC_VERSION: "9"
-      OS_NAME: "linux"
-      PYTHON_VERSION: "3.8"
-    steps:
-      # Skip if token isn't available (cross-repository PRs mainly)
-      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
