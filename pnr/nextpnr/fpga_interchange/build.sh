@@ -43,6 +43,8 @@ for device in $DEVICES; do
 	make chipdb-${device}-bin -j${CPU_COUNT}
 	cp `find -iname "chipdb-${device}.bin"` $CHIPDB_DIR/${device}.bin
 	cp `find -name "${device}_constraints-luts.device"` $DEVICES_DIR/${device}.device
+	# Check free memory
+	free -m
 done
 
 make install
