@@ -25,10 +25,10 @@ cmake -DARCH=fpga_interchange -DRAPIDWRIGHT_PATH=$RAPIDWRIGHT_PATH -DPYTHON_INTE
 make -j${CPU_COUNT}
 
 # List of devices available
+# TODO: the 200T device produces an out of memory error. Disabled for now
 DEVICES="xc7a35t \
          xc7z010 \
-         xc7a100t \
-         xc7a200t"
+         xc7a100t "
 
 CHIPDB_DIR=${PREFIX}/share/nextpnr-fpga_interchange/chipdb
 DEVICES_DIR=${PREFIX}/share/nextpnr-fpga_interchange/devices
