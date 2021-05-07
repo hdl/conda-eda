@@ -25,7 +25,8 @@ cmake -DARCH=fpga_interchange -DRAPIDWRIGHT_PATH=$RAPIDWRIGHT_PATH -DPYTHON_INTE
 make -j${CPU_COUNT}
 
 # List of devices available
-# TODO: the 200T device produces an out of memory error. Disabled for now
+# TODO: the 200T device produces an out of memory error. Disabled for now.
+# 		https://github.com/hdl/conda-eda/issues/108
 DEVICES="xc7a35t \
          xc7z010 \
          xc7a100t "
