@@ -25,10 +25,11 @@ cmake -DARCH=fpga_interchange -DRAPIDWRIGHT_PATH=$RAPIDWRIGHT_PATH -DPYTHON_INTE
 make -j${CPU_COUNT}
 
 # List of devices available
+# TODO: the 200T device produces an out of memory error. Disabled for now.
+# 		https://github.com/hdl/conda-eda/issues/108
 DEVICES="xc7a35t \
          xc7z010 \
-         xc7a100t \
-         xc7a200t"
+         xc7a100t "
 
 CHIPDB_DIR=${PREFIX}/share/nextpnr-fpga_interchange/chipdb
 DEVICES_DIR=${PREFIX}/share/nextpnr-fpga_interchange/devices
@@ -43,6 +44,8 @@ for device in $DEVICES; do
 	make chipdb-${device}-bin -j${CPU_COUNT}
 	cp `find -iname "chipdb-${device}.bin"` $CHIPDB_DIR/${device}.bin
 	cp `find -name "${device}_constraints-luts.device"` $DEVICES_DIR/${device}.device
+	# Check free memory
+	free -m
 done
 
 make install
