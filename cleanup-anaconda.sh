@@ -8,8 +8,8 @@ set -x
 #if the timestamp is older than one week, remove the whole label
 ago="7 days ago"
 
-#extract date in  milliseconds
-limit_date=$(date $DATE_SWITCH "$ago" +'%s%N' | cut -b1-13)
+#extract Conda-styled timestamp, i.e., MILLIseconds since the epoch (hence the `%3N`)
+limit_date=$(date --date="$ago" +'%s%3N')
 
 echo "Will remove labels older than $limit_date timestamp"
 
