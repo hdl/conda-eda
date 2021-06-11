@@ -43,3 +43,5 @@ for device in $DEVICES; do
 done
 
 make install
+
+cp bba/bbasm ${PREFIX}/bin
