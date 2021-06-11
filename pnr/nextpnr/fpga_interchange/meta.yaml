@@ -58,7 +58,8 @@ requirements:
     # python-fpga-interchange dependencies
     - pip
     - pyyaml
-    - pycapnp
+    - pkgconfig
+    - Cython
   run:
     - libboost {{ boost_version }}
     - py-boost {{ boost_version }}

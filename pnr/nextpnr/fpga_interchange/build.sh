@@ -9,6 +9,7 @@ export PYTHON_EXECUTABLE=`which python3`
 export PYTHON_INTERCHANGE_PATH=`realpath python-fpga-interchange`
 pushd $PYTHON_INTERCHANGE_PATH
 python3 -m pip install -e .
+python3 -m pip install git+https://github.com/capnproto/pycapnp.git
 popd
 
 # Prepare RapidWright dependency
