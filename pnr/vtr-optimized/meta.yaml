@@ -27,7 +27,6 @@ requirements:
     - libxslt
     - libxml2
     - make
-    - python-constraint
     - simplejson
     - intervaltree
     - curl
