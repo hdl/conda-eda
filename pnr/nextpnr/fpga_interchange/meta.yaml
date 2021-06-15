@@ -10,16 +10,6 @@ source:
   - git_url: https://github.com/YosysHQ/nextpnr.git
     git_rev: master
     folder:  nextpnr
-    patches:
-      - change_patch_format.patch
-  - git_url: https://github.com/Xilinx/RapidWright.git
-    git_rev: master
-    folder:  RapidWright
-  - git_url: https://github.com/SymbiFlow/python-fpga-interchange.git
-    git_rev: master
-    folder:  python-fpga-interchange
-    patches:
-      - capnp_add_prefix_include_dir.patch
 
 build:
   # number: 201803050325
@@ -39,6 +29,7 @@ requirements:
     - pkg-config
     - patchelf
     - cmake
+    - python <3.9
   host:
     # nextpnr-fpga_interchange dependencies
     - boost     {{ boost_version }}
@@ -54,15 +45,12 @@ requirements:
     - tk
     - tbb <2021.0.0a0
     - tbb-devel <2021.0.0a0
-    - python
-    # python-fpga-interchange dependencies
-    - pip
-    - pyyaml
-    - pycapnp
+    - python <3.9
   run:
     - libboost {{ boost_version }}
     - py-boost {{ boost_version }}
-    - python
+    - symbiflow-yosys
+    - python <3.9
     - zlib
 
 test:
