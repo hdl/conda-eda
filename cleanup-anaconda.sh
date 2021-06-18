@@ -33,7 +33,7 @@ function anaconda_stdout {
     anaconda -t $ANACONDA_TOKEN $@ 2>&1 | tr -s ' '
 }
 
-for label in $(anaconda_stdout label -o litex-hub --list | grep -oP '(?<= \+ )ci-[^ ]+')
+for label in $(anaconda_stdout label -o $ANACONDA_USER --list | grep -oP '(?<= \+ )ci-[^ ]+')
 do
     start_section "Label $label"
 
@@ -46,7 +46,7 @@ do
     fi
 
     #get label packages
-    packages=$(anaconda_stdout label -o litex-hub --show $label | grep -oP '(?<= \+ )[^ ]+')
+    packages=$(anaconda_stdout label -o $ANACONDA_USER --show $label | grep -oP '(?<= \+ )[^ ]+')
 
     #check build timestamp of the first package
     package=$(echo "$packages" | head -n1)
