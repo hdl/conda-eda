@@ -19,8 +19,8 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('c') }} <8
+    - {{ compiler('cxx') }} <8
     - bison
     - flex
     - make
