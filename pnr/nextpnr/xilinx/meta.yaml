@@ -3,6 +3,9 @@
 #
 # Use `conda-build-prepare` before building for some reasonable version string.
 {% set version = 'v0.0_X_gUNKNOWN' %}
+{% set boost_version = "1.73.*" %}
+{% set python_version = PYTHON_VERSION | default('3.7') %}
+{% set py_suffix = 'py%s'|format(python_version|replace('.', '')) %}
 
 package:
   name: nextpnr-xilinx
@@ -16,7 +19,7 @@ build:
   # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
   # string: 20180305_0325
-  string: {{ environ.get('DATE_STR') }}
+  string: {{ environ.get('DATE_STR') }}_{{ py_suffix }}
   script_env:
     - CI
     - USE_PYPY
@@ -25,25 +28,25 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - python {{ python }}
-    - libboost {{ boost }}
-    - py-boost {{ boost }}
+    - python {{ python_version }}
+    - libboost {{ boost_version }}
+    - py-boost {{ boost_version }}
     - make
   host:
     - bison
-    - boost {{ boost }}
+    - boost {{ boost_version }}
     - cmake
     - eigen
     - flex
     - fontconfig
     - pkg-config
-    - python {{ python }}
-    - libboost {{ boost }}
-    - py-boost {{ boost }}
+    - python {{ python_version }}
+    - libboost {{ boost_version }}
+    - py-boost {{ boost_version }}
   run:
-    - libboost {{ boost }}
-    - py-boost {{ boost }}
-    - python
+    - libboost {{ boost_version }}
+    - py-boost {{ boost_version }}
+    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
 
 test:
   commands:
