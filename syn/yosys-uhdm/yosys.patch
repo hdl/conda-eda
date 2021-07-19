@@ -1,7 +1,7 @@
-diff --git a/Makefile b/Makefile
+diff --git a/yosys/Makefile b/yosys/Makefile
 index 72ca15e36..85f131096 100644
---- a/Makefile
-+++ b/Makefile
+--- a/yosys/Makefile
++++ b/yosys/Makefile
 @@ -342,6 +342,19 @@ LDLIBS := $(filter-out -lrt,$(LDLIBS))
  ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H -DWIN32_NO_DLL -DHAVE_STRUCT_TIMESPEC -fpermissive -w"
  ABCMKARGS += LIBS="-lpthread -s" ABC_USE_NO_READLINE=0 CC="x86_64-w64-mingw32-gcc" CXX="$(CXX)"

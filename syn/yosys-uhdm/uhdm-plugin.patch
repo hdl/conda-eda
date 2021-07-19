@@ -1,0 +1,24 @@
+diff --git a/yosys-symbiflow-plugins/Makefile_plugin.common b/yosys-symbiflow-plugins/Makefile_plugin.common
+index 053a79f..5c52b36 100644
+--- a/yosys-symbiflow-plugins/Makefile_plugin.common
++++ b/yosys-symbiflow-plugins/Makefile_plugin.common
+@@ -36,12 +36,12 @@
+ # |       |   |-- ...
+ # |-- example2-plugin
+ # |-- ...
+-CXX = $(shell yosys-config --cxx)
+-CXXFLAGS = $(shell yosys-config --cxxflags) #-DSDC_DEBUG
+-LDFLAGS = $(shell yosys-config --ldflags)
+-LDLIBS = $(shell yosys-config --ldlibs)
+-PLUGINS_DIR = $(shell yosys-config --datdir)/plugins
+-DATA_DIR = $(shell yosys-config --datdir)
++CXX = $(shell uhdm-yosys-config --cxx)
++CXXFLAGS = $(shell uhdm-yosys-config --cxxflags) #-DSDC_DEBUG
++LDFLAGS = $(shell uhdm-yosys-config --ldflags)
++LDLIBS = $(shell uhdm-yosys-config --ldlibs)
++PLUGINS_DIR = $(shell uhdm-yosys-config --datdir)/plugins
++DATA_DIR = $(shell uhdm-yosys-config --datdir)
+ 
+ OBJS := $(SOURCES:cc=o)
+ 
+
