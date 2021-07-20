@@ -51,7 +51,6 @@ requirements:
     - py-boost {{ boost_version }} [not win]
     - libgcc-ng     [linux]
     - libstdcxx-ng  [linux]
-    - symbiflow-yosys
     - python
 
 test:

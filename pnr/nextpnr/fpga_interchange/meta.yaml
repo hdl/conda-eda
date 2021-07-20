@@ -49,7 +49,6 @@ requirements:
   run:
     - libboost {{ boost_version }}
     - py-boost {{ boost_version }}
-    - symbiflow-yosys
     - python <3.9
     - zlib
 

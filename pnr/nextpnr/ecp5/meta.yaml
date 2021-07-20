@@ -50,7 +50,6 @@ requirements:
     - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
     - libboost {{ boost_version }} [not win]
     - py-boost {{ boost_version }} [not win]
-    - symbiflow-yosys
 
 test:
   commands:

@@ -29,7 +29,6 @@ requirements:
     - libboost {{ boost }}
     - py-boost {{ boost }}
     - make
-    - symbiflow-yosys
   host:
     - bison
     - boost {{ boost }}
@@ -45,7 +44,6 @@ requirements:
     - libboost {{ boost }}
     - py-boost {{ boost }}
     - python
-    - symbiflow-yosys
 
 test:
   commands:
