@@ -1,0 +1,46 @@
+diff --git a/Makefile_plugin.common b/Makefile_plugin.common
+index 5e0a244..7240233 100644
+--- a/Makefile_plugin.common
++++ b/Makefile_plugin.common
+@@ -37,12 +37,12 @@
+ # |       |   |-- ...
+ # |-- example2-plugin
+ # |-- ...
+-CXX ?= $(shell yosys-config --cxx)
+-CXXFLAGS ?= $(shell yosys-config --cxxflags) #-DSDC_DEBUG
+-LDFLAGS ?= $(shell yosys-config --ldflags)
+-LDLIBS ?= $(shell yosys-config --ldlibs)
+-PLUGINS_DIR ?= $(shell yosys-config --datdir)/plugins
+-DATA_DIR ?= $(shell yosys-config --datdir)
++CXX = $(shell yosys-config --cxx)
++CXXFLAGS = $(shell yosys-config --cxxflags) #-DSDC_DEBUG
++LDFLAGS = $(shell yosys-config --ldflags)
++LDLIBS = $(shell yosys-config --ldlibs)
++PLUGINS_DIR = $(shell yosys-config --datdir)/plugins
++DATA_DIR = $(shell yosys-config --datdir)
+ 
+ OBJS := $(SOURCES:cc=o)
+ 
+diff --git a/Makefile_test.common b/Makefile_test.common
+index d1c8789..75fcb36 100644
+--- a/Makefile_test.common
++++ b/Makefile_test.common
+@@ -13,12 +13,12 @@
+ # test1_verify = $(call diff_test,test1,ext) && test $$(grep "PASS" test1/test1.txt | wc -l) -eq 2
+ # test2_verify = $(call diff_test,test2,ext)
+ #
+-GTEST_DIR ?= ../../third_party/googletest/googletest
+-CXX ?= $(shell yosys-config --cxx)
+-CXXFLAGS ?= $(shell yosys-config --cxxflags) -I.. -I$(GTEST_DIR)/include
+-LDLIBS ?= $(shell yosys-config --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
+-LDFLAGS ?= $(shell yosys-config --ldflags)
+-TEST_UTILS ?= ../../../test-utils/test-utils.tcl
++GTEST_DIR = ../../third_party/googletest/googletest
++CXX = $(shell yosys-config --cxx)
++CXXFLAGS = $(shell yosys-config --cxxflags) -I.. -I$(GTEST_DIR)/include
++LDLIBS = $(shell yosys-config --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
++LDFLAGS = $(shell yosys-config --ldflags)
++TEST_UTILS=../../../test-utils/test-utils.tcl
+ 
+ define test_tpl =
+ $(1): $(1)/ok

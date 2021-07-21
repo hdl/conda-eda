@@ -18,7 +18,7 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 70
+  NUM_OF_JOBS: 71
 defaults:
   run:
     shell: bash
@@ -140,6 +140,19 @@ jobs:
       PACKAGE: "syn/yosys"
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: hdl/conda-ci@master
+
+  #71
+  yosys-plugins-symbiflow-linux:
+    runs-on: "ubuntu-16.04"
+    needs: ["icarus-linux", "yosys-linux-py37", "yosys-linux-py38"]
+    env:
+      PACKAGE: "syn/yosys-plugins-symbiflow"
+      OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
         with:
