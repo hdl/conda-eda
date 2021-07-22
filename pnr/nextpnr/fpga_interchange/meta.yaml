@@ -1,6 +1,8 @@
 # Use `conda-build-prepare` before building for a better version string.
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 {% set boost_version = "1.73.*" %}
+{% set python_version = PYTHON_VERSION | default('3.7') %}
+{% set py_suffix = 'py%s'|format(python_version|replace('.', '')) %}
 
 package:
   name: nextpnr-fpga_interchange
@@ -15,7 +17,7 @@ build:
   # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
   # string: 20180305_0325
-  string: {{ environ.get('DATE_STR') }}
+  string: {{ environ.get('DATE_STR') }}_{{ py_suffix }}
   script_env:
     - CI
 
@@ -29,7 +31,7 @@ requirements:
     - pkg-config
     - patchelf
     - cmake
-    - python <3.9
+    - python {{ python_version }}
   host:
     # nextpnr-fpga_interchange dependencies
     - boost     {{ boost_version }}
@@ -45,12 +47,11 @@ requirements:
     - tk
     - tbb <2021.0.0a0
     - tbb-devel <2021.0.0a0
-    - python <3.9
+    - python {{ python_version }}
   run:
     - libboost {{ boost_version }}
     - py-boost {{ boost_version }}
-    - symbiflow-yosys
-    - python <3.9
+    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
     - zlib
 
 test:

@@ -1,7 +1,8 @@
 # Use `conda-build-prepare` before building for a better version string.
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
-# cmake 1.15 required for boost 1.71
-{% set boost_version = ">=1.67,<1.68.0a0" %}
+{% set boost_version = "1.73.*" %}
+{% set python_version = PYTHON_VERSION | default('3.7') %}
+{% set py_suffix = 'py%s'|format(python_version|replace('.', '')) %}
 
 package:
   name: nextpnr-ecp5
@@ -15,7 +16,7 @@ build:
   # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
   # string: 20180305_0325
-  string: {{ environ.get('DATE_STR') }}
+  string: {{ environ.get('DATE_STR') }}_{{ py_suffix }}
   script_env:
     - CI
 
@@ -26,11 +27,11 @@ requirements:
     - fontconfig  [not win]
     - make        [not win]
     - cmake
-    - python    {{ python }}
     - boost     {{ boost_version }}
     - boost-cpp {{ boost_version }}
     - libboost  {{ boost_version }}
     - py-boost  {{ boost_version }}
+    - python {{ python_version }}
   host:
     - bison        [not win]
     - eigen        [not win]
@@ -38,19 +39,18 @@ requirements:
     - pkg-config   [not win]
     - patchelf     [linux]
     - prjtrellis
-    - python    {{ python }}
     - boost     {{ boost_version }} [not win]
     - boost-cpp {{ boost_version }} [not win]
     - libboost  {{ boost_version }} [not win]
     - py-boost  {{ boost_version }} [not win]
+    - python {{ python_version }}
   run:
     - libgcc-ng     [linux]
     - libstdcxx-ng  [linux]
     - prjtrellis
-    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
     - libboost {{ boost_version }} [not win]
     - py-boost {{ boost_version }} [not win]
-    - symbiflow-yosys
+    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
 
 test:
   commands:

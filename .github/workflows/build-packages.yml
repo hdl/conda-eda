@@ -304,7 +304,7 @@ jobs:
   #21
   arachne-linux:
     runs-on: "ubuntu-16.04"
-    needs: ["icarus-linux", "icestorm-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
+    needs: ["icarus-linux", "icestorm-linux"]
     env:
       PACKAGE: "pnr/arachne"
       OS_NAME: "linux"
@@ -317,7 +317,7 @@ jobs:
   #22
   nextpnr-ice40-linux:
     runs-on: "ubuntu-16.04"
-    needs: ["icestorm-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
+    needs: ["icestorm-linux"]
     env:
       PACKAGE: "pnr/nextpnr/ice40"
       OS_NAME: "linux"
@@ -330,7 +330,7 @@ jobs:
   #23
   nextpnr-ecp5-linux:
     runs-on: "ubuntu-16.04"
-    needs: ["prjtrellis-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
+    needs: ["prjtrellis-linux"]
     env:
       PACKAGE: "pnr/nextpnr/ecp5"
       OS_NAME: "linux"
@@ -343,7 +343,6 @@ jobs:
   #24
   nextpnr-generic-linux:
     runs-on: "ubuntu-16.04"
-    needs: ["symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
     env:
       PACKAGE: "pnr/nextpnr/generic"
       OS_NAME: "linux"
@@ -356,7 +355,6 @@ jobs:
   #25
   nextpnr-xilinx-linux:
     runs-on: "ubuntu-16.04"
-    needs: ["symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
     env:
       PACKAGE: "pnr/nextpnr/xilinx"
       OS_NAME: "linux"
@@ -588,7 +586,7 @@ jobs:
   #40
   nextpnr-ice40-osx:
     runs-on: "macos-latest"
-    needs: ["icestorm-osx", "symbiflow-yosys-3_2_1-osx", "symbiflow-yosys-3_3-osx"]
+    needs: ["icestorm-osx"]
     env:
       PACKAGE: "pnr/nextpnr/ice40"
       OS_NAME: "osx"
@@ -602,7 +600,6 @@ jobs:
   #41
   nextpnr-generic-osx:
     runs-on: "macos-latest"
-    needs: ["symbiflow-yosys-3_2_1-osx", "symbiflow-yosys-3_3-osx"]
     env:
       PACKAGE: "pnr/nextpnr/generic"
       OS_NAME: "osx"

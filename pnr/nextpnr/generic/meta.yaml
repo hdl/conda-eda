@@ -1,7 +1,8 @@
 # Use `conda-build-prepare` before building for a better version string.
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
-# cmake 1.15 required for boost 1.71
-{% set boost_version = ">=1.67,<1.68.0a0" %}
+{% set boost_version = "1.73.*" %}
+{% set python_version = PYTHON_VERSION | default('3.7') %}
+{% set py_suffix = 'py%s'|format(python_version|replace('.', '')) %}
 
 package:
   name: nextpnr-generic
@@ -15,7 +16,7 @@ build:
   # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
   # string: 20180305_0325
-  string: {{ environ.get('DATE_STR') }}
+  string: {{ environ.get('DATE_STR') }}_{{ py_suffix }}
   script_env:
     - CI
 
@@ -29,7 +30,7 @@ requirements:
     - fontconfig [not win]
     - make       [not win]
     - cmake
-    - python 3.7
+    - python {{ python_version }}
     - libboost  {{ boost_version }}
     - py-boost  {{ boost_version }}
   host:
@@ -40,19 +41,17 @@ requirements:
     - flex       [not win]
     - pkg-config [not win]
     - patchelf   [linux]
-    - python
+    - python {{ python_version }}
     - boost     {{ boost_version }}
     - boost-cpp {{ boost_version }}
     - libboost  {{ boost_version }}
     - py-boost  {{ boost_version }}
   run:
-    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
     - libboost {{ boost_version }} [not win]
     - py-boost {{ boost_version }} [not win]
     - libgcc-ng     [linux]
     - libstdcxx-ng  [linux]
-    - symbiflow-yosys
-    - python
+    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
 
 test:
   commands:
