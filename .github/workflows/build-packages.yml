@@ -683,12 +683,12 @@ jobs:
 
   #47
   nextpnr-ice40-windows:
-    runs-on: "windows-latest"
+    runs-on: "windows-2016"
     needs: ["icestorm-windows"] 
     env:
       PACKAGE: "pnr/nextpnr/ice40"
       OS_NAME: "windows"
-      SKIP: "true" # Uses symbiflow-yosys (not built for windows)
+      SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/120
     steps:
       - uses: actions/checkout@v2
         with:
@@ -697,11 +697,11 @@ jobs:
 
   #48
   nextpnr-generic-windows:
-    runs-on: "windows-latest"
+    runs-on: "windows-2016"
     env:
       PACKAGE: "pnr/nextpnr/generic"
       OS_NAME: "windows"
-      SKIP: "true" # Uses symbiflow-yosys (not built for windows)
+      SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/120
     steps:
       - uses: actions/checkout@v2
         with:
