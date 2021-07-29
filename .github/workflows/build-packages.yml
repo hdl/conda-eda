@@ -18,7 +18,7 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 71
+  NUM_OF_JOBS: 72
 defaults:
   run:
     shell: bash
@@ -385,11 +385,25 @@ jobs:
       - uses: hdl/conda-ci@master
 
   #72
-  nextpnr-fpga_interchange-linux:
+  nextpnr-fpga_interchange-linux-py37:
     runs-on: "ubuntu-16.04"
     env:
       PACKAGE: "pnr/nextpnr/fpga_interchange"
       OS_NAME: "linux"
+      PYTHON_VERSION: "3.7"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: hdl/conda-ci@master
+
+  #72
+  nextpnr-fpga_interchange-linux-py38:
+    runs-on: "ubuntu-16.04"
+    env:
+      PACKAGE: "pnr/nextpnr/fpga_interchange"
+      OS_NAME: "linux"
+      PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v2
         with:
