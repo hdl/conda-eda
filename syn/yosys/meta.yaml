@@ -13,7 +13,6 @@ source:
    git_rev: master
    patches:
      - makefile-conda-config.patch
-     - XILINX_BRAM36.patch
 
 build:
   # number: 201803050325
