@@ -18,7 +18,7 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 71
+  NUM_OF_JOBS: 72
 defaults:
   run:
     shell: bash
@@ -152,6 +152,19 @@ jobs:
     needs: ["icarus-linux", "yosys-linux-py37", "yosys-linux-py38"]
     env:
       PACKAGE: "syn/yosys-plugins-symbiflow"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - uses: hdl/conda-ci@master
+
+  #72
+  nextpnr-nexus-linux:
+    runs-on: "ubuntu-18.04"
+    needs: ["prjoxide-linux"]
+    env:
+      PACKAGE: "pnr/nextpnr/nexus"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
