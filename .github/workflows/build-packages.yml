@@ -227,7 +227,7 @@ jobs:
   #13
   symbiflow-yosys-plugins-linux:
     runs-on: "ubuntu-16.04"
-    needs: ["icarus-linux", "symbiflow-yosys-3_2_1-linux", "symbiflow-yosys-3_3-linux"]
+    needs: ["icarus-linux", "yosys-linux-py37"]
     env:
       PACKAGE: "syn/symbiflow-yosys-plugins"
       OS_NAME: "linux"
@@ -572,7 +572,7 @@ jobs:
   #37
   symbiflow-yosys-plugins-osx:
     runs-on: "macos-latest"
-    needs: ["icarus-osx", "symbiflow-yosys-3_2_1-osx", "symbiflow-yosys-3_3-osx"]
+    needs: ["icarus-osx", "yosys-osx"]
     env:
       PACKAGE: "syn/symbiflow-yosys-plugins"
       OS_NAME: "osx"
