@@ -8,10 +8,11 @@ package:
   version: {{ version }}
 
 source:
-  git_rev: uhdm-yosys
-  git_url: https://github.com/antmicro/yosys.git
+  git_rev: master
+  git_url: https://github.com/antmicro/yosys-uhdm-plugin-integration.git
   patches:
     - yosys.patch
+    - uhdm-plugin.patch
 
 build:
   number: {{ environ.get('DATE_NUM') }}
@@ -28,12 +29,11 @@ requirements:
     - bison
     - cmake
     - flex
-    - libuuid
     - pkg-config
   host:
     - python {{ python_version }}
+    - libuuid
     - gperftools
-    - libunwind
     - swig
     - ncurses
     - openjdk
@@ -42,8 +42,10 @@ requirements:
     - ncurses
     - readline
     - libffi
+    - gperftools
 
 test:
     commands:
         - uhdm-yosys --version
         - surelog --version
+        - uhdm-yosys -p "plugin -i uhdm"
