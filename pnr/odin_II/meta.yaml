@@ -21,6 +21,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
+    - libxml2 >2.9.9
     - bison
     - cmake
     - flex
