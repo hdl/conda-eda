@@ -23,6 +23,7 @@ requirements:
     - {{ compiler('cxx') }} <11
     - make
   host:
+    - libxml2 >2.9.9
     - bison
     - cmake
     - flex
