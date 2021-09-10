@@ -23,11 +23,11 @@ requirements:
     - {{ compiler('cxx') }}
     - bison
     - cmake
-    - flex
-    - libuuid
     - pkg-config
   host:
     - python {{ python_version }}
+    - libuuid
+    - flex
     - gperftools
     - libunwind
     - swig
@@ -37,6 +37,7 @@ requirements:
     - flex
     - ncurses
     - python {{python_version}}
+    - gperftools
 
 test:
     commands:

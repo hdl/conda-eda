@@ -909,6 +909,7 @@ jobs:
 
   #58
   verilator-uhdm-linux-py37:
+    needs: ["gperftools"]
     runs-on: "ubuntu-16.04"
     env:
       PACKAGE: "sim/verilator-uhdm"
@@ -922,6 +923,7 @@ jobs:
 
   #59
   verilator-uhdm-linux-py38:
+    needs: ["gperftools"]
     runs-on: "ubuntu-16.04"
     env:
       PACKAGE: "sim/verilator-uhdm"
