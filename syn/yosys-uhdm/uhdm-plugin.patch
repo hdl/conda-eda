@@ -1,17 +1,17 @@
 diff --git a/yosys-symbiflow-plugins/Makefile_plugin.common b/yosys-symbiflow-plugins/Makefile_plugin.common
-index 053a79f..5c52b36 100644
+index 5e0a244..d06d555 100644
 --- a/yosys-symbiflow-plugins/Makefile_plugin.common
 +++ b/yosys-symbiflow-plugins/Makefile_plugin.common
-@@ -36,12 +36,12 @@
+@@ -37,12 +37,12 @@
  # |       |   |-- ...
  # |-- example2-plugin
  # |-- ...
--CXX = $(shell yosys-config --cxx)
--CXXFLAGS = $(shell yosys-config --cxxflags) #-DSDC_DEBUG
--LDFLAGS = $(shell yosys-config --ldflags)
--LDLIBS = $(shell yosys-config --ldlibs)
--PLUGINS_DIR = $(shell yosys-config --datdir)/plugins
--DATA_DIR = $(shell yosys-config --datdir)
+-CXX ?= $(shell yosys-config --cxx)
+-CXXFLAGS ?= $(shell yosys-config --cxxflags) #-DSDC_DEBUG
+-LDFLAGS ?= $(shell yosys-config --ldflags)
+-LDLIBS ?= $(shell yosys-config --ldlibs)
+-PLUGINS_DIR ?= $(shell yosys-config --datdir)/plugins
+-DATA_DIR ?= $(shell yosys-config --datdir)
 +CXX = $(shell uhdm-yosys-config --cxx)
 +CXXFLAGS = $(shell uhdm-yosys-config --cxxflags) #-DSDC_DEBUG
 +LDFLAGS = $(shell uhdm-yosys-config --ldflags)
@@ -21,4 +21,26 @@ index 053a79f..5c52b36 100644
  
  OBJS := $(SOURCES:cc=o)
  
-
+diff --git a/yosys-symbiflow-plugins/Makefile_test.common b/yosys-symbiflow-plugins/Makefile_test.common
+index d1c8789..3ca7481 100644
+--- a/yosys-symbiflow-plugins/Makefile_test.common
++++ b/yosys-symbiflow-plugins/Makefile_test.common
+@@ -13,12 +13,12 @@
+ # test1_verify = $(call diff_test,test1,ext) && test $$(grep "PASS" test1/test1.txt | wc -l) -eq 2
+ # test2_verify = $(call diff_test,test2,ext)
+ #
+-GTEST_DIR ?= ../../third_party/googletest/googletest
+-CXX ?= $(shell yosys-config --cxx)
+-CXXFLAGS ?= $(shell yosys-config --cxxflags) -I.. -I$(GTEST_DIR)/include
+-LDLIBS ?= $(shell yosys-config --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
+-LDFLAGS ?= $(shell yosys-config --ldflags)
+-TEST_UTILS ?= ../../../test-utils/test-utils.tcl
++GTEST_DIR = ../../third_party/googletest/googletest
++CXX = $(shell uhdm-yosys-config --cxx)
++CXXFLAGS = $(shell uhdm-yosys-config --cxxflags) -I.. -I$(GTEST_DIR)/include
++LDLIBS = $(shell uhdm-yosys-config --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
++LDFLAGS = $(shell uhdm-yosys-config --ldflags)
++TEST_UTILS = ../../../test-utils/test-utils.tcl
+ 
+ define test_tpl =
+ $(1): $(1)/ok
