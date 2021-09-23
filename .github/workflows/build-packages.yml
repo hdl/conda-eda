@@ -39,7 +39,7 @@ jobs:
 
   #72
   nextpnr-nexus-linux:
-    runs-on: "ubuntu-18.04"
+    runs-on: "ubuntu-20.04"
     needs: ["prjoxide-linux"]
     env:
       PACKAGE: "pnr/nextpnr/nexus"
