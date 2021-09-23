@@ -26,7 +26,7 @@ jobs:
 
   #1
   magic-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "misc/magic"
       OS_NAME: "linux"
@@ -38,7 +38,7 @@ jobs:
 
   #2
   icestorm-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "bit/icestorm"
       OS_NAME: "linux"
@@ -50,7 +50,7 @@ jobs:
 
   #3
   prjtrellis-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "bit/prjtrellis"
       OS_NAME: "linux"
@@ -74,7 +74,7 @@ jobs:
 
   #4
   prjxray-db-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "bit/prjxray-db"
       OS_NAME: "linux"
@@ -86,7 +86,7 @@ jobs:
 
   #5
   prjxray-tools-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "bit/prjxray-tools"
       OS_NAME: "linux"
@@ -98,7 +98,7 @@ jobs:
 
   #6
   icarus-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sim/icarus"
       OS_NAME: "linux"
@@ -110,7 +110,7 @@ jobs:
 
   #7
   verilator-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sim/verilator"
       OS_NAME: "linux"
@@ -122,7 +122,7 @@ jobs:
 
   #8
   yosys-linux-py37:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "syn/yosys"
       OS_NAME: "linux"
@@ -135,7 +135,7 @@ jobs:
 
   #64
   yosys-linux-py38:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "syn/yosys"
       OS_NAME: "linux"
@@ -148,7 +148,7 @@ jobs:
 
   #71
   yosys-plugins-symbiflow-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: ["icarus-linux", "yosys-linux-py37", "yosys-linux-py38"]
     env:
       PACKAGE: "syn/yosys-plugins-symbiflow"
@@ -174,7 +174,7 @@ jobs:
 
   #9
   quicklogic-yosys-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "syn/quicklogic-yosys"
       OS_NAME: "linux"
@@ -186,7 +186,7 @@ jobs:
 
   #10
   quicklogic-yosys-plugins-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "syn/quicklogic-yosys-plugins"
       OS_NAME: "linux"
@@ -198,7 +198,7 @@ jobs:
 
   #11
   symbiflow-yosys-3_2_1-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: "icarus-linux"
     env:
       PACKAGE: "syn/symbiflow-yosys"
@@ -212,7 +212,7 @@ jobs:
 
   #12
   symbiflow-yosys-3_3-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: "icarus-linux"
     env:
       PACKAGE: "syn/symbiflow-yosys"
@@ -226,7 +226,7 @@ jobs:
 
   #13
   symbiflow-yosys-plugins-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: ["icarus-linux", "yosys-linux-py37"]
     env:
       PACKAGE: "syn/symbiflow-yosys-plugins"
@@ -239,7 +239,7 @@ jobs:
 
   #14
   vtr-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "pnr/vtr"
       OS_NAME: "linux"
@@ -251,7 +251,7 @@ jobs:
 
   #15
   vtr-gui-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "pnr/vtr-gui"
       OS_NAME: "linux"
@@ -263,7 +263,7 @@ jobs:
 
   #16
   vtr-optimized-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "pnr/vtr-optimized"
       OS_NAME: "linux"
@@ -275,7 +275,7 @@ jobs:
 
   #17
   symbiflow-vtr-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "pnr/symbiflow-vtr"
       OS_NAME: "linux"
@@ -287,7 +287,7 @@ jobs:
 
   #18
   symbiflow-vtr-gui-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "pnr/symbiflow-vtr-gui"
       OS_NAME: "linux"
@@ -299,7 +299,7 @@ jobs:
 
   #19
   quicklogic-vtr-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: "vtr-linux"
     env:
       PACKAGE: "pnr/quicklogic-vtr"
@@ -314,7 +314,7 @@ jobs:
 
   #20
   quicklogic-vtr-gui-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: "vtr-gui-linux"
     env:
       PACKAGE: "pnr/quicklogic-vtr-gui"
@@ -329,7 +329,7 @@ jobs:
 
   #21
   arachne-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: ["icarus-linux", "icestorm-linux"]
     env:
       PACKAGE: "pnr/arachne"
@@ -342,7 +342,7 @@ jobs:
 
   #22
   nextpnr-ice40-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: ["icestorm-linux"]
     env:
       PACKAGE: "pnr/nextpnr/ice40"
@@ -355,7 +355,7 @@ jobs:
 
   #23
   nextpnr-ecp5-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: ["prjtrellis-linux"]
     env:
       PACKAGE: "pnr/nextpnr/ecp5"
@@ -368,7 +368,7 @@ jobs:
 
   #24
   nextpnr-generic-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "pnr/nextpnr/generic"
       OS_NAME: "linux"
@@ -380,7 +380,7 @@ jobs:
 
   #25
   nextpnr-xilinx-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "pnr/nextpnr/xilinx"
       OS_NAME: "linux"
@@ -399,7 +399,7 @@ jobs:
 
   #72
   nextpnr-fpga_interchange-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "pnr/nextpnr/fpga_interchange"
       OS_NAME: "linux"
@@ -411,7 +411,7 @@ jobs:
 
   #26
   symbiyosys-linux-py37:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: "yosys-linux-py37"
     env:
       PACKAGE: "formal/symbiyosys"
@@ -426,7 +426,7 @@ jobs:
 
   #66
   symbiyosys-linux-py38:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: "yosys-linux-py38"
     env:
       PACKAGE: "formal/symbiyosys"
@@ -441,7 +441,7 @@ jobs:
 
   #27
   xilinx-vivado-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "xilinx/vivado"
       OS_NAME: "linux"
@@ -723,7 +723,7 @@ jobs:
 
   #49
   verible-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sv-front/verible"
       USE_SYSTEM_GCC_VERSION: "9"
@@ -736,7 +736,7 @@ jobs:
 
   #50
   tree-sitter-verilog-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "misc/tree-sitter-verilog"
       OS_NAME: "linux"
@@ -749,7 +749,7 @@ jobs:
 
   #51
   odin-ii-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "pnr/odin_II"
       OS_NAME: "linux"
@@ -761,7 +761,7 @@ jobs:
 
   #52
   slang-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sv-front/slang"
       OS_NAME: "linux"
@@ -774,7 +774,7 @@ jobs:
 
   #53
   sv-parser-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sv-front/sv-parser"
       OS_NAME: "linux"
@@ -786,7 +786,7 @@ jobs:
 
   #54
   moore-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sv-front/moore"
       OS_NAME: "linux"
@@ -799,7 +799,7 @@ jobs:
   #55
   surelog-linux-py37:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sv-front/surelog"
       OS_NAME: "linux"
@@ -813,7 +813,7 @@ jobs:
   #65
   surelog-linux-py38:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sv-front/surelog"
       OS_NAME: "linux"
@@ -827,7 +827,7 @@ jobs:
   #56
   surelog-uhdm-linux-py37:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sv-front/surelog-uhdm"
       USE_SYSTEM_GCC_VERSION: "9"
@@ -842,7 +842,7 @@ jobs:
   #67
   surelog-uhdm-linux-py38:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sv-front/surelog-uhdm"
       USE_SYSTEM_GCC_VERSION: "9"
@@ -857,7 +857,7 @@ jobs:
   #57
   yosys-uhdm-linux-py37:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "syn/yosys-uhdm"
       OS_NAME: "linux"
@@ -871,7 +871,7 @@ jobs:
   #68
   yosys-uhdm-linux-py38:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "syn/yosys-uhdm"
       OS_NAME: "linux"
@@ -884,7 +884,7 @@ jobs:
 
   #74
   libunwind:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "misc/libunwind"
       OS_NAME: "linux"
@@ -897,7 +897,7 @@ jobs:
   #75
   gperftools:
     needs: "libunwind"
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "misc/gperftools"
       OS_NAME: "linux"
@@ -910,7 +910,7 @@ jobs:
   #58
   verilator-uhdm-linux-py37:
     needs: ["gperftools"]
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sim/verilator-uhdm"
       OS_NAME: "linux"
@@ -924,7 +924,7 @@ jobs:
   #59
   verilator-uhdm-linux-py38:
     needs: ["gperftools"]
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "sim/verilator-uhdm"
       OS_NAME: "linux"
@@ -937,7 +937,7 @@ jobs:
 
   #61
   antmicro-yosys-complete-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: "antmicro-yosys-plugins-linux"
     env:
       PACKAGE: "sim/antmicro-yosys-complete"
@@ -950,7 +950,7 @@ jobs:
 
   #62
   antmicro-yosys-plugins-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: ["antmicro-yosys-linux", "icarus-linux"]
     env:
       PACKAGE: "syn/antmicro-yosys-plugins"
@@ -963,7 +963,7 @@ jobs:
 
   #63
   antmicro-yosys-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     needs: "icarus-linux"
     env:
       PACKAGE: "syn/antmicro-yosys"
@@ -976,7 +976,7 @@ jobs:
 
   #69
   netgen-linux:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "misc/netgen"
       OS_NAME: "linux"
@@ -987,7 +987,7 @@ jobs:
       - uses: hdl/conda-ci@master
 
   master-package:
-    runs-on: "ubuntu-16.04"
+    runs-on: "ubuntu-20.04"
     env:
       OS_NAME: "linux"
     steps:
