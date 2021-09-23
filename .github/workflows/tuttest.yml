@@ -78,7 +78,6 @@ jobs:
       fail-fast: false
       matrix:
         container-os:
-          - ubuntu:16.04
           - ubuntu:18.04
           - ubuntu:20.04
           - debian:8
