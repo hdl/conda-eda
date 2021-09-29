@@ -27,11 +27,14 @@ requirements:
     - autoconf
     - make
   host:
+    - {{ compiler('cxx') }}
     - bison
     - flex
     - zlib
   run:
-    - {{ compiler('cxx') }}
+    - gxx_linux-64   [linux]
+    - clangxx_osx-64 [osx]
+    - make
     - bison
     - flex
     - ncurses
