@@ -1,0 +1,40 @@
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v','') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+package:
+  name: zachjs-sv2v
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/zachjs/sv2v.git
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - TRAVIS
+
+requirements:
+  build:
+# There seems to be no way to make linker use `libgmp` from
+# the Conda's `gmp` package to build Cabal and zachjs-sv2v
+# dependencies (ld is called through stack -> cabal -> ghc).
+#
+# Therefore linker and `libgmp` have to be installed in the
+# OS (Conda `ld` doesn't work with OS-installed `libgmp`).
+    - make
+    - stack<2.5.1
+
+test:
+  commands:
+    - zachjs-sv2v --help
+
+about:
+  home: https://github.com/zachjs/sv2v
+  license: BSD
+  license_file:
+    - LICENSE
+    - NOTICE
+  summary: 'sv2v converts SystemVerilog (IEEE 1800-2017) to Verilog (IEEE 1364-2005), with an emphasis on supporting synthesizable language constructs.'
