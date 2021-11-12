@@ -1,45 +1,67 @@
 diff --git a/yosys-symbiflow-plugins/Makefile_plugin.common b/yosys-symbiflow-plugins/Makefile_plugin.common
-index 5e0a244..d06d555 100644
+index d96d186..decc0c3 100644
 --- a/yosys-symbiflow-plugins/Makefile_plugin.common
 +++ b/yosys-symbiflow-plugins/Makefile_plugin.common
-@@ -37,12 +37,12 @@
- # |       |   |-- ...
- # |-- example2-plugin
+@@ -39,20 +39,20 @@
  # |-- ...
--CXX ?= $(shell yosys-config --cxx)
--CXXFLAGS ?= $(shell yosys-config --cxxflags) #-DSDC_DEBUG
--LDFLAGS ?= $(shell yosys-config --ldflags)
--LDLIBS ?= $(shell yosys-config --ldlibs)
--PLUGINS_DIR ?= $(shell yosys-config --datdir)/plugins
--DATA_DIR ?= $(shell yosys-config --datdir)
-+CXX = $(shell uhdm-yosys-config --cxx)
-+CXXFLAGS = $(shell uhdm-yosys-config --cxxflags) #-DSDC_DEBUG
-+LDFLAGS = $(shell uhdm-yosys-config --ldflags)
-+LDLIBS = $(shell uhdm-yosys-config --ldlibs)
-+PLUGINS_DIR = $(shell uhdm-yosys-config --datdir)/plugins
-+DATA_DIR = $(shell uhdm-yosys-config --datdir)
+ 
+ # Either find yosys in system and use its path or use the given path
+-YOSYS_PATH ?= $(realpath $(dir $(shell which yosys))/..)
++YOSYS_PATH ?= $(realpath $(dir $(shell which uhdm-yosys))/..)
+ 
+ # Find yosys-config, throw an error if not found
+-YOSYS_CONFIG ?= $(YOSYS_PATH)/bin/yosys-config
++YOSYS_CONFIG ?= $(YOSYS_PATH)/bin/uhdm-yosys-config
+ ifeq (,$(wildcard $(YOSYS_CONFIG)))
+-$(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
++$(error "Didn't find 'uhdm-yosys-config' under '$(YOSYS_PATH)'")
+ endif
+ 
+-CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
+-CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) #-DSDC_DEBUG
+-LDFLAGS ?= $(shell $(YOSYS_CONFIG) --ldflags)
+-LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs)
+-PLUGINS_DIR ?= $(shell $(YOSYS_CONFIG) --datdir)/plugins
+-DATA_DIR ?= $(shell $(YOSYS_CONFIG) --datdir)
++CXX = $(shell $(YOSYS_CONFIG) --cxx)
++CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) #-DSDC_DEBUG
++LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
++LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs)
++PLUGINS_DIR = $(shell $(YOSYS_CONFIG) --datdir)/plugins
++DATA_DIR = $(shell $(YOSYS_CONFIG) --datdir)
  
  OBJS := $(SOURCES:cc=o)
  
 diff --git a/yosys-symbiflow-plugins/Makefile_test.common b/yosys-symbiflow-plugins/Makefile_test.common
-index d1c8789..3ca7481 100644
+index 1490199..15fd2ac 100644
 --- a/yosys-symbiflow-plugins/Makefile_test.common
 +++ b/yosys-symbiflow-plugins/Makefile_test.common
-@@ -13,12 +13,12 @@
- # test1_verify = $(call diff_test,test1,ext) && test $$(grep "PASS" test1/test1.txt | wc -l) -eq 2
- # test2_verify = $(call diff_test,test2,ext)
+@@ -15,20 +15,20 @@
  #
+ 
+ # Either find yosys in system and use its path or use the given path
+-YOSYS_PATH ?= $(realpath $(dir $(shell which yosys))/..)
++YOSYS_PATH ?= $(realpath $(dir $(shell which uhdm-yosys))/..)
+ 
+ # Find yosys-config, throw an error if not found
+-YOSYS_CONFIG = $(YOSYS_PATH)/bin/yosys-config
++YOSYS_CONFIG = $(YOSYS_PATH)/bin/uhdm-yosys-config
+ ifeq (,$(wildcard $(YOSYS_CONFIG)))
+-$(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
++$(error "Didn't find 'uhdm-yosys-config' under '$(YOSYS_PATH)'")
+ endif
+ 
 -GTEST_DIR ?= ../../third_party/googletest/googletest
--CXX ?= $(shell yosys-config --cxx)
--CXXFLAGS ?= $(shell yosys-config --cxxflags) -I.. -I$(GTEST_DIR)/include
--LDLIBS ?= $(shell yosys-config --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
--LDFLAGS ?= $(shell yosys-config --ldflags)
+-CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
+-CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/include
+-LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
+-LDFLAGS ?= $(shell $(YOSYS_CONFIG) --ldflags)
 -TEST_UTILS ?= ../../../test-utils/test-utils.tcl
 +GTEST_DIR = ../../third_party/googletest/googletest
-+CXX = $(shell uhdm-yosys-config --cxx)
-+CXXFLAGS = $(shell uhdm-yosys-config --cxxflags) -I.. -I$(GTEST_DIR)/include
-+LDLIBS = $(shell uhdm-yosys-config --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
-+LDFLAGS = $(shell uhdm-yosys-config --ldflags)
++CXX = $(shell $(YOSYS_CONFIG) --cxx)
++CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/include
++LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
++LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
 +TEST_UTILS = ../../../test-utils/test-utils.tcl
  
  define test_tpl =

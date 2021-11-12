@@ -2,6 +2,15 @@ diff --git a/yosys/Makefile b/yosys/Makefile
 index 8275d8336..2176b149f 100644
 --- a/yosys/Makefile
 +++ b/yosys/Makefile
+@@ -140,7 +140,7 @@ bumpversion:
+ # is just a symlink to your actual ABC working directory, as 'make mrproper'
+ # will remove the 'abc' directory and you do not want to accidentally
+ # delete your work on ABC..
+-ABCREV = 4f5f73d
++ABCREV = f6fa2dd
+ ABCPULL = 1
+ ABCURL ?= https://github.com/YosysHQ/abc
+ ABCMKARGS = CC="$(CXX)" CXX="$(CXX)" ABC_USE_LIBSTDCXX=1 VERBOSE=$(Q)
 @@ -346,6 +346,20 @@ ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H -DWIN32_NO_DLL -DHAVE_STRUCT_TIMESPEC
  ABCMKARGS += LIBS="-lpthread -s" ABC_USE_NO_READLINE=0 CC="x86_64-w64-mingw32-gcc" CXX="$(CXX)"
  EXE = .exe
