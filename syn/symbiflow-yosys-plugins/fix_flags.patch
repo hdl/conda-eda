@@ -1,8 +1,8 @@
 diff --git a/Makefile_plugin.common b/Makefile_plugin.common
-index ac9ae9b..516b3fb 100644
+index 0870f21..ff7e178 100644
 --- a/Makefile_plugin.common
 +++ b/Makefile_plugin.common
-@@ -47,12 +47,12 @@ ifeq (,$(wildcard $(YOSYS_CONFIG)))
+@@ -47,13 +47,13 @@ ifeq (,$(wildcard $(YOSYS_CONFIG)))
  $(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
  endif
  
@@ -12,12 +12,14 @@ index ac9ae9b..516b3fb 100644
 -LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs)
 -PLUGINS_DIR ?= $(shell $(YOSYS_CONFIG) --datdir)/plugins
 -DATA_DIR ?= $(shell $(YOSYS_CONFIG) --datdir)
+-EXTRA_FLAGS ?=
 +CXX = $(shell $(YOSYS_CONFIG) --cxx)
 +CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) #-DSDC_DEBUG
 +LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
 +LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs)
 +PLUGINS_DIR = $(shell $(YOSYS_CONFIG) --datdir)/plugins
 +DATA_DIR = $(shell $(YOSYS_CONFIG) --datdir)
++EXTRA_FLAGS =
  
  OBJS := $(SOURCES:cc=o)
  
