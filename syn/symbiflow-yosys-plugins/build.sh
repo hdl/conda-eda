@@ -7,4 +7,4 @@ which pkg-config
 
 echo "PREFIX := $PREFIX" >> Makefile.conf
 
-make install -j$CPU_COUNT
+make UHDM_INSTALL_DIR=$PREFIX BUILD_UPSTREAM=1 install -j$CPU_COUNT
