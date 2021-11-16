@@ -1,16 +1,19 @@
 diff --git a/yosys-symbiflow-plugins/Makefile_plugin.common b/yosys-symbiflow-plugins/Makefile_plugin.common
-index d96d186..decc0c3 100644
+index 0870f21..1cade4a 100644
 --- a/yosys-symbiflow-plugins/Makefile_plugin.common
 +++ b/yosys-symbiflow-plugins/Makefile_plugin.common
-@@ -39,20 +39,20 @@
+@@ -38,22 +38,22 @@
+ # |-- example2-plugin
  # |-- ...
  
- # Either find yosys in system and use its path or use the given path
+-# Either find yosys in system and use its path or use the given path
 -YOSYS_PATH ?= $(realpath $(dir $(shell which yosys))/..)
++# Either find uhdm-yosys in system and use its path or use the given path
 +YOSYS_PATH ?= $(realpath $(dir $(shell which uhdm-yosys))/..)
  
- # Find yosys-config, throw an error if not found
+-# Find yosys-config, throw an error if not found
 -YOSYS_CONFIG ?= $(YOSYS_PATH)/bin/yosys-config
++# Find uhdm-yosys-config, throw an error if not found
 +YOSYS_CONFIG ?= $(YOSYS_PATH)/bin/uhdm-yosys-config
  ifeq (,$(wildcard $(YOSYS_CONFIG)))
 -$(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
@@ -23,28 +26,33 @@ index d96d186..decc0c3 100644
 -LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs)
 -PLUGINS_DIR ?= $(shell $(YOSYS_CONFIG) --datdir)/plugins
 -DATA_DIR ?= $(shell $(YOSYS_CONFIG) --datdir)
+-EXTRA_FLAGS ?=
 +CXX = $(shell $(YOSYS_CONFIG) --cxx)
 +CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) #-DSDC_DEBUG
 +LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
 +LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs)
 +PLUGINS_DIR = $(shell $(YOSYS_CONFIG) --datdir)/plugins
 +DATA_DIR = $(shell $(YOSYS_CONFIG) --datdir)
++EXTRA_FLAGS =
  
  OBJS := $(SOURCES:cc=o)
  
 diff --git a/yosys-symbiflow-plugins/Makefile_test.common b/yosys-symbiflow-plugins/Makefile_test.common
-index 1490199..15fd2ac 100644
+index 1490199..0b5c750 100644
 --- a/yosys-symbiflow-plugins/Makefile_test.common
 +++ b/yosys-symbiflow-plugins/Makefile_test.common
-@@ -15,20 +15,20 @@
+@@ -14,21 +14,21 @@
+ # test2_verify = $(call diff_test,test2,ext)
  #
  
- # Either find yosys in system and use its path or use the given path
+-# Either find yosys in system and use its path or use the given path
 -YOSYS_PATH ?= $(realpath $(dir $(shell which yosys))/..)
++# Either find uhdm-yosys in system and use its path or use the given path
 +YOSYS_PATH ?= $(realpath $(dir $(shell which uhdm-yosys))/..)
  
- # Find yosys-config, throw an error if not found
+-# Find yosys-config, throw an error if not found
 -YOSYS_CONFIG = $(YOSYS_PATH)/bin/yosys-config
++# Find uhdm-yosys-config, throw an error if not found
 +YOSYS_CONFIG = $(YOSYS_PATH)/bin/uhdm-yosys-config
  ifeq (,$(wildcard $(YOSYS_CONFIG)))
 -$(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
@@ -66,3 +74,12 @@ index 1490199..15fd2ac 100644
  
  define test_tpl =
  $(1): $(1)/ok
+@@ -49,7 +49,7 @@ $(1)/ok: $(1)/$(1).v
+ 	echo "source $(TEST_UTILS)" > run-$(1).tcl ;\
+ 	echo "source $(1).tcl" >> run-$(1).tcl ;\
+ 	DESIGN_TOP=$(1) TEST_OUTPUT_PREFIX=./ \
+-	yosys -c "run-$(1).tcl" -q -q -l $(1).log; \
++	uhdm-yosys -c "run-$(1).tcl" -q -q -l $(1).log; \
+ 	RETVAL=$$$$?; \
+ 	rm -f run-$(1).tcl; \
+ 	if [ ! -z "$$($(1)_negative)" ] && [ $$($(1)_negative) -eq 1 ]; then \
