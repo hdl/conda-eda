@@ -26,19 +26,11 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - make
-    - bison
-    - cmake
-    - flex
     - pkg-config
   host:
     - python {{ python_version }}
     - surelog
-    - libuuid
     - readline
-    - gperftools
-    - swig
-    - ncurses
-    - openjdk
     - bison
     - tk
     - libffi
@@ -48,10 +40,6 @@ requirements:
   run:
     - yosys
     - surelog
-    - python {{python_version}}
-    - ncurses
-    - readline
-    - gperftools
 
 test:
     commands:
