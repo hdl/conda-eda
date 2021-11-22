@@ -24,8 +24,8 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - make
-  host:
     - pkg-config
+  host:
     - readline
     - bison
     - tk
@@ -33,6 +33,13 @@ requirements:
     - flex
     - iverilog
     - yosys
+    - surelog
   run:
     - yosys
+    - surelog
 
+test:
+    commands:
+        - yosys --version
+        - surelog --version
+        - yosys -p "plugin -i uhdm"
