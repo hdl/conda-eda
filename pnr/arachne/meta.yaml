@@ -31,13 +31,11 @@ requirements:
     - iverilog
     - libffi
     - tk
-    - symbiflow-yosys
   run:
     - icestorm
     - iverilog
     - libffi
     - tk
-    - symbiflow-yosys
 
 test:
   commands:
