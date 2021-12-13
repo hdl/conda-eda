@@ -30,4 +30,4 @@ make install
 
 $PREFIX/bin/yosys -V
 $PREFIX/bin/yosys-abc -v 2>&1 | grep compiled
-$PREFIX/bin/yosys -Q -S tests/simple/always01.v
+$PREFIX/bin/yosys -Q -p synth tests/simple/always01.v
