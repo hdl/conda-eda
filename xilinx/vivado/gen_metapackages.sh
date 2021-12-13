@@ -16,7 +16,7 @@ do
 
 	# Prepare recipe with currently set version (cbp is installed in `base` environment)
 	conda activate base
-	ADDITIONAL_PACKAGES="anaconda-client conda-build=3.20.3 conda-verify jinja2 pexpect python=3.7 ripgrep"
+	ADDITIONAL_PACKAGES="anaconda-client conda-build conda-verify jinja2 pexpect python=3.7 ripgrep"
 	python -m conda_build_prepare --dir workdir --packages $ADDITIONAL_PACKAGES -- $PACKAGE
 
 	# Build metapackage
