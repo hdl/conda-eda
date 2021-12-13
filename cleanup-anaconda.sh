@@ -1,8 +1,8 @@
 #!/bin/bash
 
-source $GITHUB_WORKSPACE/.github/scripts/common.sh
+source $CI_SCRIPTS_PATH/common.sh
 # `for ... in $(anaconda ...` fails silently if there's any problem with anaconda
-source $GITHUB_WORKSPACE/.github/scripts/test_anaconda.sh
+source $CI_SCRIPTS_PATH/test_anaconda.sh
 
 set -e
 set -x

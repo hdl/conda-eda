@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $GITHUB_WORKSPACE/.github/scripts/common.sh
+source $CI_SCRIPTS_PATH/common.sh
 
 # Close the after_failure fold
 echo ::endgroup::

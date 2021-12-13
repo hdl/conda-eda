@@ -2,9 +2,9 @@
 
 set -x
 
-source $GITHUB_WORKSPACE/.github/scripts/common.sh
+source $CI_SCRIPTS_PATH/common.sh
 # `for ... in $(anaconda ...` fails silently if there's any problem with anaconda
-source $GITHUB_WORKSPACE/.github/scripts/test_anaconda.sh
+source $CI_SCRIPTS_PATH/test_anaconda.sh
 
 branch="$(git rev-parse --abbrev-ref HEAD)"
 # Move all packages from the current label to the main label

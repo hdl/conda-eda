@@ -1,13 +1,13 @@
 #!/bin/bash
 
-source $GITHUB_WORKSPACE/.github/scripts/common.sh
+source $CI_SCRIPTS_PATH/common.sh
 set -e
 
 # Getting the conda environment
 start_section "environment.conda" "Setting up basic ${YELLOW}conda environment${NC}"
 
 mkdir -p $BASE_PATH
-$GITHUB_WORKSPACE/.github/scripts/conda-get.sh $CONDA_PATH
+$CI_SCRIPTS_PATH/conda-get.sh $CONDA_PATH
 hash -r
 
 if [ x$PACKAGE = x"" ]; then
@@ -16,7 +16,7 @@ if [ x$PACKAGE = x"" ]; then
 fi
 
 # Add build variants to the recipe dir (appended keys win in case of any conflict)
-cat "$GITHUB_WORKSPACE/.github/scripts/conda_build_config.yaml" >> "$PACKAGE/conda_build_config.yaml"
+cat "$CI_SCRIPTS_PATH/conda_build_config.yaml" >> "$PACKAGE/conda_build_config.yaml"
 
 # Install conda-build-prepare
 python -m pip install git+https://github.com/litex-hub/conda-build-prepare@v0.1.1#egg=conda-build-prepare
@@ -39,7 +39,7 @@ fi
 python -m conda_build_prepare --channels $ADDITIONAL_CHANNELS --packages $ADDITIONAL_PACKAGES --dir workdir $PACKAGE
 
 # Freshly created conda environment will be activated by the common.sh
-source $GITHUB_WORKSPACE/.github/scripts/common.sh
+source $CI_SCRIPTS_PATH/common.sh
 
 end_section "environment.conda"
 

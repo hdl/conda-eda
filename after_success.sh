@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $GITHUB_WORKSPACE/.github/scripts/common.sh
+source $CI_SCRIPTS_PATH/common.sh
 set -e
 
 # Close the after_success fold
@@ -18,7 +18,7 @@ else
 
         start_section "package.upload" "${GREEN}Package uploading...${NC}"
         # Test `anaconda` with ANACONDA_TOKEN before uploading
-        source $GITHUB_WORKSPACE/.github/scripts/test_anaconda.sh
+        source $CI_SCRIPTS_PATH/test_anaconda.sh
 
         os_package_match='conda-bld/(.*)'
         [[ $CONDA_OUT =~ $os_package_match ]]

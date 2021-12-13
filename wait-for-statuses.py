@@ -46,19 +46,19 @@ with urllib.request.urlopen(status_url) as url:
       jobFailure = True
       break
 
+scripts_dir = os.environ['CI_SCRIPTS_PATH']
+
 branch = os.environ.get('GITHUB_REF', '')
 # Upload packages only when whole build succeeded
 # and we are on master branch
 if(branch == 'refs/heads/master'):
   if(not jobFailure):
-    subprocess.call(os.path.join(os.environ['GITHUB_WORKSPACE'],
-                                 ".github/scripts/master-package.sh"))
+    subprocess.call(os.path.join(scripts_dir, "master-package.sh"))
 else:
   print("Not on master branch, don't execute master-package.sh. Current branch: " + str(branch))
 
 # Always clean up
-subprocess.call(os.path.join(os.environ['GITHUB_WORKSPACE'],
-                             ".github/scripts/cleanup-anaconda.sh"))
+subprocess.call(os.path.join(scripts_dir, "cleanup-anaconda.sh"))
 
 if(jobFailure):
   sys.exit("ERROR: some jobs failed")
