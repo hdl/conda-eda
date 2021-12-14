@@ -196,7 +196,7 @@ To build a package similarly to how the packages are built in the CI it is
 recommended to pass the following optional arguments:
 * `--channels litex-hub` – to search for build dependencies in the LiteX-Hub
   channel in addition to the recipe-specific channels (from its `condarc` file),
-* `--packages conda-build=3.20.3 python=3.7` – to use the same versions of
+* `--packages python=3.7` – to use the same versions of
   packages that influence building as in the CI.
 
 After preparing, the output `DIRECTORY` will contain subdirectories:
@@ -235,7 +235,7 @@ PREPARED_RECIPE_OUTPUTDIR=${PREPARED_RECIPE_OUTPUTDIR:-cbp-outdir}
 RECIPE_PATH=${RECIPE_PATH:-syn/yosys}
 
 # Prepare the RECIPE with `conda-build-prepare`
-ADDITIONAL_PACKAGES="conda-build=3.20.3 python=3.7"
+ADDITIONAL_PACKAGES="python=3.7"
 python3 -m conda_build_prepare               \
             --channels litex-hub             \
             --packages $ADDITIONAL_PACKAGES  \
