@@ -18,7 +18,7 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 72
+  NUM_OF_JOBS: 68
 defaults:
   run:
     shell: bash
@@ -190,34 +190,6 @@ jobs:
     env:
       PACKAGE: "syn/quicklogic-yosys-plugins"
       OS_NAME: "linux"
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: 'true'
-      - uses: hdl/conda-ci@master
-
-  #15
-  symbiflow-yosys-3_2_1-linux:
-    runs-on: "ubuntu-20.04"
-    needs: "icarus-linux"
-    env:
-      PACKAGE: "syn/symbiflow-yosys"
-      OS_NAME: "linux"
-      LIBFFI_VERSION: "3.2.1"
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: 'true'
-      - uses: hdl/conda-ci@master
-
-  #16
-  symbiflow-yosys-3_3-linux:
-    runs-on: "ubuntu-20.04"
-    needs: "icarus-linux"
-    env:
-      PACKAGE: "syn/symbiflow-yosys"
-      OS_NAME: "linux"
-      LIBFFI_VERSION: "3.3"
     steps:
       - uses: actions/checkout@v2
         with:
@@ -535,34 +507,6 @@ jobs:
     env:
       PACKAGE: "syn/quicklogic-yosys-plugins"
       OS_NAME: "osx"
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: 'true'
-      - uses: hdl/conda-ci@master
-
-  #41
-  symbiflow-yosys-3_2_1-osx:
-    runs-on: "macos-latest"
-    needs: "icarus-osx"
-    env:
-      PACKAGE: "syn/symbiflow-yosys"
-      OS_NAME: "osx"
-      LIBFFI_VERSION: "3.2.1"
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: 'true'
-      - uses: hdl/conda-ci@master
-
-  #42
-  symbiflow-yosys-3_3-osx:
-    runs-on: "macos-latest"
-    needs: "icarus-osx"
-    env:
-      PACKAGE: "syn/symbiflow-yosys"
-      OS_NAME: "osx"
-      LIBFFI_VERSION: "3.3"
     steps:
       - uses: actions/checkout@v2
         with:

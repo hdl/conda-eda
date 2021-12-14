@@ -144,9 +144,8 @@ Some recipes require exporting additional environment variables.
 Such variables must be set before preparing the recipe, which is done
 with one of the commands from the next subsection.
 
-Currently required additional environment variables are:
-* `LIBFFI_VERSION` (by: `syn/symbiflow-yosys`) – must contain a valid version
-  of `libffi` Conda package, e.g., `3.3`.
+Currently there are no such variables and recipes in this repository,
+although there are a few such cases in other `hdl/conda-*` repositories.
 
 The `DATE_NUM` and `DATE_STR` environment variables are required by the most of
 this repository's recipes.
@@ -222,7 +221,7 @@ If the provided commands are to be used unmodified, it is important to first
 set the `RECIPE_PATH` variable with the proper recipe's path to build the
 chosen package and the variables mentioned in the previous subsection, if the
 recipe requires such.
-By default, the `symbiflow-yosys` package will be built (using `libffi 3.3`).
+By default, the `yosys` package will be built.
 
 The `PREPARED_RECIPE_OUTPUTDIR` variable sets the directory that will be
 created with the already described `conda-build-prepare`'s output
@@ -233,11 +232,7 @@ By default, the `cbp-outdir` will be created in the repository root.
 ```bash
 # Some defaults for the variables used in subsequent commands
 PREPARED_RECIPE_OUTPUTDIR=${PREPARED_RECIPE_OUTPUTDIR:-cbp-outdir}
-if [ ! -v RECIPE_PATH ]; then
-        RECIPE_PATH=syn/symbiflow-yosys
-        # LIBFFI_VERSION is required by the `symbiflow-yosys` recipe
-        export LIBFFI_VERSION=3.3
-fi
+RECIPE_PATH=${RECIPE_PATH:-syn/yosys}
 
 # Prepare the RECIPE with `conda-build-prepare`
 ADDITIONAL_PACKAGES="conda-build=3.20.3 python=3.7"
