@@ -1,4 +1,0 @@
-[submodule "conda-ci"]
-	path = .github/scripts
-	url = https://github.com/hdl/conda-ci.git
-	branch = master
