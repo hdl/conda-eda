@@ -8,7 +8,7 @@ do
 	export XILINX_VIVADO_VERSION=$version
 
 	# Initialize Conda
-	. $GITHUB_WORKSPACE/.github/scripts/common.sh
+	. $CI_SCRIPTS_PATH/common.sh
 	eval "$('conda' 'shell.bash' 'hook' 2> /dev/null)"
 
 	# Remove previously prepared recipe directory
@@ -20,6 +20,6 @@ do
 	python -m conda_build_prepare --dir workdir --packages $ADDITIONAL_PACKAGES -- $PACKAGE
 
 	# Build metapackage
-	bash $GITHUB_WORKSPACE/.github/scripts/script.sh
-	bash $GITHUB_WORKSPACE/.github/scripts/after_success.sh
+	bash $CI_SCRIPTS_PATH/script.sh
+	bash $CI_SCRIPTS_PATH/after_success.sh
 done < "$input"
