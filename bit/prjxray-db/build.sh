@@ -3,7 +3,7 @@
 set -e
 set -x
 
-DEVICES="artix7 kintex7 zynq7"
+DEVICES="artix7 kintex7 zynq7 spartan7"
 DBDIR="${PREFIX}/share/symbiflow/prjxray-db"
 
 mkdir -p $DBDIR
