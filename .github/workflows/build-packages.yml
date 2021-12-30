@@ -18,7 +18,7 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 68
+  NUM_OF_JOBS: 67
 defaults:
   run:
     shell: bash
@@ -294,19 +294,6 @@ jobs:
     steps:
       # Skip if token isn't available (cross-repository PRs mainly)
       - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
-      - uses: actions/checkout@v2
-        with:
-          submodules: 'true'
-      - uses: hdl/conda-ci@master
-
-  #25
-  arachne-linux:
-    runs-on: "ubuntu-20.04"
-    needs: ["icarus-linux", "icestorm-linux"]
-    env:
-      PACKAGE: "pnr/arachne"
-      OS_NAME: "linux"
-    steps:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
