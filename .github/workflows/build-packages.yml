@@ -196,7 +196,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #17
+  #15
   symbiflow-yosys-plugins-linux:
     runs-on: "ubuntu-20.04"
     needs: ["icarus-linux", "yosys-linux-py37"]
@@ -209,7 +209,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #18
+  #16
   vtr-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -221,7 +221,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #19
+  #17
   vtr-gui-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -233,7 +233,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #20
+  #18
   vtr-optimized-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -245,7 +245,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #21
+  #19
   symbiflow-vtr-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -257,7 +257,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #22
+  #20
   symbiflow-vtr-gui-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -269,7 +269,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #23
+  #21
   quicklogic-vtr-linux:
     runs-on: "ubuntu-20.04"
     needs: "vtr-linux"
@@ -284,7 +284,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #24
+  #22
   quicklogic-vtr-gui-linux:
     runs-on: "ubuntu-20.04"
     needs: "vtr-gui-linux"
@@ -299,7 +299,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #26
+  #23
   nextpnr-ice40-linux:
     runs-on: "ubuntu-20.04"
     needs: ["icestorm-linux"]
@@ -312,7 +312,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #27
+  #24
   nextpnr-ecp5-linux:
     runs-on: "ubuntu-20.04"
     needs: ["prjtrellis-linux"]
@@ -325,7 +325,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #28
+  #25
   nextpnr-generic-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -337,7 +337,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #29
+  #26
   nextpnr-xilinx-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -356,7 +356,7 @@ jobs:
           sudo apt install -y pypy3
       - uses: hdl/conda-ci@master
 
-  #30
+  #27
   nextpnr-fpga_interchange-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -368,7 +368,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #31
+  #28
   symbiyosys-linux-py37:
     runs-on: "ubuntu-20.04"
     needs: "yosys-linux-py37"
@@ -383,7 +383,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #32
+  #29
   symbiyosys-linux-py38:
     runs-on: "ubuntu-20.04"
     needs: "yosys-linux-py38"
@@ -398,7 +398,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #33
+  #30
   xilinx-vivado-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -412,7 +412,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #34
+  #31
   icestorm-osx:
     runs-on: "macos-latest"
     env:
@@ -424,7 +424,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #35
+  #32
   prjtrellis-osx:
     runs-on: "macos-latest"
     env:
@@ -436,7 +436,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #36
+  #33
   icarus-osx:
     runs-on: "macos-latest"
     env:
@@ -448,7 +448,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #37
+  #34
   verilator-osx:
     runs-on: "macos-latest"
     env:
@@ -461,7 +461,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #38
+  #35
   yosys-osx:
     runs-on: "macos-latest"
     env:
@@ -474,7 +474,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #39
+  #36
   quicklogic-yosys-osx:
     runs-on: "macos-latest"
     env:
@@ -487,7 +487,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #40
+  #37
   quicklogic-yosys-plugins-osx:
     runs-on: "macos-latest"
     needs: ["icarus-osx", "quicklogic-yosys-osx"]
@@ -500,7 +500,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #43
+  #38
   symbiflow-yosys-plugins-osx:
     runs-on: "macos-latest"
     needs: ["icarus-osx", "yosys-osx"]
@@ -514,7 +514,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #44
+  #39
   vtr-osx:
     runs-on: "macos-latest"
     env:
@@ -527,7 +527,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #45
+  #40
   vtr-gui-osx:
     runs-on: "macos-latest"
     env:
@@ -540,7 +540,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #46
+  #41
   nextpnr-ice40-osx:
     runs-on: "macos-latest"
     needs: ["icestorm-osx"]
@@ -553,7 +553,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #47
+  #42
   nextpnr-generic-osx:
     runs-on: "macos-latest"
     env:
@@ -565,7 +565,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #48
+  #43
   icestorm-windows:
     runs-on: "windows-latest"
     env:
@@ -577,7 +577,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #49
+  #44
   prjtrellis-windows:
     runs-on: "windows-2016"
     env:
@@ -589,7 +589,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #50
+  #45
   icarus-windows:
     runs-on: "windows-latest"
     env:
@@ -601,7 +601,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #51
+  #46
   yosys-windows:
     runs-on: "windows-latest"
     env:
@@ -613,7 +613,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #52
+  #47
   quicklogic-yosys-windows:
     runs-on: "windows-latest"
     env:
@@ -625,7 +625,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #53
+  #48
   nextpnr-ice40-windows:
     runs-on: "windows-2016"
     needs: ["icestorm-windows"] 
@@ -639,7 +639,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #54
+  #49
   nextpnr-generic-windows:
     runs-on: "windows-2016"
     env:
@@ -652,7 +652,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #55
+  #50
   verible-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -665,7 +665,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #56
+  #51
   tree-sitter-verilog-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -678,7 +678,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #57
+  #52
   odin-ii-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -690,7 +690,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #58
+  #53
   slang-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -703,7 +703,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #59
+  #54
   sv-parser-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -715,7 +715,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #60
+  #55
   moore-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -727,7 +727,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #61
+  #56
   surelog-linux-py37:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -741,7 +741,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #62
+  #57
   surelog-linux-py38:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -755,7 +755,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #63
+  #58
   surelog-uhdm-linux-py37:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -770,7 +770,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #64
+  #59
   surelog-uhdm-linux-py38:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -785,7 +785,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #65
+  #60
   yosys-uhdm-linux-py37:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -799,7 +799,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #66
+  #61
   yosys-uhdm-linux-py38:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -813,7 +813,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #67
+  #62
   libunwind:
     runs-on: "ubuntu-20.04"
     env:
@@ -825,7 +825,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #68
+  #63
   gperftools:
     needs: "libunwind"
     runs-on: "ubuntu-20.04"
@@ -838,7 +838,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #69
+  #64
   verilator-uhdm-linux-py37:
     needs: ["gperftools"]
     runs-on: "ubuntu-20.04"
@@ -852,7 +852,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #70
+  #65
   verilator-uhdm-linux-py38:
     needs: ["gperftools"]
     runs-on: "ubuntu-20.04"
@@ -866,7 +866,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #71
+  #66
   netgen-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -878,7 +878,7 @@ jobs:
           submodules: 'true'
       - uses: hdl/conda-ci@master
 
-  #72
+  #67
   zachjs-sv2v-linux:
     runs-on: "ubuntu-20.04"
     env:
