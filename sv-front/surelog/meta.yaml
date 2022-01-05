@@ -30,6 +30,7 @@ requirements:
     - flex
     - libunwind
     - swig
+    - orderedmultidict
 
   run:
     - python {{ python_version }}
