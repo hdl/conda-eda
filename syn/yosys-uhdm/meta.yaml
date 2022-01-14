@@ -30,6 +30,7 @@ requirements:
     - cmake
     - flex
     - pkg-config
+    - orderedmultidict
   host:
     - python {{ python_version }}
     - libuuid

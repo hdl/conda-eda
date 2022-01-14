@@ -9,6 +9,9 @@ set -x
 export CXXFLAGS="$CXXFLAGS -I$PREFIX/include/uhdm -I$PREFIX/include/uhdm/include -I$PREFIX/include/uhdm/headers"
 export LDFLAGS="$LDFLAGS -L$PREFIX/lib -L$PREFIX/lib/uhdm"
 
+# Github dropped support for unauthorized git: https://github.blog/2021-09-01-improving-git-protocol-security-github/
+# Make sure we always use https:// instead of git://
+git config --global url.https://github.com/.insteadOf git://github.com/
 make -C Surelog release install -j$CPU_COUNT
 autoconf && ./configure --prefix=$PREFIX && make -j$CPU_COUNT && make install
 
