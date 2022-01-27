@@ -1,5 +1,5 @@
 diff --git a/yosys-symbiflow-plugins/Makefile_plugin.common b/yosys-symbiflow-plugins/Makefile_plugin.common
-index 0870f21..1cade4a 100644
+index 0870f21..47d118e 100644
 --- a/yosys-symbiflow-plugins/Makefile_plugin.common
 +++ b/yosys-symbiflow-plugins/Makefile_plugin.common
 @@ -38,22 +38,22 @@
@@ -38,7 +38,7 @@ index 0870f21..1cade4a 100644
  OBJS := $(SOURCES:cc=o)
  
 diff --git a/yosys-symbiflow-plugins/Makefile_test.common b/yosys-symbiflow-plugins/Makefile_test.common
-index 1490199..0b5c750 100644
+index 61abadb..3701193 100644
 --- a/yosys-symbiflow-plugins/Makefile_test.common
 +++ b/yosys-symbiflow-plugins/Makefile_test.common
 @@ -14,21 +14,21 @@
@@ -59,15 +59,15 @@ index 1490199..0b5c750 100644
 +$(error "Didn't find 'uhdm-yosys-config' under '$(YOSYS_PATH)'")
  endif
  
--GTEST_DIR ?= ../../third_party/googletest/googletest
+-GTEST_DIR ?= ../../third_party/googletest
 -CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
--CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/include
+-CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
 -LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
 -LDFLAGS ?= $(shell $(YOSYS_CONFIG) --ldflags)
 -TEST_UTILS ?= ../../../test-utils/test-utils.tcl
-+GTEST_DIR = ../../third_party/googletest/googletest
++GTEST_DIR = ../../third_party/googletest
 +CXX = $(shell $(YOSYS_CONFIG) --cxx)
-+CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/include
++CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
 +LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
 +LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
 +TEST_UTILS = ../../../test-utils/test-utils.tcl
