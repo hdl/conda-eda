@@ -24,22 +24,22 @@ index 0870f21..ff7e178 100644
  OBJS := $(SOURCES:cc=o)
  
 diff --git a/Makefile_test.common b/Makefile_test.common
-index 1490199..5c93519 100644
+index 61abadb..f3a3bdb 100644
 --- a/Makefile_test.common
 +++ b/Makefile_test.common
 @@ -23,12 +23,12 @@ ifeq (,$(wildcard $(YOSYS_CONFIG)))
  $(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
  endif
  
--GTEST_DIR ?= ../../third_party/googletest/googletest
+-GTEST_DIR ?= ../../third_party/googletest
 -CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
--CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/include
+-CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
 -LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
 -LDFLAGS ?= $(shell $(YOSYS_CONFIG) --ldflags)
 -TEST_UTILS ?= ../../../test-utils/test-utils.tcl
-+GTEST_DIR = ../../third_party/googletest/googletest
++GTEST_DIR = ../../third_party/googletest
 +CXX = $(shell $(YOSYS_CONFIG) --cxx)
-+CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/include
++CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
 +LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
 +LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
 +TEST_UTILS = ../../../test-utils/test-utils.tcl
