@@ -18,7 +18,7 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 67
+  NUM_OF_JOBS: 68
 defaults:
   run:
     shell: bash
@@ -758,6 +758,15 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
+  #68
+  open_pdks-linux:
+    runs-on: "ubuntu-20.04"
+    env:
+      PACKAGE: "misc/open_pdks"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hdl/conda-ci@master
 
   master-package:
     runs-on: "ubuntu-20.04"
