@@ -1,0 +1,99 @@
+{% set skywater_pdk_rev = "f70d8ca" %}
+{% set sky130_fd_io_version = "0.2.1" %}
+{% set sky130_fd_pr_version = "0.20.1" %}
+{% set sky130_fd_sc_hd_version = "0.0.2" %}
+{% set sky130_fd_sc_hvl_version = "0.0.3" %}
+
+package:
+  name: skywater-pdk
+  version: 0.0.1_0_{{ skywater_pdk_rev }}
+source:
+  - url: https://github.com/google/skywater-pdk/archive/{{skywater_pdk_rev}}.zip
+    sha256: cc3f117af4fc8e51df710a6cad448b2ee5e7b9bd4dd3e6e4f8380413a6c98009
+    source:
+  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hd/archive/branch-{{ sky130_fd_sc_hd_version }}.zip
+    sha256: 8b9dfe2e7c720b2e6b4a800d8a8cd6166b53f39a6dd9e40d7306f8dfbaa59bc3
+    folder: libraries/sky130_fd_sc_hd/v{{ sky130_fd_sc_hd_version }}
+  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hvl/archive/branch-{{ sky130_fd_sc_hvl_version }}.zip
+    sha256: de6d360060d8411641c89379b42a9b820c7532f1478dc8e35f25eb6a1d4fe88d
+    folder: libraries/sky130_fd_sc_hvl/v{{ sky130_fd_sc_hvl_version }}
+  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_io/archive/branch-{{ sky130_fd_io_version }}.zip
+    sha256: 36b2691e14dc74d9ed09b2e669ad134bb18a50efcba2d49e10c4208572a630e7
+    folder: libraries/sky130_fd_io/v{{ sky130_fd_io_version }}
+  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_pr/archive/branch-{{ sky130_fd_pr_version }}.zip
+    sha256: e30ffaf700b5c40abf914fca7aa6d6c649c9f49e205a1bf7c15e60f94dd119fe
+    folder: libraries/sky130_fd_pr/v{{ sky130_fd_pr_version }}
+requirements:
+  run:
+    - skywater-pdk.sky130_fd_sc_hd
+    - skywater-pdk.sky130_fd_sc_hvl
+    - skywater-pdk.sky130_fd_io
+    - skywater-pdk.sky130_fd_pr
+build:
+  noarch: generic
+outputs:
+  - name: skywater-pdk.python
+    version: 0.0.0
+    requirements:
+      host:
+        - dataclasses-json
+        - python
+        - pip
+      run:
+        - dataclasses-json
+        - python
+    build:
+      noarch: python
+      script: python -m pip install scripts/python-skywater-pdk/
+    test:
+      imports: skywater_pdk
+  - name: skywater-pdk.sky130_fd_sc_hd
+    version: {{ sky130_fd_sc_hd_version }}
+    requirements:
+      host:
+        - skywater-pdk.python
+        - python
+    build:
+      noarch: generic
+    script: build-lib.sh
+    test:
+      commands:
+        - find $PREFIX/share/skywater-pdk/libraries/sky130_fd_sc_hd/ -name 'tech' -type d -print  | grep tech
+        - find $PREFIX/share/skywater-pdk/libraries/sky130_fd_sc_hd/ -path '*/timing/*.lib' -type f -print | grep timing
+  - name: skywater-pdk.sky130_fd_sc_hvl
+    version: {{ sky130_fd_sc_hvl_version }}
+    requirements:
+      host:
+        - skywater-pdk.python
+        - python
+    build:
+      noarch: generic
+    script: build-lib.sh
+    test:
+      commands:
+        - find $PREFIX/share/skywater-pdk/libraries/sky130_fd_sc_hvl/ -name 'tech' -type d -print  | grep tech
+        - find $PREFIX/share/skywater-pdk/libraries/sky130_fd_sc_hvl/ -path '*/timing/*.lib' -type f -print | grep timing
+  - name: skywater-pdk.sky130_fd_io
+    version: {{ sky130_fd_io_version }}
+    build:
+      noarch: generic
+    script: build-lib.sh
+    test:
+      commands:
+        - find $PREFIX/share/skywater-pdk/libraries/sky130_fd_io/ -name 'cells' -type d -print | grep cells
+  - name: skywater-pdk.sky130_fd_pr
+    version: {{ sky130_fd_pr_version }}
+    build:
+      noarch: generic
+    script: build-lib.sh
+    test:
+      commands:
+        - find $PREFIX/share/skywater-pdk/libraries/sky130_fd_pr/ -name 'models' -type d -print | grep models
+
+about:
+  home: https://skywater-pdk.rtfd.io/
+  license: Apache-2.0
+
+extra:
+  recipe-maintainers:
+    - proppy
