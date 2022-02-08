@@ -35,9 +35,19 @@ requirements:
     - protobuf
     - numpy
     - scipy
+
 test:
   commands:
     interpreter_main --version
     ir_converter_main --version
     opt_main --version
     codegen_main --version
+
+about:
+  home: https://google.github.io/xls/
+  license: Apache-2.0
+  summary: Accelerated HW Synthesis
+
+extra:
+  recipe-maintainers:
+    - proppy
