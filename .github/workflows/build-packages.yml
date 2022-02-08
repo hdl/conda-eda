@@ -758,6 +758,15 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
+  #68
+  xls-linux:
+    runs-on: "ubuntu-20.04"
+    env:
+      PACKAGE: "hls/xls"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hdl/conda-ci@master
 
   master-package:
     runs-on: "ubuntu-20.04"
