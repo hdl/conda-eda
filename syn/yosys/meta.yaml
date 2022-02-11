@@ -53,16 +53,17 @@ requirements:
     - m2-bison 3.0.4       [win]
     - m2-flex 2.6.0        [win]
     - m2-libreadline 6.3   [win]
+    - m2-zlib              [win]
     - bison                [not win]
     - flex                 [not win]
     - libffi               [not win]
     - pkg-config           [not win]
+    - tk                   [not win]
+    - zlib                 [not win]
     - python {{ python_version }}
-    - tk   [osx]
     - gawk [osx]
   run:
     - python {{ python_version }}
-    - tk       [osx]
     - gawk     [osx]
     - iverilog [osx]
 

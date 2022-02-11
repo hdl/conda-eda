@@ -39,13 +39,13 @@ mkdir tmp
 make -j5^
      YOSYS_VER="$VER (Fomu build)" ^
      ABCREV=default ^
-     LDLIBS="-static -lstdc++ -lm" ^
+     LDLIBS="-static -lstdc++ -lm -lz" ^
      ABCMKARGS=%ABC_ARGS% ^
      ENABLE_TCL=0 ^
      ENABLE_PLUGINS=0 ^
      ENABLE_READLINE=0 ^
      ENABLE_COVER=0 ^
-     ENABLE_ZLIB=0 ^
+     ENABLE_ZLIB=1 ^
      ENABLE_ABC=1 ^
 	 PREFIX=%BASH_PREFIX%
 
