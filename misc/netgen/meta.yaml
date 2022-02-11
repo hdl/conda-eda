@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-   git_url: https://github.com/mithro/netgen
-   git_rev: master
+   git_url: https://github.com/RTimothyEdwards/netgen
+   git_rev: netgen-1.5
 
 build:
   # number: 201803050325
