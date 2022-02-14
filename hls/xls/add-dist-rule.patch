@@ -1,3 +1,17 @@
+From 729b7f6c7e4aff0e0c86de6e4e2c931c03f167de Mon Sep 17 00:00:00 2001
+From: Johan Euphrosine <proppy@google.com>
+Date: Wed, 1 Dec 2021 11:58:59 +0900
+Subject: [PATCH] xls: add binary tools dist
+
+- add pkg_tar rule with cc_binary from //tools and //dslx
+- add cloudbuild config
+---
+ WORKSPACE       | 12 ++++++++++++
+ cloudbuild.yaml | 34 ++++++++++++++++++++++++++++++++++
+ xls/BUILD       | 39 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 85 insertions(+)
+ create mode 100644 cloudbuild.yaml
+
 diff --git a/WORKSPACE b/WORKSPACE
 index 9bdffca5f..3466a8e36 100644
 --- a/WORKSPACE
