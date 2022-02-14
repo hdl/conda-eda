@@ -1,4 +1,4 @@
-From 729b7f6c7e4aff0e0c86de6e4e2c931c03f167de Mon Sep 17 00:00:00 2001
+#From 729b7f6c7e4aff0e0c86de6e4e2c931c03f167de Mon Sep 17 00:00:00 2001
 From: Johan Euphrosine <proppy@google.com>
 Date: Wed, 1 Dec 2021 11:58:59 +0900
 Subject: [PATCH] xls: add binary tools dist
