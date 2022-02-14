@@ -1,5 +1,5 @@
 # Use `conda-build-prepare` before building for a better version string.
-{% set version = '%s_%04i_%s'| format(GIT_DESCRIBE_TAG | default('0.0.0') , GIT_DESCRIBE_NUMBER | default(0) | int, GIT_DESCRIBE_HASH | default('gUNKNOWN')) %}
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '') or '0.X.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 
 package:
   name: xls
