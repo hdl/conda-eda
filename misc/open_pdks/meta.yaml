@@ -38,6 +38,8 @@ requirements:
     - python
     - pip
     - magic
+  run_constrained:
+    - {{ pin_compatible('magic', min_pin='x.x.x', max_pin='x.x.x') }}
 
 test:
   commands:
