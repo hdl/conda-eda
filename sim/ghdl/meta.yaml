@@ -1,0 +1,42 @@
+# Use `conda-build-prepare` before building for a better version string.
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG or 'sUNKNOWN', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+package:
+  name: ghdl
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/ghdl/ghdl.git
+  git_rev: master
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+
+requirements:
+  build:
+    - {{ compiler('c') }}       [linux]
+    - {{ compiler('cxx') }}     [linux]
+    - make                      [not win]
+    - m2-bash                   [win]
+    - m2-make                   [win]
+    - m2w64-gcc                 [win]
+    - m2w64-gcc-ada             [win]
+  host:
+
+test:
+#  files:
+#    - test/counter.v
+#    - test/counter_tb.v
+#    - test/counter_list.txt
+
+about:
+  home: http://github.com/ghdl
+  license: GPLv2+
+  license_file: COPYING.md
+  summary: |
+    Open-source analyzer, compiler, simulator and (experimental) synthesizer for VHDL, a Hardware Description Language (HDL)
