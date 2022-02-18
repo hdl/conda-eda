@@ -5,12 +5,12 @@ on:
     paths:
     - 'syn/symbiflow-yosys/*'
     - '.github/workflows/tuttest.yml'
-    - 'README.md'
+    - 'DEVELOPMENT.md'
   push:
     paths:
     - 'syn/symbiflow-yosys/*'
     - '.github/workflows/tuttest.yml'
-    - 'README.md'
+    - 'DEVELOPMENT.md'
   workflow_dispatch:
 
 env:
@@ -36,11 +36,11 @@ jobs:
 
       - name: Grab install-prerequisites commands with tuttest
         run: |
-          echo "# README.md/install-prerequisites" >$SCRIPT
+          echo "# DEVELOPMENT.md/install-prerequisites" >$SCRIPT
           echo >>$SCRIPT
           # SED changes URL in case the CI is running on a fork
           #   and adds conda-eda as a directory name
-          tuttest README.md install-prerequisites | sed -e "s#git clone .*\.git.*#git clone https://github.com/$GITHUB_REPOSITORY.git conda-eda#" >>$SCRIPT
+          tuttest DEVELOPMENT.md install-prerequisites | sed -e "s#git clone .*\.git.*#git clone https://github.com/$GITHUB_REPOSITORY.git conda-eda#" >>$SCRIPT
           echo >>$SCRIPT
 
       - name: Add checkout commands
@@ -57,9 +57,9 @@ jobs:
 
       - name: Grab prepare-and-build commands with tuttest
         run: |
-          echo "# README.md/prepare-and-build" >>$SCRIPT
+          echo "# DEVELOPMENT.md/prepare-and-build" >>$SCRIPT
           echo >>$SCRIPT
-          tuttest README.md prepare-and-build >>$SCRIPT
+          tuttest DEVELOPMENT.md prepare-and-build >>$SCRIPT
 
       - name: Print ${{ env.SCRIPT }}
         run: cat $SCRIPT
