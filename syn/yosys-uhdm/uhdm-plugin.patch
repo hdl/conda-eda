@@ -59,27 +59,27 @@ index 61abadb..3701193 100644
 +$(error "Didn't find 'uhdm-yosys-config' under '$(YOSYS_PATH)'")
  endif
  
--GTEST_DIR ?= ../../third_party/googletest
+-GTEST_DIR ?= $(abspath ../../third_party/googletest)
 -CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
 -CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
 -LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
 -LDFLAGS ?= $(shell $(YOSYS_CONFIG) --ldflags)
--TEST_UTILS ?= ../../../test-utils/test-utils.tcl
-+GTEST_DIR = ../../third_party/googletest
+-TEST_UTILS ?= $(abspath ../../test-utils/test-utils.tcl)
++GTEST_DIR = $(abspath ../../third_party/googletest)
 +CXX = $(shell $(YOSYS_CONFIG) --cxx)
 +CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
 +LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
 +LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
-+TEST_UTILS = ../../../test-utils/test-utils.tcl
- 
++TEST_UTILS = $(abspath ../../test-utils/test-utils.tcl)
+
  define test_tpl =
  $(1): $(1)/ok
-@@ -49,7 +49,7 @@ $(1)/ok: $(1)/$(1).v
- 	echo "source $(TEST_UTILS)" > run-$(1).tcl ;\
- 	echo "source $(1).tcl" >> run-$(1).tcl ;\
- 	DESIGN_TOP=$(1) TEST_OUTPUT_PREFIX=./ \
--	yosys -c "run-$(1).tcl" -q -q -l $(1).log; \
-+	uhdm-yosys -c "run-$(1).tcl" -q -q -l $(1).log; \
- 	RETVAL=$$$$?; \
- 	rm -f run-$(1).tcl; \
- 	if [ ! -z "$$($(1)_negative)" ] && [ $$($(1)_negative) -eq 1 ]; then \
+@@ -49,7 +49,7 @@ $(1)/ok: $(1)/$$(notdir $(1).v)
+	echo "source $(TEST_UTILS)" > run-$$(notdir $(1)).tcl ;\
+	echo "source $$(notdir $(1)).tcl" >> run-$$(notdir $(1)).tcl ;\
+	DESIGN_TOP=$$(notdir $(1)) TEST_OUTPUT_PREFIX=./ \
+-	yosys -c "run-$$(notdir $(1)).tcl" -q -q -l $$(notdir $(1)).log; \
++	uhdm-yosys -c "run-$$(notdir $(1)).tcl" -q -q -l $$(notdir $(1)).log; \
+	RETVAL=$$$$?; \
+	rm -f run-$$(notdir $(1)).tcl; \
+	if [ ! -z "$$($(1)_negative)" ] && [ $$($(1)_negative) -eq 1 ]; then \
