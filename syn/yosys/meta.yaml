@@ -44,8 +44,7 @@ requirements:
     - m2-bison 3.0.4            [win]
     - m2-flex  2.6.0            [win]
     - make                      [not win]
-    - {{ compiler('c') }}       [not osx]
-    - {{ compiler('cxx') }}     [not osx]
+    - clang                     [not osx]
     - {{ compiler('c') }} 4.0   [osx]
     - {{ compiler('cxx') }} 4.0 [osx]
   host:
