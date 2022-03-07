@@ -1,0 +1,23 @@
+diff --git a/src/gui/CMakeLists.txt b/src/gui/CMakeLists.txt
+index 204e14956..9e8a1bac3 100755
+--- a/src/gui/CMakeLists.txt
++++ b/src/gui/CMakeLists.txt
+@@ -1,15 +1,13 @@
+ # Allow users to not build without the gui even if Qt is found
+ option(BUILD_GUI "Build the GUI" ON)
+ 
+-# If Qt is not installed there will not be cmake
+-# support for the package so this needs to be "quiet".
+-find_package(Qt5 QUIET COMPONENTS Core Widgets)
+-
+ include("openroad")
+ set(CMAKE_INCLUDE_CURRENT_DIR ON)
+ 
+-if (Qt5_FOUND AND BUILD_GUI)
++if (BUILD_GUI)
+   message(STATUS "GUI is enabled")
++  find_package(Qt5 QUIET COMPONENTS Core Widgets)
++
+   set(CMAKE_AUTOMOC ON)
+   set(CMAKE_AUTORCC ON)
+   set(CMAKE_AUTOUIC ON)
