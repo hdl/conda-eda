@@ -295,6 +295,7 @@ jobs:
       OS_NAME: "linux"
       KEEP_ALIVE: "true"
       USE_PYPY: "1"
+      SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/191
     steps:
       - uses: actions/checkout@v2
       - name: 'Install pypy'
