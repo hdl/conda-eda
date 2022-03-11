@@ -31,8 +31,8 @@ test -d $SRC_DIR/skywater-pdk/libraries/sky130_fd_pr/latest/models
 test -d $SRC_DIR/skywater-pdk/libraries/sky130_fd_pr/latest/tech
 
 # make timing
+$PYTHON -m pip install $SRC_DIR/dataclasses_json-0.5.6-py3-none-any.whl
 pushd $SRC_DIR/skywater-pdk/scripts/python-skywater-pdk/
-
 for LIB in $SRC_DIR/skywater-pdk/libraries/sky130_*_sc_*/latest; do
   if [ -d "$LIB/cells" ]; then
     $PYTHON -m skywater_pdk.liberty $LIB
