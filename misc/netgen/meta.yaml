@@ -21,7 +21,10 @@ requirements:
     - automake
     - make
     - {{ compiler('c') }}
-    - {{ cdt('xorg-x11-proto-devel') }}
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - {{ cdt('libx11-devel') }}  # [linux]
+    - {{ cdt('libxau-devel') }}  # [linux]
+    - {{ cdt('libxcb') }}  # [linux]
   host:
     - python
     - tk
