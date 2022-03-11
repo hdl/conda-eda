@@ -17,20 +17,16 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - autoconf
+    - automake
     - make
-    - tcsh
+    - {{ compiler('c') }}
+    - {{ cdt('xorg-x11-proto-devel') }}
   host:
-    - m4
     - python
-    - tcsh
     - tk
-    - xorg-libx11
   run:
     - python
-    - tcsh
-    - tk
-    - xorg-libx11
 
 about:
   home: http://opencircuitdesign.com/netgen/
