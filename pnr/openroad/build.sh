@@ -17,11 +17,10 @@
 
 set -ex
 
-mkdir $SRC_DIR/third_party/lemon/build
-cd $SRC_DIR/third_party/lemon/build
+cd $SRC_DIR/third_party/lemon
 cmake -B build  .
 cmake --build build -j $CPU_COUNT --target install
 
-mkdir $SRC_DIR/build
+cd $SRC_DIR
 cmake -B build -DCMAKE_FIND_ROOT_PATH="$BUILD_PREFIX;$PREFIX" -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=ONLY -DUSE_SYSTEM_BOOST=ON -DINSTALL_LIBOPENSTA=OFF -DBUILD_GUI=OFF -DCMAKE_INSTALL_PREFIX=$PREFIX .
 cmake --build build -j $CPU_COUNT --target install
