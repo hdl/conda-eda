@@ -8,8 +8,6 @@ package:
 source:
    git_url: https://github.com/RTimothyEdwards/magic
    git_rev: master
-   patches:
-     - csh.patch
 
 build:
   # number: 201803050325
@@ -23,27 +21,15 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - autoconf
+    - automake
     - make
-    - tcsh
+    - python
+    - {{ compiler('c') }}
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
   host:
-    - tcsh
-    - cairo
-    - m4
     - tk
-    - ncurses
-    - python>=3.7
-    - readline
-    - fontconfig
-    - xorg-libx11
-  run:
-    - python>=3.7
     - cairo
-    - ncurses
-    - readline
-    - tk
-    - xorg-libx11
 
 about:
   home: http://opencircuitdesign.com/magic/
