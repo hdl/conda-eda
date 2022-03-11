@@ -25,7 +25,6 @@ build:
     - CI
   ignore_run_exports_from:
     # header-only libraries
-    - lemon
     - fmt
 
 requirements:
@@ -38,9 +37,8 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - python
-    - boost-cpp 1.76
+    - boost-cpp 1.73
     - eigen 3.3
-    - lemon 1.3.1
     - spdlog 1.8.1
     - readline
     - tk
