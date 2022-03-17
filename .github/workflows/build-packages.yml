@@ -18,7 +18,7 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 69
+  NUM_OF_JOBS: 70
 defaults:
   run:
     shell: bash
@@ -774,6 +774,18 @@ jobs:
     runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "pnr/openroad"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hdl/conda-ci@master
+
+  #70
+  xls-linux:
+    # uses older ubuntu for better compat:
+    # https://github.com/hdl/conda-eda/issues/199
+    runs-on: "ubuntu-18.04"
+    env:
+      PACKAGE: "hls/xls"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2

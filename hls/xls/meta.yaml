@@ -1,0 +1,54 @@
+# Use `conda-build-prepare` before building for a better version string.
+{% set version = '%s_%04i_%s'| format(GIT_DESCRIBE_TAG | default('0.0.0') , GIT_DESCRIBE_NUMBER | default(0) | int, GIT_DESCRIBE_HASH | default('gUNKNOWN')) %}
+
+package:
+  name: xls
+  version: {{ version }}
+
+source:
+  - git_url: https://github.com/google/xls.git
+    git_rev: main
+    patches:
+      - skip-python-requirements.patch
+      - use-llvm-toolchain.patch      
+
+build:
+  # number: 202202082028
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20220208_2028
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+
+requirements:
+  build:
+    - bazel
+  host:
+    - python
+    - pip
+    - protobuf
+    - pycparser 2.19
+    - Flask 1.1.2
+    - Jinja2 2.11.3
+    - werkzeug 1.0.1
+    - itsdangerous 1.1.0
+    - MarkupSafe 2.0
+    - click 7.1.2
+    - numpy >=1.19.5,<=1.20.0
+    - scipy >=1.5.4,<=1.6.0
+    
+test:
+  commands:
+    - interpreter_main --version
+    - ir_converter_main --version
+    - opt_main --version
+    - codegen_main --version
+
+about:
+  home: https://google.github.io/xls/
+  license: Apache-2.0
+  summary: Accelerated HW Synthesis
+
+extra:
+  recipe-maintainers:
+    - proppy
