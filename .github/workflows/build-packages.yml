@@ -495,7 +495,7 @@ jobs:
 
   #44
   prjtrellis-windows:
-    runs-on: "windows-2016"
+    runs-on: "windows-latest"
     env:
       PACKAGE: "bit/prjtrellis"
       OS_NAME: "windows"
@@ -535,7 +535,7 @@ jobs:
 
   #48
   nextpnr-ice40-windows:
-    runs-on: "windows-2016"
+    runs-on: "windows-latest"
     needs: ["icestorm-windows"] 
     env:
       PACKAGE: "pnr/nextpnr/ice40"
@@ -547,7 +547,7 @@ jobs:
 
   #49
   nextpnr-generic-windows:
-    runs-on: "windows-2016"
+    runs-on: "windows-latest"
     env:
       PACKAGE: "pnr/nextpnr/generic"
       OS_NAME: "windows"
