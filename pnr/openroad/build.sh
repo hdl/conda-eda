@@ -18,7 +18,7 @@
 set -ex
 
 cd $SRC_DIR/third_party/lemon
-cmake -B build  .
+cmake -B build  -DCMAKE_INSTALL_PREFIX=$PREFIX .
 cmake --build build -j $CPU_COUNT --target install
 
 cd $SRC_DIR
