@@ -34,31 +34,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@aj-cbp-bump
 
-  #66
-  netgen-linux:
-    runs-on: "ubuntu-20.04"
-    env:
-      PACKAGE: "misc/netgen"
-      OS_NAME: "linux"
-    steps:
-      - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@aj-cbp-bump
-
   #68
   open_pdks-linux:
     runs-on: "ubuntu-20.04"
+    needs: "magic-linux"
     env:
       PACKAGE: "misc/open_pdks"
-      OS_NAME: "linux"
-    steps:
-      - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@aj-cbp-bump
-
-  #69
-  openroad-linux:
-    runs-on: "ubuntu-20.04"
-    env:
-      PACKAGE: "pnr/openroad"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
