@@ -1,0 +1,51 @@
+diff --git a/scripts/defs.mak.in b/scripts/defs.mak.in
+index 77dfddc..1e74b17 100755
+--- a/scripts/defs.mak.in
++++ b/scripts/defs.mak.in
+@@ -70,6 +70,7 @@ WISH_EXE	       = @WISH_EXE@
+ TCL_LIB_DIR	       = @TCL_LIB_DIR@
+ MAGIC_VERSION	       = `cat ../VERSION | cut -d. -f1-2`
+ MAGIC_REVISION	       = `cat ../VERSION | cut -d. -f3`
++MAGIC_COMMIT	       = `git rev-parse HEAD`
+ 
+ CC                     = @CC@
+ CPP                    = @CPP@
+diff --git a/tcltk/Makefile b/tcltk/Makefile
+index 97f214a..1c764ab 100644
+--- a/tcltk/Makefile
++++ b/tcltk/Makefile
+@@ -62,6 +62,7 @@ magicdnull: magicdnull.c ${MAGICDIR}/defs.mak
+ magic.tcl: magic.tcl.in ${MAGICDIR}/defs.mak ${MAGICDIR}/VERSION
+ 	sed -e /MAGIC_VERSION/s%MAGIC_VERSION%${MAGIC_VERSION}%g \
+ 	    -e /MAGIC_REVISION/s%MAGIC_REVISION%${MAGIC_REVISION}%g \
++	    -e /MAGIC_COMMIT/s%MAGIC_COMMIT%${MAGIC_COMMIT}%g \
+ 	    magic.tcl.in > magic.tcl
+ 
+ magic.sh: magic.sh.in ${MAGICDIR}/defs.mak
+diff --git a/tcltk/magic.sh.in b/tcltk/magic.sh.in
+index 5993a4c..cc04998 100755
+--- a/tcltk/magic.sh.in
++++ b/tcltk/magic.sh.in
+@@ -33,6 +33,7 @@ for i in "$@" ; do
+       -noc*) TKCON=;;
+       -dnull) DNULL=true;;
+       --version) TKCON=; DNULL=true;;
++      --commit) TKCON=; DNULL=true;;      
+       --prefix) TKCON=; DNULL=true;;
+       *) arglist="$arglist${arglist:+ }\"${i//\"/\\\"}\"";;
+    esac
+diff --git a/tcltk/magic.tcl.in b/tcltk/magic.tcl.in
+index a7f0dd8..2bee80a 100755
+--- a/tcltk/magic.tcl.in
++++ b/tcltk/magic.tcl.in
+@@ -205,6 +205,10 @@ for {set i 0} {$i < $argc} {incr i 1} {
+ 	 puts stdout "MAGIC_VERSION.MAGIC_REVISION"
+ 	 exit 0
+       }
++      ^--commit {
++	 puts stdout "MAGIC_COMMIT"
++	 exit 0
++      }
+       ^--prefix {
+ 	 puts stdout $CAD_ROOT
+ 	 exit 0
