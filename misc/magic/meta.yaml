@@ -10,7 +10,6 @@ source:
    git_rev: master
    patches:
      - csh.patch
-     - add-commit-flag.patch
 
 build:
   # number: 201803050325
