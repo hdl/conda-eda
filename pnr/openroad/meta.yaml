@@ -1,6 +1,7 @@
 # Use `conda-build-prepare` before building for a better version string.
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '')|replace('-', '')|default('0.X'), GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH|default('gUNKNOWN')) %}
-
+{% set lemon_version = '1.3.1' %}
+{% set lemon_md5 = 'e89f887559113b68657eca67cf3329b5' %}
 package:
   name: openroad
   version: {{ version }}
@@ -12,7 +13,9 @@ source:
       - odb-drt-disable-tests.patch
       - sta-add-install-options.patch
       - gui-find-qt-only-if-enabled.patch
-
+  - url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ lemon_version }}.tar.gz
+    md5: e89f887559113b68657eca67cf3329b5
+    folder: third_party/lemon
 build:
   # number: 202202031935
   number: {{ environ.get('DATE_NUM') }}
@@ -22,23 +25,20 @@ build:
     - CI
   ignore_run_exports_from:
     # header-only libraries
-    - lemon
     - fmt
 
 requirements:
   build:
     - make
     - cmake >=3.19
-    - swig 4.0.1
+    - swig 4.0.2
     - bison
-    - doxygen
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
     - python
-    - boost-cpp 1.76
+    - libboost 1.73
     - eigen 3.3
-    - lemon 1.3.1
     - spdlog 1.8.1
     - readline
     - tk
@@ -47,7 +47,7 @@ requirements:
     - libgomp
   run:
     # missing run_exports
-    - {{ pin_compatible('boost-cpp', min_pin='x.x', max_pin='x.x') }}
+    - {{ pin_compatible('libboost', min_pin='x.x', max_pin='x.x') }}
     - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}    
     
 test:
