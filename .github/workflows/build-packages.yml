@@ -32,6 +32,10 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
+      - name: 'Install csh'
+        run: |
+          sudo apt update
+          sudo apt install -y csh
       - uses: hdl/conda-ci@master
 
   #2

@@ -1,0 +1,119 @@
+diff --git a/Makefile b/Makefile
+index e1d61fb..dc0efc4 100644
+--- a/Makefile
++++ b/Makefile
+@@ -18,12 +18,10 @@ INSTALL_CAD_DIRS = windows doc ${TECH}
+ all:	$(ALL_TARGET)
+ 
+ standard:
+-	@echo --- errors and warnings logged in file make.log
+-	@${MAKE} mains 2>&1 | tee -a make.log | egrep -i "(.c:|Stop.|---)"
++	@${MAKE} mains
+ 
+ tcl:
+-	@echo --- errors and warnings logged in file make.log
+-	@${MAKE} tcllibrary 2>&1 | tee -a make.log | egrep -i "(.c:|Stop.|---)"
++	@${MAKE} tcllibrary
+ 
+ force: clean all
+ 
+@@ -36,12 +34,12 @@ config:
+ tcllibrary: database/database.h modules
+ 	@echo --- making Tcl shared libraries
+ 	for dir in ${PROGRAMS}; do \
+-		(cd $$dir && ${MAKE} tcl-main); done
++		(cd $$dir && ${MAKE} tcl-main) || exit 1; done
+ 
+ mains: database/database.h modules libs
+ 	@echo --- making main programs
+ 	for dir in ${PROGRAMS}; do \
+-		(cd $$dir && ${MAKE} main); done
++		(cd $$dir && ${MAKE} main) || exit 1; done
+ 
+ database/database.h: database/database.h.in
+ 	@echo --- making header file database/database.h
+@@ -50,18 +48,18 @@ database/database.h: database/database.h.in
+ modules: database/database.h depend
+ 	@echo --- making modules
+ 	for dir in ${MODULES} ${PROGRAMS}; do \
+-		(cd $$dir && ${MAKE} module); done
++		(cd $$dir && ${MAKE} module) || exit 1; done
+ 
+ libs:
+ 	@echo --- making libraries
+ 	for dir in ${LIBRARIES}; do \
+-		(cd $$dir && ${MAKE} lib); done
++		(cd $$dir && ${MAKE} lib) || exit 1; done
+ 
+ depend:	database/database.h
+ 	@echo --- making dependencies
+ 	${RM} */Depend
+ 	for dir in ${MODULES} ${UNUSED_MODULES} ${PROGRAMS}; do \
+-		(cd $$dir && ${MAKE} depend); done
++		(cd $$dir && ${MAKE} depend) || exit 1; done
+ 
+ install: $(INSTALL_TARGET)
+ 
+@@ -72,9 +70,9 @@ install-magic:
+ 
+ install-real: install-dirs
+ 	for dir in ${INSTALL_CAD_DIRS}; do \
+-		(cd $$dir && ${MAKE} install); done
++		(cd $$dir && ${MAKE} install) || exit 1; done
+ 	for dir in ${PROGRAMS}; do \
+-		(cd $$dir && ${MAKE} install); done
++		(cd $$dir && ${MAKE} install) || exit 1; done
+ 
+ install-tcl-dirs:
+ 	${MAGICDIR}/scripts/mkdirs $(DESTDIR)${INSTALL_BINDIR} \
+@@ -93,11 +91,11 @@ install-tcl:
+ 
+ install-tcl-real: install-tcl-dirs
+ 	for dir in ${INSTALL_CAD_DIRS} ${PROGRAMS}; do \
+-		(cd $$dir && ${MAKE} install-tcl); done
++		(cd $$dir && ${MAKE} install-tcl) || exit 1; done
+ 
+ clean:
+ 	for dir in ${MODULES} ${PROGRAMS} ${TECH} ${UNUSED_MODULES}; do \
+-		(cd $$dir && ${MAKE} clean); done
++		(cd $$dir && ${MAKE} clean) || exit 1; done
+ 	${RM} *.tmp */*.tmp *.sav */*.sav *.log TAGS tags
+ 
+ distclean:
+@@ -121,7 +119,7 @@ dist:
+ 
+ clean-mains:
+ 	for dir in ${PROGRAMS}; do \
+-		(cd $$dir && ${RM} $$dir); done
++		(cd $$dir && ${RM} $$dir) || exit 1; done
+ 
+ tags:
+ 	${RM} tags
+diff --git a/scripts/configure b/scripts/configure
+index 549324e..5c91663 100755
+--- a/scripts/configure
++++ b/scripts/configure
+@@ -9504,9 +9504,6 @@ echo
+ 
+ echo "Use 'make' to compile and 'make install' to install."
+ echo
+-echo "Errors may not be printed to stdout:  see files 'make.log' "
+-echo "  and 'install.log' for complete error summary."
+-echo
+ echo "-----------------------------------------------------------"
+ echo
+ 
+diff --git a/scripts/configure.in b/scripts/configure.in
+index 79b4cd8..1e5ace6 100644
+--- a/scripts/configure.in
++++ b/scripts/configure.in
+@@ -1910,9 +1910,6 @@ echo
+ 
+ echo "Use 'make' to compile and 'make install' to install."
+ echo
+-echo "Errors may not be printed to stdout:  see files 'make.log' "
+-echo "  and 'install.log' for complete error summary."
+-echo
+ echo "-----------------------------------------------------------"
+ echo
+ 

@@ -9,7 +9,7 @@ source:
    git_url: https://github.com/RTimothyEdwards/magic
    git_rev: master
    patches:
-     - csh.patch
+     - make-errors.patch
 
 build:
   # number: 201803050325
@@ -23,34 +23,35 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - autoconf
+    - automake
     - make
-    - tcsh
+    - python
+    - {{ compiler('c') }}
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - {{ cdt('libx11-devel') }}  # [linux]
+    - {{ cdt('libxau-devel') }}  # [linux]
+    - {{ cdt('libxext-devel') }}  # [linux]
+    - {{ cdt('libxrender-devel') }}  # [linux]    
   host:
-    - tcsh
-    - cairo
-    - m4
     - tk
-    - ncurses
-    - python>=3.7
-    - readline
-    - fontconfig
-    - xorg-libx11
-  run:
-    - python>=3.7
     - cairo
-    - ncurses
-    - readline
-    - tk
-    - xorg-libx11
 
 test:
   commands:
-    - magic --commit
+    - magic -dnull -noconsole --version
 
 about:
   home: http://opencircuitdesign.com/magic/
+  license: MIT  
+  license_family: MIT
   license_file: LICENSE
-  summary: "Magic is a venerable VLSI layout tool, written in the 1980's at Berkeley by John Ousterhout, now famous primarily for writing the scripting interpreter language Tcl. Due largely in part to its liberal Berkeley open-source license, magic has remained popular with universities and small companies. The open-source license has allowed VLSI engineers with a bent toward programming to implement clever ideas and help magic stay abreast of fabrication technology. However, it is the well thought-out core algorithms which lend to magic the greatest part of its popularity. Magic is widely cited as being the easiest tool to use for circuit layout, even for people who ultimately rely on commercial tools for their product design flow."
-
+  summary: 'Magic VLSI Layout Tool'
+  description: |
+    Magic is a venerable VLSI layout tool, written in the 1980's at Berkeley by John Ousterhout, now famous primarily for writing the scripting interpreter language Tcl.
+    Due largely in part to its liberal Berkeley open-source license, magic has remained popular with universities and small companies.
+    The open-source license has allowed VLSI engineers with a bent toward programming to implement clever ideas and help magic stay abreast of fabrication technology.
+    However, it is the well thought-out core algorithms which lend to magic the greatest part of its popularity.
+    Magic is widely cited as being the easiest tool to use for circuit layout, even for people who ultimately rely on commercial tools for their product design flow.
+  doc_url: http://opencircuitdesign.com/magic/magic_docs.html
+  dev_url: https://github.com/RTimothyEdwards/magic

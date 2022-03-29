@@ -12,9 +12,6 @@ case "${UNAME_OUT}" in
                 exit;;
 esac
 
-tcsh=`which tcsh`
-ln -s $tcsh $(dirname $tcsh)/csh
-
 ./configure --prefix="${PREFIX}" --with-cairo="${BUILD_PREFIX}/include"
 
 make V=1 -j$CPU_COUNT
