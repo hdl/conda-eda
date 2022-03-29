@@ -39,7 +39,7 @@ requirements:
 
 test:
   commands:
-    - magic --commit
+    - magic -dnull -noconsole --version
 
 about:
   home: http://opencircuitdesign.com/magic/
