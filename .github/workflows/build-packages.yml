@@ -767,6 +767,7 @@ jobs:
   #68
   open_pdks-linux:
     runs-on: "ubuntu-20.04"
+    needs: ["magic-linux"]    
     env:
       PACKAGE: "misc/open_pdks"
       OS_NAME: "linux"
