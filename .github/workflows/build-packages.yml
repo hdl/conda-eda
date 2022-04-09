@@ -576,7 +576,6 @@ jobs:
     env:
       PACKAGE: "misc/tree-sitter-verilog"
       OS_NAME: "linux"
-      SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/73
     steps:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
