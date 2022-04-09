@@ -383,7 +383,6 @@ jobs:
     env:
       PACKAGE: "sim/icarus"
       OS_NAME: "osx"
-      SKIP: "true" # See https://github.com/hdl/conda-eda/issues/157
     steps:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
