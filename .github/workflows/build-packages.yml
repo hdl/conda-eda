@@ -133,7 +133,7 @@ jobs:
   #11
   yosys-plugins-symbiflow-linux:
     runs-on: "ubuntu-20.04"
-    needs: ["icarus-linux", "yosys-linux-py37", "yosys-linux-py38"]
+    needs: ["icarus-linux", "yosys-linux-py37", "yosys-linux-py38", "surelog-linux-py37", "surelog-linux-py38"]
     env:
       PACKAGE: "syn/yosys-plugins-symbiflow"
       OS_NAME: "linux"
@@ -175,7 +175,7 @@ jobs:
   #15
   symbiflow-yosys-plugins-linux:
     runs-on: "ubuntu-20.04"
-    needs: ["icarus-linux", "yosys-linux-py37"]
+    needs: ["icarus-linux", "yosys-linux-py37", "yosys-linux-py38", "surelog-linux-py37", "surelog-linux-py38"]
     env:
       PACKAGE: "syn/symbiflow-yosys-plugins"
       OS_NAME: "linux"
