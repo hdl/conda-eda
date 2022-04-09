@@ -15,9 +15,10 @@ index 1acf403d..e36ab76c 100644
      initialize_boost()
      initialize_llvm_bazel()
 diff --git a/dependency_support/pip_requirements.txt b/dependency_support/pip_requirements.txt
-index 51165306..e69de29b 100644
+deleted file mode 100644
+index 7a1e5df7..00000000
 --- a/dependency_support/pip_requirements.txt
-+++ b/dependency_support/pip_requirements.txt
++++ /dev/null
 @@ -1,16 +0,0 @@
 -pycparser==2.19
 -Flask==1.1.2
@@ -33,10 +34,10 @@ index 51165306..e69de29b 100644
 -# Note: numpy and scipy version availability seems to differ between Ubuntu
 -# versions that we want to support (e.g. 18.04 vs 20.04), so we accept a
 -# range that makes successful installation on those platforms possible.
--numpy>=1.19.5,<=1.20.0
+-numpy>=1.21
 -scipy>=1.5.4,<=1.6.0
 diff --git a/xls/delay_model/BUILD b/xls/delay_model/BUILD
-index a2a3d0e3..77c84034 100644
+index f7c941f2..db9315fd 100644
 --- a/xls/delay_model/BUILD
 +++ b/xls/delay_model/BUILD
 @@ -12,8 +12,6 @@
@@ -48,7 +49,7 @@ index a2a3d0e3..77c84034 100644
  # pytype binary, test, library
  load("//xls/build_rules:py_proto_library.bzl", "xls_py_proto_library")
  
-@@ -154,8 +152,6 @@ py_binary(
+@@ -175,8 +173,6 @@ py_binary(
      deps = [
          ":delay_model",
          ":delay_model_py_pb2",
@@ -57,7 +58,7 @@ index a2a3d0e3..77c84034 100644
          "//xls/common:runfiles",
          "@com_google_absl_py//absl:app",
          "@com_google_absl_py//absl/flags",
-@@ -169,8 +165,6 @@ py_library(
+@@ -190,8 +186,6 @@ py_library(
      srcs_version = "PY3ONLY",
      deps = [
          ":delay_model_py_pb2",
@@ -67,7 +68,7 @@ index a2a3d0e3..77c84034 100644
  )
  
 diff --git a/xls/dslx/BUILD b/xls/dslx/BUILD
-index bdce6d1c..3bc01f2d 100644
+index 543f048c..95eec7df 100644
 --- a/xls/dslx/BUILD
 +++ b/xls/dslx/BUILD
 @@ -17,8 +17,6 @@
@@ -93,7 +94,7 @@ index 2c6e1fff..e65c386a 100644
      default_visibility = ["//xls:xls_internal"],
      licenses = ["notice"],  # Apache 2.0
 diff --git a/xls/fuzzer/BUILD b/xls/fuzzer/BUILD
-index 13e8e3aa..06e2a49d 100644
+index 4c7dc3ed..0f484ff5 100644
 --- a/xls/fuzzer/BUILD
 +++ b/xls/fuzzer/BUILD
 @@ -12,8 +12,6 @@
@@ -130,7 +131,7 @@ index 13e8e3aa..06e2a49d 100644
          "//xls/common:multiprocess",
          "//xls/fuzzer/python:cpp_ast_generator",
 diff --git a/xls/ir/BUILD b/xls/ir/BUILD
-index 1302c03f..9382ef27 100644
+index 49a27c15..3d92fb55 100644
 --- a/xls/ir/BUILD
 +++ b/xls/ir/BUILD
 @@ -15,7 +15,6 @@
@@ -141,7 +142,7 @@ index 1302c03f..9382ef27 100644
  load("@bazel_skylib//rules:build_test.bzl", "build_test")
  
  # cc_proto_library is used in this file
-@@ -722,8 +721,6 @@ py_binary(
+@@ -738,8 +737,6 @@ py_binary(
      ],
      python_version = "PY3",
      deps = [
