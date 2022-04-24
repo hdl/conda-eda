@@ -10,6 +10,3 @@ sh ./autoconf.sh
 
 make -j$CPU_COUNT
 make install
-
-$PREFIX/bin/iverilog -V
-$PREFIX/bin/iverilog -h || true
