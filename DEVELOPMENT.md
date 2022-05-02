@@ -1,4 +1,4 @@
-# Building
+# Development
 
 This repository is set up to be built in GitHub Actions.
 See [`.github/workflows/build-packages.yml`](.github/workflows/build-packages.yml).
