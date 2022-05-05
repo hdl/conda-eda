@@ -566,6 +566,7 @@ jobs:
     env:
       PACKAGE: "pnr/odin_II"
       OS_NAME: "linux"
+      SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/209
     steps:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
