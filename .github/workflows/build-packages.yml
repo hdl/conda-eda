@@ -771,6 +771,7 @@ jobs:
     env:
       PACKAGE: "hls/xls"
       OS_NAME: "linux"
+      SKIP: "true"
     steps:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
