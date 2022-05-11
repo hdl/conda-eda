@@ -41,7 +41,7 @@ requirements:
     - typing_inspect
     - marshmallow
     - marshmallow-enum    
-    - magic
+    - magic <=8.3.289
   run_constrained:
     - {{ pin_compatible('magic', min_pin='x.x.x', max_pin='x.x.x') }}
 
