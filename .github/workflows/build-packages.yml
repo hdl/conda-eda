@@ -18,7 +18,7 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
-  NUM_OF_JOBS: 70
+  NUM_OF_JOBS: 68
 defaults:
   run:
     shell: bash
@@ -214,26 +214,6 @@ jobs:
       - uses: hdl/conda-ci@master
 
   #19
-  symbiflow-vtr-linux:
-    runs-on: "ubuntu-20.04"
-    env:
-      PACKAGE: "pnr/symbiflow-vtr"
-      OS_NAME: "linux"
-    steps:
-      - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
-
-  #20
-  symbiflow-vtr-gui-linux:
-    runs-on: "ubuntu-20.04"
-    env:
-      PACKAGE: "pnr/symbiflow-vtr-gui"
-      OS_NAME: "linux"
-    steps:
-      - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
-
-  #21
   quicklogic-vtr-linux:
     runs-on: "ubuntu-20.04"
     needs: "vtr-linux"
@@ -246,7 +226,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #22
+  #20
   quicklogic-vtr-gui-linux:
     runs-on: "ubuntu-20.04"
     needs: "vtr-gui-linux"
@@ -259,7 +239,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #23
+  #21
   nextpnr-ice40-linux:
     runs-on: "ubuntu-20.04"
     needs: ["icestorm-linux"]
@@ -270,7 +250,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #24
+  #22
   nextpnr-ecp5-linux:
     runs-on: "ubuntu-20.04"
     needs: ["prjtrellis-linux"]
@@ -281,7 +261,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #25
+  #23
   nextpnr-generic-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -291,7 +271,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #26
+  #24
   nextpnr-xilinx-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -309,7 +289,7 @@ jobs:
           sudo apt install -y pypy3
       - uses: hdl/conda-ci@master
 
-  #27
+  #25
   nextpnr-fpga_interchange-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -319,7 +299,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #28
+  #26
   symbiyosys-linux-py37:
     runs-on: "ubuntu-20.04"
     needs: "yosys-linux-py37"
@@ -332,7 +312,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #29
+  #27
   symbiyosys-linux-py38:
     runs-on: "ubuntu-20.04"
     needs: "yosys-linux-py38"
@@ -345,7 +325,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #30
+  #28
   xilinx-vivado-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -357,7 +337,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #31
+  #29
   icestorm-osx:
     runs-on: "macos-latest"
     env:
@@ -367,7 +347,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #32
+  #30
   prjtrellis-osx:
     runs-on: "macos-latest"
     env:
@@ -377,7 +357,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #33
+  #31
   icarus-osx:
     runs-on: "macos-latest"
     env:
@@ -387,7 +367,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #34
+  #32
   verilator-osx:
     runs-on: "macos-latest"
     env:
@@ -397,7 +377,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #35
+  #33
   yosys-osx:
     runs-on: "macos-latest"
     env:
@@ -408,7 +388,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #36
+  #34
   quicklogic-yosys-osx:
     runs-on: "macos-latest"
     env:
@@ -419,7 +399,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #37
+  #35
   quicklogic-yosys-plugins-osx:
     runs-on: "macos-latest"
     needs: ["icarus-osx", "quicklogic-yosys-osx"]
@@ -430,7 +410,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #38
+  #36
   symbiflow-yosys-plugins-osx:
     runs-on: "macos-latest"
     needs: ["icarus-osx", "yosys-osx"]
@@ -442,7 +422,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #39
+  #37
   vtr-osx:
     runs-on: "macos-latest"
     env:
@@ -453,7 +433,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #40
+  #38
   vtr-gui-osx:
     runs-on: "macos-latest"
     env:
@@ -464,7 +444,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #41
+  #39
   nextpnr-ice40-osx:
     runs-on: "macos-latest"
     needs: ["icestorm-osx"]
@@ -475,7 +455,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #42
+  #40
   nextpnr-generic-osx:
     runs-on: "macos-latest"
     env:
@@ -485,7 +465,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #43
+  #41
   icestorm-windows:
     runs-on: "windows-latest"
     env:
@@ -495,7 +475,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #44
+  #42
   prjtrellis-windows:
     runs-on: "windows-latest"
     env:
@@ -506,7 +486,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #45
+  #43
   icarus-windows:
     runs-on: "windows-latest"
     env:
@@ -516,7 +496,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #46
+  #44
   yosys-windows:
     runs-on: "windows-latest"
     env:
@@ -526,7 +506,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #47
+  #45
   quicklogic-yosys-windows:
     runs-on: "windows-latest"
     env:
@@ -536,7 +516,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #48
+  #46
   nextpnr-ice40-windows:
     runs-on: "windows-latest"
     needs: ["icestorm-windows"] 
@@ -548,7 +528,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #49
+  #47
   nextpnr-generic-windows:
     runs-on: "windows-latest"
     env:
@@ -559,7 +539,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #50
+  #48
   verible-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -570,7 +550,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #51
+  #49
   tree-sitter-verilog-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -580,17 +560,18 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #52
+  #50
   odin-ii-linux:
     runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "pnr/odin_II"
       OS_NAME: "linux"
+      SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/209
     steps:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #53
+  #51
   slang-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -601,7 +582,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #54
+  #52
   sv-parser-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -611,7 +592,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #55
+  #53
   moore-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -622,7 +603,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #56
+  #54
   surelog-linux-py37:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -634,7 +615,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #57
+  #55
   surelog-linux-py38:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -646,7 +627,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #58
+  #56
   surelog-uhdm-linux-py37:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -659,7 +640,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #59
+  #57
   surelog-uhdm-linux-py38:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -672,7 +653,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #60
+  #58
   yosys-uhdm-linux-py37:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -684,7 +665,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #61
+  #59
   yosys-uhdm-linux-py38:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -696,7 +677,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #62
+  #60
   libunwind:
     runs-on: "ubuntu-20.04"
     env:
@@ -706,7 +687,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #63
+  #61
   gperftools:
     needs: "libunwind"
     runs-on: "ubuntu-20.04"
@@ -717,7 +698,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #64
+  #62
   verilator-uhdm-linux-py37:
     needs: ["gperftools"]
     runs-on: "ubuntu-20.04"
@@ -729,7 +710,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #65
+  #63
   verilator-uhdm-linux-py38:
     needs: ["gperftools"]
     runs-on: "ubuntu-20.04"
@@ -741,7 +722,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #66
+  #64
   netgen-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -751,7 +732,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #67
+  #65
   zachjs-sv2v-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -761,7 +742,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #68
+  #66
   open_pdks-linux:
     runs-on: "ubuntu-20.04"
     needs: ["magic-linux"]    
@@ -772,7 +753,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #69
+  #67
   openroad-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -782,7 +763,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
 
-  #70
+  #68
   xls-linux:
     # uses older ubuntu for better compat:
     # https://github.com/hdl/conda-eda/issues/199
@@ -790,6 +771,7 @@ jobs:
     env:
       PACKAGE: "hls/xls"
       OS_NAME: "linux"
+      SKIP: "true"
     steps:
       - uses: actions/checkout@v2
       - uses: hdl/conda-ci@master
