@@ -31,7 +31,7 @@ jobs:
       PACKAGE: "misc/magic"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: 'Install csh'
         run: |
           sudo apt update
@@ -45,7 +45,7 @@ jobs:
       PACKAGE: "bit/icestorm"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #3
@@ -55,7 +55,7 @@ jobs:
       PACKAGE: "bit/prjtrellis"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #4
@@ -65,7 +65,7 @@ jobs:
       PACKAGE: "bit/prjoxide"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #5
@@ -75,7 +75,7 @@ jobs:
       PACKAGE: "bit/prjxray-db"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #6
@@ -85,7 +85,7 @@ jobs:
       PACKAGE: "bit/prjxray-tools"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #7
@@ -95,7 +95,7 @@ jobs:
       PACKAGE: "sim/icarus"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #8
@@ -105,7 +105,7 @@ jobs:
       PACKAGE: "sim/verilator"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #9
@@ -116,7 +116,7 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #10
@@ -127,7 +127,7 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #11
@@ -138,7 +138,7 @@ jobs:
       PACKAGE: "syn/yosys-plugins-symbiflow"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #12
@@ -149,7 +149,7 @@ jobs:
       PACKAGE: "pnr/nextpnr/nexus"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #13
@@ -159,7 +159,7 @@ jobs:
       PACKAGE: "syn/quicklogic-yosys"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #14
@@ -169,7 +169,7 @@ jobs:
       PACKAGE: "syn/quicklogic-yosys-plugins"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #15
@@ -180,7 +180,7 @@ jobs:
       PACKAGE: "syn/symbiflow-yosys-plugins"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #16
@@ -190,7 +190,7 @@ jobs:
       PACKAGE: "pnr/vtr"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #17
@@ -200,7 +200,7 @@ jobs:
       PACKAGE: "pnr/vtr-gui"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #18
@@ -210,7 +210,7 @@ jobs:
       PACKAGE: "pnr/vtr-optimized"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #19
@@ -223,7 +223,7 @@ jobs:
     steps:
       # Skip if token isn't available (cross-repository PRs mainly)
       - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #20
@@ -236,7 +236,7 @@ jobs:
     steps:
       # Skip if token isn't available (cross-repository PRs mainly)
       - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #21
@@ -247,7 +247,7 @@ jobs:
       PACKAGE: "pnr/nextpnr/ice40"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #22
@@ -258,7 +258,7 @@ jobs:
       PACKAGE: "pnr/nextpnr/ecp5"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #23
@@ -268,7 +268,7 @@ jobs:
       PACKAGE: "pnr/nextpnr/generic"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #24
@@ -281,7 +281,7 @@ jobs:
       USE_PYPY: "1"
       SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/191
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: 'Install pypy'
         run: |
           sudo add-apt-repository ppa:pypy/ppa -y
@@ -296,7 +296,7 @@ jobs:
       PACKAGE: "pnr/nextpnr/fpga_interchange"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #26
@@ -309,7 +309,7 @@ jobs:
       PYTHON_VERSION: "3.7"
       SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/70
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #27
@@ -322,7 +322,7 @@ jobs:
       PYTHON_VERSION: "3.8"
       SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/70
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #28
@@ -334,7 +334,7 @@ jobs:
       VERSIONS: ${{ format('{0}{1}', github.workspace, '/xilinx/vivado/versions') }}
       SCRIPT: ${{ format('{0}{1}', github.workspace, '/xilinx/vivado/gen_metapackages.sh') }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #29
@@ -344,7 +344,7 @@ jobs:
       PACKAGE: "bit/icestorm"
       OS_NAME: "osx"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #30
@@ -354,7 +354,7 @@ jobs:
       PACKAGE: "bit/prjtrellis"
       OS_NAME: "osx"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #31
@@ -364,7 +364,7 @@ jobs:
       PACKAGE: "sim/icarus"
       OS_NAME: "osx"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #32
@@ -374,7 +374,7 @@ jobs:
       PACKAGE: "sim/verilator"
       OS_NAME: "osx"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #33
@@ -385,7 +385,7 @@ jobs:
       OS_NAME: "osx"
       EXTRA_BUILD_ARGS: "--no-test"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #34
@@ -396,7 +396,7 @@ jobs:
       OS_NAME: "osx"
       EXTRA_BUILD_ARGS: "--no-test"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #35
@@ -407,7 +407,7 @@ jobs:
       PACKAGE: "syn/quicklogic-yosys-plugins"
       OS_NAME: "osx"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #36
@@ -419,7 +419,7 @@ jobs:
       OS_NAME: "osx"
       SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/71
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #37
@@ -430,7 +430,7 @@ jobs:
       OS_NAME: "osx"
       SKIP: "true"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #38
@@ -441,7 +441,7 @@ jobs:
       OS_NAME: "osx"
       SKIP: "true"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #39
@@ -452,7 +452,7 @@ jobs:
       PACKAGE: "pnr/nextpnr/ice40"
       OS_NAME: "osx"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #40
@@ -462,7 +462,7 @@ jobs:
       PACKAGE: "pnr/nextpnr/generic"
       OS_NAME: "osx"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #41
@@ -472,7 +472,7 @@ jobs:
       PACKAGE: "bit/icestorm"
       OS_NAME: "windows"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #42
@@ -483,7 +483,7 @@ jobs:
       OS_NAME: "windows"
       SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/201
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #43
@@ -493,7 +493,7 @@ jobs:
       PACKAGE: "sim/icarus"
       OS_NAME: "windows"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #44
@@ -503,7 +503,7 @@ jobs:
       PACKAGE: "syn/yosys"
       OS_NAME: "windows"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #45
@@ -513,7 +513,7 @@ jobs:
       PACKAGE: "syn/quicklogic-yosys"
       OS_NAME: "windows"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #46
@@ -525,7 +525,7 @@ jobs:
       OS_NAME: "windows"
       SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/120
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #47
@@ -536,7 +536,7 @@ jobs:
       OS_NAME: "windows"
       SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/120
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #48
@@ -547,7 +547,7 @@ jobs:
       USE_SYSTEM_GCC_VERSION: "9"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #49
@@ -557,7 +557,7 @@ jobs:
       PACKAGE: "misc/tree-sitter-verilog"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #50
@@ -568,7 +568,7 @@ jobs:
       OS_NAME: "linux"
       SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/209
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #51
@@ -579,7 +579,7 @@ jobs:
       OS_NAME: "linux"
       USE_SYSTEM_GCC_VERSION: "9"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #52
@@ -589,7 +589,7 @@ jobs:
       PACKAGE: "sv-front/sv-parser"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #53
@@ -600,7 +600,7 @@ jobs:
       OS_NAME: "linux"
       SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/163
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #54
@@ -612,7 +612,7 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #55
@@ -624,7 +624,7 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #56
@@ -637,7 +637,7 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #57
@@ -650,7 +650,7 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #58
@@ -662,7 +662,7 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #59
@@ -674,7 +674,7 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #60
@@ -684,7 +684,7 @@ jobs:
       PACKAGE: "misc/libunwind"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #61
@@ -695,7 +695,7 @@ jobs:
       PACKAGE: "misc/gperftools"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #62
@@ -707,7 +707,7 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #63
@@ -719,7 +719,7 @@ jobs:
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #64
@@ -729,7 +729,7 @@ jobs:
       PACKAGE: "misc/netgen"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #65
@@ -739,7 +739,7 @@ jobs:
       PACKAGE: "sv-front/zachjs-sv2v"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #66
@@ -750,7 +750,7 @@ jobs:
       PACKAGE: "misc/open_pdks"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #67
@@ -760,7 +760,7 @@ jobs:
       PACKAGE: "pnr/openroad"
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   #68
@@ -773,7 +773,7 @@ jobs:
       OS_NAME: "linux"
       SKIP: "true"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./ci
 
   master-package:
@@ -781,7 +781,7 @@ jobs:
     env:
       OS_NAME: "linux"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v1
       - uses: BSFishy/pip-action@v1
         with:
