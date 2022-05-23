@@ -36,7 +36,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y csh
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #2
   icestorm-linux:
@@ -46,7 +46,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #3
   prjtrellis-linux:
@@ -56,7 +56,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #4
   prjoxide-linux:
@@ -66,7 +66,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #5
   prjxray-db-linux:
@@ -76,7 +76,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #6
   prjxray-tools-linux:
@@ -86,7 +86,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #7
   icarus-linux:
@@ -96,7 +96,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #8
   verilator-linux:
@@ -106,7 +106,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #9
   yosys-linux-py37:
@@ -117,7 +117,7 @@ jobs:
       PYTHON_VERSION: "3.7"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #10
   yosys-linux-py38:
@@ -128,7 +128,7 @@ jobs:
       PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #11
   yosys-plugins-symbiflow-linux:
@@ -139,7 +139,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #12
   nextpnr-nexus-linux:
@@ -150,7 +150,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #13
   quicklogic-yosys-linux:
@@ -160,7 +160,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #14
   quicklogic-yosys-plugins-linux:
@@ -170,7 +170,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #15
   symbiflow-yosys-plugins-linux:
@@ -181,7 +181,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #16
   vtr-linux:
@@ -191,7 +191,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #17
   vtr-gui-linux:
@@ -201,7 +201,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #18
   vtr-optimized-linux:
@@ -211,7 +211,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #19
   quicklogic-vtr-linux:
@@ -224,7 +224,7 @@ jobs:
       # Skip if token isn't available (cross-repository PRs mainly)
       - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #20
   quicklogic-vtr-gui-linux:
@@ -237,7 +237,7 @@ jobs:
       # Skip if token isn't available (cross-repository PRs mainly)
       - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #21
   nextpnr-ice40-linux:
@@ -248,7 +248,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #22
   nextpnr-ecp5-linux:
@@ -259,7 +259,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #23
   nextpnr-generic-linux:
@@ -269,7 +269,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #24
   nextpnr-xilinx-linux:
@@ -287,7 +287,7 @@ jobs:
           sudo add-apt-repository ppa:pypy/ppa -y
           sudo apt update
           sudo apt install -y pypy3
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #25
   nextpnr-fpga_interchange-linux:
@@ -297,7 +297,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #26
   symbiyosys-linux-py37:
@@ -310,7 +310,7 @@ jobs:
       SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/70
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #27
   symbiyosys-linux-py38:
@@ -323,7 +323,7 @@ jobs:
       SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/70
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #28
   xilinx-vivado-linux:
@@ -331,11 +331,11 @@ jobs:
     env:
       PACKAGE: "xilinx/vivado"
       OS_NAME: "linux"
-      VERSIONS: ${{ format('{0}{1}', github.workspace, '/xilinx/vivado/versions') }} 
+      VERSIONS: ${{ format('{0}{1}', github.workspace, '/xilinx/vivado/versions') }}
       SCRIPT: ${{ format('{0}{1}', github.workspace, '/xilinx/vivado/gen_metapackages.sh') }}
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #29
   icestorm-osx:
@@ -345,7 +345,7 @@ jobs:
       OS_NAME: "osx"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #30
   prjtrellis-osx:
@@ -355,7 +355,7 @@ jobs:
       OS_NAME: "osx"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #31
   icarus-osx:
@@ -365,7 +365,7 @@ jobs:
       OS_NAME: "osx"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #32
   verilator-osx:
@@ -375,7 +375,7 @@ jobs:
       OS_NAME: "osx"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #33
   yosys-osx:
@@ -386,7 +386,7 @@ jobs:
       EXTRA_BUILD_ARGS: "--no-test"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #34
   quicklogic-yosys-osx:
@@ -397,7 +397,7 @@ jobs:
       EXTRA_BUILD_ARGS: "--no-test"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #35
   quicklogic-yosys-plugins-osx:
@@ -408,7 +408,7 @@ jobs:
       OS_NAME: "osx"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #36
   symbiflow-yosys-plugins-osx:
@@ -420,7 +420,7 @@ jobs:
       SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/71
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #37
   vtr-osx:
@@ -431,7 +431,7 @@ jobs:
       SKIP: "true"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #38
   vtr-gui-osx:
@@ -442,7 +442,7 @@ jobs:
       SKIP: "true"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #39
   nextpnr-ice40-osx:
@@ -453,7 +453,7 @@ jobs:
       OS_NAME: "osx"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #40
   nextpnr-generic-osx:
@@ -463,7 +463,7 @@ jobs:
       OS_NAME: "osx"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #41
   icestorm-windows:
@@ -473,7 +473,7 @@ jobs:
       OS_NAME: "windows"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #42
   prjtrellis-windows:
@@ -484,7 +484,7 @@ jobs:
       SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/201
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #43
   icarus-windows:
@@ -494,7 +494,7 @@ jobs:
       OS_NAME: "windows"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #44
   yosys-windows:
@@ -504,7 +504,7 @@ jobs:
       OS_NAME: "windows"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #45
   quicklogic-yosys-windows:
@@ -514,19 +514,19 @@ jobs:
       OS_NAME: "windows"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #46
   nextpnr-ice40-windows:
     runs-on: "windows-latest"
-    needs: ["icestorm-windows"] 
+    needs: ["icestorm-windows"]
     env:
       PACKAGE: "pnr/nextpnr/ice40"
       OS_NAME: "windows"
       SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/120
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #47
   nextpnr-generic-windows:
@@ -537,7 +537,7 @@ jobs:
       SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/120
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #48
   verible-linux:
@@ -548,7 +548,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #49
   tree-sitter-verilog-linux:
@@ -558,7 +558,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #50
   odin-ii-linux:
@@ -569,7 +569,7 @@ jobs:
       SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/209
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #51
   slang-linux:
@@ -580,7 +580,7 @@ jobs:
       USE_SYSTEM_GCC_VERSION: "9"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #52
   sv-parser-linux:
@@ -590,7 +590,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #53
   moore-linux:
@@ -601,7 +601,7 @@ jobs:
       SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/163
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #54
   surelog-linux-py37:
@@ -613,7 +613,7 @@ jobs:
       PYTHON_VERSION: "3.7"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #55
   surelog-linux-py38:
@@ -625,7 +625,7 @@ jobs:
       PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #56
   surelog-uhdm-linux-py37:
@@ -638,7 +638,7 @@ jobs:
       PYTHON_VERSION: "3.7"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #57
   surelog-uhdm-linux-py38:
@@ -651,7 +651,7 @@ jobs:
       PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #58
   yosys-uhdm-linux-py37:
@@ -663,7 +663,7 @@ jobs:
       PYTHON_VERSION: "3.7"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #59
   yosys-uhdm-linux-py38:
@@ -675,7 +675,7 @@ jobs:
       PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #60
   libunwind:
@@ -685,7 +685,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #61
   gperftools:
@@ -696,7 +696,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #62
   verilator-uhdm-linux-py37:
@@ -708,7 +708,7 @@ jobs:
       PYTHON_VERSION: "3.7"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #63
   verilator-uhdm-linux-py38:
@@ -720,7 +720,7 @@ jobs:
       PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #64
   netgen-linux:
@@ -730,7 +730,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #65
   zachjs-sv2v-linux:
@@ -740,18 +740,18 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #66
   open_pdks-linux:
     runs-on: "ubuntu-20.04"
-    needs: ["magic-linux"]    
+    needs: ["magic-linux"]
     env:
       PACKAGE: "misc/open_pdks"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #67
   openroad-linux:
@@ -761,7 +761,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   #68
   xls-linux:
@@ -774,26 +774,20 @@ jobs:
       SKIP: "true"
     steps:
       - uses: actions/checkout@v2
-      - uses: hdl/conda-ci@master
+      - uses: ./ci
 
   master-package:
     runs-on: "ubuntu-20.04"
     env:
       OS_NAME: "linux"
-      CI_SCRIPTS_REL_PATH: "conda-ci"
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/checkout@v2
-        with:
-          repository: hdl/conda-ci
-          ref: master
-          path: ${{ env.CI_SCRIPTS_REL_PATH }}
       - uses: actions/setup-python@v1
       - uses: BSFishy/pip-action@v1
         with:
           packages: urllib3
       - run: |
           # Required internally by the scripts to locate other scripts.
-          export CI_SCRIPTS_PATH="$GITHUB_WORKSPACE/$CI_SCRIPTS_REL_PATH"
+          export CI_SCRIPTS_PATH="$(pwd)/ci"
           bash $CI_SCRIPTS_PATH/install.sh
           python $CI_SCRIPTS_PATH/wait-for-statuses.py
