@@ -1,0 +1,3 @@
+CONDA_BUILD_SYSROOT:
+  - /Users/runner/sdk/MacOSX10.9.sdk        # [osx]
+
