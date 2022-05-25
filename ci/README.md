@@ -1,8 +1,6 @@
-# conda-ci
+# Continuous Integration utilities
 
-GitHub Actions scripts for hdl/conda-(compilers|eda|misc|prog) .
-
-This repository is not meant to be used on its own, but as submodule for above repositories.
+GitHub Actions scripts for hdl/conda-(compilers|eda|misc|prog).
 
 ## Setting up Github Actions for your own fork
 
