@@ -32,7 +32,7 @@ jobs:
         run: tuttest --help
 
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Grab install-prerequisites commands with tuttest
         run: |
@@ -64,7 +64,7 @@ jobs:
       - name: Print ${{ env.SCRIPT }}
         run: cat $SCRIPT
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ env.SCRIPT }}
@@ -87,7 +87,7 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: ${{ env.ARTIFACT_NAME }}
       - name: Test
