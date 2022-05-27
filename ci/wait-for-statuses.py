@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import urllib.request
 import json
 import subprocess
@@ -21,21 +23,6 @@ numOfJobs = int(os.environ['NUM_OF_JOBS'])
 if(numOfJobs > max_jobs):
   sys.exit("ERROR: number of jobs exceeded max_jobs: " + str(max_jobs))
 
-
-while(True):
-  time.sleep(60)
-  countCompleted = 0
-
-  with urllib.request.urlopen(status_url) as url:
-    data = json.loads(url.read().decode())
-    for j in data["jobs"]:
-      if(j["status"] == "completed"):
-        countCompleted += 1
-
-  print("Completed jobs: " + str(countCompleted) + ". Jobs overall: " + str(numOfJobs))
-  if(countCompleted >= numOfJobs):
-    break
-
 # Check if all jobs succeeded
 jobFailure = False
 with urllib.request.urlopen(status_url) as url:
@@ -49,13 +36,11 @@ with urllib.request.urlopen(status_url) as url:
 scripts_dir = os.environ['CI_SCRIPTS_PATH']
 
 branch = os.environ.get('GITHUB_REF', '')
-# Upload packages only when whole build succeeded
-# and we are on master branch
-if(branch == 'refs/heads/master'):
-  if(not jobFailure):
-    subprocess.call(os.path.join(scripts_dir, "master-package.sh"))
-else:
+# Upload packages only when whole build succeeded and we are on master branch
+if not (branch == 'refs/heads/master'):
   print("Not on master branch, don't execute master-package.sh. Current branch: " + str(branch))
+elif(not jobFailure):
+  subprocess.call(os.path.join(scripts_dir, "master-package.sh"))
 
 # Always clean up
 subprocess.call(os.path.join(scripts_dir, "cleanup-anaconda.sh"))

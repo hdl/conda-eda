@@ -1,0 +1,44 @@
+name: Upload packages
+
+on:
+  push:
+    # Prevents triggering multiple workflows in PRs. Workflows triggered from
+    # the same commit shouldn't run simultaneously because they're overwriting
+    # each other's packages on Anaconda.
+    branches: [ master ]
+    paths-ignore:
+      - '.github/workflows/tuttest.yml'
+      - 'README.md'
+  pull_request:
+    paths-ignore:
+      - '.github/workflows/tuttest.yml'
+      - 'README.md'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 23 * * *' # run daily at 23:00 (UTC)
+
+env:
+  ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+  ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
+
+jobs:
+
+
+  Build:
+    uses: ./.github/workflows/Build.yml
+
+
+  Upload:
+    needs: Build
+    if: always()
+    runs-on: ubuntu-20.04
+    env:
+      OS_NAME: linux
+    steps:
+      - uses: actions/checkout@v3
+      - run: pip install urllib3
+      - run: |
+          # Required internally by the scripts to locate other scripts.
+          export CI_SCRIPTS_PATH="$(pwd)/ci"
+          ./ci/install.sh
+          ./ci/wait-for-statuses.py
