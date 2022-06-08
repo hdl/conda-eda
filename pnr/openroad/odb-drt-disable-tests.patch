@@ -1,8 +1,8 @@
 diff --git a/src/drt/CMakeLists.txt b/src/drt/CMakeLists.txt
-index ce93a063e..2c3afc754 100644
+index ca78d0f16..a0f1bf7fa 100644
 --- a/src/drt/CMakeLists.txt
 +++ b/src/drt/CMakeLists.txt
-@@ -159,43 +159,6 @@ target_compile_options(drt
+@@ -166,45 +166,6 @@ target_compile_options(drt
      $<$<CXX_COMPILER_ID:Clang>:-Wall -pedantic -Wcast-qual -Wredundant-decls -Wformat-security -Wno-gnu-zero-variadic-macro-arguments>
    )
  
@@ -14,6 +14,8 @@ index ce93a063e..2c3afc754 100644
 -add_executable(trTest
 -  ${FLEXROUTE_HOME}/test/gcTest.cpp
 -  ${FLEXROUTE_HOME}/test/fixture.cpp
+-  ${FLEXROUTE_HOME}/test/stubs.cpp
+-  ${OPENROAD_HOME}/src/gui/src/stub.cpp
 -)
 -
 -target_include_directories(trTest
@@ -46,15 +48,3 @@ index ce93a063e..2c3afc754 100644
  ############################################################
  # VTune ITT API
  ############################################################
-diff --git a/src/odb/CMakeLists.txt b/src/odb/CMakeLists.txt
-index 7e55b669c..4614df8bf 100644
---- a/src/odb/CMakeLists.txt
-+++ b/src/odb/CMakeLists.txt
-@@ -29,7 +29,6 @@ add_subdirectory(src/zutil)
- add_subdirectory(src/zlib)
- add_subdirectory(src/tm)
- add_subdirectory(src/cdl)
--add_subdirectory(test/cpp)
- ############################################################################
- ################################# SWIG #####################################
- ############################################################################
