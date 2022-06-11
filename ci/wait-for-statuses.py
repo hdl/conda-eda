@@ -1,49 +1,41 @@
 #!/usr/bin/env python3
 
-import urllib.request
-import json
-import subprocess
-import time
-import os
-import sys
+from pathlib import Path
+from sys import exit as sys_exit
+from os import environ
+from subprocess import check_call
+from urllib.request import urlopen
+from json import loads as json_loads
 
 # We're limited to this number by GH Actions API
 # https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-jobs-for-a-workflow-run
 max_jobs = 100
 
 status_url = "https://api.github.com/repos/" \
-         + os.environ['GITHUB_REPOSITORY'] \
+         + environ['GITHUB_REPOSITORY'] \
          + "/actions/runs/" \
-         + os.environ['GITHUB_RUN_ID'] \
+         + environ['GITHUB_RUN_ID'] \
          + "/jobs" \
          + "?per_page=" + str(max_jobs)
 
-numOfJobs = int(os.environ['NUM_OF_JOBS'])
+numOfJobs = int(environ.get('NUM_OF_JOBS', 0))
 
 if(numOfJobs > max_jobs):
-  sys.exit("ERROR: number of jobs exceeded max_jobs: " + str(max_jobs))
+  sys_exit("ERROR: number of jobs exceeded max_jobs: " + str(max_jobs))
 
 # Check if all jobs succeeded
 jobFailure = False
-with urllib.request.urlopen(status_url) as url:
-  data = json.loads(url.read().decode())
+with urlopen(status_url) as url:
+  data = json_loads(url.read().decode())
   for j in data["jobs"]:
     # THIS is master-package job, still in progress (not concluded)
     if(j["conclusion"] != "success" and j["name"] != "master-package"):
       jobFailure = True
       break
 
-scripts_dir = os.environ['CI_SCRIPTS_PATH']
+scripts_dir = Path(environ['CI_SCRIPTS_PATH'])
 
-branch = os.environ.get('GITHUB_REF', '')
-# Upload packages only when whole build succeeded and we are on master branch
-if not (branch == 'refs/heads/master'):
-  print("Not on master branch, don't execute master-package.sh. Current branch: " + str(branch))
-elif(not jobFailure):
-  subprocess.call(os.path.join(scripts_dir, "master-package.sh"))
+if environ.get('GITHUB_REF', '') == 'refs/heads/master':
+  check_call(scripts_dir / "master-package.sh")
 
-# Always clean up
-subprocess.call(os.path.join(scripts_dir, "cleanup-anaconda.sh"))
-
-if(jobFailure):
-  sys.exit("ERROR: some jobs failed")
+check_call(scripts_dir / "cleanup-anaconda.sh")
