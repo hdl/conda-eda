@@ -20,6 +20,7 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
+  OS_NAME: linux
 
 jobs:
 
@@ -30,15 +31,23 @@ jobs:
 
   Upload:
     needs: Build
-    if: always()
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-20.04
-    env:
-      OS_NAME: linux
     steps:
       - uses: actions/checkout@v3
-      - run: pip install urllib3
       - run: |
           # Required internally by the scripts to locate other scripts.
           export CI_SCRIPTS_PATH="$(pwd)/ci"
           ./ci/install.sh
-          ./ci/wait-for-statuses.py
+          ./ci/upload-packages.sh
+
+
+  Cleanup:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          # Required internally by the scripts to locate other scripts.
+          export CI_SCRIPTS_PATH="$(pwd)/ci"
+          ./ci/install.sh
+          ./ci/cleanup-anaconda.sh
