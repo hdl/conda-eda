@@ -1,0 +1,34 @@
+name: Documentation
+
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: '0 0 * * 4'
+  workflow_dispatch:
+
+env:
+  DOCKER_BUILDKIT: 1
+
+jobs:
+
+
+  docs:
+    runs-on: ubuntu-latest
+    name: '📓 Docs'
+    steps:
+
+    - name: 🧰 Checkout
+      uses: actions/checkout@v3
+
+    - name: 📓 BuildTheDocs (BTD)
+      uses: buildthedocs/btd@v0
+      with:
+        token: ${{ github.token }}
+        skip-deploy: ${{ github.event_name == 'pull_request' }}
+
+    - name: '📤 Upload artifact: Sphinx HTML'
+      uses: actions/upload-artifact@v3
+      with:
+        name: Documentation-HTML
+        path: docs/_build/html
