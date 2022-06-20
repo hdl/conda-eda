@@ -6,8 +6,6 @@ Conda recipes for FPGA EDA tools
    :align: center
    :target: https://github.com/hdl/conda-eda
 
-.. raw:: html
+.. toctree::
 
-    <br>
-
-    <hr>
+  DEVELOPMENT.md

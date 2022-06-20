@@ -8,11 +8,19 @@ ROOT = Path(__file__).resolve().parent
 extensions = [
     "sphinx.ext.extlinks",
     "sphinx.ext.intersphinx",
+    "myst_parser"
 ]
 
 source_suffix = {
     ".rst": "restructuredtext",
+    ".md": "markdown"
 }
+
+myst_enable_extensions = [
+    "colon_fence",
+]
+
+numfig = True
 
 master_doc = "index"
 project = "Conda recipes for FPGA EDA tools"
