@@ -36,6 +36,6 @@ with urlopen(status_url) as url:
 scripts_dir = Path(environ['CI_SCRIPTS_PATH'])
 
 if environ.get('GITHUB_REF', '') == 'refs/heads/master':
-  check_call(scripts_dir / "master-package.sh")
+  check_call(scripts_dir / "upload-packages.sh")
 
 check_call(scripts_dir / "cleanup-anaconda.sh")
