@@ -10,7 +10,7 @@ These packages are mostly used by [`litex-buildenv`](https://github.com/litex-hu
 
 ## Common CI build failures
 
-Common issues with this repository include package dependencies (eg, where Conda has changed) and builds timing out.
+Common issues with this repository include package dependencies (e.g. where Conda has changed) and builds timing out.
 
 ## Testing conda builds locally
 
