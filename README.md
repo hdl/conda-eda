@@ -5,6 +5,7 @@
 </p>
 
 Conda recipes for FPGA EDA tools (for synthesis, place and route and bitstream generation).
+Find further details in [hdl.github.io/conda-eda](https://hdl.github.io/conda-eda/).
 
 ## Synthesis
 
