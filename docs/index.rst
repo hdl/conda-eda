@@ -8,6 +8,7 @@ Conda recipes for FPGA EDA tools
 
 .. toctree::
 
+  Tools.md
   DEVELOPMENT.md
   ContinuousIntegration
 
