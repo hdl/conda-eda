@@ -769,7 +769,6 @@ jobs:
     env:
       PACKAGE: "hls/xls"
       OS_NAME: "linux"
-      SKIP: "true"
     steps:
       - uses: actions/checkout@v3
       - uses: ./ci
