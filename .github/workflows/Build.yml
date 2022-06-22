@@ -154,6 +154,7 @@ jobs:
   #14
   quicklogic-yosys-plugins-linux:
     runs-on: "ubuntu-20.04"
+    needs: ["quicklogic-yosys-linux"]
     env:
       PACKAGE: "syn/quicklogic-yosys-plugins"
       OS_NAME: "linux"
