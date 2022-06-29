@@ -1,8 +1,8 @@
 diff --git a/yosys-symbiflow-plugins/Makefile_plugin.common b/yosys-symbiflow-plugins/Makefile_plugin.common
-index 0870f21..47d118e 100644
+index b26a7e0..32c1544 100644
 --- a/yosys-symbiflow-plugins/Makefile_plugin.common
 +++ b/yosys-symbiflow-plugins/Makefile_plugin.common
-@@ -38,22 +38,22 @@
+@@ -38,16 +38,16 @@
  # |-- example2-plugin
  # |-- ...
  
@@ -12,33 +12,21 @@ index 0870f21..47d118e 100644
 +YOSYS_PATH ?= $(realpath $(dir $(shell which uhdm-yosys))/..)
  
 -# Find yosys-config, throw an error if not found
--YOSYS_CONFIG ?= $(YOSYS_PATH)/bin/yosys-config
+-YOSYS_CONFIG = $(YOSYS_PATH)/bin/yosys-config
 +# Find uhdm-yosys-config, throw an error if not found
-+YOSYS_CONFIG ?= $(YOSYS_PATH)/bin/uhdm-yosys-config
++YOSYS_CONFIG = $(YOSYS_PATH)/bin/uhdm-yosys-config
  ifeq (,$(wildcard $(YOSYS_CONFIG)))
--$(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
-+$(error "Didn't find 'uhdm-yosys-config' under '$(YOSYS_PATH)'")
+-  $(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
++  $(error "Didn't find 'uhdm-yosys-config' under '$(YOSYS_PATH)'")
  endif
  
 -CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
--CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) #-DSDC_DEBUG
--LDFLAGS ?= $(shell $(YOSYS_CONFIG) --ldflags)
--LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs)
--PLUGINS_DIR ?= $(shell $(YOSYS_CONFIG) --datdir)/plugins
--DATA_DIR ?= $(shell $(YOSYS_CONFIG) --datdir)
--EXTRA_FLAGS ?=
 +CXX = $(shell $(YOSYS_CONFIG) --cxx)
-+CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) #-DSDC_DEBUG
-+LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
-+LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs)
-+PLUGINS_DIR = $(shell $(YOSYS_CONFIG) --datdir)/plugins
-+DATA_DIR = $(shell $(YOSYS_CONFIG) --datdir)
-+EXTRA_FLAGS =
- 
- OBJS := $(SOURCES:cc=o)
- 
+ CXXFLAGS := $(shell $(YOSYS_CONFIG) --cxxflags) $(CXXFLAGS) #-DSDC_DEBUG
+ LDFLAGS := $(shell $(YOSYS_CONFIG) --ldflags) $(LDFLAGS)
+ LDLIBS := $(shell $(YOSYS_CONFIG) --ldlibs) $(LDLIBS)
 diff --git a/yosys-symbiflow-plugins/Makefile_test.common b/yosys-symbiflow-plugins/Makefile_test.common
-index 61abadb..3701193 100644
+index ca6ec18..94090c7 100644
 --- a/yosys-symbiflow-plugins/Makefile_test.common
 +++ b/yosys-symbiflow-plugins/Makefile_test.common
 @@ -14,21 +14,21 @@
@@ -71,15 +59,15 @@ index 61abadb..3701193 100644
 +LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
 +LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
 +TEST_UTILS = $(abspath ../../test-utils/test-utils.tcl)
-
+ 
  define test_tpl =
  $(1): $(1)/ok
 @@ -49,7 +49,7 @@ $(1)/ok: $(1)/$$(notdir $(1).v)
-	echo "source $(TEST_UTILS)" > run-$$(notdir $(1)).tcl ;\
-	echo "source $$(notdir $(1)).tcl" >> run-$$(notdir $(1)).tcl ;\
-	DESIGN_TOP=$$(notdir $(1)) TEST_OUTPUT_PREFIX=./ \
+ 	echo "source $(TEST_UTILS)" > run-$$(notdir $(1)).tcl ;\
+ 	echo "source $$(notdir $(1)).tcl" >> run-$$(notdir $(1)).tcl ;\
+ 	DESIGN_TOP=$$(notdir $(1)) TEST_OUTPUT_PREFIX=./ \
 -	yosys -c "run-$$(notdir $(1)).tcl" -q -q -l $$(notdir $(1)).log; \
 +	uhdm-yosys -c "run-$$(notdir $(1)).tcl" -q -q -l $$(notdir $(1)).log; \
-	RETVAL=$$$$?; \
-	rm -f run-$$(notdir $(1)).tcl; \
-	if [ ! -z "$$($(1)_negative)" ] && [ $$($(1)_negative) -eq 1 ]; then \
+ 	RETVAL=$$$$?; \
+ 	rm -f run-$$(notdir $(1)).tcl; \
+ 	if [ ! -z "$$($(1)_negative)" ] && [ $$($(1)_negative) -eq 1 ]; then \
