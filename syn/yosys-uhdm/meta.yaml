@@ -27,21 +27,21 @@ requirements:
     - bison
     - cmake
     - flex
-    - pkg-config
     - orderedmultidict
+    - pkg-config
   host:
-    - python {{ python_version }}
-    - libuuid
-    - libffi
     - gperftools
-    - swig
+    - libffi
+    - libuuid
     - ncurses
     - openjdk
+    - python {{ python_version }}
+    - swig
   run:
-    - python {{python_version}}
-    - ncurses
-    - readline
     - gperftools
+    - ncurses
+    - python {{python_version}}
+    - readline
 
 test:
     commands:
