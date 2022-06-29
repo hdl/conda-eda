@@ -37,6 +37,8 @@ requirements:
     - openjdk
     - python {{ python_version }}
     - swig
+    - tk
+    - zlib
   run:
     - gperftools
     - ncurses
