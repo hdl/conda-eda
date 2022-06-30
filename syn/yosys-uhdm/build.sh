@@ -15,10 +15,6 @@ cd Surelog && \
 	cmake --install build && \
 	cd ..
 
-#Create aliases for gcc/gxx as `abc` uses them directly in Makefile
-alias gcc=x86_64-conda_cos6-linux-gnu-gcc
-alias gxx=x86_64-conda_cos6-linux-gnu-gcc
 make -C yosys ENABLE_READLINE=0 CONFIG=conda-linux PROGRAM_PREFIX=uhdm- install -j$(nproc)
-
 make -C $PWD/yosys-symbiflow-plugins/ UHDM_INSTALL_DIR=$PREFIX install -j$(nproc)
 
