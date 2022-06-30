@@ -2,7 +2,7 @@ diff --git a/yosys-symbiflow-plugins/Makefile_plugin.common b/yosys-symbiflow-pl
 index b26a7e0..32c1544 100644
 --- a/yosys-symbiflow-plugins/Makefile_plugin.common
 +++ b/yosys-symbiflow-plugins/Makefile_plugin.common
-@@ -38,16 +38,16 @@
+@@ -38,12 +38,12 @@
  # |-- example2-plugin
  # |-- ...
  
@@ -20,16 +20,12 @@ index b26a7e0..32c1544 100644
 +  $(error "Didn't find 'uhdm-yosys-config' under '$(YOSYS_PATH)'")
  endif
  
--CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
-+CXX = $(shell $(YOSYS_CONFIG) --cxx)
- CXXFLAGS := $(shell $(YOSYS_CONFIG) --cxxflags) $(CXXFLAGS) #-DSDC_DEBUG
- LDFLAGS := $(shell $(YOSYS_CONFIG) --ldflags) $(LDFLAGS)
- LDLIBS := $(shell $(YOSYS_CONFIG) --ldlibs) $(LDLIBS)
+ CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
 diff --git a/yosys-symbiflow-plugins/Makefile_test.common b/yosys-symbiflow-plugins/Makefile_test.common
 index ca6ec18..94090c7 100644
 --- a/yosys-symbiflow-plugins/Makefile_test.common
 +++ b/yosys-symbiflow-plugins/Makefile_test.common
-@@ -14,21 +14,21 @@
+@@ -14,13 +14,13 @@
  # test2_verify = $(call diff_test,test2,ext)
  #
  
@@ -47,21 +43,7 @@ index ca6ec18..94090c7 100644
 +$(error "Didn't find 'uhdm-yosys-config' under '$(YOSYS_PATH)'")
  endif
  
--GTEST_DIR ?= $(abspath ../../third_party/googletest)
--CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
--CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
--LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
--LDFLAGS ?= $(shell $(YOSYS_CONFIG) --ldflags)
--TEST_UTILS ?= $(abspath ../../test-utils/test-utils.tcl)
-+GTEST_DIR = $(abspath ../../third_party/googletest)
-+CXX = $(shell $(YOSYS_CONFIG) --cxx)
-+CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
-+LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
-+LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
-+TEST_UTILS = $(abspath ../../test-utils/test-utils.tcl)
- 
- define test_tpl =
- $(1): $(1)/ok
+ GTEST_DIR ?= $(abspath ../../third_party/googletest)
 @@ -49,7 +49,7 @@ $(1)/ok: $(1)/$$(notdir $(1).v)
  	echo "source $(TEST_UTILS)" > run-$$(notdir $(1)).tcl ;\
  	echo "source $$(notdir $(1)).tcl" >> run-$$(notdir $(1)).tcl ;\
