@@ -9,6 +9,7 @@ source:
   git_url: https://github.com/mithro/icestorm.git
   git_rev: master
   patches:
+   - icetime_add_stdexcept_include.patch    # [linux]
    - noiceprog.patch
 
 build:
