@@ -157,6 +157,7 @@ jobs:
     env:
       PACKAGE: "syn/quicklogic-yosys-plugins"
       OS_NAME: "linux"
+      SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/223
     steps:
       - uses: actions/checkout@v3
       - uses: ./ci
@@ -395,6 +396,7 @@ jobs:
     env:
       PACKAGE: "syn/quicklogic-yosys-plugins"
       OS_NAME: "osx"
+      SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/223
     steps:
       - uses: actions/checkout@v3
       - uses: ./ci
