@@ -493,6 +493,7 @@ jobs:
     env:
       PACKAGE: "syn/yosys"
       OS_NAME: "windows"
+      SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/224
     steps:
       - uses: actions/checkout@v3
       - uses: ./ci
