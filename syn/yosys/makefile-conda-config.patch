@@ -7,16 +7,16 @@ index d352358a..12108723 100644
  EXE = .exe
  
 +else ifeq ($(CONFIG),conda-linux)
-+CXX = x86_64-conda_cos6-linux-gnu-gcc
-+LD = x86_64-conda_cos6-linux-gnu-gcc
++CXX = $(CC)
++LD = $(CC)
 +CXXFLAGS += -std=c++11 -Os -fno-merge-constants
 +CFLAGS += -Wno-unused-function -Wno-unused-but-set-variable
 +ABCMKARGS += "ABC_READLINE_INCLUDES=-I${PREFIX}/include"
 +ABCMKARGS += "ABC_READLINE_LIBRARIES=-L${PREFIX}/lib -lreadline"
 +
 +else ifeq ($(CONFIG),conda-mac)
-+CXX = x86_64-apple-darwin13.4.0-clang
-+LD = x86_64-apple-darwin13.4.0-clang++
++CXX = $(CC)
++LD = $(CXX)
 +CXXFLAGS += -std=c++11 -Os
 +ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H"
 +

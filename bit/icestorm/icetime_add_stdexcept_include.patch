@@ -1,0 +1,12 @@
+diff --git a/icetime/icetime.cc b/icetime/icetime.cc
+index cc37625..0735b00 100644
+--- a/icetime/icetime.cc
++++ b/icetime/icetime.cc
+@@ -30,6 +30,7 @@
+ #include <functional>
+ #include <map>
+ #include <set>
++#include <stdexcept>
+ #include <string>
+ #include <tuple>
+ #include <vector>
