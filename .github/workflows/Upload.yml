@@ -18,8 +18,6 @@ on:
     - cron: '0 23 * * *' # run daily at 23:00 (UTC)
 
 env:
-  ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
-  ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
   OS_NAME: linux
 
 jobs:
@@ -27,6 +25,9 @@ jobs:
 
   Build:
     uses: ./.github/workflows/Build.yml
+    secrets:
+      ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+      ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
 
 
   Upload:
@@ -35,19 +36,27 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: |
+      - name: Upload packages
+        run: |
           # Required internally by the scripts to locate other scripts.
           export CI_SCRIPTS_PATH="$(pwd)/ci"
           ./ci/install.sh
           ./ci/upload-packages.sh
+        env:
+          ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+          ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
 
 
   Cleanup:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: |
+      - name: Cleanup Anaconda
+        run: |
           # Required internally by the scripts to locate other scripts.
           export CI_SCRIPTS_PATH="$(pwd)/ci"
           ./ci/install.sh
           ./ci/cleanup-anaconda.sh
+        env:
+          ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+          ANACONDA_USER: ${{ secrets.ANACONDA_USER }}

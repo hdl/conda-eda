@@ -2,6 +2,11 @@ name: Build packages
 
 on:
   workflow_call:
+    secrets:
+      ANACONDA_TOKEN:
+        description: 'Anaconda Token'
+      ANACONDA_USER:
+        description: 'Anaconda User'
 
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
