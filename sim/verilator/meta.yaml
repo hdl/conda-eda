@@ -38,8 +38,6 @@ requirements:
 
 test:
   requires:
-    - gxx_linux-64   [linux]
-    - clangxx_osx-64 [osx]
     - make
   files:
     - test/counter.v
