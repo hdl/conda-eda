@@ -20,10 +20,10 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}       [not osx]
-    - {{ compiler('cxx') }}     [not osx]
-    - {{ compiler('c') }} 4.0   [osx]
-    - {{ compiler('cxx') }} 4.0 [osx]
+    # Older Linux compiler packages doesn't contain the '...-conda-...'-prefixed
+    #   executables which are common since v8. They're required for verilation.
+    - {{ compiler('cxx') }}
+    - gxx_linux-64 >=8      [linux]
     - autoconf
     - make
   host:
@@ -32,6 +32,7 @@ requirements:
     - zlib
   run:
     - {{ compiler('cxx') }}
+    - gxx_linux-64 >=8      [linux]
     - bison
     - flex
     - ncurses
