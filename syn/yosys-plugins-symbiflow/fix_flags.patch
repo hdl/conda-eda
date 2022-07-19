@@ -1,0 +1,49 @@
+diff --git a/Makefile_plugin.common b/Makefile_plugin.common
+index 0870f21..ff7e178 100644
+--- a/Makefile_plugin.common
++++ b/Makefile_plugin.common
+@@ -47,13 +47,13 @@ ifeq (,$(wildcard $(YOSYS_CONFIG)))
+ $(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
+ endif
+ 
+-CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
+-CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) #-DSDC_DEBUG
+-LDFLAGS ?= $(shell $(YOSYS_CONFIG) --ldflags)
+-LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs)
+-PLUGINS_DIR ?= $(shell $(YOSYS_CONFIG) --datdir)/plugins
+-DATA_DIR ?= $(shell $(YOSYS_CONFIG) --datdir)
+-EXTRA_FLAGS ?=
++CXX = $(shell $(YOSYS_CONFIG) --cxx)
++CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) #-DSDC_DEBUG
++LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
++LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs)
++PLUGINS_DIR = $(shell $(YOSYS_CONFIG) --datdir)/plugins
++DATA_DIR = $(shell $(YOSYS_CONFIG) --datdir)
++EXTRA_FLAGS =
+ 
+ OBJS := $(SOURCES:cc=o)
+ 
+diff --git a/Makefile_test.common b/Makefile_test.common
+index 16e016e..605a99e 100644
+--- a/Makefile_test.common
++++ b/Makefile_test.common
+@@ -23,12 +23,12 @@ ifeq (,$(wildcard $(YOSYS_CONFIG)))
+ $(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
+ endif
+
+-GTEST_DIR ?= $(abspath ../../third_party/googletest)
+-CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
+-CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
+-LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
+-LDFLAGS ?= $(shell $(YOSYS_CONFIG) --ldflags)
+-TEST_UTILS ?= $(abspath ../../test-utils/test-utils.tcl)
++GTEST_DIR = $(abspath ../../third_party/googletest)
++CXX = $(shell $(YOSYS_CONFIG) --cxx)
++CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
++LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
++LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
++TEST_UTILS = $(abspath ../../test-utils/test-utils.tcl)
+
+ define test_tpl =
+ $(1): $(1)/ok
+

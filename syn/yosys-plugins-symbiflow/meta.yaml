@@ -8,6 +8,8 @@ package:
 source:
   git_url: https://github.com/SymbiFlow/yosys-f4pga-plugins
   git_rev: main
+  patches:
+    - fix_flags.patch
 
 build:
   # number: 201803050325
