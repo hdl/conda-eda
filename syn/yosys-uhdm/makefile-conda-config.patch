@@ -7,16 +7,16 @@ index b5cfb6b42..6138db005 100644
  EXE = .exe
  
 +else ifeq ($(CONFIG),conda-linux)
-+CXX = $(CC)
-+LD = $(CC)
++CXX = $(notdir $(CC))
++LD = $(notdir $(CC))
 +CXXFLAGS += -std=c++11 -Os -fno-merge-constants
 +CFLAGS += -Wno-unused-function -Wno-unused-but-set-variable
 +ABCMKARGS += "ABC_READLINE_INCLUDES=-I${PREFIX}/include"
 +ABCMKARGS += "ABC_READLINE_LIBRARIES=-L${PREFIX}/lib -lreadline"
 +
 +else ifeq ($(CONFIG),conda-mac)
-+CXX = $(CC)
-+LD = $(CXX)
++CXX = $(notdir $(CC))
++LD = $(notdir $(CXX))
 +CXXFLAGS += -std=c++11 -Os
 +ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H"
 +

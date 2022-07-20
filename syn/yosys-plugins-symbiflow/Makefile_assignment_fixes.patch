@@ -1,0 +1,32 @@
+diff --git a/Makefile_plugin.common b/Makefile_plugin.common
+index b26a7e0..ecf4b92 100644
+--- a/Makefile_plugin.common
++++ b/Makefile_plugin.common
+@@ -47,7 +47,7 @@ ifeq (,$(wildcard $(YOSYS_CONFIG)))
+   $(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
+ endif
+ 
+-CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
++CXX = $(shell $(YOSYS_CONFIG) --cxx)
+ CXXFLAGS := $(shell $(YOSYS_CONFIG) --cxxflags) $(CXXFLAGS) #-DSDC_DEBUG
+ LDFLAGS := $(shell $(YOSYS_CONFIG) --ldflags) $(LDFLAGS)
+ LDLIBS := $(shell $(YOSYS_CONFIG) --ldlibs) $(LDLIBS)
+diff --git a/Makefile_test.common b/Makefile_test.common
+index ca6ec18..5ffd545 100644
+--- a/Makefile_test.common
++++ b/Makefile_test.common
+@@ -24,10 +24,10 @@ $(error "Didn't find 'yosys-config' under '$(YOSYS_PATH)'")
+ endif
+ 
+ GTEST_DIR ?= $(abspath ../../third_party/googletest)
+-CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
+-CXXFLAGS ?= $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
+-LDLIBS ?= $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
+-LDFLAGS ?= $(shell $(YOSYS_CONFIG) --ldflags)
++CXX = $(shell $(YOSYS_CONFIG) --cxx)
++CXXFLAGS = $(shell $(YOSYS_CONFIG) --cxxflags) -I.. -I$(GTEST_DIR)/googletest/include
++LDLIBS = $(shell $(YOSYS_CONFIG) --ldlibs) -L$(GTEST_DIR)/build/lib -lgtest -lgtest_main -lpthread
++LDFLAGS = $(shell $(YOSYS_CONFIG) --ldflags)
+ TEST_UTILS ?= $(abspath ../../test-utils/test-utils.tcl)
+ 
+ define test_tpl =
