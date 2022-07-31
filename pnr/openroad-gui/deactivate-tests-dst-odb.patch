@@ -1,0 +1,100 @@
+diff --git a/src/dst/test/cpp/CMakeLists.txt b/src/dst/test/cpp/CMakeLists.txt
+index 8693fbaab..6c027cb28 100644
+--- a/src/dst/test/cpp/CMakeLists.txt
++++ b/src/dst/test/cpp/CMakeLists.txt
+@@ -5,26 +5,26 @@ set(TEST_LIBS
+ 
+ set(DST_HOME ${PROJECT_SOURCE_DIR})
+ 
+-add_executable(TestWorker TestWorker.cc stubs.cpp)
+-add_executable(TestBalancer TestBalancer.cc stubs.cpp)
+-add_executable(TestDistributed TestDistributed.cc stubs.cpp)
+-
+-target_link_libraries(TestWorker ${TEST_LIBS})
+-target_link_libraries(TestBalancer ${TEST_LIBS})
+-target_link_libraries(TestDistributed ${TEST_LIBS})
+-
+-target_include_directories(TestWorker
+-  PRIVATE
+-  ${DST_HOME}/src
+-  ${OPENROAD_HOME}/include
+-)
+-target_include_directories(TestBalancer
+-  PRIVATE
+-  ${DST_HOME}/src
+-  ${OPENROAD_HOME}/include
+-)
+-target_include_directories(TestDistributed
+-  PRIVATE
+-  ${DST_HOME}/src
+-  ${OPENROAD_HOME}/include
+-)
++# add_executable(TestWorker TestWorker.cc stubs.cpp)
++# add_executable(TestBalancer TestBalancer.cc stubs.cpp)
++# add_executable(TestDistributed TestDistributed.cc stubs.cpp)
++# 
++# target_link_libraries(TestWorker ${TEST_LIBS})
++# target_link_libraries(TestBalancer ${TEST_LIBS})
++# target_link_libraries(TestDistributed ${TEST_LIBS})
++# 
++# target_include_directories(TestWorker
++#   PRIVATE
++#   ${DST_HOME}/src
++#   ${OPENROAD_HOME}/include
++# )
++# target_include_directories(TestBalancer
++#   PRIVATE
++#   ${DST_HOME}/src
++#   ${OPENROAD_HOME}/include
++# )
++# target_include_directories(TestDistributed
++#   PRIVATE
++#   ${DST_HOME}/src
++#   ${OPENROAD_HOME}/include
++# )
+diff --git a/src/odb/test/cpp/CMakeLists.txt b/src/odb/test/cpp/CMakeLists.txt
+index 917627742..7ee8a7caf 100644
+--- a/src/odb/test/cpp/CMakeLists.txt
++++ b/src/odb/test/cpp/CMakeLists.txt
+@@ -15,22 +15,22 @@ set(TEST_LIBS
+         utl
+ )
+ 
+-add_executable(TestCallBacks TestCallBacks.cpp)
+-add_executable(TestGeom TestGeom.cpp)
+-add_executable(TestModule TestModule.cpp)
+-add_executable(TestLef58Properties TestLef58Properties.cpp)
+-add_executable(TestGroup TestGroup.cpp)
+-add_executable(TestGCellGrid TestGCellGrid.cpp)
+-add_executable(TestJournal TestJournal.cpp)
+-add_executable(TestAccessPoint TestAccessPoint.cpp)
+-add_executable(TestGuide TestGuide.cpp)
+-
+-target_link_libraries(TestCallBacks ${TEST_LIBS})
+-target_link_libraries(TestGeom ${TEST_LIBS})
+-target_link_libraries(TestModule ${TEST_LIBS})
+-target_link_libraries(TestLef58Properties ${TEST_LIBS})
+-target_link_libraries(TestGroup ${TEST_LIBS})
+-target_link_libraries(TestGCellGrid ${TEST_LIBS})
+-target_link_libraries(TestJournal ${TEST_LIBS})
+-target_link_libraries(TestAccessPoint ${TEST_LIBS})
+-target_link_libraries(TestGuide ${TEST_LIBS})
++# add_executable(TestCallBacks TestCallBacks.cpp)
++# add_executable(TestGeom TestGeom.cpp)
++# add_executable(TestModule TestModule.cpp)
++# add_executable(TestLef58Properties TestLef58Properties.cpp)
++# add_executable(TestGroup TestGroup.cpp)
++# add_executable(TestGCellGrid TestGCellGrid.cpp)
++# add_executable(TestJournal TestJournal.cpp)
++# add_executable(TestAccessPoint TestAccessPoint.cpp)
++# add_executable(TestGuide TestGuide.cpp)
++# 
++# target_link_libraries(TestCallBacks ${TEST_LIBS})
++# target_link_libraries(TestGeom ${TEST_LIBS})
++# target_link_libraries(TestModule ${TEST_LIBS})
++# target_link_libraries(TestLef58Properties ${TEST_LIBS})
++# target_link_libraries(TestGroup ${TEST_LIBS})
++# target_link_libraries(TestGCellGrid ${TEST_LIBS})
++# target_link_libraries(TestJournal ${TEST_LIBS})
++# target_link_libraries(TestAccessPoint ${TEST_LIBS})
++# target_link_libraries(TestGuide ${TEST_LIBS})

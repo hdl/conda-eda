@@ -13,6 +13,7 @@ source:
       - odb-drt-disable-tests.patch
       - sta-add-install-options.patch
       - gui-find-qt-only-if-enabled.patch
+      - deactivate-tests-dst-odb.patch
   - url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ lemon_version }}.tar.gz
     md5: e89f887559113b68657eca67cf3329b5
     folder: third_party/lemon
@@ -45,6 +46,8 @@ requirements:
     - zlib
     - fmt
     - libgomp
+    - qt
+    - mesalib
   run:
     # missing run_exports
     - {{ pin_compatible('libboost', min_pin='x.x', max_pin='x.x') }}
