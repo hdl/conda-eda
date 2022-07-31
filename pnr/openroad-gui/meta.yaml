@@ -1,0 +1,65 @@
+# Use `conda-build-prepare` before building for a better version string.
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '')|replace('-', '')|default('0.X'), GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH|default('gUNKNOWN')) %}
+{% set lemon_version = '1.3.1' %}
+{% set lemon_md5 = 'e89f887559113b68657eca67cf3329b5' %}
+package:
+  name: openroad-gui
+  version: {{ version }}
+
+source:
+  - git_url: https://github.com/The-OpenROAD-Project/OpenROAD.git
+    git_rev: master
+    patches:
+      - odb-drt-disable-tests.patch
+      - sta-add-install-options.patch
+      - gui-find-qt-only-if-enabled.patch
+  - url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ lemon_version }}.tar.gz
+    md5: e89f887559113b68657eca67cf3329b5
+    folder: third_party/lemon
+build:
+  # number: 202202031935
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20220203_1935
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+  ignore_run_exports_from:
+    # header-only libraries
+    - fmt
+
+requirements:
+  build:
+    - make
+    - cmake >=3.19
+    - swig 4.0.2
+    - bison
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - python
+    - libboost 1.73
+    - eigen 3.3
+    - spdlog 1.8.1
+    - readline
+    - tk
+    - zlib
+    - fmt
+    - libgomp
+  run:
+    # missing run_exports
+    - {{ pin_compatible('libboost', min_pin='x.x', max_pin='x.x') }}
+    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}    
+    
+test:
+  commands:
+    - openroad -version
+    - sta -version
+
+about:
+  home: https://theopenroadproject.org/
+  license: BSD-3-Clause
+  summary: OpenROAD is an unified application implementing an RTL-to-GDS Flow.
+
+extra:
+  recipe-maintainers:
+    - proppy
