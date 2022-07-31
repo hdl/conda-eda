@@ -33,6 +33,7 @@ requirements:
     - cmake >=3.19
     - swig 4.0.2
     - bison
+    - qt 5.15
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
