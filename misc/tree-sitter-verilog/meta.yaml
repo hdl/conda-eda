@@ -6,7 +6,9 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/tree-sitter/tree-sitter-verilog.git
+  - git_url: https://github.com/tree-sitter/tree-sitter-verilog.git
+  - git_url: https://github.com/tree-sitter/py-tree-sitter
+    folder: py-tree-sitter
 
 build:
   # number: 201803050325
@@ -20,10 +22,8 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-  host:
     - nodejs
     - python
-    - pip
 
 about:
   home: https://github.com/tree-sitter/tree-sitter-verilog
