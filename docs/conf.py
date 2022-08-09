@@ -115,6 +115,7 @@ texinfo_documents = [
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
+    "conda": ("https://docs.conda.io/projects/conda/en/latest/", None),
     "constraints": ("https://hdl.github.io/constraints", None)
 }
 
@@ -127,5 +128,5 @@ extlinks = {
     "ghsharp": ("https://github.com/hdl/conda-eda/issues/%s", "#"),
     "ghissue": ("https://github.com/hdl/conda-eda/issues/%s", "issue #"),
     "ghpull": ("https://github.com/hdl/conda-eda/pull/%s", "pull request #"),
-    "ghsrc": ("https://github.com/hdl/conda-eda/blob/main/%s", ""),
+    "ghsrc": ("https://github.com/hdl/conda-eda/blob/master/%s", ""),
 }
