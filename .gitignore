@@ -2,3 +2,5 @@ Miniconda3-latest-Linux-x86_64.sh
 recipe_append.yaml
 gcc/nostdc/conda_build_config.*.yaml
 gcc/newlib/conda_build_config.*.yaml
+/docs/_build/
+/docs/_theme/
