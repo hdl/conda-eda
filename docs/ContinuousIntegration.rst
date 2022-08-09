@@ -3,4 +3,11 @@ Continuous Integration (CI)
 
 .. include:: shields.inc
 
-|SHIELD:svg:CI:eda:Upload|
+============ ================================
+Repository   Status
+============ ================================
+eda          |SHIELD:svg:CI:eda:Upload|
+compilers    |SHIELD:svg:CI:compilers:Upload|
+misc:        |SHIELD:svg:CI:misc:Upload|
+prog:        |SHIELD:svg:CI:prog:Upload|
+============ ================================
