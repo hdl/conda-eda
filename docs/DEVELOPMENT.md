@@ -1,7 +1,7 @@
 # Development
 
 This repository is set up to be built in GitHub Actions.
-See [`.github/workflows/build-packages.yml`](.github/workflows/build-packages.yml).
+See {ghsrc}`.github/workflows/Build.yml`.
 
 On a successful build, the resulting packages are uploaded to https://anaconda.org/litex-hub/repo and can be installed
 with: `conda install --channel "LiteX-Hub" package`.

@@ -8,4 +8,16 @@ Conda recipes for FPGA EDA tools
 
 .. toctree::
 
+  Tools.md
+  Usage
   DEVELOPMENT.md
+  ContinuousIntegration
+
+.. toctree::
+  :caption: Repositories
+  :hidden:
+
+  hdl/conda-eda ➚ <https://github.com/hdl/conda-eda>
+  hdl/conda-compilers ➚ <https://github.com/hdl/conda-compilers>
+  hdl/conda-misc ➚ <https://github.com/hdl/conda-misc>
+  hdl/conda-prog ➚ <https://github.com/hdl/conda-prog>
