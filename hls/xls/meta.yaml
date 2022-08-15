@@ -8,9 +8,6 @@ package:
 source:
   - git_url: https://github.com/google/xls.git
     git_rev: main
-    patches:
-      - skip-python-requirements.patch
-      - use-llvm-toolchain.patch      
 
 build:
   # number: 202202082028
@@ -24,18 +21,7 @@ requirements:
   build:
     - bazel
   host:
-    - python
-    - pip
     - protobuf
-    - pycparser 2.19
-    - Flask 1.1.2
-    - Jinja2 2.11.3
-    - werkzeug 1.0.1
-    - itsdangerous 1.1.0
-    - MarkupSafe 2.0
-    - click 7.1.2
-    - numpy >=1.19.5,<=1.20.0
-    - scipy >=1.5.4,<=1.6.0
     
 test:
   commands:
