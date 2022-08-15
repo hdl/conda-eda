@@ -2,6 +2,8 @@
 
 set -ex
 
+alias bazel=$SRC_DIR/bazelisk-linux-amd64
+
 bazel build -c opt \
   --extra_toolchains=@llvm_toolchain//:cc-toolchain-x86_64-linux \
   //xls/dslx:interpreter_main \
