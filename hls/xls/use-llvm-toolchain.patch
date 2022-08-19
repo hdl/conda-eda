@@ -1,39 +1,9 @@
 diff --git a/.bazelrc b/.bazelrc
-index 2d43fa52..b0b0f9cd 100644
+index 2d43fa52..b906f240 100644
 --- a/.bazelrc
 +++ b/.bazelrc
-@@ -5,7 +5,4 @@ build --copt "-Wno-sign-compare"
- build --copt "-Wno-comment"
- build --host_copt "-Wno-sign-compare"
- build --host_copt "-Wno-comment"
--
--# TODO(leary): 2020-09-09 Make it possible to enable this option.
--# Currently m4 doesn't seem to work as a dependency.
--# build --crosstool_top=@llvm_toolchain_llvm//:toolchain
+@@ -9,3 +9,4 @@ build --host_copt "-Wno-comment"
+ # TODO(leary): 2020-09-09 Make it possible to enable this option.
+ # Currently m4 doesn't seem to work as a dependency.
+ # build --crosstool_top=@llvm_toolchain_llvm//:toolchain
 +build --incompatible_enable_cc_toolchain_resolution
-diff --git a/WORKSPACE b/WORKSPACE
-index b31cd958..05751201 100644
---- a/WORKSPACE
-+++ b/WORKSPACE
-@@ -8,10 +8,10 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
- 
- http_archive(
-     name = "com_grail_bazel_toolchain",
--    sha256 = "dd03374af7885d255eb735b9065a32463a1154d9de6eb47261a49c8acc1cd497",
-+    sha256 = "da607faed78c4cb5a5637ef74a36fdd2286f85ca5192222c4664efec2d529bb8",
-     strip_prefix = "bazel-toolchain-0.6.3",
-     urls = [
--        "https://github.com/grailbio/bazel-toolchain/archive/0.6.3.zip",
-+        "https://github.com/grailbio/bazel-toolchain/archive/0.6.3.tar.gz",
-     ],
- )
- 
-@@ -23,7 +23,7 @@ load("@com_grail_bazel_toolchain//toolchain:rules.bzl", "llvm_toolchain")
- 
- llvm_toolchain(
-     name = "llvm_toolchain",
--    llvm_version = "10.0.0",
-+    llvm_version = "13.0.0",
- )
- 
- load("@llvm_toolchain//:toolchains.bzl", "llvm_register_toolchains")

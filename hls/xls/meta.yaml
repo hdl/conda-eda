@@ -9,9 +9,9 @@ source:
   - git_url: https://github.com/google/xls.git
     git_rev: main
     patches:
-      - skip-python-requirements.patch
-      - use-llvm-toolchain.patch      
-
+      - use-llvm-toolchain.patch 
+  - url: https://github.com/bazelbuild/bazelisk/releases/download/v1.12.0/bazelisk-linux-amd64
+    sha256: 6b0bcb2ea15bca16fffabe6fda75803440375354c085480fe361d2cbf32501db
 build:
   # number: 202202082028
   number: {{ environ.get('DATE_NUM') }}
@@ -20,23 +20,6 @@ build:
   script_env:
     - CI
 
-requirements:
-  build:
-    - bazel
-  host:
-    - python
-    - pip
-    - protobuf
-    - pycparser 2.19
-    - Flask 1.1.2
-    - Jinja2 2.11.3
-    - werkzeug 1.0.1
-    - itsdangerous 1.1.0
-    - MarkupSafe 2.0
-    - click 7.1.2
-    - numpy >=1.19.5,<=1.20.0
-    - scipy >=1.5.4,<=1.6.0
-    
 test:
   commands:
     - interpreter_main --version
