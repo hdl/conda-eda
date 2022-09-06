@@ -147,28 +147,6 @@ jobs:
       - uses: ./ci
 
   #13
-  quicklogic-yosys-linux:
-    runs-on: "ubuntu-20.04"
-    env:
-      PACKAGE: "syn/quicklogic-yosys"
-      OS_NAME: "linux"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./ci
-
-  #14
-  quicklogic-yosys-plugins-linux:
-    runs-on: "ubuntu-20.04"
-    needs: ["quicklogic-yosys-linux"]
-    env:
-      PACKAGE: "syn/quicklogic-yosys-plugins"
-      OS_NAME: "linux"
-      SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/223
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./ci
-
-  #15
   symbiflow-yosys-plugins-linux:
     runs-on: "ubuntu-20.04"
     needs: ["icarus-linux", "yosys-linux-py37", "yosys-linux-py38", "surelog-linux-py37", "surelog-linux-py38"]
@@ -179,7 +157,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #16
+  #14
   vtr-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -189,7 +167,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #17
+  #15
   vtr-gui-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -199,7 +177,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #18
+  #16
   vtr-optimized-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -209,7 +187,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #19
+  #17
   quicklogic-vtr-linux:
     runs-on: "ubuntu-20.04"
     needs: "vtr-linux"
@@ -222,7 +200,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #20
+  #18
   quicklogic-vtr-gui-linux:
     runs-on: "ubuntu-20.04"
     needs: "vtr-gui-linux"
@@ -235,7 +213,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #21
+  #19
   nextpnr-ice40-linux:
     runs-on: "ubuntu-20.04"
     needs: ["icestorm-linux"]
@@ -246,7 +224,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #22
+  #20
   nextpnr-ecp5-linux:
     runs-on: "ubuntu-20.04"
     needs: ["prjtrellis-linux"]
@@ -257,7 +235,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #23
+  #21
   nextpnr-generic-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -267,7 +245,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #24
+  #22
   nextpnr-xilinx-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -285,7 +263,7 @@ jobs:
           sudo apt install -y pypy3
       - uses: ./ci
 
-  #25
+  #23
   nextpnr-fpga_interchange-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -295,7 +273,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #26
+  #24
   symbiyosys-linux-py37:
     runs-on: "ubuntu-20.04"
     needs: "yosys-linux-py37"
@@ -308,7 +286,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #27
+  #25
   symbiyosys-linux-py38:
     runs-on: "ubuntu-20.04"
     needs: "yosys-linux-py38"
@@ -321,7 +299,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #28
+  #26
   xilinx-vivado-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -333,7 +311,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #29
+  #27
   icestorm-osx:
     runs-on: "macos-latest"
     env:
@@ -343,7 +321,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #30
+  #28
   prjtrellis-osx:
     runs-on: "macos-latest"
     env:
@@ -353,7 +331,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #31
+  #29
   icarus-osx:
     runs-on: "macos-latest"
     env:
@@ -363,7 +341,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #32
+  #30
   verilator-osx:
     runs-on: "macos-latest"
     env:
@@ -373,7 +351,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #33
+  #31
   yosys-osx:
     runs-on: "macos-latest"
     env:
@@ -384,30 +362,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #34
-  quicklogic-yosys-osx:
-    runs-on: "macos-latest"
-    env:
-      PACKAGE: "syn/quicklogic-yosys"
-      OS_NAME: "osx"
-      EXTRA_BUILD_ARGS: "--no-test"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./ci
-
-  #35
-  quicklogic-yosys-plugins-osx:
-    runs-on: "macos-latest"
-    needs: ["icarus-osx", "quicklogic-yosys-osx"]
-    env:
-      PACKAGE: "syn/quicklogic-yosys-plugins"
-      OS_NAME: "osx"
-      SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/223
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./ci
-
-  #36
+  #32
   symbiflow-yosys-plugins-osx:
     runs-on: "macos-latest"
     needs: ["icarus-osx", "yosys-osx"]
@@ -419,7 +374,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #37
+  #33
   vtr-osx:
     runs-on: "macos-latest"
     env:
@@ -430,7 +385,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #38
+  #34
   vtr-gui-osx:
     runs-on: "macos-latest"
     env:
@@ -441,7 +396,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #39
+  #35
   nextpnr-ice40-osx:
     runs-on: "macos-latest"
     needs: ["icestorm-osx"]
@@ -452,7 +407,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #40
+  #36
   nextpnr-generic-osx:
     runs-on: "macos-latest"
     env:
@@ -462,7 +417,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #41
+  #37
   icestorm-windows:
     runs-on: "windows-latest"
     env:
@@ -472,7 +427,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #42
+  #38
   prjtrellis-windows:
     runs-on: "windows-latest"
     env:
@@ -483,7 +438,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #43
+  #39
   icarus-windows:
     runs-on: "windows-latest"
     env:
@@ -493,7 +448,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #44
+  #40
   yosys-windows:
     runs-on: "windows-latest"
     env:
@@ -504,17 +459,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #45
-  quicklogic-yosys-windows:
-    runs-on: "windows-latest"
-    env:
-      PACKAGE: "syn/quicklogic-yosys"
-      OS_NAME: "windows"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./ci
-
-  #46
+  #41
   nextpnr-ice40-windows:
     runs-on: "windows-latest"
     needs: ["icestorm-windows"]
@@ -526,7 +471,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #47
+  #42
   nextpnr-generic-windows:
     runs-on: "windows-latest"
     env:
@@ -537,7 +482,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #48
+  #43
   verible-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -548,7 +493,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #49
+  #44
   tree-sitter-verilog-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -558,7 +503,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #50
+  #45
   odin-ii-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -569,7 +514,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #51
+  #46
   slang-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -580,7 +525,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #52
+  #47
   sv-parser-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -590,7 +535,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #53
+  #48
   moore-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -601,7 +546,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #54
+  #49
   surelog-linux-py37:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -613,7 +558,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #55
+  #50
   surelog-linux-py38:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -625,7 +570,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #56
+  #51
   surelog-uhdm-linux-py37:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -638,7 +583,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #57
+  #52
   surelog-uhdm-linux-py38:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -651,7 +596,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #58
+  #53
   yosys-uhdm-linux-py37:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -663,7 +608,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #59
+  #54
   yosys-uhdm-linux-py38:
     needs: ["libunwind", "gperftools"]
     runs-on: "ubuntu-20.04"
@@ -675,7 +620,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #60
+  #55
   libunwind:
     runs-on: "ubuntu-20.04"
     env:
@@ -685,7 +630,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #61
+  #56
   gperftools:
     needs: "libunwind"
     runs-on: "ubuntu-20.04"
@@ -696,7 +641,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #62
+  #57
   verilator-uhdm-linux-py37:
     needs: ["gperftools"]
     runs-on: "ubuntu-20.04"
@@ -708,7 +653,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #63
+  #58
   verilator-uhdm-linux-py38:
     needs: ["gperftools"]
     runs-on: "ubuntu-20.04"
@@ -720,7 +665,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #64
+  #59
   netgen-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -730,7 +675,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #65
+  #60
   zachjs-sv2v-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -740,7 +685,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #66
+  #61
   open_pdks-linux:
     runs-on: "ubuntu-20.04"
     needs: ["magic-linux"]
@@ -751,7 +696,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #67
+  #62
   openroad-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -761,7 +706,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #68
+  #63
   xls-linux:
     # uses older ubuntu for better compat:
     # https://github.com/hdl/conda-eda/issues/199
