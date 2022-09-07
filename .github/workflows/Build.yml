@@ -725,16 +725,28 @@ jobs:
       - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libgmp-dev
       - uses: ./ci
 
-  open_pdks-linux:
-    needs: ["magic-linux"]
+  open_pdks-linux-sky130a:
     runs-on: [self-hosted, Linux, X64]
     container: ubuntu:20.04
+    needs: ["magic-linux"]
     env:
-      PACKAGE: "misc/open_pdks"
+      PACKAGE: "misc/open_pdks/sky130a"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
       - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1
+      - uses: ./ci
+
+  open_pdks-linux-gf180mcuc:
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
+    needs: ["magic-linux"]
+    env:
+      PACKAGE: "misc/open_pdks/gf180mcuc"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1        
       - uses: ./ci
 
   openroad-linux:

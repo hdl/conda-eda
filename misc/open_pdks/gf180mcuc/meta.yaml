@@ -1,0 +1,80 @@
+# Use `conda-build-prepare` before building for a better version string.
+{% set version = '%s_%04i_%s'| format(GIT_DESCRIBE_TAG | default('0.X'), GIT_DESCRIBE_NUMBER | default(0) | int, GIT_DESCRIBE_HASH | default('gUNKNOWN')) %}
+
+package:
+  name: open_pdks.gf180mcuc
+  version: {{ version }}
+
+source:
+  - git_url: https://github.com/RTimothyEdwards/open_pdks.git
+    git_rev: master
+    patches:
+      - use-sources-from-conda.patch
+      - disable-link-targets-for-C-variant.patch
+  - git_url: https://github.com/efabless/globalfoundries-pdk-libs-gf180mcu_fd_pr.git
+    git_rev: main
+    git_depth: 1
+    folder: gf180mcu-pdk/gf180mcu_fd_pr
+  - git_url: https://github.com/google/globalfoundries-pdk-libs-gf180mcu_fd_io.git
+    git_rev: main
+    git_depth: 1
+    folder: gf180mcu-pdk/gf180mcu_fd_io
+  - git_url: https://github.com/efabless/globalfoundries-pdk-libs-gf180mcu_fd_sc_mcu7t5v0.git
+    git_rev: main
+    git_depth: 1
+    folder: gf180mcu-pdk/gf180mcu_fd_sc_mcu7t5v0
+  - git_url: https://github.com/efabless/globalfoundries-pdk-libs-gf180mcu_fd_sc_mcu9t5v0.git
+    git_rev: main
+    git_depth: 1
+    folder: gf180mcu-pdk/gf180mcu_fd_sc_mcu9t5v0
+  - git_url: https://github.com/google/globalfoundries-pdk-ip-gf180mcu_fd_ip_sram.git
+    git_rev: main
+    git_depth: 1
+    folder: gf180mcu-pdk/gf180mcu_fd_ip_sram
+  - git_url: https://github.com/stineje/globalfoundries-pdk-libs-gf180mcu_osu_sc
+    git_rev: main
+    git_depth: 1
+    folder: gf180mcu-pdk/gf180mcu_osu_sc
+
+build:
+  noarch: generic
+  # number: 202202031935
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20220203_1935
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+
+requirements:
+  build:
+    - autoconf
+    - automake
+    - make
+  host:
+    - python
+    - magic
+  run_constrained:
+    - {{ pin_compatible('magic', min_pin='x.x.x', max_pin='x.x.x') }}
+
+test:
+  commands:
+    - test -d $PREFIX/share/pdk/gf180mcuC/libs.ref/gf180mcu_fd_io
+    - test -d $PREFIX/share/pdk/gf180mcuC/libs.ref/gf180mcu_fd_sc_mcu7t5v0
+    - test -d $PREFIX/share/pdk/gf180mcuC/libs.ref/gf180mcu_fd_sc_mcu9t5v0
+    - test -d $PREFIX/share/pdk/gf180mcuC/libs.ref/gf180mcu_fd_ip_sram
+    - test -d $PREFIX/share/pdk/gf180mcuC/libs.ref/gf180mcu_osu_sc_gp9t3v3
+    - test -d $PREFIX/share/pdk/gf180mcuC/libs.ref/gf180mcu_osu_sc_gp12t3v3
+    # from gf180mcu_fd_pr
+    - test -d $PREFIX/share/pdk/gf180mcuC/libs.tech/ngspice
+    - test -d $PREFIX/share/pdk/gf180mcuC/libs.tech/xyce
+    - test -d $PREFIX/share/pdk/gf180mcuC/libs.tech/klayout
+    - test -d $PREFIX/share/pdk/gf180mcuC/libs.tech/xschem
+
+about:
+  home: http://opencircuitdesign.com/open_pdks/
+  license: Apache-2.0
+  summary: 'PDK installer for open-source EDA tools and toolchains. Distributed with a setup for the Google/GlobalFoundries 180nm process.'
+
+extra:
+  recipe-maintainers:
+    - proppy

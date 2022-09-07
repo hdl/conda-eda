@@ -32,7 +32,7 @@ build:
   string: {{ environ.get('DATE_STR') }}
   script_env:
     - CI
-    
+
 requirements:
   build:
     - autoconf
@@ -43,7 +43,7 @@ requirements:
     - pip
     - typing_inspect
     - marshmallow
-    - marshmallow-enum    
+    - marshmallow-enum
     - magic
   run_constrained:
     - {{ pin_compatible('magic', min_pin='x.x.x', max_pin='x.x.x') }}
@@ -54,7 +54,7 @@ test:
     - test -d $PREFIX/share/pdk/sky130A/libs.ref/sky130_fd_sc_hvl
     - test -d $PREFIX/share/pdk/sky130A/libs.ref/sky130_fd_io
     - test -d $PREFIX/share/pdk/sky130A/libs.ref/sky130_fd_pr
-  
+
 about:
   home: http://opencircuitdesign.com/open_pdks/
   license: Apache-2.0
