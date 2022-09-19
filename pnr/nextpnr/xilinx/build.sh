@@ -3,7 +3,16 @@
 set -e
 set -x
 
-cmake -DARCH=xilinx -DBUILD_GUI=OFF -DCMAKE_INSTALL_PREFIX=${PREFIX} -DENABLE_READLINE=No .
+RECIPE_CMAKE_ARGS=(
+  # The variable set by Conda.
+  $CMAKE_ARGS
+
+  -DARCH=xilinx
+  -DBUILD_GUI=OFF
+  -DCMAKE_INSTALL_PREFIX=$PREFIX
+  )
+
+cmake ${RECIPE_CMAKE_ARGS[@]} .
 make -j$(nproc)
 make install
 
