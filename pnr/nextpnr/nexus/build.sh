@@ -7,6 +7,10 @@ RECIPE_CMAKE_ARGS=(
   # The variable set by Conda.
   $CMAKE_ARGS
 
+  # Use 'Python3_FIND_STRATEGY=LOCATION' in projects with 'cmake_minimum_required' <3.15 too.
+  # More info: https://cmake.org/cmake/help/v3.22/policy/CMP0094.html
+  -DCMAKE_POLICY_DEFAULT_CMP0094=NEW
+
   -DARCH=nexus
   -DBUILD_GUI=OFF
   -DOXIDE_INSTALL_PREFIX=$PREFIX
