@@ -3,8 +3,18 @@
 set -e
 set -x
 
-cd libtrellis
+# Use 'Python3_FIND_STRATEGY=LOCATION' in projects with 'cmake_minimum_required'
+# <3.15 too. More info: https://cmake.org/cmake/help/v3.22/policy/CMP0094.html
+#
+# The 'CMAKE_ARGS' variable contains arguments recommended for building by Conda.
+CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_POLICY_DEFAULT_CMP0094=NEW"
+
+mkdir -p libtrellis/build
+cd libtrellis/build
+
 cmake \
+	${CMAKE_ARGS} \
+	\
 	-DCMAKE_INSTALL_PREFIX=/ 			\
 	-DCMAKE_INSTALL_BINDIR='/bin'			\
 	-DCMAKE_INSTALL_DATADIR='/share'		\
@@ -16,10 +26,6 @@ cmake \
 	-DCMAKE_INSTALL_LIBEXECDIR='/libexec'		\
 	-DCMAKE_INSTALL_LOCALEDIR='/share/locale'	\
 	\
-	-DPYTHON_EXECUTABLE=$(which python) \
-	-DPYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())")  \
-	-DPYTHON_LIBRARY=$(python -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") \
-	\
 	-DBOOST_ROOT="${BUILD_PREFIX}" \
 	-DBoost_NO_SYSTEM_PATHS:BOOL=ON \
 	-DBOOST_INCLUDEDIR="${BUILD_PREFIX}/include" \
@@ -28,7 +34,7 @@ cmake \
 	-DBUILD_SHARED=ON \
 	-DSTATIC_BUILD=OFF \
 	-DBoost_USE_STATIC_LIBS=ON \
-	.
+	..
 
 make -j$CPU_COUNT
 make DESTDIR=${PREFIX} install
