@@ -16,6 +16,16 @@ RECIPE_CMAKE_ARGS=(
   -DCMAKE_INSTALL_PREFIX=/
   )
 
+# This addresses the following error on macOS:
+#
+# In file included from /Users/runner/work/conda-eda/conda-eda/workdir/conda-env/conda-bld/nextpnr-generic_1663768849724/work/common/place/detail_place_core.cc:20:
+#  /Users/runner/work/conda-eda/conda-eda/workdir/conda-env/conda-bld/nextpnr-generic_1663768849724/work/common/place/detail_place_core.h:102:10: error: 'shared_timed_mutex' is unavailable: introduced in macOS 10.12 - see https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
+#      std::shared_timed_mutex archapi_mutex;
+
+if [[ "$(uname -s)" == "Darwin"* ]]; then
+    CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+fi
+
 mkdir -p build
 cd build
 
