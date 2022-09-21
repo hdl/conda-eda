@@ -3,14 +3,23 @@
 set -e
 set -x
 
-export PYTHON_EXECUTABLE=`which python3`
+RECIPE_CMAKE_ARGS=(
+  # The variable set by Conda.
+  $CMAKE_ARGS
+
+  # Use 'Python3_FIND_STRATEGY=LOCATION' in projects with 'cmake_minimum_required' <3.15 too.
+  # More info: https://cmake.org/cmake/help/v3.22/policy/CMP0094.html
+  -DCMAKE_POLICY_DEFAULT_CMP0094=NEW
+
+  -DARCH=fpga_interchange
+  )
 
 cd nextpnr
 mkdir -p build
-pushd build
-cmake -DARCH=fpga_interchange -DCMAKE_INSTALL_PREFIX=${PREFIX} -DPYTHON_EXECUTABLE=$PYTHON_EXECUTABLE ..
+cd build
 
+cmake ${RECIPE_CMAKE_ARGS[@]} ..
 make -j${CPU_COUNT}
-
 make install
+
 cp bba/bbasm ${PREFIX}/bin
