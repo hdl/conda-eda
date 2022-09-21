@@ -17,6 +17,13 @@ RECIPE_CMAKE_ARGS=(
   -DCMAKE_INSTALL_PREFIX=/
   )
 
+# Ignore errors about unavailable symbols on macOS. 'nextpnr' uses 'shared_timed_mutex' from macOS
+# SDK 10.12 while 10.9 is used by default. Newer symbols are available in Conda libraries though:
+# https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
+if [ "$(uname -s)" = Darwin ]; then
+  RECIPE_CMAKE_ARGS+=( -DCMAKE_CXX_FLAGS=-D_LIBCPP_DISABLE_AVAILABILITY )
+fi
+
 mkdir -p build
 cd build
 
