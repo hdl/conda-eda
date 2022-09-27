@@ -1,0 +1,50 @@
+# Use `conda-build-prepare` before building for a better version string.
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+package:
+  name: openlane
+  version: {{ version }}
+
+source:
+   git_url: https://github.com/The-OpenROAD-Project/OpenLane
+   git_rev: master
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - CONDA_OUT
+    - TEST_PACKAGE
+
+requirements:
+  run:
+    - openroad
+    - magic
+    - netgen
+    - yosys
+    - click
+    - pyyaml
+
+test:
+  requires:
+    - open_pdks.sky130a
+  commands:
+    - PDK=sky130A STD_CELL_LIBRARY=sky130_fd_sc_hd STD_CELL_LIBRARY_OPT=sky130_fd_sc_hd flow.tcl -design inverter
+
+about:
+  home: https://github.com/The-OpenROAD-Project/OpenLane
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: 'OpenLane is an automated RTL to GDSII flow.'
+  description: |
+    OpenLane is an automated RTL to GDSII flow based on several
+    components including OpenROAD, Yosys, Magic, Netgen, CVC,
+    SPEF-Extractor, KLayout and a number of custom scripts for design
+    exploration and optimization. It also provides a number of custom
+    scripts for design exploration, optimization and ECO.
+  doc_url: https://openlane.readthedocs.io/
+  dev_url: https://github.com/The-OpenROAD-Project/OpenLane
