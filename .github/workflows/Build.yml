@@ -719,3 +719,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./ci
+
+  #64
+  openlane-linux:
+    runs-on: "ubuntu-20.04"
+    env:
+      PACKAGE: "misc/openlane"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v3
+      - name: 'Install tcllib'
+        run: |
+          sudo apt update
+          sudo apt install -y tcllib
+      - uses: ./ci

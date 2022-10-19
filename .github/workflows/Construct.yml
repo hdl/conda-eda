@@ -1,0 +1,49 @@
+name: Build installers
+
+on:
+  workflow_call:
+
+permissions:
+  contents: write    
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  openlane-sky130a-installer:
+    runs-on: "ubuntu-20.04"
+    steps:
+      - name: checkout conda-eda
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # fetch all tags
+
+      - name: construct installer
+        run: |
+          export CI_SCRIPTS_PATH="$(pwd)/ci"
+          ./ci/install.sh
+          conda install constructor
+          constructor installer/openlane.sky130a/
+
+      - name: archive openlane.sky130a installer
+        uses: actions/upload-artifact@v3
+        with:
+          name: "openlane-sky130a-installer"
+          path: |
+            /home/runner/work/conda-eda/conda-eda/openlane-sky130a-0-Linux-x86_64.sh
+
+      - run: |
+          git config --local user.name conda-eda@bot
+          git config --local user.email conda-eda@bot
+          TAG=$(git describe --tags)
+          git tag $TAG
+          git push origin "HEAD:refs/tags/$TAG"
+          echo "TAG=$TAG" >> $GITHUB_ENV
+
+      - uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ env.TAG }}
+          tag_name: ${{ env.TAG }}
+          files: |
+            openlane-sky130a-installer/*.sh

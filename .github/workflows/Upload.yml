@@ -47,6 +47,12 @@ jobs:
           ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
 
 
+  Construct:
+    needs: Upload
+    if: always() && (github.event_name != 'pull_request') && (github.ref == 'refs/heads/master')
+    uses: ./.github/workflows/Construct.yml
+
+
   Cleanup:
     runs-on: ubuntu-20.04
     steps:
