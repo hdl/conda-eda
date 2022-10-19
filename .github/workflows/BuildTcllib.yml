@@ -1,0 +1,22 @@
+name: Build single package
+
+on:
+  push:
+
+env:
+  ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+  ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  tcllib-linux:
+    runs-on: "ubuntu-20.04"
+    env:
+      PACKAGE: "misc/tcllib"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./ci
