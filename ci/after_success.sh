@@ -20,12 +20,19 @@ else
         # Test `anaconda` with ANACONDA_TOKEN before uploading
         source $CI_SCRIPTS_PATH/test_anaconda.sh
 
+        # Pathname expansion isn't performed with '[[' and $CONDA_OUT may be a glob pattern.
+        if [ $(echo "$CONDA_OUT" | wc -w) -ne 1 ]; then
+            echo "CONDA_OUT expands to multiple files: $CONDA_OUT"
+            exit 1
+        fi
+        expanded_conda_out="$(echo $CONDA_OUT)"
+
         os_package_match='conda-bld/(.*)'
-        [[ $CONDA_OUT =~ $os_package_match ]]
+        [[ $expanded_conda_out =~ $os_package_match ]]
         os_and_package="${BASH_REMATCH[1]}"
 
         name_version_match='conda-bld/(.*)/(.*)-([^-]*)-[^-]*$'
-        [[ $CONDA_OUT =~ $name_version_match ]]
+        [[ $expanded_conda_out =~ $name_version_match ]]
         name="${BASH_REMATCH[2]}"
         version="${BASH_REMATCH[3]}"
 
