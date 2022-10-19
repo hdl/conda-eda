@@ -423,6 +423,7 @@ jobs:
     env:
       PACKAGE: "bit/icestorm"
       OS_NAME: "windows"
+      SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/251
     steps:
       - uses: actions/checkout@v3
       - uses: ./ci
@@ -444,6 +445,7 @@ jobs:
     env:
       PACKAGE: "sim/icarus"
       OS_NAME: "windows"
+      SKIP: "true"  # See: https://github.com/hdl/conda-eda/issues/251
     steps:
       - uses: actions/checkout@v3
       - uses: ./ci
