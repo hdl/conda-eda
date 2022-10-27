@@ -8,6 +8,8 @@ package:
 source:
   - git_url: https://github.com/verilog-to-routing/vtr-verilog-to-routing.git
     git_rev: master
+    patches:
+      vpr-cmake.patch
   - path: . # Extra files needed for PGO
 
 build:
@@ -31,15 +33,18 @@ requirements:
     - intervaltree
     - curl
     - xz
+    - pyyaml
   host:
     - bison
     - cmake
     - flex
     - pkg-config
-    - tbb <2021.0.0a0
-    - tbb-devel <2021.0.0a0
+    - prjxray-db
+    - prjxray-tools
+    - tbb
+    - tbb-devel
   run:
-    - tbb <2021.0.0a0
+    - tbb
 
 about:
   home: http://verilogtorouting.org/
