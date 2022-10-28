@@ -1,13 +1,13 @@
 diff --git a/yosys-symbiflow-plugins/Makefile_plugin.common b/yosys-symbiflow-plugins/Makefile_plugin.common
-index b26a7e0..32c1544 100644
+index fd6d86e..7376e41 100644
 --- a/yosys-symbiflow-plugins/Makefile_plugin.common
 +++ b/yosys-symbiflow-plugins/Makefile_plugin.common
-@@ -38,12 +38,12 @@
- # |-- example2-plugin
- # |-- ...
+@@ -40,13 +40,13 @@
+ 
+ SHELL := /usr/bin/env bash
  
 -# Either find yosys in system and use its path or use the given path
--YOSYS_PATH ?= $(realpath $(dir $(shell which yosys))/..)
+-YOSYS_PATH ?= $(realpath $(dir $(shell command -v yosys))/..)
 +# Either find uhdm-yosys in system and use its path or use the given path
 +YOSYS_PATH ?= $(realpath $(dir $(shell which uhdm-yosys))/..)
  
@@ -22,15 +22,15 @@ index b26a7e0..32c1544 100644
  
  CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
 diff --git a/yosys-symbiflow-plugins/Makefile_test.common b/yosys-symbiflow-plugins/Makefile_test.common
-index ca6ec18..94090c7 100644
+index 5d72327..75096de 100644
 --- a/yosys-symbiflow-plugins/Makefile_test.common
 +++ b/yosys-symbiflow-plugins/Makefile_test.common
-@@ -14,13 +14,13 @@
- # test2_verify = $(call diff_test,test2,ext)
- #
+@@ -16,13 +16,13 @@
+ 
+ SHELL := /usr/bin/env bash
  
 -# Either find yosys in system and use its path or use the given path
--YOSYS_PATH ?= $(realpath $(dir $(shell which yosys))/..)
+-YOSYS_PATH ?= $(realpath $(dir $(shell command -v yosys))/..)
 +# Either find uhdm-yosys in system and use its path or use the given path
 +YOSYS_PATH ?= $(realpath $(dir $(shell which uhdm-yosys))/..)
  
@@ -44,7 +44,7 @@ index ca6ec18..94090c7 100644
  endif
  
  GTEST_DIR ?= $(abspath ../../third_party/googletest)
-@@ -49,7 +49,7 @@ $(1)/ok: $(1)/$$(notdir $(1).v)
+@@ -51,7 +51,7 @@ $(1)/ok: $(1)/$$(notdir $(1).v)
  	echo "source $(TEST_UTILS)" > run-$$(notdir $(1)).tcl ;\
  	echo "source $$(notdir $(1)).tcl" >> run-$$(notdir $(1)).tcl ;\
  	DESIGN_TOP=$$(notdir $(1)) TEST_OUTPUT_PREFIX=./ \
