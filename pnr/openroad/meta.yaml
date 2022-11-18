@@ -13,6 +13,7 @@ source:
       - odb-drt-disable-tests.patch
       - sta-add-install-options.patch
       - gui-find-qt-only-if-enabled.patch
+      - disable-mpl2.patch # until or-tools dep is added
   - url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ lemon_version }}.tar.gz
     md5: e89f887559113b68657eca67cf3329b5
     folder: third_party/lemon
