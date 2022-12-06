@@ -10,11 +10,12 @@ source:
   - git_url: https://github.com/The-OpenROAD-Project/OpenROAD.git
     git_rev: master
     patches:
-      - odb-drt-disable-tests.patch
-      - sta-add-install-options.patch
-      - gui-find-qt-only-if-enabled.patch
+      - odb-drt-disable-tests.patch # until tests are added to the recope
+      - sta-add-install-options.patch # to enable sta binary distribution
+      - gui-find-qt-only-if-enabled.patch # until gui variant is added
+      - disable-mpl2.patch # until or-tools dep is added
   - url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ lemon_version }}.tar.gz
-    md5: e89f887559113b68657eca67cf3329b5
+    md5: {{ lemon_md5 }}
     folder: third_party/lemon
 build:
   # number: 202202031935
