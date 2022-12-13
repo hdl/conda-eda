@@ -730,3 +730,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./ci
+
+  #65
+  xyce-linux:
+    runs-on: "ubuntu-20.04"
+    env:
+      PACKAGE: "sim/xyce"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./ci
