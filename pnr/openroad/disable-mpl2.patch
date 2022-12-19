@@ -1,56 +1,39 @@
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 99752d275..74a1ef540 100755
+index 3383cc173..79e66cecb 100755
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -244,7 +244,6 @@ add_subdirectory(cts)
+@@ -168,6 +168,8 @@ message(STATUS "boost: ${Boost_VERSION}")
+ find_package(Python3 COMPONENTS Development REQUIRED)
+ option(BUILD_PYTHON "Build the Python3 interface" ON)
+ 
++option(BUILD_MPL2 "Build MPL2 macro placer" ON)
++
+ option(ALLOW_WARNINGS "Flag to allow compilation with compiler warnings: on by default" ON)
+ if (NOT ALLOW_WARNINGS)
+   add_compile_options(
+@@ -250,7 +252,9 @@ add_subdirectory(cts)
  add_subdirectory(grt)
  add_subdirectory(tap)
  add_subdirectory(mpl)
 -add_subdirectory(mpl2)
++if ((NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin") AND BUILD_MPL2)
++  add_subdirectory(mpl2)
++endif()
  add_subdirectory(rcx)
  add_subdirectory(psm)
  add_subdirectory(par)
-@@ -309,7 +308,6 @@ target_link_libraries(openroad
-   drt
-   dst
-   mpl
--  mpl2
-   psm
-   ant
-   par
-diff --git a/src/OpenRoad.cc b/src/OpenRoad.cc
-index dcf1ae707..0f0341ddb 100644
---- a/src/OpenRoad.cc
-+++ b/src/OpenRoad.cc
-@@ -57,7 +57,6 @@
- #include "gui/MakeGui.h"
- #include "ifp//MakeInitFloorplan.hh"
- #include "mpl/MakeMacroPlacer.h"
--#include "mpl2/MakeMacroPlacer.h"
- #include "odb/cdl.h"
- #include "odb/db.h"
- #include "odb/defin.h"
-@@ -160,7 +159,6 @@ OpenRoad::~OpenRoad()
-   deleteTritonCts(tritonCts_);
-   deleteTapcell(tapcell_);
-   deleteMacroPlacer(macro_placer_);
--  deleteMacroPlacer2(macro_placer2_);
-   deleteOpenRCX(extractor_);
-   deleteTritonRoute(detailed_router_);
-   deleteReplace(replace_);
-@@ -213,7 +211,6 @@ void OpenRoad::init(Tcl_Interp* tcl_interp)
-   tritonCts_ = makeTritonCts();
-   tapcell_ = makeTapcell();
-   macro_placer_ = makeMacroPlacer();
--  macro_placer2_ = makeMacroPlacer2();
-   extractor_ = makeOpenRCX();
-   detailed_router_ = makeTritonRoute();
-   replace_ = makeReplace();
-@@ -247,7 +244,6 @@ void OpenRoad::init(Tcl_Interp* tcl_interp)
-   initTritonCts(this);
-   initTapcell(this);
-   initMacroPlacer(this);
--  initMacroPlacer2(this);
-   initOpenRCX(this);
-   initPad(this);
-   initRestructure(this);
+@@ -325,12 +329,12 @@ target_link_libraries(openroad
+   ${CMAKE_THREAD_LIBS_INIT}
+ )
+ 
+-if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
++if ((NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin") AND BUILD_MPL2)
+   # mpl2 aborts with link error on darwin so do not link it.
+   target_link_libraries(openroad mpl2)
+   target_compile_definitions(openroad PRIVATE ENABLE_MPL2)
+ else()
+-  message(STATUS "Removing MPL2 to avoid run time fatal error.")
++  message(STATUS "MPL2 macro placer disabled.")
+ endif()
+ 
+ # tclReadline
