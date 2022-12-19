@@ -12,6 +12,7 @@ source:
       - use-llvm-toolchain.patch 
   - url: https://github.com/bazelbuild/bazelisk/releases/download/v1.12.0/bazelisk-linux-amd64
     sha256: 6b0bcb2ea15bca16fffabe6fda75803440375354c085480fe361d2cbf32501db
+
 build:
   # number: 202202082028
   number: {{ environ.get('DATE_NUM') }}
@@ -20,12 +21,17 @@ build:
   script_env:
     - CI
 
+requirements:
+  build:
+    - python
+
 test:
   commands:
     - interpreter_main --version
     - ir_converter_main --version
     - opt_main --version
     - codegen_main --version
+    - interpreter_main $RECIPE_DIR/test_stdlib.x
 
 about:
   home: https://google.github.io/xls/

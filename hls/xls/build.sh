@@ -2,18 +2,33 @@
 
 set -ex
 
+# build targets
 chmod +x $SRC_DIR/bazelisk-linux-amd64
 $SRC_DIR/bazelisk-linux-amd64 build -c opt \
-  --extra_toolchains=@llvm_toolchain//:cc-toolchain-x86_64-linux \
-  //xls/dslx:interpreter_main \
-  //xls/dslx:ir_converter_main \
-  //xls/tools:opt_main \
-  //xls/tools:codegen_main \
-  //xls/tools:proto_to_dslx_main
+			      --extra_toolchains=@llvm_toolchain//:cc-toolchain-x86_64-linux \
+			      //xls/dslx:interpreter_main \
+			      //xls/dslx:ir_converter_main \
+			      //xls/tools:opt_main \
+			      //xls/tools:codegen_main \
+			      //xls/tools:proto_to_dslx_main \
+			      //xls/tools:package_bazel_build
 
-mkdir -p $PREFIX/bin/
-cp bazel-bin/xls/dslx/interpreter_main \
-   bazel-bin/xls/dslx/ir_converter_main \
-   bazel-bin/xls/tools/opt_main \
-   bazel-bin/xls/tools/codegen_main \
-   bazel-bin/xls/tools/proto_to_dslx_main $PREFIX/bin/
+# install targets
+mkdir -p $PREFIX/share/xls
+bazel-bin/xls/tools/package_bazel_build --output_dir $PREFIX/share/xls \
+					--inc_target xls/dslx/interpreter_main \
+					--inc_target xls/dslx/ir_converter_main \
+					--inc_target xls/tools/opt_main \
+					--inc_target xls/tools/codegen_main \
+					--inc_target xls/tools/proto_to_dslx_main
+
+# create tools symlinks
+mkdir -p $PREFIX/bin
+for f in xls/dslx/interpreter_main \
+	 xls/dslx/ir_converter_main \
+	 xls/tools/opt_main \
+	 xls/tools/codegen_main \
+	 xls/tools/proto_to_dslx_main
+do
+    ln -sr $PREFIX/share/xls/$f $PREFIX/bin/$(basename $f)
+done
