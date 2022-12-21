@@ -740,3 +740,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./ci
+
+  #66
+  klayout-linux-py37:
+    runs-on: "ubuntu-20.04"
+    env:
+      PACKAGE: "misc/klayout"
+      OS_NAME: "linux"
+      PYTHON_VERSION: "3.7"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./ci
