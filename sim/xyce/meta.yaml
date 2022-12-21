@@ -44,6 +44,9 @@ requirements:
     - flex
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
+  host:
+    - libgfortran5
+    - libgfortran-ng
 
 test:
   commands:
