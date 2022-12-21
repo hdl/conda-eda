@@ -8,16 +8,18 @@ package:
 source:
   - git_url: https://github.com/RTimothyEdwards/open_pdks.git
     git_rev: master
-  - url: https://github.com/google/skywater-pdk/archive/refs/heads/main.zip
+  - git_url: https://github.com/google/skywater-pdk.git
     folder: skywater-pdk
-  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hd/archive/refs/heads/branch-0.0.2.zip
+  - git_url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hd.git
     folder: skywater-pdk/libraries/sky130_fd_sc_hd/latest
-  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hvl/archive/refs/heads/branch-0.0.3.zip
+  - git_url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hvl.git
     folder: skywater-pdk/libraries/sky130_fd_sc_hvl/latest
-  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_io/archive/refs/heads/branch-0.2.1.zip
+  - git_url: https://github.com/google/skywater-pdk-libs-sky130_fd_io.git
     folder: skywater-pdk/libraries/sky130_fd_io/latest
-  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_pr/archive/refs/heads/branch-0.20.1.zip
+  - git_url: https://github.com/google/skywater-pdk-libs-sky130_fd_pr.git
     folder: skywater-pdk/libraries/sky130_fd_pr/latest
+  - git_url: https://github.com/StefanSchippers/xschem_sky130.git
+    folder: xschem_sky130
   - url: https://files.pythonhosted.org/packages/07/1f/3d9ae865addc9ef6cb7b102d7d93e227c46b6e5e94db345cae2a30944efa/dataclasses_json-0.5.6-py3-none-any.whl
     sha256: 1d7f3a284a49d350ddbabde0e7d0c5ffa34a144aaf1bcb5b9f2c87673ff0c76e
 

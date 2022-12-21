@@ -52,12 +52,11 @@ VARIANT=${VARIANT^^}
 
 # --enable-sky130-pdk: point to current checkout
 # --disable-alpha-sky130: disable font library
-# --disable-xschem-sky130: disable xschem integration
 # --with-sky130-variants: use specified variant 
 ./configure --prefix=$PREFIX \
   --enable-sky130-pdk=$SRC_DIR/skywater-pdk/ \
+  --enable-xschem-sky130=$SRC_DIR/xschem_sky130/ \
   --disable-alpha-sky130 \
-  --disable-xschem-sky130 \
   --with-sky130-variants=$VARIANT
 make V=1
 make V=1 install
