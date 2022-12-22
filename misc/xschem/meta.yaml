@@ -1,0 +1,61 @@
+# Use `conda-build-prepare` before building for a better version string.
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+{% set xpm_version = '3.5.14' %}
+{% set xpm_md5 = 'c308d303ed5d369a8c65b09f83a2f86b' %}
+
+package:
+  name: xschem
+  version: {{ version }}
+
+source:
+   - git_url: https://github.com/StefanSchippers/xschem.git
+     git_rev: master
+   - url: https://www.x.org/releases/individual/lib/libXpm-{{ xpm_version }}.tar.gz
+     md5: {{ xpm_md5 }}
+     folder: xpm
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+    - CONDA_OUT
+    - TEST_PACKAGE
+
+requirements:
+  build:
+    - autoconf
+    - automake
+    - make
+    - bison
+    - flex
+    - {{ compiler('c') }}
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - {{ cdt('libx11-devel') }}  # [linux]
+    - {{ cdt('libxau-devel') }}  # [linux]
+    - {{ cdt('libxrender-devel') }}  # [linux]
+    - {{ cdt('libxt-devel') }}  # [linux]
+    - {{ cdt('libsm-devel') }}  # [linux]
+    - {{ cdt('libice-devel') }}  # [linux]
+    - {{ cdt('libxext-devel') }}  # [linux]
+    - {{ cdt('libxcb') }}  # [linux]
+  host:
+    - tk
+    - cairo
+
+test:
+  commands:
+    - xschem -v
+
+about:
+  home: http://repo.hu/projects/xschem/index.html
+  license: GPL-2.0-or-later
+  license_family: GPL
+  license_file: LICENSE
+  summary: 'Schematic capture and netlisting EDA tool.'
+  description: |
+    Xschem is a schematic capture program, it allows creation of hierarchical representation of circuits with a top down approach. By focusing on interfaces, hierarchy and instance properties a complex system can be described in terms of simpler building blocks. A VHDL or Verilog or Spice netlist can be generated from the drawn schematic, allowing the simulation of the circuit. Key feature of the program is its drawing engine written in C and using directly the Xlib drawing primitives; this gives very good speed performance, even on very big circuits. The user interface is built with the Tcl-Tk toolkit, tcl is also the extension language used.
+  doc_url: http://repo.hu/projects/xschem/xschem_man/xschem_man.html
+  dev_url: https://github.com/StefanSchippers/xschem
