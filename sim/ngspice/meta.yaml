@@ -1,0 +1,45 @@
+# Use `conda-build-prepare` before building for a better version string.
+{% set NGSPICE_TAG = GIT_DESCRIBE_TAG|replace('ngspice-', '') %}
+{% set version = '%s_%04i_%s'|format(NGSPICE_TAG, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+package:
+  name: ngspice
+  version: {{ version }}
+
+source:
+   git_url: git://git.code.sf.net/p/ngspice/ngspice
+   git_rev: master
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+
+requirements:
+  build:
+    - autoconf
+    - automake
+    - make
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+
+test:
+  commands:
+    - ngspice --version
+
+about:
+  home: https://ngspice.sourceforge.io/
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: COPYING
+  summary: 'The open source spice simulator for electric and electronic circuit.'
+  description: |
+    Ngspice is the open source spice simulator for electric and electronic circuits.
+
+    Such a circuit may comprise of JFETs, bipolar and MOS transistors, passive elements like R, L, or C, diodes, transmission lines and other devices, all interconnected in a netlist. Digital circuits are simulated as well, event driven and fast, from single gates to complex circuits. And you may enter the combination of both analog and digital as a mixed-signal circuit.
+
+    ngspice offers a wealth of device models for active, passive, analog, and digital elements. Model parameters are provided by our collections, by the semiconductor device manufacturers, or from semiconductor foundries. The user adds her circuits as a netlist, and the output is one or more graphs of currents, voltages and other electrical quantities or is saved in a data file.
+     tools for their product design flow.
+  doc_url: https://ngspice.sourceforge.io/docs.html
+  dev_url: http://ngspice.sourceforge.net/devel.html
