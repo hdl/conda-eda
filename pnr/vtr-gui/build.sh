@@ -13,7 +13,7 @@ case "${UNAME_OUT}" in
                 exit;;
 esac
 
-make V=1 CMAKE_PARAMS="-DCMAKE_INSTALL_PREFIX=${PREFIX}" -j$CPU_COUNT
+make V=1 CMAKE_PARAMS="-DCMAKE_INSTALL_PREFIX=${PREFIX} -DVTR_IPO_BUILD=off" -j$CPU_COUNT
 if [[ $OS != "Mac" ]]; then
 	make test
 fi
