@@ -39,6 +39,7 @@ BUILD_ROOT=$PWD
 # python-constraint requires to use the conda-forge channel.
 # Given that it is only used to build this package, install it via the GH repository.
 python3 -m pip install git+https://github.com/python-constraint/python-constraint.git
+python3 -m pip install https://github.com/f4pga/prjxray/archive/master.zip
 
 # Executables needed for PGO
 PGO_TARGETS="vpr genfasm"

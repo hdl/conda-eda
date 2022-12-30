@@ -1,0 +1,12 @@
+diff --git a/vpr/CMakeLists.txt b/vpr/CMakeLists.txt
+index 05f82edde..6da113bf3 100644
+--- a/vpr/CMakeLists.txt
++++ b/vpr/CMakeLists.txt
+@@ -151,6 +151,7 @@ set(PROF_GEN_FLAGS_TO_CHECK
+ set(PROF_USE_FLAGS_TO_CHECK
+     #GCC-like
+     "-fprofile-use=${VPR_PGO_DATA_DIR}"     #Build will use previously generated profiling information to guide code optimization
++    "-fprofile-correction" #correct the profile
+     "-Wmissing-profile" #Warn if the used profiling information doesn't match the source code or is missing
+     )
+ 
