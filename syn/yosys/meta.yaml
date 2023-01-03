@@ -24,11 +24,16 @@ build:
     - CONDA_OUT
     - TEST_PACKAGE
 
-test:                                                      # [osx]
+test:
   files:                                                   # [osx]
     - test.sh                                              # [osx]
     - only-test.patch                                      # [osx]
-  commands:                                                # [osx]
+  source_files:
+    - tests/simple/always01.v
+  commands:
+    - yosys -V
+    - yosys-abc -v 2>&1 | grep compiled
+    - yosys -Q -p synth tests/simple/always01.v
     - git clone https://github.com/timvideos/yosys.git     # [osx]
     - cd yosys                                             # [osx]
     - git apply ../only-test.patch                         # [osx]
