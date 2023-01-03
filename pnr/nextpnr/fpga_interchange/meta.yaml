@@ -52,6 +52,7 @@ requirements:
     - libboost {{ boost_version }}
     - py-boost {{ boost_version }}
     - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
+    - tbb <2021.0.0a0
     - zlib
 
 test:
