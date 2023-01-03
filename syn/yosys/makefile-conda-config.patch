@@ -1,8 +1,8 @@
 diff --git a/Makefile b/Makefile
-index d352358a..12108723 100644
+index b37d11c05..c6725d88a 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -344,6 +344,20 @@ ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H -DWIN32_NO_DLL -DHAVE_STRUCT_TIMESPEC
+@@ -378,6 +378,20 @@ ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H -DWIN32_NO_DLL -DHAVE_STRUCT_TIMESPEC
  ABCMKARGS += LIBS="-lpthread -s" ABC_USE_NO_READLINE=0 CC="x86_64-w64-mingw32-gcc" CXX="$(CXX)"
  EXE = .exe
  
@@ -21,9 +21,9 @@ index d352358a..12108723 100644
 +ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H"
 +
  else ifneq ($(CONFIG),none)
- $(error Invalid CONFIG setting '$(CONFIG)'. Valid values: clang, gcc, gcc-4.8, emcc, mxe, msys2, msys2-64)
+ $(error Invalid CONFIG setting '$(CONFIG)'. Valid values: clang, gcc, gcc-4.8, emcc, mxe, msys2-32, msys2-64)
  endif
-@@ -561,6 +575,11 @@ EXTRA_OBJS += $(1)
+@@ -597,6 +611,11 @@ EXTRA_OBJS += $(1)
  .SECONDARY: $(1)
  endef
  
@@ -35,7 +35,7 @@ index d352358a..12108723 100644
  ifeq ($(PRETTY), 1)
  P_STATUS = 0
  P_OFFSET = 0
-@@ -1004,6 +1023,12 @@ config-gprof: clean
+@@ -1099,6 +1118,12 @@ config-gprof: clean
  	echo 'CONFIG := gcc' > Makefile.conf
  	echo 'ENABLE_GPROF := 1' >> Makefile.conf
  
@@ -48,9 +48,9 @@ index d352358a..12108723 100644
  config-sudo:
  	echo "INSTALL_SUDO := sudo" >> Makefile.conf
  
-@@ -1024,4 +1049,4 @@ echo-abc-rev:
+@@ -1119,4 +1144,4 @@ echo-abc-rev:
  -include techlibs/*/*.d
  
- .PHONY: all top-all abc test install install-abc manual clean mrproper qtcreator coverage vcxsrc mxebin
+ .PHONY: all top-all abc test install install-abc docs clean mrproper qtcreator coverage vcxsrc mxebin
 -.PHONY: config-clean config-clang config-gcc config-gcc-static config-gcc-4.8 config-afl-gcc config-gprof config-sudo
-+.PHONY: config-clean config-clang config-gcc config-gcc-static config-gcc-4.8 config-afl-gcc config-gprof config-conda-linux config-conda-mac config-sudo
++.PHONY: config-clean config-clang config-gcc config-gcc-static config-gcc-4.8 config-afl-gcc config-gprof config-sudo config-conda-linux config-conda-mac
