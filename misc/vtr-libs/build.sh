@@ -21,9 +21,7 @@ make install
 
 mkdir -p ${PREFIX}/lib
 mv ${PREFIX}/bin/*.a ${PREFIX}/lib/
-mv ${PREFIX}/bin/capnp-schemas-dir ${PREFIX}/lib/
 rm ${PREFIX}/bin/*
-mv ${PREFIX}/lib/capnp-schemas-dir ${PREFIX}/bin/
 
 CAPNP_SCHEMAS=${PREFIX}/bin/capnp-schemas-dir
 
