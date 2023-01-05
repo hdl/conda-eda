@@ -722,7 +722,7 @@ jobs:
 
   #64
   openlane-linux:
-    needs: ["magic-linux", "netgen-linux", "openroad-linux", "yosys-linux-py37", "yosys-linux-py38"]
+    needs: ["magic-linux", "netgen-linux", "open_pdks-linux", "openroad-linux", "yosys-linux-py37", "yosys-linux-py38"]
     runs-on: "ubuntu-20.04"
     env:
       PACKAGE: "misc/openlane"
