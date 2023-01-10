@@ -45,14 +45,14 @@ requirements:
     - swig
     - openjdk
     - tk
-    - tbb <2021.0.0a0
-    - tbb-devel <2021.0.0a0
+    - tbb
+    - tbb-devel
     - python {{ python_version }}
   run:
     - libboost {{ boost_version }}
     - py-boost {{ boost_version }}
     - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
-    - tbb <2021.0.0a0
+    - tbb
     - zlib
 
 test:
