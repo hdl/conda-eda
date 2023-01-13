@@ -11,243 +11,262 @@ on:
 env:
   ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
   ANACONDA_USER: ${{ secrets.ANACONDA_USER }}
+  DEBIAN_FRONTEND: noninteractive
+  GHA_MACHINE_TYPE: "n2-standard-4"
+  APT_REQUIREMENTS: binutils build-essential csh curl git libgl1 pkg-config sudo wget
 
 defaults:
   run:
     shell: bash
 
 jobs:
-
-  #1
   magic-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "misc/magic"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
-      - name: 'Install csh'
-        run: |
-          sudo apt update
-          sudo apt install -y csh
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1
       - uses: ./ci
 
-  #2
   icestorm-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "bit/icestorm"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #3
   prjtrellis-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "bit/prjtrellis"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #4
   prjoxide-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "bit/prjoxide"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #5
   prjxray-db-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "bit/prjxray-db"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #6
   prjxray-tools-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "bit/prjxray-tools"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #7
   icarus-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sim/icarus"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #8
   verilator-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sim/verilator"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #9
   yosys-linux-py37:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "syn/yosys"
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #10
   yosys-linux-py38:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "syn/yosys"
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #11
   yosys-plugins-symbiflow-linux:
-    runs-on: "ubuntu-20.04"
     needs: ["icarus-linux", "yosys-linux-py37", "yosys-linux-py38", "surelog-linux-py37", "surelog-linux-py38"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "syn/yosys-plugins-symbiflow"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #12
   nextpnr-nexus-linux:
-    runs-on: "ubuntu-20.04"
     needs: ["prjoxide-linux"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/nextpnr/nexus"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #13
   symbiflow-yosys-plugins-linux:
-    runs-on: "ubuntu-20.04"
     needs: ["icarus-linux", "yosys-linux-py37", "yosys-linux-py38", "surelog-linux-py37", "surelog-linux-py38"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "syn/symbiflow-yosys-plugins"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #14
   vtr-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/vtr"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #15
   vtr-gui-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/vtr-gui"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #16
   vtr-optimized-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/vtr-optimized"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #17
   quicklogic-vtr-linux:
-    runs-on: "ubuntu-20.04"
-    needs: "vtr-linux"
+    needs: ["vtr-linux"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/quicklogic-vtr"
       OS_NAME: "linux"
     steps:
-      # Skip if token isn't available (cross-repository PRs mainly)
-      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
       - uses: actions/checkout@v3
+      # Skip if token isn't available (cross-repository PRs mainly).
+      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #18
   quicklogic-vtr-gui-linux:
-    runs-on: "ubuntu-20.04"
-    needs: "vtr-gui-linux"
+    needs: ["vtr-gui-linux"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/quicklogic-vtr-gui"
       OS_NAME: "linux"
     steps:
-      # Skip if token isn't available (cross-repository PRs mainly)
-      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
       - uses: actions/checkout@v3
+      # Skip if token isn't available (cross-repository PRs mainly).
+      - run: if [ "$ANACONDA_TOKEN" = "" ]; then echo "SKIP=true" >>$GITHUB_ENV; fi
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #19
   nextpnr-ice40-linux:
-    runs-on: "ubuntu-20.04"
     needs: ["icestorm-linux"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/nextpnr/ice40"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #20
   nextpnr-ecp5-linux:
-    runs-on: "ubuntu-20.04"
     needs: ["prjtrellis-linux"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/nextpnr/ecp5"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #21
   nextpnr-generic-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/nextpnr/generic"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #22
   nextpnr-xilinx-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/nextpnr/xilinx"
       OS_NAME: "linux"
@@ -256,27 +275,26 @@ jobs:
       SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/191
     steps:
       - uses: actions/checkout@v3
-      - name: 'Install pypy'
-        run: |
-          sudo add-apt-repository ppa:pypy/ppa -y
-          sudo apt update
-          sudo apt install -y pypy3
+      - run: apt -qqy update && apt -qqy install software-properties-common
+      - run: add-apt-repository ppa:pypy/ppa
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} pypy
       - uses: ./ci
 
-  #23
   nextpnr-fpga_interchange-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/nextpnr/fpga_interchange"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #24
   symbiyosys-linux-py37:
-    runs-on: "ubuntu-20.04"
-    needs: "yosys-linux-py37"
+    needs: ["yosys-linux-py37"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "formal/symbiyosys"
       OS_NAME: "linux"
@@ -284,12 +302,13 @@ jobs:
       SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/70
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #25
   symbiyosys-linux-py38:
-    runs-on: "ubuntu-20.04"
-    needs: "yosys-linux-py38"
+    needs: ["yosys-linux-py38"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "formal/symbiyosys"
       OS_NAME: "linux"
@@ -297,11 +316,12 @@ jobs:
       SKIP: "true"  # See https://github.com/litex-hub/litex-conda-eda/issues/70
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #26
   xilinx-vivado-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "xilinx/vivado"
       OS_NAME: "linux"
@@ -309,9 +329,9 @@ jobs:
       SCRIPT: ${{ format('{0}{1}', github.workspace, '/xilinx/vivado/gen_metapackages.sh') }}
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #27
   icestorm-osx:
     runs-on: "macos-latest"
     env:
@@ -321,7 +341,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #28
   prjtrellis-osx:
     runs-on: "macos-latest"
     env:
@@ -331,7 +350,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #29
   icarus-osx:
     runs-on: "macos-latest"
     env:
@@ -341,7 +359,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #30
   verilator-osx:
     runs-on: "macos-latest"
     env:
@@ -351,7 +368,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #31
   yosys-osx:
     runs-on: "macos-latest"
     env:
@@ -362,7 +378,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #32
   symbiflow-yosys-plugins-osx:
     runs-on: "macos-latest"
     needs: ["icarus-osx", "yosys-osx"]
@@ -374,7 +389,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #33
   vtr-osx:
     runs-on: "macos-latest"
     env:
@@ -385,7 +399,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #34
   vtr-gui-osx:
     runs-on: "macos-latest"
     env:
@@ -396,7 +409,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #35
   nextpnr-ice40-osx:
     runs-on: "macos-latest"
     needs: ["icestorm-osx"]
@@ -407,7 +419,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #36
   nextpnr-generic-osx:
     runs-on: "macos-latest"
     env:
@@ -417,7 +428,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #37
   icestorm-windows:
     runs-on: "windows-latest"
     env:
@@ -428,7 +438,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #38
   prjtrellis-windows:
     runs-on: "windows-latest"
     env:
@@ -439,7 +448,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #39
   icarus-windows:
     runs-on: "windows-latest"
     env:
@@ -450,7 +458,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #40
   yosys-windows:
     runs-on: "windows-latest"
     env:
@@ -461,7 +468,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #41
   nextpnr-ice40-windows:
     runs-on: "windows-latest"
     needs: ["icestorm-windows"]
@@ -473,7 +479,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #42
   nextpnr-generic-windows:
     runs-on: "windows-latest"
     env:
@@ -484,7 +489,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #43
   verible-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -495,28 +499,29 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #44
   tree-sitter-verilog-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "misc/tree-sitter-verilog"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #45
   odin-ii-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/odin_II"
       OS_NAME: "linux"
       SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/209
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libgmp-dev
       - uses: ./ci
 
-  #46
   slang-linux:
     runs-on: "ubuntu-20.04"
     env:
@@ -527,55 +532,59 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
-  #47
   sv-parser-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sv-front/sv-parser"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #48
   moore-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sv-front/moore"
       OS_NAME: "linux"
       SKIP: "true"  # See https://github.com/hdl/conda-eda/issues/163
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #49
   surelog-linux-py37:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sv-front/surelog"
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #50
   surelog-linux-py38:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sv-front/surelog"
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #51
   surelog-uhdm-linux-py37:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sv-front/surelog-uhdm"
       USE_SYSTEM_GCC_VERSION: "9"
@@ -583,12 +592,13 @@ jobs:
       PYTHON_VERSION: "3.7"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} default-jre
       - uses: ./ci
 
-  #52
   surelog-uhdm-linux-py38:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sv-front/surelog-uhdm"
       USE_SYSTEM_GCC_VERSION: "9"
@@ -596,169 +606,184 @@ jobs:
       PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} default-jre
       - uses: ./ci
 
-  #53
   yosys-uhdm-linux-py37:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "syn/yosys-uhdm"
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #54
   yosys-uhdm-linux-py38:
     needs: ["libunwind", "gperftools"]
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "syn/yosys-uhdm"
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #55
   libunwind:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "misc/libunwind"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #56
   gperftools:
-    needs: "libunwind"
-    runs-on: "ubuntu-20.04"
+    needs: ["libunwind"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "misc/gperftools"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #57
   verilator-uhdm-linux-py37:
     needs: ["gperftools"]
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sim/verilator-uhdm"
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} default-jre
       - uses: ./ci
 
-  #58
   verilator-uhdm-linux-py38:
     needs: ["gperftools"]
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sim/verilator-uhdm"
       OS_NAME: "linux"
       PYTHON_VERSION: "3.8"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} default-jre
       - uses: ./ci
 
-  #59
   netgen-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "misc/netgen"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #60
   zachjs-sv2v-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sv-front/zachjs-sv2v"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libgmp-dev
       - uses: ./ci
 
-  #61
   open_pdks-linux:
-    runs-on: "ubuntu-20.04"
     needs: ["magic-linux"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "misc/open_pdks"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1
       - uses: ./ci
 
-  #62
   openroad-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "pnr/openroad"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #63
   xls-linux:
+    runs-on: [self-hosted, Linux, X64]
     # uses older ubuntu for better compat:
     # https://github.com/hdl/conda-eda/issues/199
-    runs-on: "ubuntu-18.04"
+    container: ubuntu:18.04
     env:
       PACKAGE: "hls/xls"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #64
   openlane-linux:
     needs: ["magic-linux", "netgen-linux", "openroad-linux", "yosys-linux-py37", "yosys-linux-py38"]
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "misc/openlane"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1
       - uses: ./ci
 
-  #65
   xschem-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "misc/xschem"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} xorg-dev tcl-dev
       - uses: ./ci
 
-  #66
   klayout-linux-py37:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "misc/klayout"
       OS_NAME: "linux"
       PYTHON_VERSION: "3.7"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
-  #66
   ngspice-linux:
-    runs-on: "ubuntu-20.04"
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
     env:
       PACKAGE: "sim/ngspice"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
-        
