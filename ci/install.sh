@@ -18,8 +18,9 @@ fi
 # Add build variants to the recipe dir (appended keys win in case of any conflict)
 cat "$CI_SCRIPTS_PATH/conda_build_config.yaml" >> "$PACKAGE/conda_build_config.yaml"
 
-# Install conda-build-prepare
-python -m pip install git+https://github.com/hdl/conda-build-prepare@v0.1.2#egg=conda-build-prepare
+# Install conda-build-prepare. Its revision can be specified with CONDA_BUILD_PREPARE_REV.
+_cbp_rev=${CONDA_BUILD_PREPARE_REV:-v0.1.2}
+python -m pip install git+https://github.com/hdl/conda-build-prepare@${_cbp_rev}#egg=conda-build-prepare
 
 # ANACONDA_USER isn't available in cross-repository PRs
 if [ "$ANACONDA_USER" != "" ]; then
