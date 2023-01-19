@@ -11,6 +11,7 @@ pushd capnproto-c++-0.8.0
 ./configure
 make -j`nproc` check
 sudo make install
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 popd
 
 git clone https://github.com/capnproto/capnproto-java.git
@@ -20,6 +21,7 @@ sudo make install
 popd
 
 curl --proto '=https' -sSf https://sh.rustup.rs | sh -s -- -y
+source "$HOME/.cargo/env"
 
 cd libprjoxide
 cargo install --path prjoxide --all-features --root $PREFIX
