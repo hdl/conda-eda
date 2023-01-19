@@ -21,6 +21,11 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - autoconf
+    - libtool
+    - make
+    - binutils
+    - pkg-config
 
 about:
   home: https://github.com/gatecat/prjoxide
