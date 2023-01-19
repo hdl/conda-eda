@@ -24,6 +24,7 @@ requirements:
     - {{ compiler('cxx') }}
     - nodejs
     - python
+    - make
 
 about:
   home: https://github.com/tree-sitter/tree-sitter-verilog
