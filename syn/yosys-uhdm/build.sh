@@ -17,5 +17,5 @@ cd Surelog && \
 unset CXX CXXFLAGS LDLIBS LDFLAGS
 
 make -C yosys ENABLE_READLINE=0 CONFIG=conda-linux PROGRAM_PREFIX=uhdm- install -j$(nproc)
-make -C $PWD/yosys-symbiflow-plugins/ UHDM_INSTALL_DIR=$PREFIX install -j$(nproc)
+make -C yosys-f4pga-plugins/ UHDM_INSTALL_DIR=$PREFIX install -j$(nproc)
 
