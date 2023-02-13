@@ -33,6 +33,8 @@ test:
   requires:
     - open_pdks.sky130a
   commands:
+    - export TERM=xterm
+    - echo $TERM
     - PDK=sky130A STD_CELL_LIBRARY=sky130_fd_sc_hd STD_CELL_LIBRARY_OPT=sky130_fd_sc_hd flow.tcl -design inverter
 
 about:
