@@ -1,14 +1,14 @@
 name: Upload packages
 
 on:
-  push:
-    # Prevents triggering multiple workflows in PRs. Workflows triggered from
-    # the same commit shouldn't run simultaneously because they're overwriting
-    # each other's packages on Anaconda.
-    branches: [ master ]
-    paths-ignore:
-      - '.github/workflows/tuttest.yml'
-      - 'README.md'
+  #  push:
+  #    # Prevents triggering multiple workflows in PRs. Workflows triggered from
+  #    # the same commit shouldn't run simultaneously because they're overwriting
+  #    # each other's packages on Anaconda.
+  #    branches: [ master ]
+  #    paths-ignore:
+  #      - '.github/workflows/tuttest.yml'
+  #      - 'README.md'
   pull_request:
     paths-ignore:
       - '.github/workflows/tuttest.yml'
