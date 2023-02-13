@@ -38,7 +38,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - python
-    - libboost 1.73
+    - libboost 1.80
     - eigen 3.3
     - spdlog 1.8.1
     - readline
