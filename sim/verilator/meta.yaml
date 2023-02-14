@@ -26,6 +26,7 @@ requirements:
     - gxx_linux-64 >=8      [linux]
     - autoconf
     - make
+    - help2man
   host:
     - bison
     - flex

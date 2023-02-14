@@ -20,7 +20,9 @@ requirements:
   build:
     - autoconf
     - automake
+    - libtool
     - make
+    - bison
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
 

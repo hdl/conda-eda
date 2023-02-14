@@ -1,10 +1,11 @@
-diff --git a/yosys-symbiflow-plugins/Makefile_plugin.common b/yosys-symbiflow-plugins/Makefile_plugin.common
-index fd6d86e..7376e41 100644
---- a/yosys-symbiflow-plugins/Makefile_plugin.common
-+++ b/yosys-symbiflow-plugins/Makefile_plugin.common
-@@ -40,13 +40,13 @@
+Submodule yosys-f4pga-plugins contains modified content
+diff --git a/yosys-f4pga-plugins/Makefile_plugin.common b/yosys-f4pga-plugins/Makefile_plugin.common
+index 45c2640..9b838e0 100644
+--- a/yosys-f4pga-plugins/Makefile_plugin.common
++++ b/yosys-f4pga-plugins/Makefile_plugin.common
+@@ -46,13 +46,13 @@ TOP_DIR := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
  
- SHELL := /usr/bin/env bash
+ _MAKEFILES := $(abspath $(filter-out %.d,$(MAKEFILE_LIST)))
  
 -# Either find yosys in system and use its path or use the given path
 -YOSYS_PATH ?= $(realpath $(dir $(shell command -v yosys))/..)
@@ -21,10 +22,10 @@ index fd6d86e..7376e41 100644
  endif
  
  CXX ?= $(shell $(YOSYS_CONFIG) --cxx)
-diff --git a/yosys-symbiflow-plugins/Makefile_test.common b/yosys-symbiflow-plugins/Makefile_test.common
+diff --git a/yosys-f4pga-plugins/Makefile_test.common b/yosys-f4pga-plugins/Makefile_test.common
 index 5d72327..75096de 100644
---- a/yosys-symbiflow-plugins/Makefile_test.common
-+++ b/yosys-symbiflow-plugins/Makefile_test.common
+--- a/yosys-f4pga-plugins/Makefile_test.common
++++ b/yosys-f4pga-plugins/Makefile_test.common
 @@ -16,13 +16,13 @@
  
  SHELL := /usr/bin/env bash

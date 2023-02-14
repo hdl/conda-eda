@@ -138,6 +138,11 @@ if [ -d "workdir/recipe" ]; then
     fi
 fi
 
+# ssh: Disable host key checking
+mkdir -p ~/.ssh
+echo "Host *" >> ~/.ssh/config
+echo "    StrictHostKeyChecking no" >> ~/.ssh/config
+
 echo "          GITREV: $GITREV"
 echo "      CONDA_PATH: $CONDA_PATH"
 echo "CONDA_BUILD_ARGS: $CONDA_BUILD_ARGS"
