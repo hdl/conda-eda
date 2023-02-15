@@ -8,17 +8,18 @@ package:
 source:
   - git_url: https://github.com/RTimothyEdwards/open_pdks.git
     git_rev: master
-  - git_url: https://github.com/google/skywater-pdk.git
+  # use url below to prevent submodules
+  - url: https://github.com/google/skywater-pdk/archive/refs/heads/main.zip
     folder: skywater-pdk
-  - git_url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hd.git
+  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hd/archive/refs/heads/main.zip
     folder: skywater-pdk/libraries/sky130_fd_sc_hd/latest
-  - git_url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hvl.git
+  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hvl/archive/refs/heads/main.zip
     folder: skywater-pdk/libraries/sky130_fd_sc_hvl/latest
-  - git_url: https://github.com/google/skywater-pdk-libs-sky130_fd_io.git
+  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_io/archive/refs/heads/main.zip
     folder: skywater-pdk/libraries/sky130_fd_io/latest
-  - git_url: https://github.com/google/skywater-pdk-libs-sky130_fd_pr.git
+  - url: https://github.com/google/skywater-pdk-libs-sky130_fd_pr/archive/refs/heads/main.zip
     folder: skywater-pdk/libraries/sky130_fd_pr/latest
-  - git_url: https://github.com/StefanSchippers/xschem_sky130.git
+  - url: https://github.com/StefanSchippers/xschem_sky130/archive/refs/heads/main.zip
     folder: xschem_sky130
   - url: https://files.pythonhosted.org/packages/07/1f/3d9ae865addc9ef6cb7b102d7d93e227c46b6e5e94db345cae2a30944efa/dataclasses_json-0.5.6-py3-none-any.whl
     sha256: 1d7f3a284a49d350ddbabde0e7d0c5ffa34a144aaf1bcb5b9f2c87673ff0c76e
