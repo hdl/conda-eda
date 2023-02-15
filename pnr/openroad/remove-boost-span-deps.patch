@@ -1,0 +1,172 @@
+diff --git a/src/odb/test/parseTest.cpp b/src/odb/test/parseTest.cpp
+index 38e372a20..08cf44ee8 100644
+--- a/src/odb/test/parseTest.cpp
++++ b/src/odb/test/parseTest.cpp
+@@ -55,36 +55,4 @@ int notice(int code, const char* msg, ...)
+   abort();
+ }
+ 
+-BOOST_AUTO_TEST_CASE(parser_init_and_parse_line_with_integers)
+-{
+-  Ath__parser parser;
+-
+-  BOOST_TEST(parser.getLineNum() == 0);
+-
+-  utl::Logger logger;
+-  utl::ScopedTemporaryFile scoped_temp_file(&logger);
+-  const std::string kContents = "1 2 3 4";
+-  boost::span<const uint8_t> contents(
+-      reinterpret_cast<const uint8_t*>(kContents.data()), kContents.size());
+-  utl::WriteAll(scoped_temp_file.file(), contents, &logger);
+-  fseek(scoped_temp_file.file(), SEEK_SET, 0);
+-
+-  parser.setInputFP(scoped_temp_file.file());
+-  BOOST_TEST(parser.readLineAndBreak() == 4);
+-
+-  BOOST_TEST(parser.get(0) == "1");
+-  BOOST_TEST(parser.get(1) == "2");
+-  BOOST_TEST(parser.get(2) == "3");
+-  BOOST_TEST(parser.get(3) == "4");
+-
+-  BOOST_TEST(parser.getInt(0) == 1);
+-  BOOST_TEST(parser.getInt(1) == 2);
+-  BOOST_TEST(parser.getInt(2) == 3);
+-  BOOST_TEST(parser.getInt(3) == 4);
+-
+-  // If we don't reset this we get an error as it thinks it owns the `FILE*`
+-  // and can fclose it.
+-  parser.setInputFP(nullptr);
+-}
+-
+ }  // namespace odb
+diff --git a/src/utl/CMakeLists.txt b/src/utl/CMakeLists.txt
+index a795da4d1..db52c9dd4 100644
+--- a/src/utl/CMakeLists.txt
++++ b/src/utl/CMakeLists.txt
+@@ -35,7 +35,7 @@
+ 
+ include("openroad")
+ 
+-find_package(Boost 1.78 REQUIRED)
++find_package(Boost 1.73 REQUIRED)
+ 
+ swig_lib(NAME      utl
+          NAMESPACE utl
+diff --git a/src/utl/include/utl/CFileUtils.h b/src/utl/include/utl/CFileUtils.h
+index a3c6d8024..192b1a89d 100644
+--- a/src/utl/include/utl/CFileUtils.h
++++ b/src/utl/include/utl/CFileUtils.h
+@@ -32,7 +32,6 @@
+ 
+ #pragma once
+ 
+-#include <boost/core/span.hpp>
+ #include <cstdio>
+ #include <string>
+ 
+@@ -54,13 +53,4 @@ namespace utl {
+ // logger->error is used to throw.
+ std::string GetContents(FILE* file, Logger* logger);
+ 
+-// Writes all the contents of "data" to the current position of "file".
+-//
+-// NOTE: C-style `FILE*` constructs are not recommended for use in new code,
+-// prefer C++ iostreams for any new code.
+-//
+-// "logger" is used to flag any errors in the writing process. Returns when all
+-// of "data" has been written successfully.
+-void WriteAll(FILE* file, boost::span<const uint8_t> data, Logger* logger);
+-
+ }  // namespace utl
+diff --git a/src/utl/src/CFileUtils.cpp b/src/utl/src/CFileUtils.cpp
+index d4bc76048..a4d93c527 100644
+--- a/src/utl/src/CFileUtils.cpp
++++ b/src/utl/src/CFileUtils.cpp
+@@ -44,25 +44,4 @@ std::string GetContents(FILE* file, Logger* logger)
+   return result;
+ }
+ 
+-void WriteAll(FILE* file, boost::span<const uint8_t> data, Logger* logger)
+-{
+-  size_t total_written = 0;
+-  while (total_written < data.size()) {
+-    size_t this_size = data.size() - total_written;
+-    size_t written = fwrite(data.data() + total_written, 1, this_size, file);
+-    if (written == 0) {
+-      if (ferror(file)) {
+-        std::string error = strerror(errno);
+-        logger->error(UTL,
+-                      4,
+-                      "error writing {} bytes from file at offset {}: {}",
+-                      this_size,
+-                      total_written,
+-                      error);
+-      }
+-    }
+-    total_written += written;
+-  }
+-}
+-
+ }  // namespace utl
+diff --git a/src/utl/test/CFileUtilsTest.cpp b/src/utl/test/CFileUtilsTest.cpp
+index 554bf9628..e47767c4e 100644
+--- a/src/utl/test/CFileUtilsTest.cpp
++++ b/src/utl/test/CFileUtilsTest.cpp
+@@ -54,57 +54,4 @@ BOOST_AUTO_TEST_CASE(read_all_of_empty_file)
+   BOOST_TEST(contents.empty());
+ }
+ 
+-// Writes then reads 4B of data.
+-BOOST_AUTO_TEST_CASE(read_all_of_written_file_seek_required)
+-{
+-  Logger logger;
+-  ScopedTemporaryFile stf(&logger);
+-
+-  const std::vector<uint8_t> kTestData = {0x01, 0x02, 0x03, 0x04};
+-  WriteAll(stf.file(), kTestData, &logger);
+-
+-  std::string contents = GetContents(stf.file(), &logger);
+-  BOOST_TEST(contents.size() == kTestData.size());
+-  for (size_t i = 0; i < contents.size(); ++i) {
+-    BOOST_TEST(static_cast<uint8_t>(contents.at(i)) == kTestData.at(i));
+-  }
+-}
+-
+-// Writes then reads 1024B of data.
+-BOOST_AUTO_TEST_CASE(read_all_of_file_exactly_1024B)
+-{
+-  Logger logger;
+-  ScopedTemporaryFile stf(&logger);
+-
+-  std::vector<uint8_t> test_data(1024);
+-  std::iota(test_data.begin(), test_data.end(), 0);
+-
+-  WriteAll(stf.file(), test_data, &logger);
+-
+-  std::string contents = GetContents(stf.file(), &logger);
+-  BOOST_TEST(contents.size() == test_data.size());
+-  for (size_t i = 0; i < contents.size(); ++i) {
+-    BOOST_TEST(static_cast<uint8_t>(contents.at(i)) == test_data.at(i));
+-  }
+-}
+-
+-// Writes then reads 1025B of data (whitebox test, we know internally the read
+-// buffer size is 1024B so this causes two chunks of read).
+-BOOST_AUTO_TEST_CASE(read_all_of_file_exactly_1025B)
+-{
+-  Logger logger;
+-  ScopedTemporaryFile stf(&logger);
+-
+-  std::vector<uint8_t> test_data(1025);
+-  std::iota(test_data.begin(), test_data.end(), 0);
+-
+-  WriteAll(stf.file(), test_data, &logger);
+-
+-  std::string contents = GetContents(stf.file(), &logger);
+-  BOOST_TEST(contents.size() == test_data.size());
+-  for (size_t i = 0; i < contents.size(); ++i) {
+-    BOOST_TEST(static_cast<uint8_t>(contents.at(i)) == test_data.at(i));
+-  }
+-}
+-
+ }  // namespace utl
