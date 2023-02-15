@@ -18,7 +18,7 @@ index ca8bc1cb5..8d7171bb0 100644
 +CXX = $(notdir $(CC))
 +LD = $(notdir $(CXX))
 +CXXFLAGS += -std=c++11 -Os
-+ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H"
++ABCMKARGS += ARCHFLAGS="-DABC_USE_STDINT_H -Wno-c++11-narrowing"
 +
  ifneq ($(SANITIZER),)
  $(info [Clang Sanitizer] $(SANITIZER))
