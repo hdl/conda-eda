@@ -41,16 +41,18 @@ requirements:
     - python
     - libboost 1.73
     - eigen 3.3
-    - spdlog 1.8.1
+    - spdlog 1.9
     - readline
     - tk
     - zlib
     - fmt
-    - libgomp
+    - libgomp                 [not osx]
+    - llvm-openmp             [osx]
   run:
     # missing run_exports
     - {{ pin_compatible('libboost', min_pin='x.x', max_pin='x.x') }}
     - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}    
+    - spdlog >=1.9,<1.10
     
 test:
   commands:
