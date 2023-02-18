@@ -17,6 +17,21 @@
 
 set -ex
 
+# Identify OS
+UNAME_OUT="$(uname -s)"
+case "${UNAME_OUT}" in
+    Linux*)     OS=Linux;;
+    Darwin*)    OS=Mac;;
+    *)          OS="${UNAME_OUT}"
+                echo "Unknown OS: ${OS}"
+                exit;;
+esac
+
+# Support `any_cast` workaround: https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
+if [[ $OS == "Mac" ]]; then
+    export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+fi
+
 cd $SRC_DIR/third_party/lemon
 cmake -B build  -DCMAKE_INSTALL_PREFIX=$PREFIX .
 cmake --build build -j $CPU_COUNT --target install
