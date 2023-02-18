@@ -341,6 +341,15 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./ci
 
+  klayout-osx:
+    runs-on: "macos-latest"
+    env:
+      PACKAGE: "misc/klayout"
+      OS_NAME: "osx"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./ci
+
   magic-osx:
     runs-on: "macos-latest"
     env:
