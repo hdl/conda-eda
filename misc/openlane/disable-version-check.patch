@@ -1,0 +1,21 @@
+diff --git a/scripts/tcl_commands/all.tcl b/scripts/tcl_commands/all.tcl
+index de0b0e65..5509c09e 100755
+--- a/scripts/tcl_commands/all.tcl
++++ b/scripts/tcl_commands/all.tcl
+@@ -420,16 +420,6 @@ proc prep {args} {
+     set_if_unset arg_values(-verbose) 0
+     set_if_unset arg_values(-expose_env) ""
+ 
+-    if [catch {exec python3 $::env(OPENLANE_ROOT)/dependencies/verify_versions.py $arg_values(-test_mismatches)} ::env(VCHECK_OUTPUT)] {
+-        if { ![info exists flags_map(-ignore_mismatches)]} {
+-            puts_err $::env(VCHECK_OUTPUT)
+-            puts_err "Please update your environment. OpenLane will now quit."
+-            exit -1
+-        }
+-
+-        puts_warn "OpenLane may not function properly: $::env(VCHECK_OUTPUT)"
+-    }
+-
+     # Normalize Design Directory
+     set ::env(DESIGN_DIR) [file normalize $arg_values(-design)]
+     if { ![file exists $::env(DESIGN_DIR)] } {

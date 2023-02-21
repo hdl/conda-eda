@@ -8,6 +8,9 @@ package:
 source:
   git_url: https://github.com/The-OpenROAD-Project/OpenLane
   git_rev: master
+  patches:
+    - handle-unknown-terminal.patch # The-OpenROAD-Project/OpenLane#1662
+    - disable-version-check.patch # conda versions differ from openlane metadata
 
 build:
   # number: 201803050325
@@ -28,6 +31,7 @@ requirements:
     - click
     - pyyaml
     - tcllib
+    - klayout
 
 test:
   requires:
