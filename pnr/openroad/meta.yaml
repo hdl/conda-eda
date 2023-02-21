@@ -37,6 +37,16 @@ requirements:
     - bison
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ cdt('libx11-devel') }}         # [linux]
+    - {{ cdt('libxau-devel') }}         # [linux]
+    - {{ cdt('libxext-devel') }}        # [linux]
+    - {{ cdt('libxdamage-devel') }}     # [linux]
+    - {{ cdt('libxfixes-devel') }}     # [linux]    
+    - {{ cdt('libxxf86vm-devel') }}     # [linux]
+    - {{ cdt('xorg-x11-proto-devel') }} # [linux]
+    - {{ cdt('mesa-libgl-devel') }}     # [linux]
+    - {{ cdt('mesa-dri-drivers') }}     # [linux]
+    - {{ cdt('libselinux-devel') }}     # [linux]
   host:
     - python
     - libboost 1.73
@@ -48,12 +58,13 @@ requirements:
     - fmt
     - libgomp                 [not osx]
     - llvm-openmp             [osx]
+    - qt
   run:
     # missing run_exports
     - {{ pin_compatible('libboost', min_pin='x.x', max_pin='x.x') }}
-    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}    
+    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
     - spdlog >=1.9,<1.10
-    
+
 test:
   commands:
     - openroad -version
