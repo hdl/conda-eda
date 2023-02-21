@@ -19,4 +19,6 @@ set ::env(OPENLANE_LOCAL_INSTALL) 1
 set ::env(TCLLIBPATH) [glob -type d "$::env(CONDA_PREFIX)/lib/tcllib*"]
 lappend ::auto_path $::env(TCLLIBPATH)
 # default to conda-install PDKs
-set ::env(PDK_ROOT) "$::env(CONDA_PREFIX)/share/pdk"
+if { ! [info exists ::env(PDK_ROOT)] } {
+    set ::env(PDK_ROOT) "$::env(CONDA_PREFIX)/share/pdk"
+}
