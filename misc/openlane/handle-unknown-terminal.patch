@@ -1,0 +1,16 @@
+diff --git a/scripts/utils/utils.tcl b/scripts/utils/utils.tcl
+index f040a97f..0f23885c 100755
+--- a/scripts/utils/utils.tcl
++++ b/scripts/utils/utils.tcl
+@@ -256,7 +256,10 @@ proc calc_total_runtime {args} {
+ # 8	Not used
+ # 9	Reset to default color
+ proc color_text {color txt} {
+-    if {[info exists ::env(TERM)] && $::env(TERM) != "" && $::env(TERM) != "dumb"} {
++    if {[info exists ::env(TERM)] &&
++        $::env(TERM) != "" &&
++        $::env(TERM) != "dumb" &&
++        $::env(TERM) != "unknown"} {
+         return [exec tput setaf $color]$txt[exec tput setaf 9]
+     } else {
+         return $txt

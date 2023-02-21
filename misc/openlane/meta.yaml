@@ -8,6 +8,8 @@ package:
 source:
   git_url: https://github.com/The-OpenROAD-Project/OpenLane
   git_rev: master
+  patches:
+    - handle-unknown-terminal.patch # The-OpenROAD-Project/OpenLane#1662
 
 build:
   # number: 201803050325
