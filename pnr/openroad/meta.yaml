@@ -51,7 +51,6 @@ requirements:
     - libboost 1.73
     - eigen 3.3
     - spdlog 1.9
-    - readline
     - tk
     - zlib
     - fmt
