@@ -12,7 +12,6 @@ source:
     patches:
       - odb-drt-disable-tests.patch # until tests are added to the recope
       - sta-add-install-options.patch # to enable sta binary distribution
-      - gui-find-qt-only-if-enabled.patch # until gui variant is added
       - disable-mpl2-and-par.patch # until or-tools dep is added
       - remove-boost-span-deps.patch # to allow older boost
   - url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ lemon_version }}.tar.gz
@@ -37,23 +36,33 @@ requirements:
     - bison
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ cdt('libx11-devel') }}         # [linux]
+    - {{ cdt('libxau-devel') }}         # [linux]
+    - {{ cdt('libxext-devel') }}        # [linux]
+    - {{ cdt('libxdamage-devel') }}     # [linux]
+    - {{ cdt('libxfixes-devel') }}     # [linux]    
+    - {{ cdt('libxxf86vm-devel') }}     # [linux]
+    - {{ cdt('xorg-x11-proto-devel') }} # [linux]
+    - {{ cdt('mesa-libgl-devel') }}     # [linux]
+    - {{ cdt('mesa-dri-drivers') }}     # [linux]
+    - {{ cdt('libselinux-devel') }}     # [linux]
   host:
     - python
     - libboost 1.73
     - eigen 3.3
     - spdlog 1.9
-    - readline
     - tk
     - zlib
     - fmt
     - libgomp                 [not osx]
     - llvm-openmp             [osx]
+    - qt                      [linux]
   run:
     # missing run_exports
     - {{ pin_compatible('libboost', min_pin='x.x', max_pin='x.x') }}
-    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}    
+    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
     - spdlog >=1.9,<1.10
-    
+
 test:
   commands:
     - openroad -version
