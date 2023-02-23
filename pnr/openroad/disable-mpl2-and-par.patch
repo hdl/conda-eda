@@ -137,20 +137,20 @@ index 255699ee0..b934b6b1e 100644
  #undef FOREACH_TOOL
  #undef FOREACH_TOOL_WITHOUT_OPENROAD
 diff --git a/src/OpenRoad.cc b/src/OpenRoad.cc
-index 388aa92fa..db320b684 100644
+index c90e40db9..c8a9a8109 100644
 --- a/src/OpenRoad.cc
 +++ b/src/OpenRoad.cc
 @@ -70,7 +70,9 @@
  #include "odb/lefout.h"
  #include "ord/InitOpenRoad.hh"
- #include "pad/MakePad.h"
+ #include "pad/MakeICeWall.h"
 +#ifdef ENABLE_PAR
  #include "par/MakePartitionMgr.h"
 +#endif
  #include "pdn/MakePdnGen.hh"
  #include "ppl/MakeIoplacer.h"
  #include "psm/MakePDNSim.hh"
-@@ -174,7 +176,9 @@ OpenRoad::~OpenRoad()
+@@ -175,7 +177,9 @@ OpenRoad::~OpenRoad()
    deleteFinale(finale_);
    deleteAntennaChecker(antenna_checker_);
    odb::dbDatabase::destroy(db_);
@@ -158,9 +158,9 @@ index 388aa92fa..db320b684 100644
    deletePartitionMgr(partitionMgr_);
 +#endif
    deletePdnGen(pdngen_);
+   deleteICeWall(icewall_);
    deleteDistributed(distributer_);
-   deleteSteinerTreeBuilder(stt_builder_);
-@@ -229,7 +233,9 @@ void OpenRoad::init(Tcl_Interp* tcl_interp)
+@@ -231,7 +235,9 @@ void OpenRoad::init(Tcl_Interp* tcl_interp)
    replace_ = makeReplace();
    pdnsim_ = makePDNSim();
    antenna_checker_ = makeAntennaChecker();
@@ -168,9 +168,9 @@ index 388aa92fa..db320b684 100644
    partitionMgr_ = makePartitionMgr();
 +#endif
    pdngen_ = makePdnGen();
+   icewall_ = makeICeWall();
    distributer_ = makeDistributed();
-   stt_builder_ = makeSteinerTreeBuilder();
-@@ -267,7 +273,9 @@ void OpenRoad::init(Tcl_Interp* tcl_interp)
+@@ -270,7 +276,9 @@ void OpenRoad::init(Tcl_Interp* tcl_interp)
    initTritonRoute(this);
    initPDNSim(this);
    initAntennaChecker(this);
