@@ -27,9 +27,16 @@ case "${UNAME_OUT}" in
                 exit;;
 esac
 
-# Support `any_cast` workaround: https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
 if [[ $OS == "Mac" ]]; then
     export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+    cd $PREFIX
+    # This is required because we have an external SDK file. The default
+    # Qt build explicitly looks for the SDK in /System/Library/Frameworks/
+    # and ignores any attempt to set the SDK root any other way.
+    if grep -q _GL_INCDIRS "$PREFIX/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake"; then
+        sed '1,11d' < "$PREFIX/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake" | sed '1 s|.*|set(_qt5gui_OPENGL_INCLUDE_DIR "'$CONDA_BUILD_SYSROOT'/System/Library/Frameworks/OpenGL.framework/Headers")|' > "$PREFIX/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake.bak"
+        mv "$PREFIX/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake.bak" "$PREFIX/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake"
+    fi
 fi
 
 cd $SRC_DIR/third_party/lemon
