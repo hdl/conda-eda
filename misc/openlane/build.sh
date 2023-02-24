@@ -20,13 +20,14 @@ set -ex
 UNAME_OUT="$(uname -s)"
 case "${UNAME_OUT}" in
     Linux*)     OS=Linux;;
+    Darwin*)    OS=Mac;;
     *)          OS="${UNAME_OUT}"
                 echo "Unknown OS: ${OS}"
                 exit;;
 esac
 
 mkdir -p $PREFIX/share/
-cp -ar $SRC_DIR $PREFIX/share/openlane
+cp -a $SRC_DIR $PREFIX/share/openlane
 # define system and pdk variables
 mkdir -p $PREFIX/share/openlane/install
 echo $PKG_VERSION-conda > $PREFIX/share/openlane/install/installed_version
