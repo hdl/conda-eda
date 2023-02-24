@@ -1,0 +1,38 @@
+diff --git a/scripts/configure b/scripts/configure
+index 640aa87..5c9bf35 100755
+--- a/scripts/configure
++++ b/scripts/configure
+@@ -6057,10 +6057,10 @@ if test "x$no_x" != "x"; then
+      echo Graphics options will be NULL only!
+      usingX11=
+   fi
+-  if test $usingTcl ; then
+-    echo "Cannot compile TCL version without X11, disabling."
+-    usingTcl=
+-  fi
++  # if test $usingTcl ; then
++  #   echo "Cannot compile TCL version without X11, disabling."
++  #   usingTcl=
++  # fi
+ fi
+ 
+ 
+@@ -6085,8 +6085,8 @@ fi
+ 
+ if test $usingTcl ; then
+   if test $usingX11 ; then
+-     gr_dflags="$gr_dflags -DX11 -DXLIB"
+-     gr_libs="$gr_libs -lX11"
++     gr_dflags="$gr_dflags"
++     gr_libs="$gr_libs"
+      gr_srcs="$gr_srcs \${TK_SRCS}"
+   else
+      gr_srcs="$gr_srcs \${NULL_SRCS}"
+@@ -6094,7 +6094,6 @@ if test $usingTcl ; then
+ else
+   if test $usingX11 ; then
+     gr_dflags="$gr_dflags -DX11 -DXLIB"
+-    gr_libs="$gr_libs -lX11"
+     gr_srcs="$gr_srcs \${X11_SRCS}"
+   fi
+ fi
