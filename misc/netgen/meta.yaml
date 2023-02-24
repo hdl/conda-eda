@@ -31,6 +31,10 @@ requirements:
   run:
     - python
 
+test:
+  commands:
+    - netgen -batch quit
+
 about:
   home: http://opencircuitdesign.com/netgen/
   license_file: Copying
