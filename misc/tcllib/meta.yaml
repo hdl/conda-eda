@@ -1,0 +1,52 @@
+# backported from https://github.com/conda-forge/tcllib-feedstock
+# with the following changes
+# - update `name` and `version` strings to match conda-eda convention
+# - switch to git url and track master
+# - use noarch: generic
+
+# Use `conda-build-prepare` before building for a better version string.
+{% set version = '%s_%04i_%s'| format(GIT_DESCRIBE_TAG | default('0.X'), GIT_DESCRIBE_NUMBER | default(0) | int, GIT_DESCRIBE_HASH | default('gUNKNOWN')) %}
+
+package:
+  name: tcllib
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/tcltk/tcllib.git
+  git_rev: master
+
+build:
+  noarch: generic
+  # number: 202202031935
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20220203_1935
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+  script: "tclsh installer.tcl -no-wait -no-gui -no-html -no-nroff -no-examples"
+
+requirements:
+  host:
+    - tk
+  run:
+    - tk
+
+test:
+  source_files:
+    - examples
+  commands:
+    - tclsh examples/logger/logtofile.tcl
+
+about:
+  home: https://core.tcl-lang.org/tcllib/doc/trunk/embedded/index.md
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: license.terms
+  summary: 'Tcllib is a collection of utility modules for Tcl.'
+  doc_url: https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/toc.md
+
+extra:
+  recipe-maintainers:
+    - abloemert
+    - proppy
+    - xobs
