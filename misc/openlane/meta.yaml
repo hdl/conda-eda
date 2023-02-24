@@ -13,6 +13,7 @@ source:
     - disable-version-check.patch # conda versions differ from openlane metadata
 
 build:
+  noarch: generic
   # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
   # string: 20180305_0325
