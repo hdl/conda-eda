@@ -1,7 +1,8 @@
 name: Build packages
 
 on:
-  workflow_call:
+#  workflow_call:
+  push:
     secrets:
       ANACONDA_TOKEN:
         description: 'Anaconda Token'
