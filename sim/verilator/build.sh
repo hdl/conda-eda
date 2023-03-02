@@ -15,5 +15,7 @@ autoconf
 make -j$CPU_COUNT
 make install
 
+ls -la ${PREFIX}/share/verilator/include
+
 # Fix hard coded paths in verilator
 sed -i -e 's-/.*_build_env/bin/--' $PREFIX/share/verilator/include/verilated.mk

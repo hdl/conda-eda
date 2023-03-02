@@ -7,6 +7,8 @@ export CONDA_BUILD_SYSROOT=/Users/runner/sdk/MacOSX10.9.sdk
 $PREFIX/bin/verilator -V
 #$PREFIX/bin/verilator --help || true
 
+ls -la ${PREFIX}/share/verilator/include
+
 cd $PREFIX/bin
 ln -s "$AR" ar
 ln -s "$RANLIB" ranlib
