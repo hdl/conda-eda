@@ -36,6 +36,8 @@ requirements:
 test:
   commands:
     - netgen -batch quit
+  downstreams:
+    - openlane
 
 about:
   home: http://opencircuitdesign.com/netgen/

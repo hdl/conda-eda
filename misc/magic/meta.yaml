@@ -40,6 +40,10 @@ requirements:
 test:
   commands:
     - magic -dnull -noconsole --version
+  downstreams:
+    - openlane
+    - open_pdks.gf180mcu
+    - open_pdks.sky130a
 
 about:
   home: http://opencircuitdesign.com/magic/
