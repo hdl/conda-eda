@@ -15,6 +15,10 @@ source:
     git_rev: main
     git_depth: 1
     folder: gf180mcu-pdk/gf180mcu_fd_pr
+  - git_url: https://github.com/efabless/globalfoundries-pdk-libs-gf180mcu_fd_pv.git
+    git_rev: main
+    git_depth: 1
+    folder: gf180mcu-pdk/gf180mcu_fd_pv
   - git_url: https://github.com/google/globalfoundries-pdk-libs-gf180mcu_fd_io.git
     git_rev: main
     git_depth: 1
