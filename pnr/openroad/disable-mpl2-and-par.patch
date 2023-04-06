@@ -1,8 +1,8 @@
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 293ea212c..d4df13f4a 100755
+index 1b51a5a1a..ca6bfd14b 100755
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -168,6 +168,9 @@ message(STATUS "boost: ${Boost_VERSION}")
+@@ -169,6 +169,9 @@ message(STATUS "boost: ${Boost_VERSION}")
  find_package(Python3 COMPONENTS Development REQUIRED)
  option(BUILD_PYTHON "Build the Python3 interface" ON)
  
@@ -12,7 +12,7 @@ index 293ea212c..d4df13f4a 100755
  option(ALLOW_WARNINGS "Flag to allow compilation with compiler warnings: on by default" ON)
  if (NOT ALLOW_WARNINGS)
    add_compile_options(
-@@ -250,10 +253,14 @@ add_subdirectory(cts)
+@@ -251,10 +254,14 @@ add_subdirectory(cts)
  add_subdirectory(grt)
  add_subdirectory(tap)
  add_subdirectory(mpl)
@@ -22,161 +22,46 @@ index 293ea212c..d4df13f4a 100755
 +endif()
  add_subdirectory(rcx)
  add_subdirectory(psm)
-+if (BUILD_PAR)
- add_subdirectory(par)
+-add_subdirectory(par)
++if ((NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin") AND BUILD_PAR)
++  add_subdirectory(par)
 +endif()
  add_subdirectory(ant)
  add_subdirectory(gui)
  add_subdirectory(drt)
-@@ -319,7 +326,6 @@ target_link_libraries(openroad
-   mpl
-   psm
-   ant
--  par
-   upf
-   utl
-   pdn
-@@ -329,12 +335,19 @@ target_link_libraries(openroad
+@@ -329,15 +336,23 @@ target_link_libraries(openroad
    ${CMAKE_THREAD_LIBS_INIT}
  )
  
 -if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 +if ((NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin") AND BUILD_MPL2)
-   # mpl2 aborts with link error on darwin so do not link it.
-   target_link_libraries(openroad mpl2)
+   # mpl2 aborts with link error on darwin and par causes abseil link error at startup on apple silicon so do not link it.
+-  target_link_libraries(openroad mpl2 par)
++  target_link_libraries(openroad mpl2)
    target_compile_definitions(openroad PRIVATE ENABLE_MPL2)
- else()
--  message(STATUS "Removing MPL2 to avoid run time fatal error.")
-+  message(STATUS "MPL2 macro placer disabled.")
++else()
++  message(STATUS "Removing MPL2 to avoid run time fatal error.")
 +endif()
 +
-+if (BUILD_PAR)
++if ((NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin") AND BUILD_PAR)
++  # mpl2 aborts with link error on darwin and par causes abseil link error at startup on apple silicon so do not link it.
 +  target_link_libraries(openroad par)
-+  target_compile_definitions(openroad PRIVATE ENABLE_PAR)
-+else()
-+  message(STATUS "PAR partitioner disabled.")
+   target_compile_definitions(openroad PRIVATE ENABLE_PAR)
+ else()
+-  message(STATUS "Removing MPL2 and PAR to avoid run time fatal error.")
++  message(STATUS "Removing PAR to avoid run time fatal error.")
  endif()
  
++
  # tclReadline
-@@ -398,7 +411,6 @@ if (Python3_FOUND AND BUILD_PYTHON)
-     drt_py
-     dpo_py
-     fin_py
--    par_py
-     rcx_py
-     rmp_py
-     stt_py
-@@ -406,10 +418,17 @@ if (Python3_FOUND AND BUILD_PYTHON)
-     pdn_py
+ if (TCL_READLINE_LIBRARY AND TCL_READLINE_H)
+   target_compile_definitions(openroad PRIVATE ENABLE_READLINE)
+@@ -407,7 +422,7 @@ if (Python3_FOUND AND BUILD_PYTHON)
      dft_py
    )
-+  if (BUILD_PAR)
-+    target_link_libraries(openroad par_py)
-+  else()
-+    message(STATUS "PAR partitioner disabled.")
-+  endif()
- else()
-   message(STATUS "Python3 disabled")
- endif()
  
-+
-+
- messages(
-   TARGET openroad
-   SOURCE_DIR .
-diff --git a/src/Main.cc b/src/Main.cc
-index 255699ee0..b934b6b1e 100644
---- a/src/Main.cc
-+++ b/src/Main.cc
-@@ -93,7 +93,6 @@ using std::string;
-   X(drt)                                 \
-   X(dpo)                                 \
-   X(fin)                                 \
--  X(par)                                 \
-   X(rcx)                                 \
-   X(rmp)                                 \
-   X(stt)                                 \
-@@ -108,6 +107,9 @@ using std::string;
- extern "C" {
- #define X(name) extern PyObject* PyInit__##name##_py();
- FOREACH_TOOL(X)
-+#ifdef ENABLE_PAR
-+X(par)
-+#endif
- #undef X
- }
- #endif
-@@ -126,6 +128,9 @@ static void showSplash();
- namespace sta {
- #define X(name) extern const char* name##_py_python_inits[];
- FOREACH_TOOL(X)
-+#ifdef ENABLE_PAR
-+X(par)
-+#endif
- #undef X
- }  // namespace sta
- 
-@@ -137,6 +142,9 @@ static void initPython()
-     exit(1);                                                                \
-   }
-   FOREACH_TOOL(X)
-+#ifdef ENABLE_PAR
-+  X(par)
-+#endif
- #undef X
-   Py_Initialize();
- #define X(name)                                                       \
-@@ -157,6 +165,9 @@ static void initPython()
-     delete[] unencoded;                                               \
-   }
-   FOREACH_TOOL_WITHOUT_OPENROAD(X)
-+#ifdef ENABLE_PAR
-+  X(par)
-+#endif
- #undef X
- #undef FOREACH_TOOL
- #undef FOREACH_TOOL_WITHOUT_OPENROAD
-diff --git a/src/OpenRoad.cc b/src/OpenRoad.cc
-index c90e40db9..c8a9a8109 100644
---- a/src/OpenRoad.cc
-+++ b/src/OpenRoad.cc
-@@ -70,7 +70,9 @@
- #include "odb/lefout.h"
- #include "ord/InitOpenRoad.hh"
- #include "pad/MakeICeWall.h"
-+#ifdef ENABLE_PAR
- #include "par/MakePartitionMgr.h"
-+#endif
- #include "pdn/MakePdnGen.hh"
- #include "ppl/MakeIoplacer.h"
- #include "psm/MakePDNSim.hh"
-@@ -175,7 +177,9 @@ OpenRoad::~OpenRoad()
-   deleteFinale(finale_);
-   deleteAntennaChecker(antenna_checker_);
-   odb::dbDatabase::destroy(db_);
-+#ifdef ENABLE_PAR
-   deletePartitionMgr(partitionMgr_);
-+#endif
-   deletePdnGen(pdngen_);
-   deleteICeWall(icewall_);
-   deleteDistributed(distributer_);
-@@ -231,7 +235,9 @@ void OpenRoad::init(Tcl_Interp* tcl_interp)
-   replace_ = makeReplace();
-   pdnsim_ = makePDNSim();
-   antenna_checker_ = makeAntennaChecker();
-+#ifdef ENABLE_PAR
-   partitionMgr_ = makePartitionMgr();
-+#endif
-   pdngen_ = makePdnGen();
-   icewall_ = makeICeWall();
-   distributer_ = makeDistributed();
-@@ -270,7 +276,9 @@ void OpenRoad::init(Tcl_Interp* tcl_interp)
-   initTritonRoute(this);
-   initPDNSim(this);
-   initAntennaChecker(this);
-+#ifdef ENABLE_PAR
-   initPartitionMgr(this);
-+#endif
-   initPdnGen(this);
-   initDistributed(this);
-   initSteinerTreeBuilder(this);
+-  if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
++  if ((NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin") AND BUILD_PAR)
+     # par_py causes abseil link error at startup on apple silicon so do not link it.
+     target_link_libraries(openroad par_py)
+   else()

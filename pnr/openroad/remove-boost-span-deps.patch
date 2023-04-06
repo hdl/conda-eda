@@ -1,5 +1,5 @@
 diff --git a/src/odb/test/parseTest.cpp b/src/odb/test/parseTest.cpp
-index 38e372a20..08cf44ee8 100644
+index f2e7d900d..08cf44ee8 100644
 --- a/src/odb/test/parseTest.cpp
 +++ b/src/odb/test/parseTest.cpp
 @@ -55,36 +55,4 @@ int notice(int code, const char* msg, ...)
@@ -8,11 +8,11 @@ index 38e372a20..08cf44ee8 100644
  
 -BOOST_AUTO_TEST_CASE(parser_init_and_parse_line_with_integers)
 -{
--  Ath__parser parser;
+-  utl::Logger logger;
+-  Ath__parser parser(&logger);
 -
 -  BOOST_TEST(parser.getLineNum() == 0);
 -
--  utl::Logger logger;
 -  utl::ScopedTemporaryFile scoped_temp_file(&logger);
 -  const std::string kContents = "1 2 3 4";
 -  boost::span<const uint8_t> contents(
@@ -40,7 +40,7 @@ index 38e372a20..08cf44ee8 100644
 -
  }  // namespace odb
 diff --git a/src/utl/CMakeLists.txt b/src/utl/CMakeLists.txt
-index a795da4d1..db52c9dd4 100644
+index 464e5b3ca..603696be1 100644
 --- a/src/utl/CMakeLists.txt
 +++ b/src/utl/CMakeLists.txt
 @@ -35,7 +35,7 @@
@@ -52,6 +52,13 @@ index a795da4d1..db52c9dd4 100644
  
  swig_lib(NAME      utl
           NAMESPACE utl
+@@ -121,4 +121,4 @@ if(ENABLE_TESTS)
+   target_link_libraries(CFileUtilsTest
+     utl
+   )
+-endif()
+\ No newline at end of file
++endif()
 diff --git a/src/utl/include/utl/CFileUtils.h b/src/utl/include/utl/CFileUtils.h
 index a3c6d8024..192b1a89d 100644
 --- a/src/utl/include/utl/CFileUtils.h
