@@ -1,0 +1,43 @@
+diff --git a/src/dpl/CMakeLists.txt b/src/dpl/CMakeLists.txt
+index bd2ab1b56..5d7a47b63 100644
+--- a/src/dpl/CMakeLists.txt
++++ b/src/dpl/CMakeLists.txt
+@@ -37,7 +37,7 @@
+ ###########################################################################
+ 
+ include("openroad")
+-
++find_package(TCL)
+ 
+ add_library(dpl_lib
+   src/Opendp.cpp
+@@ -53,7 +53,7 @@ target_link_libraries(dpl_lib
+   PUBLIC
+     odb
+     OpenSTA
+-    tcl
++    ${TCL_LIBRARY}
+   PRIVATE
+     utl
+ )
+diff --git a/src/dst/CMakeLists.txt b/src/dst/CMakeLists.txt
+index bbce29086..b3077513e 100644
+--- a/src/dst/CMakeLists.txt
++++ b/src/dst/CMakeLists.txt
+@@ -34,6 +34,7 @@
+ ###############################################################################
+ include("openroad")
+ include(FindZLIB)
++find_package(TCL)
+ 
+ project(dst
+   LANGUAGES CXX
+@@ -64,7 +65,7 @@ target_link_libraries(dst
+   PUBLIC
+     utl
+     OpenSTA
+-    tcl
++    ${TCL_LIBRARY}
+     ${ZLIB_LIBRARIES}
+     Boost::serialization
+     Boost::system
