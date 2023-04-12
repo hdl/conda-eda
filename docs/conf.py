@@ -24,7 +24,7 @@ numfig = True
 
 master_doc = "index"
 project = "Conda recipes for FPGA EDA tools"
-copyright = "2019-2022, hdl/conda-* contributors"
+copyright = "2019-2023, hdl/conda-* contributors"
 author = "hdl/conda-* contributors"
 
 version = "latest"
