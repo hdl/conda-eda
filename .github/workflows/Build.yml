@@ -21,25 +21,23 @@ defaults:
 
 jobs:
   magic-linux:
-    runs-on: [self-hosted, Linux, X64]
-    container: ubuntu:20.04
+    runs-on: ubuntu-20.04
     env:
       PACKAGE: "misc/magic"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
-      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1
+      - run: sudo apt -qqy update && sudo apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1
       - uses: ./ci
 
   icestorm-linux:
-    runs-on: [self-hosted, Linux, X64]
-    container: ubuntu:20.04
+    runs-on: ubuntu-20.04
     env:
       PACKAGE: "bit/icestorm"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
-      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
+      - run: sudo apt -qqy update && sudo apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
   prjtrellis-linux:
@@ -764,7 +762,7 @@ jobs:
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
-      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1        
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1
       - uses: ./ci
 
   openroad-linux:
