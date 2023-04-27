@@ -17,6 +17,10 @@ build:
   script_env:
     - CI
 
+requirements:
+  build:
+    - cmake
+
 test:
   commands:
     - moore --version
