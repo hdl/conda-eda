@@ -31,7 +31,7 @@ else
     ADDITIONAL_CHANNELS="litex-hub"
 fi
 
-ADDITIONAL_PACKAGES="conda-build conda-verify jinja2 pexpect python=3.7"
+ADDITIONAL_PACKAGES="conda-build conda-verify jinja2 pexpect python"
 if [[ "$OS_NAME" != 'windows' ]]; then
     ADDITIONAL_PACKAGES="$ADDITIONAL_PACKAGES ripgrep"
 fi
