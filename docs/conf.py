@@ -24,7 +24,7 @@ numfig = True
 
 master_doc = "index"
 project = "Conda recipes for FPGA EDA tools"
-copyright = "2019-2022, hdl/conda-* contributors"
+copyright = "2019-2023, hdl/conda-* contributors"
 author = "hdl/conda-* contributors"
 
 version = "latest"
@@ -122,11 +122,11 @@ intersphinx_mapping = {
 # -- Sphinx.Ext.ExtLinks -----------------------------------------------------------------------------------------------
 
 extlinks = {
-    "wikipedia": ("https://en.wikipedia.org/wiki/%s", None),
-    "awesome": ("https://hdl.github.io/awesome/items/%s", ""),
-    "gh": ("https://github.com/%s", "gh:"),
-    "ghsharp": ("https://github.com/hdl/conda-eda/issues/%s", "#"),
-    "ghissue": ("https://github.com/hdl/conda-eda/issues/%s", "issue #"),
-    "ghpull": ("https://github.com/hdl/conda-eda/pull/%s", "pull request #"),
-    "ghsrc": ("https://github.com/hdl/conda-eda/blob/master/%s", ""),
+    "wikipedia": ("https://en.wikipedia.org/wiki/%s", "wikipedia:%s"),
+    "awesome":   ("https://hdl.github.io/awesome/items/%s", "%s"),
+    "gh":        ("https://github.com/%s", "gh:%s"),
+    "ghsharp":   ("https://github.com/hdl/conda-eda/issues/%s", "#%s"),
+    "ghissue":   ("https://github.com/hdl/conda-eda/issues/%s", "issue #%s"),
+    "ghpull":    ("https://github.com/hdl/conda-eda/pull/%s", "pull request #%s"),
+    "ghsrc":     ("https://github.com/hdl/conda-eda/blob/master/%s", "%s"),
 }
