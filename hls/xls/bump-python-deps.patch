@@ -1,0 +1,33 @@
+diff --git a/dependency_support/pip_requirements.txt b/dependency_support/pip_requirements.txt
+index 813e1bd5..e2dca88d 100644
+--- a/dependency_support/pip_requirements.txt
++++ b/dependency_support/pip_requirements.txt
+@@ -1,16 +1,12 @@
+-Flask==2.3.2
+-Jinja2==3.1.2
+-werkzeug==2.3.3
+-itsdangerous>=2.0
+-click==8.1.3
+-markupsafe==2.1.1
+-termcolor==1.1.0
+-psutil==5.7.0
+-portpicker==1.3.1
+-pyyaml==5.4.1
+-
+-# Note: numpy and scipy version availability seems to differ between Ubuntu
+-# versions that we want to support (e.g. 18.04 vs 20.04), so we accept a
+-# range that makes successful installation on those platforms possible.
+-numpy>=1.21
+-scipy>=1.5.4,<=1.8.1
++Flask~=2.3
++Jinja2~=3.1
++Werkzeug~=2.3
++itsdangerous~=2.1
++click~=8.1
++MarkupSafe~=2.1
++termcolor~=2.3
++psutil~=5.9
++portpicker~=1.5
++PyYAML~=6.0
++numpy~=1.24
++scipy~=1.10
