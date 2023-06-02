@@ -39,7 +39,7 @@ requirements:
     - automake
     - make
   host:
-    - python
+    - python 3.10
     - pip
     - typing_inspect
     - marshmallow
