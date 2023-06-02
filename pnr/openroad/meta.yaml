@@ -47,7 +47,7 @@ requirements:
     - {{ cdt('mesa-dri-drivers') }}     # [linux]
     - {{ cdt('libselinux-devel') }}     # [linux]
   host:
-    - python
+    - python 3.10
     - libboost 1.73
     - eigen 3.3
     - spdlog 1.9
