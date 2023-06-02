@@ -11,6 +11,7 @@ source:
     patches:
       - use-sources-from-conda.patch
       - disable-link-targets-for-C-variant.patch
+      - fix-klayout-lvs-path.patch
   - git_url: https://github.com/efabless/globalfoundries-pdk-libs-gf180mcu_fd_pr.git
     git_rev: main
     git_depth: 1
