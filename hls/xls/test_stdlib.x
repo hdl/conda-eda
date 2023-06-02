@@ -1,6 +1,6 @@
 import apfloat
 
-type F8 = apfloat::APFloat<u32:4, u32:3>;
+type F8 = apfloat::APFloat<4, 3>;
 
 #[test]
 fn cast_test() {
