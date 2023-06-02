@@ -40,7 +40,7 @@ index f2e7d900d..08cf44ee8 100644
 -
  }  // namespace odb
 diff --git a/src/utl/CMakeLists.txt b/src/utl/CMakeLists.txt
-index 464e5b3ca..603696be1 100644
+index 85a1250d4..99e01b846 100644
 --- a/src/utl/CMakeLists.txt
 +++ b/src/utl/CMakeLists.txt
 @@ -35,7 +35,7 @@
@@ -52,13 +52,6 @@ index 464e5b3ca..603696be1 100644
  
  swig_lib(NAME      utl
           NAMESPACE utl
-@@ -121,4 +121,4 @@ if(ENABLE_TESTS)
-   target_link_libraries(CFileUtilsTest
-     utl
-   )
--endif()
-\ No newline at end of file
-+endif()
 diff --git a/src/utl/include/utl/CFileUtils.h b/src/utl/include/utl/CFileUtils.h
 index a3c6d8024..192b1a89d 100644
 --- a/src/utl/include/utl/CFileUtils.h
