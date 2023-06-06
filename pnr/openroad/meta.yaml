@@ -13,7 +13,6 @@ source:
       - sta-add-install-options.patch # to enable sta binary distribution
       - disable-mpl2-and-par.patch # until or-tools dep is added
       - remove-boost-span-deps.patch # to allow older boost
-      - find-tcl-library.patch # to find installed tcl library
   - url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ lemon_version }}.tar.gz
     md5: {{ lemon_md5 }}
     folder: third_party/lemon
