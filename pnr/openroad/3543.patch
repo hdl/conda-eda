@@ -1,16 +1,3 @@
-From 1d2df27f143d2cc9d8c3abc686b5155ca62ef4e1 Mon Sep 17 00:00:00 2001
-From: Johan Euphrosine <proppy@google.com>
-Date: Wed, 28 Jun 2023 15:19:19 +0900
-Subject: [PATCH] gui,dst,dbSta: add missing include
-
-Signed-off-by: Johan Euphrosine <proppy@google.com>
----
- src/dbSta/src/dbSta.cc            | 1 +
- src/dst/src/BalancerConnection.cc | 1 +
- src/gui/src/renderThread.h        | 1 +
- src/gui/src/search.h              | 1 +
- 4 files changed, 4 insertions(+)
-
 diff --git a/src/dbSta/src/dbSta.cc b/src/dbSta/src/dbSta.cc
 index a2ac0e5e53..fba9473fc2 100644
 --- a/src/dbSta/src/dbSta.cc
