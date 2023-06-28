@@ -1,0 +1,61 @@
+From 1d2df27f143d2cc9d8c3abc686b5155ca62ef4e1 Mon Sep 17 00:00:00 2001
+From: Johan Euphrosine <proppy@google.com>
+Date: Wed, 28 Jun 2023 15:19:19 +0900
+Subject: [PATCH] gui,dst,dbSta: add missing include
+
+Signed-off-by: Johan Euphrosine <proppy@google.com>
+---
+ src/dbSta/src/dbSta.cc            | 1 +
+ src/dst/src/BalancerConnection.cc | 1 +
+ src/gui/src/renderThread.h        | 1 +
+ src/gui/src/search.h              | 1 +
+ 4 files changed, 4 insertions(+)
+
+diff --git a/src/dbSta/src/dbSta.cc b/src/dbSta/src/dbSta.cc
+index a2ac0e5e53..fba9473fc2 100644
+--- a/src/dbSta/src/dbSta.cc
++++ b/src/dbSta/src/dbSta.cc
+@@ -44,6 +44,7 @@
+ #include <tcl.h>
+ 
+ #include <algorithm>  // min
++#include <mutex>
+ 
+ #include "AbstractPathRenderer.h"
+ #include "AbstractPowerDensityDataSource.h"
+diff --git a/src/dst/src/BalancerConnection.cc b/src/dst/src/BalancerConnection.cc
+index 5afaf1423e..44b0288be8 100644
+--- a/src/dst/src/BalancerConnection.cc
++++ b/src/dst/src/BalancerConnection.cc
+@@ -36,6 +36,7 @@
+ #include <boost/bind/bind.hpp>
+ #include <boost/serialization/export.hpp>
+ #include <boost/thread/thread.hpp>
++#include <mutex>
+ #include <thread>
+ 
+ #include "LoadBalancer.h"
+diff --git a/src/gui/src/renderThread.h b/src/gui/src/renderThread.h
+index 4c1a2b973b..e885864d8a 100644
+--- a/src/gui/src/renderThread.h
++++ b/src/gui/src/renderThread.h
+@@ -36,6 +36,7 @@
+ #include <QPainter>
+ #include <QThread>
+ #include <QWaitCondition>
++#include <mutex>
+ 
+ #include "gui/gui.h"
+ #include "odb/db.h"
+diff --git a/src/gui/src/search.h b/src/gui/src/search.h
+index 53460b5989..4d24a72bef 100644
+--- a/src/gui/src/search.h
++++ b/src/gui/src/search.h
+@@ -35,6 +35,7 @@
+ #include <QObject>
+ #include <boost/geometry.hpp>
+ #include <boost/geometry/index/rtree.hpp>
++#include <mutex>
+ 
+ #include "odb/db.h"
+ #include "odb/dbBlockCallBackObj.h"
