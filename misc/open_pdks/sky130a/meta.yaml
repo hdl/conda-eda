@@ -38,9 +38,9 @@ requirements:
     - autoconf
     - automake
     - make
-  host:
-    - python 3.10
+    - python
     - pip
+  host:
     - typing_inspect
     - marshmallow
     - marshmallow-enum
