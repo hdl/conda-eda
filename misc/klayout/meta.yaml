@@ -46,7 +46,7 @@ requirements:
     - qt >=5.0,<6.0
     - zlib
   run:
-    - python {{ python_version }}
+    - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
     - ruby
     - qt >=5.0,<6.0
     - zlib

@@ -11,6 +11,8 @@ source:
   # use url below to prevent submodules
   - url: https://github.com/google/skywater-pdk/archive/49d3c73c2cd8ea42cdae5056440baef0f72e7e42.zip
     folder: skywater-pdk
+    patches:
+      - 423.patch # drop when google/skywater-pdk#423 is merged
   - url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hd/archive/ac7fb61f06e6470b94e8afdf7c25268f62fbd7b1.zip
     folder: skywater-pdk/libraries/sky130_fd_sc_hd/latest
   - url: https://github.com/google/skywater-pdk-libs-sky130_fd_sc_hvl/archive/4fd4f858d16c558a6a488b200649e909bb4dd800.zip
@@ -38,9 +40,9 @@ requirements:
     - autoconf
     - automake
     - make
-  host:
-    - python 3.10
+    - python
     - pip
+  host:
     - typing_inspect
     - marshmallow
     - marshmallow-enum

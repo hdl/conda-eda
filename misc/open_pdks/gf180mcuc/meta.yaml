@@ -54,8 +54,8 @@ requirements:
     - autoconf
     - automake
     - make
-  host:
     - python
+  host:
     - magic
   run_constrained:
     - {{ pin_compatible('magic', min_pin='x.x.x', max_pin='x.x.x') }}

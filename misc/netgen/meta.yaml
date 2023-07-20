@@ -28,10 +28,7 @@ requirements:
     - {{ cdt('libxau-devel') }}  # [linux]
     - {{ cdt('libxcb') }}  # [linux]
   host:
-    - python
     - tk
-  run:
-    - python
 
 test:
   commands:
