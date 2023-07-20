@@ -38,7 +38,7 @@ test:
   requires:
     - open_pdks.sky130a
   commands:
-    - PDK=sky130A STD_CELL_LIBRARY=sky130_fd_sc_hd STD_CELL_LIBRARY_OPT=sky130_fd_sc_hd flow.tcl -design inverter
+    - PDK=sky130A STD_CELL_LIBRARY=sky130_fd_sc_hd STD_CELL_LIBRARY_OPT=sky130_fd_sc_hd flow.tcl -design spm
 
 about:
   home: https://github.com/The-OpenROAD-Project/OpenLane
