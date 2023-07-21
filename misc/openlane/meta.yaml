@@ -37,8 +37,10 @@ requirements:
 test:
   requires:
     - open_pdks.sky130a
+    - open_pdks.gf180mcuc
   commands:
     - PDK=sky130A STD_CELL_LIBRARY=sky130_fd_sc_hd STD_CELL_LIBRARY_OPT=sky130_fd_sc_hd flow.tcl -design spm
+    - PDK=gf180mcuC STD_CELL_LIBRARY=gf180mcu_fd_sc_mcu7t5v0 STD_CELL_LIBRARY_OPT=gf180mcu_fd_sc_mcu7t5v0 flow.tcl -design spm    
 
 about:
   home: https://github.com/The-OpenROAD-Project/OpenLane

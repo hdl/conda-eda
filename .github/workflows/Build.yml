@@ -896,7 +896,7 @@ jobs:
       - uses: ./ci
 
   openlane-linux:
-    needs: ["magic-linux", "netgen-linux", "openroad-linux-py37", "openroad-linux-py38", "openroad-linux-py310", "yosys-linux-py37", "yosys-linux-py38", "yosys-linux-py310", "tcllib-linux"]
+    needs: ["magic-linux", "netgen-linux", "openroad-linux-py37", "openroad-linux-py38", "openroad-linux-py310", "yosys-linux-py37", "yosys-linux-py38", "yosys-linux-py310", "tcllib-linux", "open_pdks.sky130a", "open_pdks.gf180mcuc"]
     runs-on: [self-hosted, Linux, X64]
     container: ubuntu:20.04
     env:
