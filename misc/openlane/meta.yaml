@@ -1,6 +1,9 @@
 # Use `conda-build-prepare` before building for a better version string.
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 
+{% set python_version = PYTHON_VERSION | default('3.7') %}
+{% set py_suffix = 'py%s'|format(python_version|replace('.', '')) %}
+
 package:
   name: openlane
   version: {{ version }}
@@ -17,7 +20,7 @@ build:
   # number: 201803050325
   number: {{ environ.get('DATE_NUM') }}
   # string: 20180305_0325
-  string: {{ environ.get('DATE_STR') }}
+  string: {{ environ.get('DATE_STR') }}_{{ py_suffix }}
   script_env:
     - CI
     - CONDA_OUT
@@ -33,12 +36,15 @@ requirements:
     - pyyaml
     - tcllib
     - klayout
+    - python {{ python_version }}
 
 test:
   requires:
     - open_pdks.sky130a
+    - open_pdks.gf180mcuc
   commands:
     - PDK=sky130A STD_CELL_LIBRARY=sky130_fd_sc_hd STD_CELL_LIBRARY_OPT=sky130_fd_sc_hd flow.tcl -design spm
+    - PDK=gf180mcuC STD_CELL_LIBRARY=gf180mcu_fd_sc_mcu7t5v0 STD_CELL_LIBRARY_OPT=gf180mcu_fd_sc_mcu7t5v0 flow.tcl -design spm    
 
 about:
   home: https://github.com/The-OpenROAD-Project/OpenLane
