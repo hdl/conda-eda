@@ -57,6 +57,8 @@ test:
   requires:
     - ruby
     - python {{ python_version }}
+  downstreams:
+    - openlane
 
 about:
   home: https://www.klayout.de/

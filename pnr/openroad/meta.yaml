@@ -69,6 +69,8 @@ test:
   commands:
     - openroad -version
     - sta -version
+  downstreams:
+    - openlane
 
 about:
   home: https://theopenroadproject.org/
