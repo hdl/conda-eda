@@ -11,6 +11,7 @@ source:
   patches:
     - fix-vvp-path.patch
     - vvp-config.patch
+    - add-arm64.patch
 
 build:
   # number: 201803050325
@@ -24,8 +25,8 @@ requirements:
   build:
     - {{ compiler('c') }}       [linux]
     - {{ compiler('cxx') }}     [linux]
-    - {{ compiler('c') }} 4.0   [osx]
-    - {{ compiler('cxx') }} 4.0 [osx]
+    - {{ compiler('c') }} 14.0   [osx]
+    - {{ compiler('cxx') }} 14.0 [osx]
     - autoconf                  [not win]
     - bison                     [not win]
     - gperf                     [not win]
