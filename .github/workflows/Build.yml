@@ -934,6 +934,19 @@ jobs:
       - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1
       - uses: ./ci
 
+  openfasoc-linux-py310:
+    needs: ["magic-linux", "netgen-linux", "openroad-linux-py310", "yosys-linux-py310", "tcllib-linux", "open_pdks-sky130a-linux"]
+    runs-on: [self-hosted, Linux, X64]
+    container: ubuntu:20.04
+    env:
+      PACKAGE: "misc/openfasoc"
+      OS_NAME: "linux"
+      PYTHON_VERSION: "3.10"      
+    steps:
+      - uses: actions/checkout@v3
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1
+      - uses: ./ci
+
   tcllib-linux:
     runs-on: [self-hosted, Linux, X64]
     container: ubuntu:20.04

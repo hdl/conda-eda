@@ -1,0 +1,64 @@
+# Use `conda-build-prepare` before building for a better version string.
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+{% set python_version = PYTHON_VERSION | default('3.7') %}
+{% set py_suffix = 'py%s'|format(python_version|replace('.', '')) %}
+
+package:
+  name: openfasoc
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/idea-fasoc/OpenFASOC
+  git_rev: master
+
+build:
+  noarch: generic
+  number: {{ environ.get('DATE_NUM') }}
+  string: {{ environ.get('DATE_STR') }}_{{ py_suffix }}
+  script_env:
+    - CI
+    - CONDA_OUT
+    - TEST_PACKAGE
+
+requirements:
+  run:
+    - openroad
+    - magic
+    - netgen
+    - yosys
+    - click
+    - pyyaml
+    - tcllib
+    - klayout
+    - pandas
+    - numpy
+    - matplotlib
+    - gdsfactory
+    - cairosvg
+    - scipy
+    - ltspice
+    - mako
+    - python {{ python_version }}
+
+test:
+  requires:
+    - open_pdks.sky130a
+  commands:
+    - PDK_ROOT=sky130A  
+
+about:
+  home: https://github.com/idea-fasoc/OpenFASOC
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: 'OpenFASoC - Fully Open Source FASOC generators built on top of open-source EDA tools.'
+  description: |
+    OpenFASOC is focused on open-source automated analog generation from user specification to GDSII with fully open-sourced tools. This project is led by a team of researchers at the University of Michigan and is inspired by FASoC, that sits on proprietary tools. (
+  doc_url: https://openfasoc.readthedocs.io/
+  dev_url: https://github.com/idea-fasoc/OpenFASOC
+
+extra:
+  recipe-maintainers:
+    - saicharan0112
+
