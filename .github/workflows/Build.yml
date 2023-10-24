@@ -895,6 +895,15 @@ jobs:
       - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
 
+  xls-osx:
+    runs-on: "macos-latest"
+    env:
+      PACKAGE: "hls/xls"
+      OS_NAME: "osx"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./ci
+
   openlane-linux-py37:
     needs: ["magic-linux", "netgen-linux", "openroad-linux-py37", "yosys-linux-py37", "tcllib-linux", "open_pdks-sky130a-linux", "open_pdks-gf180mcuc-linux"]
     runs-on: [self-hosted, Linux, X64]
