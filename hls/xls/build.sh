@@ -2,7 +2,7 @@
 
 set -ex
 
-cd $SRC_DIR
+cd $SRC_DIR/xls_src
 
 # build targets
 chmod +x $SRC_DIR/bazelisk
