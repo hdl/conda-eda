@@ -8,8 +8,11 @@ package:
 source:
   - git_url: https://github.com/google/xls.git
     git_rev: main
-  - url: https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-amd64
-    sha256: ce52caa51ef9e509fb6b7e5ad892e5cf10feb0794b0aed4d2f36adb00a1a2779
+  - url: https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-amd64 # [linux64]
+    sha256: ce52caa51ef9e509fb6b7e5ad892e5cf10feb0794b0aed4d2f36adb00a1a2779 # [linux64]
+    url: https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-darwin # [osx]
+    sha256: b033e51edd02ca4a8896cc24af9991af41ac54e4d34c133d159763a172cc2a2a # [osx]
+    fn: bazelisk
 
 build:
   # number: 202202082028
