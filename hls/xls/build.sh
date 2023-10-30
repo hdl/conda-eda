@@ -2,6 +2,8 @@
 
 set -ex
 
+cd $SRC_DIR
+
 # build targets
 chmod +x $SRC_DIR/bazelisk
 $SRC_DIR/bazelisk build -c opt \
