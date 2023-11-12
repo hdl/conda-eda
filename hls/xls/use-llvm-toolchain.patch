@@ -1,9 +1,0 @@
-diff --git a/.bazelrc b/.bazelrc
-index 2d43fa52..b906f240 100644
---- a/.bazelrc
-+++ b/.bazelrc
-@@ -9,3 +9,4 @@ build --host_copt "-Wno-comment"
- # TODO(leary): 2020-09-09 Make it possible to enable this option.
- # Currently m4 doesn't seem to work as a dependency.
- # build --crosstool_top=@llvm_toolchain_llvm//:toolchain
-+build --incompatible_enable_cc_toolchain_resolution
