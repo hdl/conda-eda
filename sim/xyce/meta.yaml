@@ -1,0 +1,70 @@
+# Use `conda-build-prepare` before building for a better version string.
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('v', '')|replace('-', '')|default('0.X'), GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH|default('gUNKNOWN')) %}
+{% set trilinos_version = '13-4-1' %}
+{% set trilinos_md5 = '8f26e97d92a9d91affadc54896a0ec77' %}
+{% set blas_version = '3.11.0' %}
+{% set blas_md5 = '92418c9bc598e589d73044ec39518616' %}
+{% set lapack_version = '3.11.0' %}
+{% set lapack_md5 = '595b064fd448b161cd711fe346f498a7' %}
+{% set amd_version = '6.0.2' %}
+{% set amd_md5 = '628214a2d18ee4d3996fdc50b7fc9aef' %}
+package:
+  name: xyce
+  version: {{ version }}
+
+source:
+  - git_url: https://github.com/Xyce/Xyce.git
+    git_rev: master
+  - url: https://github.com/trilinos/Trilinos/archive/refs/tags/trilinos-release-{{ trilinos_version }}.tar.gz
+    md5: {{ trilinos_md5 }}
+    folder: Trilinos
+  - url: http://www.netlib.org/blas/blas-{{ blas_version }}.tgz
+    md5: {{ blas_md5 }}
+    folder: blas
+  - url: https://github.com/Reference-LAPACK/lapack/archive/refs/tags/v{{ lapack_version }}.tar.gz
+    md5: {{ lapack_md5 }}
+    folder: lapack
+  - url: https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/refs/tags/v{{ amd_version }}.tar.gz
+    md5: {{ amd_md5 }}
+    folder: amd
+
+build:
+  # number: 202202031935
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20220203_1935
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+
+requirements:
+  build:
+    - autoconf
+    - automake
+    - make
+    - cmake
+    - bison
+    - flex
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+  host:
+    - libgfortran5
+    - libgfortran-ng
+
+test:
+  commands:
+    - xyce --version
+
+about:
+  home: https://xyce.sandia.gov/
+  license: GPL
+  license_family: GPL
+  license_file: LICENSE
+  summary: 'The Xyce™ Parallel Electronic Simulator'
+  description: |
+    Xyce (zīs, rhymes with “spice”) is an open source, SPICE-compatible, high-performance analog circuit simulator, capable of solving extremely large circuit problems by supporting large-scale parallel computing platforms. It also supports serial execution on all common desktop platforms, and small-scale parallel runs on Unix-like systems. In addition to analog electronic simulation, Xyce has also been used to investigate more general network systems, such as neural networks and power grids.
+  doc_url: https://xyce.sandia.gov/documentation/
+  dev_url: https://github.com/Xyce/Xyce
+
+extra:
+  recipe-maintainers:
+    - proppy

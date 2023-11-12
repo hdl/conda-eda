@@ -1026,3 +1026,13 @@ jobs:
       - uses: actions/checkout@v3
       - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
       - uses: ./ci
+
+  #65
+  xyce-linux:
+    runs-on: "ubuntu-20.04"
+    env:
+      PACKAGE: "sim/xyce"
+      OS_NAME: "linux"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./ci
