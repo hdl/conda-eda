@@ -4,11 +4,11 @@
 {% set python_version = PYTHON_VERSION | default('3.10') %}
 {% set py_suffix = 'py%s'|format(python_version|replace('.', '')) %}
 
-{% set open_pdks_sky130a_version = '1.0.286_0_g52af776'}
-{% set openroad_version = '2.0_10905_ge89829335'}
-{% set magic_version = '8.3.445_3_g7db77d4'}
-{% set netgen_version = '1.5.262_0_gc1ed4ce'}
-{% set yosys_version = '0.35_8_g5691cd095'}
+{% set open_pdks_sky130a_version = '1.0.286_0_g52af776' %}
+{% set openroad_version = '2.0_10905_ge89829335' %}
+{% set magic_version = '8.3.445_3_g7db77d4' %}
+{% set netgen_version = '1.5.262_0_gc1ed4ce' %}
+{% set yosys_version = '0.35_8_g5691cd095' %}
 
 
 package:
