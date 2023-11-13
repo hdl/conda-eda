@@ -1,8 +1,15 @@
 # Use `conda-build-prepare` before building for a better version string.
 {% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG, GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
 
-{% set python_version = PYTHON_VERSION | default('3.7') %}
+{% set python_version = PYTHON_VERSION | default('3.10') %}
 {% set py_suffix = 'py%s'|format(python_version|replace('.', '')) %}
+
+{% set open_pdks_sky130a_version = '1.0.286_0_g52af776'}
+{% set openroad_version = '2.0_10905_ge89829335'}
+{% set magic_version = '8.3.445_3_g7db77d4'}
+{% set netgen_version = '1.5.262_0_gc1ed4ce'}
+{% set yosys_version = '0.35_8_g5691cd095'}
+
 
 package:
   name: openfasoc
@@ -23,10 +30,11 @@ build:
 
 requirements:
   run:
-    - openroad
-    - magic
-    - netgen
-    - yosys
+    - openroad {{ openroad_version }}
+    - magic {{ magic_version }}
+    - netgen {{ netgen_version }}
+    - yosys {{ yosys_version }}
+    - open_pdks.sky130a {{ open_pdks_sky130a_version }}
     - click
     - pyyaml
     - tcllib
