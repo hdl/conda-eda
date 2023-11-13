@@ -24,5 +24,5 @@ jobs:
       PYTHON_VERSION: "3.10"      
     steps:
       - uses: actions/checkout@v3
-      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1
+      - run: sudo apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libxrender1
       - uses: ./ci
