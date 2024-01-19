@@ -1,0 +1,49 @@
+# Use `conda-build-prepare` before building for a better version string.
+{% set version = '%s_%04i_%s'|format(GIT_DESCRIBE_TAG|replace('vpr-', '')|replace('-', '') or '0.X', GIT_DESCRIBE_NUMBER|int, GIT_DESCRIBE_HASH or 'gUNKNOWN') %}
+
+package:
+  name: vtr-libs
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/verilog-to-routing/vtr-verilog-to-routing.git
+  git_rev: master
+  patches:
+    - osx.patch             [osx]
+
+build:
+  # number: 201803050325
+  number: {{ environ.get('DATE_NUM') }}
+  # string: 20180305_0325
+  string: {{ environ.get('DATE_STR') }}
+  script_env:
+    - CI
+
+requirements:
+  build:
+    - {{ compiler('c') }}   [linux]
+    - {{ compiler('cxx') }} [linux]
+    - clang 8.0             [osx]
+    - clangxx 8.0           [osx]
+    - python                {{ python }}
+    - make
+  host:
+    - bison 3.4
+    - cmake
+    - flex
+    - pkg-config
+    - tbb <2021.0.0a0
+    - tbb-devel <2021.0.0a0
+  run:
+    - tbb <2021.0.0a0
+
+#test:
+#  commands:
+#    - ./run_reg_test.pl vtr_reg_basic
+#    - ./run_reg_test.pl vtr_reg_strong -j2
+
+about:
+  home: http://verilogtorouting.org/
+  license: MIT
+  license_file: LICENSE.md
+  summary: 'The Verilog-to-Routing (VTR) project is a world-wide collaborative effort to provide a open-source framework for conducting FPGA architecture and CAD research and development. The VTR design flow takes as input a Verilog description of a digital circuit, and a description of the target FPGA architecture.'
