@@ -1,5 +1,5 @@
 diff --git a/src/gpl/CMakeLists.txt b/src/gpl/CMakeLists.txt
-index 86d085370..d6fd7d0d3 100644
+index d80f6778e..d997246d1 100644
 --- a/src/gpl/CMakeLists.txt
 +++ b/src/gpl/CMakeLists.txt
 @@ -41,7 +41,6 @@ include("openroad")
@@ -10,7 +10,7 @@ index 86d085370..d6fd7d0d3 100644
  find_package(LEMON NAMES LEMON lemon REQUIRED)
  find_package(OpenMP REQUIRED)
  
-@@ -67,7 +66,6 @@ target_sources(gpl
+@@ -66,7 +65,6 @@ target_sources(gpl
      src/timingBase.cpp
      src/graphics.cpp
      src/solver.cpp
@@ -18,7 +18,7 @@ index 86d085370..d6fd7d0d3 100644
  )
  
  messages(TARGET gpl)
-@@ -87,7 +85,6 @@ target_link_libraries(gpl
+@@ -86,7 +84,6 @@ target_link_libraries(gpl
      OpenSTA
      rsz
      grt
@@ -27,25 +27,28 @@ index 86d085370..d6fd7d0d3 100644
      OpenMP::OpenMP_CXX
  )
 diff --git a/src/gpl/README.md b/src/gpl/README.md
-index 28d40b2f6..e8ac16b3b 100644
+index f391d2e67..db4f585b2 100644
 --- a/src/gpl/README.md
 +++ b/src/gpl/README.md
-@@ -51,13 +51,6 @@ global_placement
-     [-force_cpu]
+@@ -127,16 +127,6 @@ global_placement_debug -pause -update -inst -draw_bins -initial
+ get_global_placement_uniform_density -pad_left -pad_right 
  ```
  
--```
--cluster_flops  
--    [-tray_weight tray_weight]  
--    [-timing_weight timing_weight]  
--    [-max_split_size max_split_size]  
--```
+-### Cluster Flops
 -
- ### Tuning Parameters
+-Cluster single bit flops into multi-bit flops.
+-
+-```
+-cluster_flops
+-    [-tray_weight tray_weight]
+-    [-timing_weight timing_weight]
+-    [-max_split_size max_split_size]
+-```
  
- - `-timing_driven`: Enable timing-driven mode
+ #### General Arguments
+ 
 diff --git a/src/gpl/include/gpl/Replace.h b/src/gpl/include/gpl/Replace.h
-index 3ab9e2e37..a5af2c596 100644
+index ecf4c243b..ea28dbb68 100644
 --- a/src/gpl/include/gpl/Replace.h
 +++ b/src/gpl/include/gpl/Replace.h
 @@ -84,7 +84,6 @@ class Replace
@@ -57,33 +60,17 @@ index 3ab9e2e37..a5af2c596 100644
    int doNesterovPlace(int start_iter = 0);
  
 diff --git a/src/gpl/src/replace.cpp b/src/gpl/src/replace.cpp
-index 8f645b836..8439ac17e 100644
+index 3dc353f63..a8d3a6364 100644
 --- a/src/gpl/src/replace.cpp
 +++ b/src/gpl/src/replace.cpp
-@@ -297,28 +297,6 @@ void Replace::doInitialPlace()
+@@ -251,12 +251,6 @@ void Replace::doInitialPlace()
    ip_->doBicgstabPlace();
  }
  
 -void Replace::runMBFF(int max_sz, float alpha, float beta, int threads)
 -{
--  int num_flops = 0;
--  int num_paths = 0;
--  vector<odb::Point> points;
--  vector<Path> paths;
--
--  auto block = db_->getChip()->getBlock();
--  for (const auto& inst : block->getInsts()) {
--    if (inst->getMaster()->isSequential()) {
--      int x_i, y_i;
--      inst->getOrigin(x_i, y_i);
--      odb::Point pt(x_i, y_i);
--      points.push_back(pt);
--      num_flops++;
--    }
--  }
--
--  MBFF pntset(num_flops, num_paths, points, paths, threads, 4, 10, log_);
--  pntset.Run((max_sz == -1 ? num_flops : max_sz), alpha, beta);
+-  MBFF pntset(db_, sta_, log_, threads, 4, 10, gui_debug_);
+-  pntset.Run(max_sz, alpha, beta);
 -}
 -
  bool Replace::initNesterovPlace()
@@ -111,10 +98,10 @@ index 4ecb0a32c..abf18d15c 100644
  set_density_cmd(float density)
  {
 diff --git a/src/gpl/src/replace.tcl b/src/gpl/src/replace.tcl
-index 5ab822570..9206e0fa5 100644
+index 199f70578..b8cf5f625 100644
 --- a/src/gpl/src/replace.tcl
 +++ b/src/gpl/src/replace.tcl
-@@ -321,37 +321,6 @@ proc global_placement { args } {
+@@ -319,37 +319,6 @@ proc global_placement { args } {
  }
  
  
