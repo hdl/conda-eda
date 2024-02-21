@@ -45,6 +45,7 @@ requirements:
     - ruby
     - qt >=5.0,<6.0
     - zlib
+    - libgit2
   run:
     - {{ pin_compatible('python', min_pin='x.x', max_pin='x.x') }}
     - ruby
