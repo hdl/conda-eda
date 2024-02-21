@@ -17,6 +17,8 @@ source:
       - disable-mpl2-and-par.patch # until or-tools dep is added
       - disable-cluster-flops-cmd.patch # until or-tools dep is added      
       - remove-boost-span-deps.patch # to allow older boost
+      - opendp-numeric.patch # Fixes error with missing include
+      - layouttabs-include-qtglobal.patch # Fixes potential missing Qt include
   - url: http://lemon.cs.elte.hu/pub/sources/lemon-{{ lemon_version }}.tar.gz
     md5: {{ lemon_md5 }}
     folder: third_party/lemon
@@ -59,7 +61,7 @@ requirements:
     - fmt
     - libgomp                 [not osx]
     - llvm-openmp             [osx]
-    - qt >=5.0,<6.0
+    - qt >=5.7,<6.0
   run:
     # missing run_exports
     - {{ pin_compatible('libboost', min_pin='x.x', max_pin='x.x') }}

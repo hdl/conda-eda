@@ -1,5 +1,5 @@
 diff --git a/src/gpl/CMakeLists.txt b/src/gpl/CMakeLists.txt
-index 86d085370..d6fd7d0d3 100644
+index d80f6778e..d997246d1 100644
 --- a/src/gpl/CMakeLists.txt
 +++ b/src/gpl/CMakeLists.txt
 @@ -41,7 +41,6 @@ include("openroad")
@@ -10,7 +10,7 @@ index 86d085370..d6fd7d0d3 100644
  find_package(LEMON NAMES LEMON lemon REQUIRED)
  find_package(OpenMP REQUIRED)
  
-@@ -67,7 +66,6 @@ target_sources(gpl
+@@ -66,7 +65,6 @@ target_sources(gpl
      src/timingBase.cpp
      src/graphics.cpp
      src/solver.cpp
@@ -18,7 +18,7 @@ index 86d085370..d6fd7d0d3 100644
  )
  
  messages(TARGET gpl)
-@@ -87,7 +85,6 @@ target_link_libraries(gpl
+@@ -86,7 +84,6 @@ target_link_libraries(gpl
      OpenSTA
      rsz
      grt
@@ -27,83 +27,76 @@ index 86d085370..d6fd7d0d3 100644
      OpenMP::OpenMP_CXX
  )
 diff --git a/src/gpl/README.md b/src/gpl/README.md
-index 28d40b2f6..e8ac16b3b 100644
+index 92fd05ffc..acd3c7e90 100644
 --- a/src/gpl/README.md
 +++ b/src/gpl/README.md
-@@ -51,13 +51,6 @@ global_placement
-     [-force_cpu]
+@@ -127,18 +127,6 @@ global_placement_debug -pause -update -inst -draw_bins -initial
+ get_global_placement_uniform_density -pad_left -pad_right 
  ```
  
+-### Cluster Flops
+-
+-Cluster single bit flops into multi-bit flops.
+-
 -```
--cluster_flops  
--    [-tray_weight tray_weight]  
--    [-timing_weight timing_weight]  
--    [-max_split_size max_split_size]  
+-cluster_flops
+-    [-tray_weight tray_weight]
+-    [-timing_weight timing_weight]
+-    [-max_split_size max_split_size]
+-    [-num_paths num_paths]
 -```
 -
- ### Tuning Parameters
+ #### General Arguments
  
- - `-timing_driven`: Enable timing-driven mode
+ | Switch Name | Description |
 diff --git a/src/gpl/include/gpl/Replace.h b/src/gpl/include/gpl/Replace.h
-index 3ab9e2e37..a5af2c596 100644
+index a7ef0a90f..dc599ae2d 100644
 --- a/src/gpl/include/gpl/Replace.h
 +++ b/src/gpl/include/gpl/Replace.h
 @@ -84,7 +84,6 @@ class Replace
  
-   void doIncrementalPlace();
+   void doIncrementalPlace(int threads);
    void doInitialPlace();
--  void runMBFF(int max_sz, float alpha, float beta, int threads);
+-  void runMBFF(int max_sz, float alpha, float beta, int threads, int num_paths);
  
-   int doNesterovPlace(int start_iter = 0);
+   int doNesterovPlace(int threads, int start_iter = 0);
  
 diff --git a/src/gpl/src/replace.cpp b/src/gpl/src/replace.cpp
-index 8f645b836..8439ac17e 100644
+index 23849c392..e3cb943e9 100644
 --- a/src/gpl/src/replace.cpp
 +++ b/src/gpl/src/replace.cpp
-@@ -297,28 +297,6 @@ void Replace::doInitialPlace()
+@@ -251,16 +251,6 @@ void Replace::doInitialPlace()
    ip_->doBicgstabPlace();
  }
  
--void Replace::runMBFF(int max_sz, float alpha, float beta, int threads)
+-void Replace::runMBFF(int max_sz,
+-                      float alpha,
+-                      float beta,
+-                      int threads,
+-                      int num_paths)
 -{
--  int num_flops = 0;
--  int num_paths = 0;
--  vector<odb::Point> points;
--  vector<Path> paths;
--
--  auto block = db_->getChip()->getBlock();
--  for (const auto& inst : block->getInsts()) {
--    if (inst->getMaster()->isSequential()) {
--      int x_i, y_i;
--      inst->getOrigin(x_i, y_i);
--      odb::Point pt(x_i, y_i);
--      points.push_back(pt);
--      num_flops++;
--    }
--  }
--
--  MBFF pntset(num_flops, num_paths, points, paths, threads, 4, 10, log_);
--  pntset.Run((max_sz == -1 ? num_flops : max_sz), alpha, beta);
+-  MBFF pntset(db_, sta_, log_, threads, 4, 10, num_paths, gui_debug_);
+-  pntset.Run(max_sz, alpha, beta);
 -}
 -
- bool Replace::initNesterovPlace()
+ bool Replace::initNesterovPlace(int threads)
  {
    if (!pbc_) {
 diff --git a/src/gpl/src/replace.i b/src/gpl/src/replace.i
-index 4ecb0a32c..abf18d15c 100644
+index 2ca1f500e..b1a1bc7ac 100644
 --- a/src/gpl/src/replace.i
 +++ b/src/gpl/src/replace.i
-@@ -43,16 +43,6 @@ replace_nesterov_place_cmd()
-   replace->doNesterovPlace();
+@@ -44,16 +44,6 @@ replace_nesterov_place_cmd()
+   replace->doNesterovPlace(threads);
  }
  
 -
 -void
--replace_run_mbff_cmd(int max_sz, float alpha, float beta) 
+-replace_run_mbff_cmd(int max_sz, float alpha, float beta, int num_paths) 
 -{
 -  Replace* replace = getReplace();
 -  int threads = ord::OpenRoad::openRoad()->getThreadCount();
--  replace->runMBFF(max_sz, alpha, beta, threads);   
+-  replace->runMBFF(max_sz, alpha, beta, threads, num_paths);   
 -}
 -
 -
@@ -111,27 +104,30 @@ index 4ecb0a32c..abf18d15c 100644
  set_density_cmd(float density)
  {
 diff --git a/src/gpl/src/replace.tcl b/src/gpl/src/replace.tcl
-index 5ab822570..9206e0fa5 100644
+index 8b88ebc3d..2720e894c 100644
 --- a/src/gpl/src/replace.tcl
 +++ b/src/gpl/src/replace.tcl
-@@ -321,37 +321,6 @@ proc global_placement { args } {
+@@ -316,44 +316,6 @@ proc global_placement { args } {
+   }
  }
  
- 
+-
 -sta::define_cmd_args "cluster_flops" {\
 -    [-tray_weight tray_weight]\
 -    [-timing_weight timing_weight]\
 -    [-max_split_size max_split_size]\
+-    [-num_paths num_paths]\
 -}
 -
 -proc cluster_flops { args } {
 -  sta::parse_key_args "cluster_flops" args \
--    keys { -tray_weight -timing_weight -max_split_size }
+-    keys { -tray_weight -timing_weight -max_split_size -num_paths }
 -
 -
 -  set tray_weight 20.0
 -  set timing_weight 1.0
--  set max_split_size -1
+-  set max_split_size 250
+-  set num_paths 0
 -
 -  if { [info exists keys(-tray_weight)] } {
 -    set tray_weight $keys(-tray_weight)
@@ -145,7 +141,11 @@ index 5ab822570..9206e0fa5 100644
 -    set max_split_size $keys(-max_split_size)
 -  }
 -
--  gpl::replace_run_mbff_cmd $max_split_size $tray_weight $timing_weight
+-  if { [info exists keys(-num_paths)] } {
+-    set num_paths $keys(-num_paths)
+-  }
+-
+-  gpl::replace_run_mbff_cmd $max_split_size $tray_weight $timing_weight $num_paths
 -}
 -
 -
