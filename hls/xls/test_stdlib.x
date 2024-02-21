@@ -1,4 +1,4 @@
-import apfloat
+import apfloat;
 
 type F8 = apfloat::APFloat<4, 3>;
 
