@@ -884,15 +884,13 @@ jobs:
 
   xls-linux:
     runs-on: [self-hosted, Linux, X64]
-    # uses older ubuntu for better compat:
-    # https://github.com/hdl/conda-eda/issues/199
-    container: ubuntu:18.04
+    container: ubuntu:22.04
     env:
       PACKAGE: "hls/xls"
       OS_NAME: "linux"
     steps:
       - uses: actions/checkout@v3
-      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }}
+      - run: apt -qqy update && apt -qqy install ${{ env.APT_REQUIREMENTS }} libtinfo6
       - uses: ./ci
 
   openlane-linux-py37:
