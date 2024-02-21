@@ -61,7 +61,7 @@ requirements:
     - fmt
     - libgomp                 [not osx]
     - llvm-openmp             [osx]
-    - qt >=5.0,<6.0
+    - qt >=5.7,<6.0
   run:
     # missing run_exports
     - {{ pin_compatible('libboost', min_pin='x.x', max_pin='x.x') }}
