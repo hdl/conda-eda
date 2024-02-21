@@ -1,0 +1,13 @@
+diff --git a/src/gui/src/layoutTabs.cpp b/src/gui/src/layoutTabs.cpp
+index 56a7dd15b..fbca9e40c 100644
+--- a/src/gui/src/layoutTabs.cpp
++++ b/src/gui/src/layoutTabs.cpp
+@@ -32,6 +32,8 @@
+ 
+ #include "layoutTabs.h"
+ 
++#include <QtGlobal>
++
+ #include <utility>
+ 
+ #include "colorGenerator.h"
