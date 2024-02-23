@@ -32,7 +32,7 @@ elif [[ $OS == "Mac" ]]; then
 fi
 
 cd ${SRC_DIR}
-./build.sh -build "${SRC_DIR}/build" -python "${PYTHON}" -expert -without-qtbinding -libpng -libexpat -dry-run
+./build.sh -build "${SRC_DIR}/build" -python "${PYTHON}" -expert -libpng -libexpat -dry-run
 
 cd ${SRC_DIR}/build
 make V=1 -j$CPU_COUNT
