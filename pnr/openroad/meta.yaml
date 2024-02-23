@@ -39,13 +39,14 @@ requirements:
     - cmake >=3.19
     - swig 4.0.2
     - bison
+    - git >= 2.0          # cmake needs to be able to find git to establish a version string
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ cdt('libx11-devel') }}         # [linux]
     - {{ cdt('libxau-devel') }}         # [linux]
     - {{ cdt('libxext-devel') }}        # [linux]
     - {{ cdt('libxdamage-devel') }}     # [linux]
-    - {{ cdt('libxfixes-devel') }}     # [linux]    
+    - {{ cdt('libxfixes-devel') }}      # [linux]    
     - {{ cdt('libxxf86vm-devel') }}     # [linux]
     - {{ cdt('xorg-x11-proto-devel') }} # [linux]
     - {{ cdt('mesa-libgl-devel') }}     # [linux]
