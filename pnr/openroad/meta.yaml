@@ -31,7 +31,6 @@ build:
     - CI
   ignore_run_exports_from:
     # header-only libraries
-    - fmt
 
 requirements:
   build:
