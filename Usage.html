@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage &mdash; Conda recipes for FPGA EDA tools latest documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/documentation_options.js?v=c6e86fd7"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Development" href="DEVELOPMENT.html" />
+    <link rel="prev" title="Tools" href="Tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Conda recipes for FPGA EDA tools
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Tools.html">Tools</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#bumping-overriding-specific-tools">Bumping/overriding specific tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-a-different-conda-channel">Using a different Conda channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-conda-packages-youself">Building Conda packages youself</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-tools-manually-inside-conda">Building tools manually inside Conda</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#yosys-systemverilog-plugin">Yosys SystemVerilog plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#building-installing-tools-outside-of-conda">Building/installing tools outside of Conda</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContinuousIntegration.html">Continuous Integration (CI)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Repositories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/hdl/conda-eda">hdl/conda-eda ➚</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/hdl/conda-compilers">hdl/conda-compilers ➚</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/hdl/conda-misc">hdl/conda-misc ➚</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/hdl/conda-prog">hdl/conda-prog ➚</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Conda recipes for FPGA EDA tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Usage</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/conda-eda/blob/master/docs/Usage.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage">
+<span id="id1"></span><h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
+<p>Find what conda is, what it does and how to use it in the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/index.html" title="(in conda v24.3.1.dev23)"><span>User guide</span></a> at <a class="reference external" href="https://conda.io">conda.io</a>.</p>
+<section id="bumping-overriding-specific-tools">
+<span id="usage-bumping"></span><h2>Bumping/overriding specific tools<a class="headerlink" href="#bumping-overriding-specific-tools" title="Link to this heading">¶</a></h2>
+<p>Since several of the tools provided through <code class="docutils literal notranslate"><span class="pre">hdl/conda-*</span></code> repositories are rapidly evolving projects, users,
+contributors or developers might need to tweak the environments.
+This section explains various strategies to do so.</p>
+<ul class="simple">
+<li><p>Report the issue upstream.
+<code class="docutils literal notranslate"><span class="pre">hdl/conda-*</span></code> repositories build the latest main branches of upstreams.
+Therefore, the best approach to have a bug fixed or an additional feature is to report an issue upstream.</p></li>
+<li><p>A developer or a contributor might eventually create a feature branch with the fix/enhancement.
+There are various solutions to build a variant of a package/tool from a feature branch.
+See <a class="reference internal" href="#usage-bumping-package"><span class="std std-ref">Building Conda packages youself</span></a>, <a class="reference internal" href="#usage-bumping-manual"><span class="std std-ref">Building tools manually inside Conda</span></a> and/or <a class="reference internal" href="#usage-bumping-outside"><span class="std std-ref">Building/installing tools outside of Conda</span></a>.</p></li>
+<li><p>After the fix/enhancement is pushed to the main branch upstream, it should be built in the corresponding <code class="docutils literal notranslate"><span class="pre">hdl/conda-*</span></code>
+repository within 24h.
+Hence, it is recommended to wait until that is done before bumping the Conda packages downstream.</p>
+<ul>
+<li><p>If the CI job fails, report it in the corresponding <code class="docutils literal notranslate"><span class="pre">hdl/conda-*</span></code> repository.</p></li>
+</ul>
+</li>
+<li><p>Update/bump the tool in the downstream Conda <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file, or in the sibling <code class="docutils literal notranslate"><span class="pre">conda_lock.yml</span></code>.</p></li>
+<li><p>Update/recreate the Conda environment.</p></li>
+</ul>
+<section id="using-a-different-conda-channel">
+<span id="usage-bumping-channel"></span><h3>Using a different Conda channel<a class="headerlink" href="#using-a-different-conda-channel" title="Link to this heading">¶</a></h3>
+<p>Mixing packages from multiple channels (e.g. <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and <code class="docutils literal notranslate"><span class="pre">defaults</span></code>) is possible.
+However, it might produce library mismatches preventing the environment from being bootstraped.</p>
+</section>
+<section id="building-conda-packages-youself">
+<span id="usage-bumping-package"></span><h3>Building Conda packages youself<a class="headerlink" href="#building-conda-packages-youself" title="Link to this heading">¶</a></h3>
+<p>Build the conda package yourself.
+In order to push it somewhere, Conda credentials are required.
+Hence, it can be cumbersome and it’s recommended to instead wait for CI in the <code class="docutils literal notranslate"><span class="pre">hdl/conda-*</span></code> repos to run.</p>
+</section>
+<section id="building-tools-manually-inside-conda">
+<span id="usage-bumping-manual"></span><h3>Building tools manually inside Conda<a class="headerlink" href="#building-tools-manually-inside-conda" title="Link to this heading">¶</a></h3>
+<p><em>TBC</em></p>
+<section id="yosys-systemverilog-plugin">
+<h4>Yosys SystemVerilog plugin<a class="headerlink" href="#yosys-systemverilog-plugin" title="Link to this heading">¶</a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The expected usage of the plugin by using the <code class="docutils literal notranslate"><span class="pre">read_systemverilog</span></code> command (used by default in F4PGA flow) should work.
+When using the plugin by calling <code class="docutils literal notranslate"><span class="pre">read_uhdm</span></code> command, take additional care to use the same Surelog and UHDM version for creating and reading the UHDM file - updating only the plugin can create a mismatch in this case.</p>
+</div>
+<p>Make sure <code class="docutils literal notranslate"><span class="pre">curl</span></code>, <code class="docutils literal notranslate"><span class="pre">jq</span></code>, <code class="docutils literal notranslate"><span class="pre">tar</span></code> and <code class="docutils literal notranslate"><span class="pre">wget</span></code> are installed (used to automatically download newest version):</p>
+<div class="highlight-bash notranslate" id="get-utils"><div class="highlight"><pre><span></span>apt<span class="w"> </span>install<span class="w"> </span>curl<span class="w"> </span>jq<span class="w"> </span>tar<span class="w"> </span>wget
+</pre></div>
+</div>
+<p>Activate the conda repository for the correct family:</p>
+<div class="highlight-bash notranslate" id="activate-xc7"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>xc7
+</pre></div>
+</div>
+<p>Obtain the latest release of the plugin from <a class="reference external" href="https://github.com/antmicro/yosys-uhdm-plugin-integration/releases">here</a>:</p>
+<div class="highlight-bash notranslate" id="get-plugin"><div class="highlight"><pre><span></span>curl<span class="w"> </span>https://api.github.com/repos/antmicro/yosys-uhdm-plugin-integration/releases/latest<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.assets<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;browser_download_url&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-Eo<span class="w"> </span><span class="s1">&#39;https://[^\&quot;]*&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>wget<span class="w"> </span>-O<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>-xz
+</pre></div>
+</div>
+<p>Install the plugin using provided installation script.
+It will use the <code class="docutils literal notranslate"><span class="pre">yosys-config</span></code> from conda, so it will install into the conda environment.</p>
+<div class="highlight-bash notranslate" id="install-plugin"><div class="highlight"><pre><span></span>./install-plugin.sh
+</pre></div>
+</div>
+</section>
+</section>
+<section id="building-installing-tools-outside-of-conda">
+<span id="usage-bumping-outside"></span><h3>Building/installing tools outside of Conda<a class="headerlink" href="#building-installing-tools-outside-of-conda" title="Link to this heading">¶</a></h3>
+<p>For development/testing purposes, tools can be optionally built outside of Conda and prepended to the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> so
+they are found first.
+However, problems related to mismatching system libraries might be expected.
+It is strongly recommended to build tools statically if this approach is to be followed.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Tools.html" class="btn btn-neutral float-left" title="Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DEVELOPMENT.html" class="btn btn-neutral float-right" title="Development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, hdl/conda-* contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
