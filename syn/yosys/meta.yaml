@@ -39,6 +39,8 @@ test:
     - git apply ../only-test.patch                         # [osx]
     - cd ..                                                # [osx]
     - bash test.sh                                         # [osx]
+  downstreams:
+    - openlane
 
 requirements:
   build:

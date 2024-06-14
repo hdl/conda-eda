@@ -56,6 +56,8 @@ test:
     - test -d $PREFIX/share/pdk/sky130A/libs.ref/sky130_fd_sc_hvl
     - test -d $PREFIX/share/pdk/sky130A/libs.ref/sky130_fd_io
     - test -d $PREFIX/share/pdk/sky130A/libs.ref/sky130_fd_pr
+  downstreams:
+    - openlane
 
 about:
   home: http://opencircuitdesign.com/open_pdks/

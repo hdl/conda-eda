@@ -73,6 +73,8 @@ test:
     - test -d $PREFIX/share/pdk/gf180mcuC/libs.tech/xyce
     - test -d $PREFIX/share/pdk/gf180mcuC/libs.tech/klayout
     - test -d $PREFIX/share/pdk/gf180mcuC/libs.tech/xschem
+  downstreams:
+    - openlane
 
 about:
   home: http://opencircuitdesign.com/open_pdks/
