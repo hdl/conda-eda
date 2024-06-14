@@ -51,8 +51,8 @@ requirements:
     - make                      [not win]
     - {{ compiler('c') }}       [not osx]
     - {{ compiler('cxx') }}     [not osx]
-    - {{ compiler('c') }} 4.0   [osx]
-    - {{ compiler('cxx') }} 4.0 [osx]
+    - {{ compiler('c') }} 14.0   [osx]
+    - {{ compiler('cxx') }} 14.0 [osx]
   host:
     - m2-base 1.0.0        [win]
     - m2-bison 3.0.4       [win]
