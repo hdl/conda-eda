@@ -24,5 +24,5 @@ mv ${PREFIX}/bin/*.a ${PREFIX}/lib/
 
 CAPNP_SCHEMAS=${PREFIX}/bin/capnp-schemas-dir
 
-echo -e "#!/bin/bash\n\necho ${PREFIX}/capnp" > ${CAPNP_SCHEMAS}
+echo -e "#!/bin/bash\n\necho ${PREFIX}/share/vtr" > ${CAPNP_SCHEMAS}
 chmod +x ${CAPNP_SCHEMAS}
