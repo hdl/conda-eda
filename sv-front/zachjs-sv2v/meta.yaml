@@ -25,7 +25,7 @@ requirements:
 # Therefore linker and `libgmp` have to be installed in the
 # OS (Conda `ld` doesn't work with OS-installed `libgmp`).
     - make
-    - stack<2.5.1
+    - stack
 
 test:
   commands:
