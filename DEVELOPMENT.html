@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Development &mdash; Conda recipes for FPGA EDA tools latest documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/documentation_options.js?v=c6e86fd7"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Continuous Integration (CI)" href="ContinuousIntegration.html" />
+    <link rel="prev" title="Usage" href="Usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Conda recipes for FPGA EDA tools
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#common-ci-build-failures">Common CI build failures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-conda-builds-locally">Testing conda builds locally</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#required-environment-variables">Required environment variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preparing-and-building-the-package">Preparing and building the package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#preparing-the-recipe-with-conda-build-prepare">Preparing the recipe with <em>conda-build-prepare</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-package">Building the package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#script-to-prepare-the-recipe-and-build-the-package">Script to prepare the recipe and build the package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-information">Additional information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ContinuousIntegration.html">Continuous Integration (CI)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Repositories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/hdl/conda-eda">hdl/conda-eda ➚</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/hdl/conda-compilers">hdl/conda-compilers ➚</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/hdl/conda-misc">hdl/conda-misc ➚</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/hdl/conda-prog">hdl/conda-prog ➚</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Conda recipes for FPGA EDA tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Development</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/conda-eda/blob/master/docs/DEVELOPMENT.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="development">
+<h1>Development<a class="headerlink" href="#development" title="Link to this heading">¶</a></h1>
+<p>This repository is set up to be built in GitHub Actions.
+See <a class="reference external" href="https://github.com/hdl/conda-eda/blob/master/.github/workflows/Build.yml">.github/workflows/Build.yml</a>.</p>
+<p>On a successful build, the resulting packages are uploaded to https://anaconda.org/litex-hub/repo and can be installed
+with: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">--channel</span> <span class="pre">&quot;LiteX-Hub&quot;</span> <span class="pre">package</span></code>.</p>
+<p>These packages are mostly used by <a class="reference external" href="https://github.com/litex-hub/litex-buildenv"><code class="docutils literal notranslate"><span class="pre">litex-buildenv</span></code></a>.</p>
+<section id="common-ci-build-failures">
+<h2>Common CI build failures<a class="headerlink" href="#common-ci-build-failures" title="Link to this heading">¶</a></h2>
+<p>Common issues with this repository include package dependencies (e.g. where Conda has changed) and builds timing out.</p>
+</section>
+<section id="testing-conda-builds-locally">
+<h2>Testing conda builds locally<a class="headerlink" href="#testing-conda-builds-locally" title="Link to this heading">¶</a></h2>
+<p>It is recommend to build these packages in a fresh disposable environment such as a clean container (Docker, Podman,
+etc.).
+While the goal is for the conda environment to be totally self contained, there is a constant battle to make sure this
+happens.</p>
+<p>The commands from the following subsections were tested to be enough to build a package in a clean container based on
+<code class="docutils literal notranslate"><span class="pre">ubuntu</span></code> (<code class="docutils literal notranslate"><span class="pre">16.04</span></code>-<code class="docutils literal notranslate"><span class="pre">20.04</span></code>) or <code class="docutils literal notranslate"><span class="pre">debian</span></code> (<code class="docutils literal notranslate"><span class="pre">8</span></code>-<code class="docutils literal notranslate"><span class="pre">10</span></code>) Docker image.</p>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h3>
+<p>Apart from cloning this repository to a local directory, the following prerequisites are required:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://git-scm.com/">Git</a>,</p></li>
+<li><p>Conda installed and initialized, e.g., using <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>
+(which includes self contained versions of the required <em>python3</em> with <em>pip</em> and <em>setuptools</em> tooling),</p></li>
+<li><p><a class="reference external" href="https://github.com/litex-hub/conda-build-prepare">conda-build-prepare</a>.</p></li>
+</ul>
+<p>On Debian and Ubuntu, these requirements can be satisfied using the following commands:</p>
+<!-- name="install-prerequisites" -->
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install git and wget (might require using `sudo`)</span>
+apt-get<span class="w"> </span>update
+apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>git<span class="w"> </span>wget
+
+<span class="c1"># Download Miniconda and install in CONDA_PATH</span>
+<span class="nv">CONDA_PATH</span><span class="o">=</span>~/conda
+wget<span class="w"> </span>-c<span class="w"> </span>https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+chmod<span class="w"> </span>a+x<span class="w"> </span>Miniconda3-latest-Linux-x86_64.sh
+./Miniconda3-latest-Linux-x86_64.sh<span class="w"> </span>-p<span class="w"> </span><span class="nv">$CONDA_PATH</span><span class="w"> </span>-b<span class="w"> </span>-f
+
+<span class="c1"># Initialize Conda in the shell</span>
+<span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span><span class="s2">&quot;</span><span class="nv">$CONDA_PATH</span><span class="s2">/bin/conda&quot;</span><span class="w"> </span><span class="s2">&quot;shell.bash&quot;</span><span class="w"> </span><span class="s1">&#39;hook&#39;</span><span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="c1"># Install `conda-build-prepare`</span>
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/litex-hub/conda-build-prepare@v0.1.1#egg<span class="o">=</span>conda-build-prepare
+
+<span class="c1"># Clone the `conda-eda` repository</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/hdl/conda-eda.git
+<span class="nb">cd</span><span class="w"> </span>conda-eda
+</pre></div>
+</div>
+</section>
+<section id="required-environment-variables">
+<h3>Required environment variables<a class="headerlink" href="#required-environment-variables" title="Link to this heading">¶</a></h3>
+<p>Some recipes require exporting additional environment variables.
+Such variables must be set before preparing the recipe, which is done with one of the commands from the next subsection.</p>
+<p>Currently there are no such variables and recipes in this repository, although there are a few such cases in other
+<code class="docutils literal notranslate"><span class="pre">hdl/conda-*</span></code> repositories.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">DATE_NUM</span></code> and <code class="docutils literal notranslate"><span class="pre">DATE_STR</span></code> environment variables are required by most of this repository’s recipes.
+Values of these variables are commonly used as <code class="docutils literal notranslate"><span class="pre">build/number</span></code> and <code class="docutils literal notranslate"><span class="pre">build/string</span></code> keys in the recipes.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">DATE_STR</span></code> hasn’t been set in the environment then it is set during the preparation based:</p>
+<ul class="simple">
+<li><p>on the latest commit’s committer date if the recipe belongs to a git repository,</p></li>
+<li><p>on the latest file modification date after checking all recipe files otherwise, using UTC timezone and
+<code class="docutils literal notranslate"><span class="pre">%Y%m%d_%H%M%S</span></code> time format, e.g., <code class="docutils literal notranslate"><span class="pre">20210216_155420</span></code>.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">DATE_NUM</span></code> is always automatically set with all <code class="docutils literal notranslate"><span class="pre">DATE_STR</span></code> digits.
+In case of the aforementioned <code class="docutils literal notranslate"><span class="pre">DATE_STR</span></code> example, <code class="docutils literal notranslate"><span class="pre">20210216155420</span></code> would be used as the <code class="docutils literal notranslate"><span class="pre">DATE_NUM</span></code> value.</p>
+</section>
+<section id="preparing-and-building-the-package">
+<h3>Preparing and building the package<a class="headerlink" href="#preparing-and-building-the-package" title="Link to this heading">¶</a></h3>
+<p>After getting all prerequisites and setting the required variables, it is recommended to prepare the recipe with <em>conda-build-prepare</em> before building, as it gives you the advantages described <a class="reference external" href="https://github.com/litex-hub/conda-build-prepare">on the tool’s GitHub page</a>.
+Since it’s also used within the CI, the locally built packages will be much more similar to the ones built by the CI
+workflow.</p>
+<section id="preparing-the-recipe-with-conda-build-prepare">
+<h4>Preparing the recipe with <em>conda-build-prepare</em><a class="headerlink" href="#preparing-the-recipe-with-conda-build-prepare" title="Link to this heading">¶</a></h4>
+<p>The <em>conda-build-prepare</em> is a Python module with a CLI.
+Its calling signature is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">conda_build_prepare</span>
+<span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">channels</span> <span class="n">CHANNEL</span> <span class="p">[</span><span class="n">CHANNEL</span> <span class="o">...</span><span class="p">]]</span>
+<span class="p">[</span><span class="o">--</span><span class="n">packages</span> <span class="n">PACKAGE</span> <span class="p">[</span><span class="n">PACKAGE</span> <span class="o">...</span><span class="p">]]</span>
+<span class="o">--</span><span class="nb">dir</span> <span class="n">DIRECTORY</span>
+<span class="n">RECIPE</span>
+</pre></div>
+</div>
+<p>The required arguments are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--dir</span> <span class="pre">DIRECTORY</span></code> – the path for a new directory that will be created with output files,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RECIPE</span></code> – the path to the recipe corresponding to the package chosen to be built.</p></li>
+</ul>
+<p>To build a package similarly to how the packages are built in the CI it is recommended to pass the following optional
+arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--channels</span> <span class="pre">litex-hub</span></code> – to search for build dependencies in the LiteX-Hub channel in addition to the recipe-specific
+channels (from its <code class="docutils literal notranslate"><span class="pre">condarc</span></code> file),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--packages</span> <span class="pre">python=3.7</span></code> – to use the same versions of packages that influence building as in the CI.</p></li>
+</ul>
+<p>After preparing, the output <code class="docutils literal notranslate"><span class="pre">DIRECTORY</span></code> will contain subdirectories:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">conda-env</span></code> with a clean Conda environment to host the build process,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git-repos</span></code> with source git repositories cloned and slightly adjusted,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">recipe</span></code> with an adjusted recipe (locked requirements, version set etc.).</p></li>
+</ul>
+<p>More details can be found on <a class="reference external" href="https://github.com/litex-hub/conda-build-prepare">the <em>conda-build-prepare</em> GitHub page</a>.</p>
+</section>
+<section id="building-the-package">
+<h4>Building the package<a class="headerlink" href="#building-the-package" title="Link to this heading">¶</a></h4>
+<p>To build the package using the prepared subdirectories:</p>
+<ul class="simple">
+<li><p>activate the Conda environment from <code class="docutils literal notranslate"><span class="pre">DIRECTORY/conda-env</span></code>,</p></li>
+<li><p>run <code class="docutils literal notranslate"><span class="pre">conda-build</span></code> tool with <code class="docutils literal notranslate"><span class="pre">DIRECTORY/recipe</span></code>.</p></li>
+</ul>
+</section>
+<section id="script-to-prepare-the-recipe-and-build-the-package">
+<h4>Script to prepare the recipe and build the package<a class="headerlink" href="#script-to-prepare-the-recipe-and-build-the-package" title="Link to this heading">¶</a></h4>
+<p>All of the following commands are meant to be run from the repository root.</p>
+<p>If the provided commands are to be used unmodified, it is important to first set the <code class="docutils literal notranslate"><span class="pre">RECIPE_PATH</span></code> variable with the
+proper recipe’s path to build the chosen package and the variables mentioned in the previous subsection, if the recipe
+requires such.
+By default, the <code class="docutils literal notranslate"><span class="pre">yosys</span></code> package will be built.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">PREPARED_RECIPE_OUTPUTDIR</span></code> variable sets the directory that will be created with the already described
+<code class="docutils literal notranslate"><span class="pre">conda-build-prepare</span></code>’s output subdirectories.
+By default, the <code class="docutils literal notranslate"><span class="pre">cbp-outdir</span></code> will be created in the repository root.</p>
+<!-- name="prepare-and-build" -->
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Some defaults for the variables used in subsequent commands</span>
+<span class="nv">PREPARED_RECIPE_OUTPUTDIR</span><span class="o">=</span><span class="si">${</span><span class="nv">PREPARED_RECIPE_OUTPUTDIR</span><span class="k">:-</span><span class="nv">cbp</span><span class="p">-outdir</span><span class="si">}</span>
+<span class="nv">RECIPE_PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">RECIPE_PATH</span><span class="k">:-</span><span class="nv">syn</span><span class="p">/yosys</span><span class="si">}</span>
+
+<span class="c1"># Prepare the RECIPE with `conda-build-prepare`</span>
+<span class="nv">ADDITIONAL_PACKAGES</span><span class="o">=</span><span class="s2">&quot;python=3.7&quot;</span>
+python3<span class="w"> </span>-m<span class="w"> </span>conda_build_prepare<span class="w">               </span><span class="se">\</span>
+<span class="w">            </span>--channels<span class="w"> </span>litex-hub<span class="w">             </span><span class="se">\</span>
+<span class="w">            </span>--packages<span class="w"> </span><span class="nv">$ADDITIONAL_PACKAGES</span><span class="w">  </span><span class="se">\</span>
+<span class="w">            </span>--dir<span class="w"> </span><span class="nv">$PREPARED_RECIPE_OUTPUTDIR</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="nv">$RECIPE_PATH</span>
+
+<span class="c1"># Activate prepared environment where `conda build` will be run</span>
+conda<span class="w"> </span>activate<span class="w"> </span><span class="nv">$PREPARED_RECIPE_OUTPUTDIR</span>/conda-env
+
+<span class="c1"># Build the package</span>
+conda<span class="w"> </span>build<span class="w"> </span><span class="nv">$PREPARED_RECIPE_OUTPUTDIR</span>/recipe
+</pre></div>
+</div>
+</section>
+</section>
+<section id="additional-information">
+<h3>Additional information<a class="headerlink" href="#additional-information" title="Link to this heading">¶</a></h3>
+<p>Expect packages like <code class="docutils literal notranslate"><span class="pre">binutils</span></code> to take 3-5 minutes to build, packages like <code class="docutils literal notranslate"><span class="pre">gcc/nostdc</span></code> to take 10-15 minutes to
+build, and packages like <code class="docutils literal notranslate"><span class="pre">gcc/newlib</span></code> to take 25-40 minutes to build, on a relatively fast build system (eg, SSD, i7,
+reasonable amount of RAM).
+Beware that <code class="docutils literal notranslate"><span class="pre">gcc/newlib</span></code> wants to see <code class="docutils literal notranslate"><span class="pre">gcc/nostdc</span></code> <em>of the same version</em> already installed before it will build; this
+means that <code class="docutils literal notranslate"><span class="pre">gcc/newlib</span></code> is non-trivial to build individually.</p>
+<p>To build one architecture of tools, without any cleanup will need a VM with maybe 12-15GiB of space available (a 10GiB
+disk image is not quite big enough). Building more architectures at once will need more disk space.</p>
+<p><strong>NOTE</strong>: By preference only packages built in GitHub Actions should be uploaded to the Anaconda repository, so that the
+externally visible packages have consistent package versions (and do not conflict).
+But it can be useful to build locally to debug <code class="docutils literal notranslate"><span class="pre">conda-build</span></code> config issues without waiting for a full CI cycle.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ContinuousIntegration.html" class="btn btn-neutral float-right" title="Continuous Integration (CI)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, hdl/conda-* contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
